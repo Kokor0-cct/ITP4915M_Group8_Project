@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ITP4915M_Group8_Project.Staff.Inventory
 {
-    public partial class InventoryControl : Form
+    public partial class InventoryMaterial : Form
     {
-        public InventoryControl()
+        public InventoryMaterial()
         {
             InitializeComponent();
         }

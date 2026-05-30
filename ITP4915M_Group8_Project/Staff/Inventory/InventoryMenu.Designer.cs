@@ -1,6 +1,6 @@
 ﻿namespace ITP4915M_Group8_Project.Staff.Inventory
 {
-    partial class InventoryControl
+    partial class InventoryMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -29,50 +29,49 @@
         private void InitializeComponent()
         {
             labInvCon = new Label();
-            dataGridView1 = new DataGridView();
-            dataGridView2 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            btnToFurniture = new Button();
+            btnToMaterial = new Button();
             SuspendLayout();
             // 
             // labInvCon
             // 
             labInvCon.AutoSize = true;
-            labInvCon.Font = new Font("Microsoft YaHei UI", 35F, FontStyle.Bold);
-            labInvCon.Location = new Point(356, -1);
+            labInvCon.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            labInvCon.Location = new Point(58, 19);
             labInvCon.Name = "labInvCon";
-            labInvCon.Size = new Size(445, 62);
+            labInvCon.Size = new Size(154, 22);
             labInvCon.TabIndex = 0;
             labInvCon.Text = "Inventory Control";
             // 
-            // dataGridView1
+            // btnToFurniture
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 114);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1147, 247);
-            dataGridView1.TabIndex = 1;
+            btnToFurniture.Location = new Point(62, 74);
+            btnToFurniture.Name = "btnToFurniture";
+            btnToFurniture.Size = new Size(150, 23);
+            btnToFurniture.TabIndex = 1;
+            btnToFurniture.Text = "InventoryFurniture";
+            btnToFurniture.UseVisualStyleBackColor = true;
+            btnToFurniture.Click += btnToFurniture_Click;
             // 
-            // dataGridView2
+            // btnToMaterial
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(12, 461);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(1147, 247);
-            dataGridView2.TabIndex = 2;
+            btnToMaterial.Location = new Point(62, 133);
+            btnToMaterial.Name = "btnToMaterial";
+            btnToMaterial.Size = new Size(150, 23);
+            btnToMaterial.TabIndex = 2;
+            btnToMaterial.Text = "InventoryMaterial";
+            btnToMaterial.UseVisualStyleBackColor = true;
             // 
-            // InventoryControl
+            // InventoryMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1171, 802);
-            Controls.Add(dataGridView2);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(277, 242);
+            Controls.Add(btnToMaterial);
+            Controls.Add(btnToFurniture);
             Controls.Add(labInvCon);
-            Name = "InventoryControl";
+            Name = "InventoryMenu";
             Text = "InventoryMenu";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -80,7 +79,7 @@
         #endregion
 
         private Label labInvCon;
-        private DataGridView dataGridView1;
-        private DataGridView dataGridView2;
+        private Button btnToFurniture;
+        private Button btnToMaterial;
     }
 }
