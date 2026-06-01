@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Staff
+namespace ITP4915M_Group8_Project.Staff.Sales
 {
     public partial class OderInfrommationEdit : Form
     {

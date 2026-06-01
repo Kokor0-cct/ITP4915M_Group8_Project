@@ -159,6 +159,7 @@
             btnSalesService.TabIndex = 11;
             btnSalesService.Text = "Customer service";
             btnSalesService.UseVisualStyleBackColor = true;
+            btnSalesService.Click += btnSalesService_Click;
             // 
             // btnSalesOrderEdit
             // 
@@ -168,6 +169,7 @@
             btnSalesOrderEdit.TabIndex = 12;
             btnSalesOrderEdit.Text = "Order information Edit";
             btnSalesOrderEdit.UseVisualStyleBackColor = true;
+            btnSalesOrderEdit.Click += btnSalesOrderEdit_Click;
             // 
             // btnSalesReport
             // 
@@ -205,6 +207,7 @@
             btnLogistic.TabIndex = 16;
             btnLogistic.Text = "Logistics\n status\n modification";
             btnLogistic.UseVisualStyleBackColor = true;
+            btnLogistic.Click += btnLogistic_Click;
             // 
             // btnDesign
             // 

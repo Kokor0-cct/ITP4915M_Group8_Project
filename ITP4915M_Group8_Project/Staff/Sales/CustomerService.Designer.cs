@@ -1,4 +1,5 @@
-﻿namespace Staff
+﻿namespace ITP4915M_Group8_Project.Staff.Sales
+
 {
     partial class CustomerService
     {

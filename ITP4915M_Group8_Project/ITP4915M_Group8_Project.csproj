@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="Customer\" />
     <Folder Include="Customer\" />
-    <Folder Include="Staff\Salse\" />
     <Folder Include="Login\" />
   </ItemGroup>
 
