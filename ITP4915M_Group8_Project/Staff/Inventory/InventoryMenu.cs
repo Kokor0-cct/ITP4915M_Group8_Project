@@ -24,5 +24,11 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             Staff.Inventory.InventoryFurniture orderForm = new Staff.Inventory.InventoryFurniture();
             orderForm.Show();
         }
+
+        private void btnToMaterial_Click(object sender, EventArgs e)
+        {
+            Staff.Inventory.InventoryMaterials orderForm = new Staff.Inventory.InventoryMaterials();
+            orderForm.Show();
+        }
     }
 }

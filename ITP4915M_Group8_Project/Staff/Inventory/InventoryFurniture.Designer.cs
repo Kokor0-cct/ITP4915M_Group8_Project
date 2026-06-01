@@ -29,58 +29,58 @@
         private void InitializeComponent()
         {
             lblInventoryFurnitureTitle = new Label();
-            lblSearch = new Label();
-            dgvInventoryControl = new DataGridView();
+            lblfSearch = new Label();
+            dgvfInventoryControl = new DataGridView();
             lblFurniturName = new Label();
             lblFurnitureQuantity = new Label();
             lblFurniturePrice = new Label();
             lblFurniturType = new Label();
-            txtSearch = new TextBox();
+            txtfSearch = new TextBox();
             txtFurnitureName = new TextBox();
             txtFurnitureQuantity = new TextBox();
             txtFurnitureType = new TextBox();
             txtFurniturePrice = new TextBox();
             txtFurnitureDesc = new TextBox();
-            btnSearch = new Button();
-            btnDeleteFurniture = new Button();
-            btnUpdateFurniture = new Button();
+            btnfSearch = new Button();
+            btnfDeleteFurniture = new Button();
+            btnfUpdateFurniture = new Button();
             lblFurnitureDesc = new Label();
             lblback = new Label();
-            btnInsertFurniture = new Button();
-            btnRefresh = new Button();
-            btnClearTextBox = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvInventoryControl).BeginInit();
+            btnfInsertFurniture = new Button();
+            btnfRefresh = new Button();
+            btnfClearTextBox = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).BeginInit();
             SuspendLayout();
             // 
             // lblInventoryFurnitureTitle
             // 
             lblInventoryFurnitureTitle.AutoSize = true;
             lblInventoryFurnitureTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblInventoryFurnitureTitle.Location = new Point(283, 9);
+            lblInventoryFurnitureTitle.Location = new Point(224, 9);
             lblInventoryFurnitureTitle.Name = "lblInventoryFurnitureTitle";
-            lblInventoryFurnitureTitle.Size = new Size(230, 31);
+            lblInventoryFurnitureTitle.Size = new Size(349, 31);
             lblInventoryFurnitureTitle.TabIndex = 0;
-            lblInventoryFurnitureTitle.Text = "Inventory Control";
+            lblInventoryFurnitureTitle.Text = "Inventory Furniture Control";
             // 
-            // lblSearch
+            // lblfSearch
             // 
-            lblSearch.AutoSize = true;
-            lblSearch.Location = new Point(75, 51);
-            lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(93, 17);
-            lblSearch.TabIndex = 1;
-            lblSearch.Text = "Search Name :";
+            lblfSearch.AutoSize = true;
+            lblfSearch.Location = new Point(75, 51);
+            lblfSearch.Name = "lblfSearch";
+            lblfSearch.Size = new Size(93, 17);
+            lblfSearch.TabIndex = 1;
+            lblfSearch.Text = "Search Name :";
             // 
-            // dgvInventoryControl
+            // dgvfInventoryControl
             // 
-            dgvInventoryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvInventoryControl.Location = new Point(75, 77);
-            dgvInventoryControl.MultiSelect = false;
-            dgvInventoryControl.Name = "dgvInventoryControl";
-            dgvInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInventoryControl.Size = new Size(664, 169);
-            dgvInventoryControl.TabIndex = 2;
-            dgvInventoryControl.RowEnter += dgvInventoryControl_RowEnter;
+            dgvfInventoryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvfInventoryControl.Location = new Point(75, 77);
+            dgvfInventoryControl.MultiSelect = false;
+            dgvfInventoryControl.Name = "dgvfInventoryControl";
+            dgvfInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvfInventoryControl.Size = new Size(664, 169);
+            dgvfInventoryControl.TabIndex = 2;
+            dgvfInventoryControl.RowEnter += dgvInventoryControl_RowEnter;
             // 
             // lblFurniturName
             // 
@@ -118,12 +118,12 @@
             lblFurniturType.TabIndex = 6;
             lblFurniturType.Text = "Furnitur Type : ";
             // 
-            // txtSearch
+            // txtfSearch
             // 
-            txtSearch.Location = new Point(167, 48);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(100, 23);
-            txtSearch.TabIndex = 8;
+            txtfSearch.Location = new Point(167, 48);
+            txtfSearch.Name = "txtfSearch";
+            txtfSearch.Size = new Size(100, 23);
+            txtfSearch.TabIndex = 8;
             // 
             // txtFurnitureName
             // 
@@ -161,36 +161,36 @@
             txtFurnitureDesc.Size = new Size(353, 71);
             txtFurnitureDesc.TabIndex = 13;
             // 
-            // btnSearch
+            // btnfSearch
             // 
-            btnSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            btnSearch.Location = new Point(273, 48);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(75, 23);
-            btnSearch.TabIndex = 14;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            btnfSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            btnfSearch.Location = new Point(273, 48);
+            btnfSearch.Name = "btnfSearch";
+            btnfSearch.Size = new Size(75, 23);
+            btnfSearch.TabIndex = 14;
+            btnfSearch.Text = "Search";
+            btnfSearch.UseVisualStyleBackColor = true;
+            btnfSearch.Click += btnSearch_Click;
             // 
-            // btnDeleteFurniture
+            // btnfDeleteFurniture
             // 
-            btnDeleteFurniture.Location = new Point(617, 409);
-            btnDeleteFurniture.Name = "btnDeleteFurniture";
-            btnDeleteFurniture.Size = new Size(131, 29);
-            btnDeleteFurniture.TabIndex = 15;
-            btnDeleteFurniture.Text = "Delete Furniture";
-            btnDeleteFurniture.UseVisualStyleBackColor = true;
-            btnDeleteFurniture.Click += btnDeleteFurniture_Click;
+            btnfDeleteFurniture.Location = new Point(617, 409);
+            btnfDeleteFurniture.Name = "btnfDeleteFurniture";
+            btnfDeleteFurniture.Size = new Size(131, 29);
+            btnfDeleteFurniture.TabIndex = 15;
+            btnfDeleteFurniture.Text = "Delete Furniture";
+            btnfDeleteFurniture.UseVisualStyleBackColor = true;
+            btnfDeleteFurniture.Click += btnDeleteFurniture_Click;
             // 
-            // btnUpdateFurniture
+            // btnfUpdateFurniture
             // 
-            btnUpdateFurniture.Location = new Point(75, 349);
-            btnUpdateFurniture.Name = "btnUpdateFurniture";
-            btnUpdateFurniture.Size = new Size(144, 31);
-            btnUpdateFurniture.TabIndex = 16;
-            btnUpdateFurniture.Text = "Update Furniture";
-            btnUpdateFurniture.UseVisualStyleBackColor = true;
-            btnUpdateFurniture.Click += btnUpdateFurniture_Click;
+            btnfUpdateFurniture.Location = new Point(75, 349);
+            btnfUpdateFurniture.Name = "btnfUpdateFurniture";
+            btnfUpdateFurniture.Size = new Size(144, 31);
+            btnfUpdateFurniture.TabIndex = 16;
+            btnfUpdateFurniture.Text = "Update Furniture";
+            btnfUpdateFurniture.UseVisualStyleBackColor = true;
+            btnfUpdateFurniture.Click += btnUpdateFurniture_Click;
             // 
             // lblFurnitureDesc
             // 
@@ -209,65 +209,65 @@
             lblback.Size = new Size(684, 136);
             lblback.TabIndex = 18;
             // 
-            // btnInsertFurniture
+            // btnfInsertFurniture
             // 
-            btnInsertFurniture.Location = new Point(234, 349);
-            btnInsertFurniture.Name = "btnInsertFurniture";
-            btnInsertFurniture.Size = new Size(144, 31);
-            btnInsertFurniture.TabIndex = 19;
-            btnInsertFurniture.Text = "Insert Furniture";
-            btnInsertFurniture.UseVisualStyleBackColor = true;
-            btnInsertFurniture.Click += btnInsertFurniture_Click;
+            btnfInsertFurniture.Location = new Point(234, 349);
+            btnfInsertFurniture.Name = "btnfInsertFurniture";
+            btnfInsertFurniture.Size = new Size(144, 31);
+            btnfInsertFurniture.TabIndex = 19;
+            btnfInsertFurniture.Text = "Insert Furniture";
+            btnfInsertFurniture.UseVisualStyleBackColor = true;
+            btnfInsertFurniture.Click += btnInsertFurniture_Click;
             // 
-            // btnRefresh
+            // btnfRefresh
             // 
-            btnRefresh.Location = new Point(480, 409);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(131, 29);
-            btnRefresh.TabIndex = 20;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = true;
-            btnRefresh.Click += btnRefresh_Click;
+            btnfRefresh.Location = new Point(480, 409);
+            btnfRefresh.Name = "btnfRefresh";
+            btnfRefresh.Size = new Size(131, 29);
+            btnfRefresh.TabIndex = 20;
+            btnfRefresh.Text = "Refresh";
+            btnfRefresh.UseVisualStyleBackColor = true;
+            btnfRefresh.Click += btnRefresh_Click;
             // 
-            // btnClearTextBox
+            // btnfClearTextBox
             // 
-            btnClearTextBox.Location = new Point(343, 409);
-            btnClearTextBox.Name = "btnClearTextBox";
-            btnClearTextBox.Size = new Size(131, 29);
-            btnClearTextBox.TabIndex = 21;
-            btnClearTextBox.Text = "Clear Text Box";
-            btnClearTextBox.UseVisualStyleBackColor = true;
-            btnClearTextBox.Click += btnClearTextBox_Click;
+            btnfClearTextBox.Location = new Point(343, 409);
+            btnfClearTextBox.Name = "btnfClearTextBox";
+            btnfClearTextBox.Size = new Size(131, 29);
+            btnfClearTextBox.TabIndex = 21;
+            btnfClearTextBox.Text = "Clear Text Box";
+            btnfClearTextBox.UseVisualStyleBackColor = true;
+            btnfClearTextBox.Click += btnClearTextBox_Click;
             // 
             // InventoryFurniture
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnClearTextBox);
-            Controls.Add(btnRefresh);
-            Controls.Add(btnInsertFurniture);
+            Controls.Add(btnfClearTextBox);
+            Controls.Add(btnfRefresh);
+            Controls.Add(btnfInsertFurniture);
             Controls.Add(lblFurnitureDesc);
-            Controls.Add(btnUpdateFurniture);
-            Controls.Add(btnDeleteFurniture);
-            Controls.Add(btnSearch);
+            Controls.Add(btnfUpdateFurniture);
+            Controls.Add(btnfDeleteFurniture);
+            Controls.Add(btnfSearch);
             Controls.Add(txtFurnitureDesc);
             Controls.Add(txtFurniturePrice);
             Controls.Add(txtFurnitureType);
             Controls.Add(txtFurnitureQuantity);
             Controls.Add(txtFurnitureName);
-            Controls.Add(txtSearch);
+            Controls.Add(txtfSearch);
             Controls.Add(lblFurniturType);
             Controls.Add(lblFurniturePrice);
             Controls.Add(lblFurnitureQuantity);
             Controls.Add(lblFurniturName);
-            Controls.Add(dgvInventoryControl);
-            Controls.Add(lblSearch);
+            Controls.Add(dgvfInventoryControl);
+            Controls.Add(lblfSearch);
             Controls.Add(lblInventoryFurnitureTitle);
             Controls.Add(lblback);
             Name = "InventoryFurniture";
             Text = "Inventory Furniture Control";
-            ((System.ComponentModel.ISupportInitialize)dgvInventoryControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,26 +275,26 @@
         #endregion
 
         private Label lblInventoryFurnitureTitle;
-        private Label lblSearch;
-        private DataGridView dgvInventoryControl;
+        private Label lblfSearch;
+        private DataGridView dgvfInventoryControl;
         private Label lblFurniturName;
         private Label lblFurnitureQuantity;
         private Label lblFurniturePrice;
         private Label lblFurniturType;
         private Label label7;
-        private TextBox txtSearch;
+        private TextBox txtfSearch;
         private TextBox txtFurnitureName;
         private TextBox txtFurnitureQuantity;
         private TextBox txtFurnitureType;
         private TextBox txtFurniturePrice;
         private TextBox txtFurnitureDesc;
-        private Button btnSearch;
-        private Button btnDeleteFurniture;
-        private Button btnUpdateFurniture;
+        private Button btnfSearch;
+        private Button btnfDeleteFurniture;
+        private Button btnfUpdateFurniture;
         private Label lblFurnitureDesc;
         private Label lblback;
-        private Button btnInsertFurniture;
-        private Button btnRefresh;
-        private Button btnClearTextBox;
+        private Button btnfInsertFurniture;
+        private Button btnfRefresh;
+        private Button btnfClearTextBox;
     }
 }
