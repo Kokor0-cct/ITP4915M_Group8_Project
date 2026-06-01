@@ -1,0 +1,12 @@
+Logistics Control
+
+Required Database:
+1. orders
+2. furniture
+3. shippingOption
+4. status
+
+Note:
+ - This Control only gets records from orders, where the status type is 2 --> "In transit"
+ - You can select to view delivered orders by toggling the checkbox created
+ Conclusion: Create sample datas in table "orders" with status type 2/3 to effectively use this function. 
