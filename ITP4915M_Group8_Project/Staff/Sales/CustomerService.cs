@@ -29,8 +29,7 @@ namespace Staff
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Staff staff = new Staff();
-            staff.Show();
+            
             this.Hide();
         }
 

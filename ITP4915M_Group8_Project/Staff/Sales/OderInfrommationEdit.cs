@@ -25,8 +25,7 @@ namespace Staff
 
         private void btnDetial1_Click1(object sender, EventArgs e)
         {
-            OderInfrommation oderInfrommation = new OderInfrommation();
-            oderInfrommation.Show();
+            
             this.Hide();
         }
     }
