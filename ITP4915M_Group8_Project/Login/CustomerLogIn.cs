@@ -53,14 +53,12 @@ namespace ITP4915M_Group8_Project.Login
 
         private void LogIn_button_Click(object sender, EventArgs e)
         {
-            // 檢查是否輸入帳號密碼
             if (textBox_UserName.Text == "" || textBox_password.Text == "")
             {
                 MessageBox.Show("請輸入使用者名稱和密碼。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 檢查是否選擇了身份類型
             if (comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("請選擇登入身份（客戶/員工）。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -69,34 +67,31 @@ namespace ITP4915M_Group8_Project.Login
 
             string uname = textBox_UserName.Text;
             string pass = textBox_password.Text;
-            string identity = comboBox1.SelectedItem.ToString();
-            string isStaffValue = (identity == "Staff") ? "Y" : "N";
+            string isStaff = comboBox1.SelectedItem.ToString();
+           
 
             try
             {
-                // 使用參數化查詢防止 SQL 注入
-                string query = "SELECT * FROM `customers` WHERE `cName` = @cName AND `cPassword` = @cPassword AND `isStaff` = @isStaff";
+                string query = "SELECT * FROM `customers` WHERE `cName` = @cName AND `cPassword` = @cPassword ";
                 MySqlCommand cmd = new MySqlCommand(query);
                 cmd.Parameters.AddWithValue("@cName", uname);
                 cmd.Parameters.AddWithValue("@cPassword", pass);
-                cmd.Parameters.AddWithValue("@isStaff", isStaffValue);
 
                 DataTable table = customerLogin.getlist(cmd);
 
                 if (table.Rows.Count > 0)
                 {
-                    // 登入成功
-                    string welcomeMessage = (identity == "Staff") ? $"歡迎員工，{uname}！" : $"歡迎客戶，{uname}！";
+                    string welcomeMessage = (isStaff == "Staff") ? $"歡迎員工，{uname}！" : $"歡迎客戶，{uname}！";
                     MessageBox.Show(welcomeMessage, "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 可以在這裡儲存登入資訊（如果需要）
                     // 例如：Session.LoginUser = uname;
-                    // Session.UserType = identity;
+                    // Session.UserType = isStaff;
 
                     this.Hide(); // 隱藏登入表單
 
                     // 可以根據不同身份開啟不同的主畫面
-                    // if (identity == "Staff")
+                    // if (isStaff == "Staff")
                     // {
                     //     StaffMainForm staffForm = new StaffMainForm();
                     //     staffForm.Show();
@@ -110,7 +105,7 @@ namespace ITP4915M_Group8_Project.Login
                 else
                 {
                     // 登入失敗
-                    string errorMessage = (identity == "Staff") ?
+                    string errorMessage = (isStaff == "Staff") ?
                         "員工帳號或密碼錯誤。" :
                         "客戶帳號或密碼錯誤。";
                     MessageBox.Show(errorMessage, "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
