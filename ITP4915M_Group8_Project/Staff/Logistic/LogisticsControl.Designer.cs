@@ -33,7 +33,6 @@
             lblSearch = new Label();
             txtSearch = new TextBox();
             btnSearch = new Button();
-            lblback = new Label();
             btnRefresh = new Button();
             btnCompleteDelivery = new Button();
             lblOrder = new Label();
@@ -56,6 +55,7 @@
             txtDeliveryDate = new TextBox();
             chkDelivered = new CheckBox();
             btnFindSimilar = new Button();
+            groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             SuspendLayout();
             // 
@@ -109,14 +109,6 @@
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
-            // 
-            // lblback
-            // 
-            lblback.BorderStyle = BorderStyle.Fixed3D;
-            lblback.Location = new Point(77, 259);
-            lblback.Name = "lblback";
-            lblback.Size = new Size(774, 158);
-            lblback.TabIndex = 19;
             // 
             // btnRefresh
             // 
@@ -312,6 +304,15 @@
             btnFindSimilar.UseVisualStyleBackColor = true;
             btnFindSimilar.Click += btnFindSimilar_Click;
             // 
+            // groupBox1
+            // 
+            groupBox1.FlatStyle = FlatStyle.Popup;
+            groupBox1.Location = new Point(77, 248);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(773, 178);
+            groupBox1.TabIndex = 45;
+            groupBox1.TabStop = false;
+            // 
             // Logistics_Control
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -339,12 +340,12 @@
             Controls.Add(lblOrder);
             Controls.Add(btnCompleteDelivery);
             Controls.Add(btnRefresh);
-            Controls.Add(lblback);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(lblSearch);
             Controls.Add(dgvOrderControl);
             Controls.Add(lblTitle);
+            Controls.Add(groupBox1);
             Name = "Logistics_Control";
             Text = "Logistics Delivery Control";
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
@@ -359,7 +360,6 @@
         private Label lblSearch;
         private TextBox txtSearch;
         private Button btnSearch;
-        private Label lblback;
         private Button btnRefresh;
         private Button btnCompleteDelivery;
         private Label lblOrder;
@@ -382,5 +382,6 @@
         private TextBox txtDeliveryDate;
         private CheckBox chkDelivered;
         private Button btnFindSimilar;
+        private GroupBox groupBox1;
     }
 }

@@ -56,7 +56,7 @@
             // 
             lblInventoryFurnitureTitle.AutoSize = true;
             lblInventoryFurnitureTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblInventoryFurnitureTitle.Location = new Point(224, 9);
+            lblInventoryFurnitureTitle.Location = new Point(224, 8);
             lblInventoryFurnitureTitle.Name = "lblInventoryFurnitureTitle";
             lblInventoryFurnitureTitle.Size = new Size(349, 31);
             lblInventoryFurnitureTitle.TabIndex = 0;
@@ -65,108 +65,108 @@
             // lblfSearch
             // 
             lblfSearch.AutoSize = true;
-            lblfSearch.Location = new Point(75, 51);
+            lblfSearch.Location = new Point(75, 45);
             lblfSearch.Name = "lblfSearch";
-            lblfSearch.Size = new Size(93, 17);
+            lblfSearch.Size = new Size(83, 15);
             lblfSearch.TabIndex = 1;
             lblfSearch.Text = "Search Name :";
             // 
             // dgvfInventoryControl
             // 
             dgvfInventoryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvfInventoryControl.Location = new Point(75, 77);
+            dgvfInventoryControl.Location = new Point(75, 68);
             dgvfInventoryControl.MultiSelect = false;
             dgvfInventoryControl.Name = "dgvfInventoryControl";
             dgvfInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvfInventoryControl.Size = new Size(664, 169);
+            dgvfInventoryControl.Size = new Size(664, 149);
             dgvfInventoryControl.TabIndex = 2;
             dgvfInventoryControl.RowEnter += dgvInventoryControl_RowEnter;
             // 
             // lblFurniturName
             // 
             lblFurniturName.AutoSize = true;
-            lblFurniturName.Location = new Point(75, 274);
+            lblFurniturName.Location = new Point(75, 242);
             lblFurniturName.Name = "lblFurniturName";
-            lblFurniturName.Size = new Size(101, 17);
+            lblFurniturName.Size = new Size(93, 15);
             lblFurniturName.TabIndex = 3;
             lblFurniturName.Text = "Furniture Name:";
             // 
             // lblFurnitureQuantity
             // 
             lblFurnitureQuantity.AutoSize = true;
-            lblFurnitureQuantity.Location = new Point(399, 274);
+            lblFurnitureQuantity.Location = new Point(399, 242);
             lblFurnitureQuantity.Name = "lblFurnitureQuantity";
-            lblFurnitureQuantity.Size = new Size(118, 17);
+            lblFurnitureQuantity.Size = new Size(110, 15);
             lblFurnitureQuantity.TabIndex = 4;
             lblFurnitureQuantity.Text = "Furniture Quantity :";
             // 
             // lblFurniturePrice
             // 
             lblFurniturePrice.AutoSize = true;
-            lblFurniturePrice.Location = new Point(75, 312);
+            lblFurniturePrice.Location = new Point(75, 275);
             lblFurniturePrice.Name = "lblFurniturePrice";
-            lblFurniturePrice.Size = new Size(98, 17);
+            lblFurniturePrice.Size = new Size(90, 15);
             lblFurniturePrice.TabIndex = 5;
             lblFurniturePrice.Text = "Furniture Price :";
             // 
             // lblFurniturType
             // 
             lblFurniturType.AutoSize = true;
-            lblFurniturType.Location = new Point(592, 274);
+            lblFurniturType.Location = new Point(592, 242);
             lblFurniturType.Name = "lblFurniturType";
-            lblFurniturType.Size = new Size(95, 17);
+            lblFurniturType.Size = new Size(85, 15);
             lblFurniturType.TabIndex = 6;
             lblFurniturType.Text = "Furnitur Type : ";
             // 
             // txtfSearch
             // 
-            txtfSearch.Location = new Point(167, 48);
+            txtfSearch.Location = new Point(167, 42);
             txtfSearch.Name = "txtfSearch";
             txtfSearch.Size = new Size(100, 23);
             txtfSearch.TabIndex = 8;
             // 
             // txtFurnitureName
             // 
-            txtFurnitureName.Location = new Point(182, 271);
+            txtFurnitureName.Location = new Point(182, 239);
             txtFurnitureName.Name = "txtFurnitureName";
             txtFurnitureName.Size = new Size(211, 23);
             txtFurnitureName.TabIndex = 9;
             // 
             // txtFurnitureQuantity
             // 
-            txtFurnitureQuantity.Location = new Point(523, 271);
+            txtFurnitureQuantity.Location = new Point(523, 239);
             txtFurnitureQuantity.Name = "txtFurnitureQuantity";
             txtFurnitureQuantity.Size = new Size(61, 23);
             txtFurnitureQuantity.TabIndex = 10;
             // 
             // txtFurnitureType
             // 
-            txtFurnitureType.Location = new Point(693, 271);
+            txtFurnitureType.Location = new Point(693, 239);
             txtFurnitureType.Name = "txtFurnitureType";
             txtFurnitureType.Size = new Size(44, 23);
             txtFurnitureType.TabIndex = 11;
             // 
             // txtFurniturePrice
             // 
-            txtFurniturePrice.Location = new Point(179, 309);
+            txtFurniturePrice.Location = new Point(179, 273);
             txtFurniturePrice.Name = "txtFurniturePrice";
             txtFurniturePrice.Size = new Size(112, 23);
             txtFurniturePrice.TabIndex = 12;
             // 
             // txtFurnitureDesc
             // 
-            txtFurnitureDesc.Location = new Point(384, 309);
+            txtFurnitureDesc.Location = new Point(384, 273);
             txtFurnitureDesc.Multiline = true;
             txtFurnitureDesc.Name = "txtFurnitureDesc";
-            txtFurnitureDesc.Size = new Size(353, 71);
+            txtFurnitureDesc.Size = new Size(353, 63);
             txtFurnitureDesc.TabIndex = 13;
             // 
             // btnfSearch
             // 
             btnfSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            btnfSearch.Location = new Point(273, 48);
+            btnfSearch.Location = new Point(273, 42);
             btnfSearch.Name = "btnfSearch";
-            btnfSearch.Size = new Size(75, 23);
+            btnfSearch.Size = new Size(75, 20);
             btnfSearch.TabIndex = 14;
             btnfSearch.Text = "Search";
             btnfSearch.UseVisualStyleBackColor = true;
@@ -174,9 +174,9 @@
             // 
             // btnfDeleteFurniture
             // 
-            btnfDeleteFurniture.Location = new Point(617, 409);
+            btnfDeleteFurniture.Location = new Point(617, 361);
             btnfDeleteFurniture.Name = "btnfDeleteFurniture";
-            btnfDeleteFurniture.Size = new Size(131, 29);
+            btnfDeleteFurniture.Size = new Size(131, 26);
             btnfDeleteFurniture.TabIndex = 15;
             btnfDeleteFurniture.Text = "Delete Furniture";
             btnfDeleteFurniture.UseVisualStyleBackColor = true;
@@ -184,9 +184,9 @@
             // 
             // btnfUpdateFurniture
             // 
-            btnfUpdateFurniture.Location = new Point(75, 349);
+            btnfUpdateFurniture.Location = new Point(75, 308);
             btnfUpdateFurniture.Name = "btnfUpdateFurniture";
-            btnfUpdateFurniture.Size = new Size(144, 31);
+            btnfUpdateFurniture.Size = new Size(144, 27);
             btnfUpdateFurniture.TabIndex = 16;
             btnfUpdateFurniture.Text = "Update Furniture";
             btnfUpdateFurniture.UseVisualStyleBackColor = true;
@@ -195,25 +195,25 @@
             // lblFurnitureDesc
             // 
             lblFurnitureDesc.AutoSize = true;
-            lblFurnitureDesc.Location = new Point(297, 312);
+            lblFurnitureDesc.Location = new Point(297, 275);
             lblFurnitureDesc.Name = "lblFurnitureDesc";
-            lblFurnitureDesc.Size = new Size(81, 17);
+            lblFurnitureDesc.Size = new Size(73, 15);
             lblFurnitureDesc.TabIndex = 17;
             lblFurnitureDesc.Text = "Description :";
             // 
             // lblback
             // 
             lblback.BorderStyle = BorderStyle.Fixed3D;
-            lblback.Location = new Point(64, 259);
+            lblback.Location = new Point(64, 229);
             lblback.Name = "lblback";
-            lblback.Size = new Size(684, 136);
+            lblback.Size = new Size(684, 120);
             lblback.TabIndex = 18;
             // 
             // btnfInsertFurniture
             // 
-            btnfInsertFurniture.Location = new Point(234, 349);
+            btnfInsertFurniture.Location = new Point(234, 308);
             btnfInsertFurniture.Name = "btnfInsertFurniture";
-            btnfInsertFurniture.Size = new Size(144, 31);
+            btnfInsertFurniture.Size = new Size(144, 27);
             btnfInsertFurniture.TabIndex = 19;
             btnfInsertFurniture.Text = "Insert Furniture";
             btnfInsertFurniture.UseVisualStyleBackColor = true;
@@ -221,9 +221,9 @@
             // 
             // btnfRefresh
             // 
-            btnfRefresh.Location = new Point(480, 409);
+            btnfRefresh.Location = new Point(480, 361);
             btnfRefresh.Name = "btnfRefresh";
-            btnfRefresh.Size = new Size(131, 29);
+            btnfRefresh.Size = new Size(131, 26);
             btnfRefresh.TabIndex = 20;
             btnfRefresh.Text = "Refresh";
             btnfRefresh.UseVisualStyleBackColor = true;
@@ -231,9 +231,9 @@
             // 
             // btnfClearTextBox
             // 
-            btnfClearTextBox.Location = new Point(343, 409);
+            btnfClearTextBox.Location = new Point(343, 361);
             btnfClearTextBox.Name = "btnfClearTextBox";
-            btnfClearTextBox.Size = new Size(131, 29);
+            btnfClearTextBox.Size = new Size(131, 26);
             btnfClearTextBox.TabIndex = 21;
             btnfClearTextBox.Text = "Clear Text Box";
             btnfClearTextBox.UseVisualStyleBackColor = true;
@@ -241,9 +241,9 @@
             // 
             // InventoryFurniture
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 397);
             Controls.Add(btnfClearTextBox);
             Controls.Add(btnfRefresh);
             Controls.Add(btnfInsertFurniture);
