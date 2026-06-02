@@ -19,56 +19,42 @@ namespace ITP4915M_Group8_Project.Login
         {
             InitializeComponent();
 
-            comboBox1.Items.Clear();
-            comboBox1.Items.Add("Customer");
-            comboBox1.Items.Add("Staff");
-            comboBox1.SelectedIndex = 0; // 預設選擇第一個
+            cboBoxIdentity.Items.Clear();
+            cboBoxIdentity.Items.Add("Customer");
+            cboBoxIdentity.Items.Add("Staff");
+            cboBoxIdentity.SelectedIndex = 0; // 預設選擇第一個
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void cboBoxIdentity_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cboBoxIdentity.SelectedItem == null) return;
 
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedItem == null) return;
-
-            string selectedType = comboBox1.SelectedItem.ToString();
+            string selectedType = cboBoxIdentity.SelectedItem.ToString();
 
             // 清空輸入欄位
             textBox_UserName.Clear();
             textBox_password.Clear();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void LogIn_button_Click(object sender, EventArgs e)
         {
             if (textBox_UserName.Text == "" || textBox_password.Text == "")
             {
-                MessageBox.Show("請輸入使用者名稱和密碼。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter username and password", "Hint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (comboBox1.SelectedItem == null)
+            // 檢查是否選擇了身份類型
+            if (cboBoxIdentity.SelectedItem == null)
             {
-                MessageBox.Show("請選擇登入身份（客戶/員工）。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select login role. (Customer/Staff)", "Hint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string uname = textBox_UserName.Text;
             string pass = textBox_password.Text;
-            string isStaff = comboBox1.SelectedItem.ToString();
-           
+            string identity = cboBoxIdentity.SelectedItem.ToString();
+            string isStaffValue = (identity == "Staff") ? "Y" : "N";
 
             try
             {
@@ -81,8 +67,9 @@ namespace ITP4915M_Group8_Project.Login
 
                 if (table.Rows.Count > 0)
                 {
-                    string welcomeMessage = (isStaff == "Staff") ? $"歡迎員工，{uname}！" : $"歡迎客戶，{uname}！";
-                    MessageBox.Show(welcomeMessage, "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // 登入成功
+                    string welcomeMessage = (identity == "Staff") ? $"Welcome Staff, {uname}!" : $"Welcome Customer, {uname}!";
+                    MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 可以在這裡儲存登入資訊（如果需要）
                     // 例如：Session.LoginUser = uname;
@@ -105,10 +92,10 @@ namespace ITP4915M_Group8_Project.Login
                 else
                 {
                     // 登入失敗
-                    string errorMessage = (isStaff == "Staff") ?
-                        "員工帳號或密碼錯誤。" :
-                        "客戶帳號或密碼錯誤。";
-                    MessageBox.Show(errorMessage, "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string errorMessage = (identity == "Staff") ?
+                        "Staff code or password incorrect!" :
+                        "Customer code or password incorrect!";
+                    MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     // 清空密碼欄位讓使用者重新輸入
                     textBox_password.Clear();
@@ -117,7 +104,7 @@ namespace ITP4915M_Group8_Project.Login
             }
             catch (Exception ex)
             {
-                MessageBox.Show("登入時發生錯誤：" + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Login Error." + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -133,9 +120,9 @@ namespace ITP4915M_Group8_Project.Login
 
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            linkLabel1.LinkVisited = true;
+            llblRegister.LinkVisited = true;
             Form1 form1 = new Form1();  // 保持原来的
             form1.Show();
             // this.Hide();  // 如果需要隐藏当前登录窗体，取消注释这行
