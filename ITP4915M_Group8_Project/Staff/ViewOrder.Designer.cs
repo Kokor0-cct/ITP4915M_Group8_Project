@@ -54,8 +54,16 @@
             lblFurniture = new Label();
             lblOrder = new Label();
             lblback = new Label();
-            groupBox1 = new GroupBox();
+            grpStatus = new GroupBox();
+            rbAll = new RadioButton();
+            rbCancel = new RadioButton();
+            rbFailed = new RadioButton();
+            rbDelivered = new RadioButton();
+            rbTransit = new RadioButton();
+            rbProduction = new RadioButton();
+            rbPending = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
+            grpStatus.SuspendLayout();
             SuspendLayout();
             // 
             // btnRefresh
@@ -66,6 +74,7 @@
             btnRefresh.TabIndex = 29;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -76,6 +85,7 @@
             btnSearch.TabIndex = 28;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -105,6 +115,7 @@
             dgvOrderControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvOrderControl.Size = new Size(944, 162);
             dgvOrderControl.TabIndex = 25;
+            dgvOrderControl.CellClick += dgvOrderControl_CellClick;
             // 
             // lblTitle
             // 
@@ -124,6 +135,7 @@
             btnFindSimilar.TabIndex = 64;
             btnFindSimilar.Text = "Find Related Records";
             btnFindSimilar.UseVisualStyleBackColor = true;
+            btnFindSimilar.Click += btnFindSimilar_Click;
             // 
             // txtDeliveryDate
             // 
@@ -286,21 +298,112 @@
             lblback.Size = new Size(597, 158);
             lblback.TabIndex = 45;
             // 
-            // groupBox1
+            // grpStatus
             // 
-            groupBox1.Location = new Point(683, 293);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(341, 158);
-            groupBox1.TabIndex = 65;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            grpStatus.Controls.Add(rbAll);
+            grpStatus.Controls.Add(rbCancel);
+            grpStatus.Controls.Add(rbFailed);
+            grpStatus.Controls.Add(rbDelivered);
+            grpStatus.Controls.Add(rbTransit);
+            grpStatus.Controls.Add(rbProduction);
+            grpStatus.Controls.Add(rbPending);
+            grpStatus.Location = new Point(683, 293);
+            grpStatus.Name = "grpStatus";
+            grpStatus.Size = new Size(341, 158);
+            grpStatus.TabIndex = 65;
+            grpStatus.TabStop = false;
+            grpStatus.Text = "Status";
+            // 
+            // rbAll
+            // 
+            rbAll.AutoSize = true;
+            rbAll.Location = new Point(6, 22);
+            rbAll.Name = "rbAll";
+            rbAll.Size = new Size(39, 19);
+            rbAll.TabIndex = 6;
+            rbAll.TabStop = true;
+            rbAll.Text = "All";
+            rbAll.UseVisualStyleBackColor = true;
+            rbAll.CheckedChanged += rbAll_CheckedChanged;
+            // 
+            // rbCancel
+            // 
+            rbCancel.AutoSize = true;
+            rbCancel.Location = new Point(147, 110);
+            rbCancel.Name = "rbCancel";
+            rbCancel.Size = new Size(61, 19);
+            rbCancel.TabIndex = 5;
+            rbCancel.TabStop = true;
+            rbCancel.Text = "Cancel";
+            rbCancel.UseVisualStyleBackColor = true;
+            rbCancel.CheckedChanged += rbCancel_CheckedChanged;
+            // 
+            // rbFailed
+            // 
+            rbFailed.AutoSize = true;
+            rbFailed.Location = new Point(6, 110);
+            rbFailed.Name = "rbFailed";
+            rbFailed.Size = new Size(56, 19);
+            rbFailed.TabIndex = 4;
+            rbFailed.TabStop = true;
+            rbFailed.Text = "Failed";
+            rbFailed.UseVisualStyleBackColor = true;
+            rbFailed.CheckedChanged += rbFailed_CheckedChanged;
+            // 
+            // rbDelivered
+            // 
+            rbDelivered.AutoSize = true;
+            rbDelivered.Location = new Point(147, 85);
+            rbDelivered.Name = "rbDelivered";
+            rbDelivered.Size = new Size(74, 19);
+            rbDelivered.TabIndex = 3;
+            rbDelivered.TabStop = true;
+            rbDelivered.Text = "Delivered";
+            rbDelivered.UseVisualStyleBackColor = true;
+            rbDelivered.CheckedChanged += rbDelivered_CheckedChanged;
+            // 
+            // rbTransit
+            // 
+            rbTransit.AutoSize = true;
+            rbTransit.Location = new Point(6, 85);
+            rbTransit.Name = "rbTransit";
+            rbTransit.Size = new Size(72, 19);
+            rbTransit.TabIndex = 2;
+            rbTransit.TabStop = true;
+            rbTransit.Text = "In Transit";
+            rbTransit.UseVisualStyleBackColor = true;
+            rbTransit.CheckedChanged += rbTransit_CheckedChanged;
+            // 
+            // rbProduction
+            // 
+            rbProduction.AutoSize = true;
+            rbProduction.Location = new Point(147, 60);
+            rbProduction.Name = "rbProduction";
+            rbProduction.Size = new Size(97, 19);
+            rbProduction.TabIndex = 1;
+            rbProduction.TabStop = true;
+            rbProduction.Text = "In Production";
+            rbProduction.UseVisualStyleBackColor = true;
+            rbProduction.CheckedChanged += rbProduction_CheckedChanged;
+            // 
+            // rbPending
+            // 
+            rbPending.AutoSize = true;
+            rbPending.Location = new Point(6, 60);
+            rbPending.Name = "rbPending";
+            rbPending.Size = new Size(69, 19);
+            rbPending.TabIndex = 0;
+            rbPending.TabStop = true;
+            rbPending.Text = "Pending";
+            rbPending.UseVisualStyleBackColor = true;
+            rbPending.CheckedChanged += rbPending_CheckedChanged;
             // 
             // ViewOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
-            Controls.Add(groupBox1);
+            Controls.Add(grpStatus);
             Controls.Add(btnFindSimilar);
             Controls.Add(txtDeliveryDate);
             Controls.Add(txtAmount);
@@ -330,6 +433,8 @@
             Name = "ViewOrder";
             Text = "ViewOrder";
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
+            grpStatus.ResumeLayout(false);
+            grpStatus.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -362,6 +467,13 @@
         private Label lblFurniture;
         private Label lblOrder;
         private Label lblback;
-        private GroupBox groupBox1;
+        private GroupBox grpStatus;
+        private RadioButton rbCancel;
+        private RadioButton rbFailed;
+        private RadioButton rbDelivered;
+        private RadioButton rbTransit;
+        private RadioButton rbProduction;
+        private RadioButton rbPending;
+        private RadioButton rbAll;
     }
 }

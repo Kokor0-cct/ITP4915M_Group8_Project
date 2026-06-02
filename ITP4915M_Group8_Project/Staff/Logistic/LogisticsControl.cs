@@ -51,6 +51,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         //------search the textboxes text item in database------
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            ClearTextBox();
             string keyword = txtSearch.Text.Trim();
 
 
@@ -62,7 +63,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
 
             DataTable dt = DbConnect.Query(sql, parameters);
-
+            
             dgvOrderControl.DataSource = dt;
         }
 
@@ -128,6 +129,8 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvOrderControl.CurrentRow.Selected = true;
+            if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
+                return;
 
             //Get fName from furniture
             string sql = @"SELECT fName FROM furniture WHERE fID = @FID";

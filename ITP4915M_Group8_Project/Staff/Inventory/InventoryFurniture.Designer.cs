@@ -34,7 +34,7 @@
             lblFurniturName = new Label();
             lblFurnitureQuantity = new Label();
             lblFurniturePrice = new Label();
-            lblFurniturType = new Label();
+            lblFurnitureType = new Label();
             txtfSearch = new TextBox();
             txtFurnitureName = new TextBox();
             txtFurnitureQuantity = new TextBox();
@@ -109,14 +109,14 @@
             lblFurniturePrice.TabIndex = 5;
             lblFurniturePrice.Text = "Furniture Price :";
             // 
-            // lblFurniturType
+            // lblFurnitureType
             // 
-            lblFurniturType.AutoSize = true;
-            lblFurniturType.Location = new Point(592, 242);
-            lblFurniturType.Name = "lblFurniturType";
-            lblFurniturType.Size = new Size(85, 15);
-            lblFurniturType.TabIndex = 6;
-            lblFurniturType.Text = "Furnitur Type : ";
+            lblFurnitureType.AutoSize = true;
+            lblFurnitureType.Location = new Point(592, 242);
+            lblFurnitureType.Name = "lblFurnitureType";
+            lblFurnitureType.Size = new Size(91, 15);
+            lblFurnitureType.TabIndex = 6;
+            lblFurnitureType.Text = "Furniture Type : ";
             // 
             // txtfSearch
             // 
@@ -257,7 +257,7 @@
             Controls.Add(txtFurnitureQuantity);
             Controls.Add(txtFurnitureName);
             Controls.Add(txtfSearch);
-            Controls.Add(lblFurniturType);
+            Controls.Add(lblFurnitureType);
             Controls.Add(lblFurniturePrice);
             Controls.Add(lblFurnitureQuantity);
             Controls.Add(lblFurniturName);
@@ -280,7 +280,7 @@
         private Label lblFurniturName;
         private Label lblFurnitureQuantity;
         private Label lblFurniturePrice;
-        private Label lblFurniturType;
+        private Label lblFurnitureType;
         private Label label7;
         private TextBox txtfSearch;
         private TextBox txtFurnitureName;

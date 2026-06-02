@@ -35,13 +35,19 @@ namespace ITP4915M_Group8_Project.Staff
 
         private void btnSalesOrderEdit_Click(object sender, EventArgs e)
         {
-            Staff.Sales.OderInfrommationEdit Form = new Staff.Sales.OderInfrommationEdit();
-            Form.Show();
+            //Staff.Sales.OderInfrommationEdit Form = new Staff.Sales.OderInfrommationEdit();
+            //Form.Show();
         }
 
         private void btnLogistic_Click(object sender, EventArgs e)
         {
             Staff.Logistic.Logistics_Control Form = new Staff.Logistic.Logistics_Control();
+            Form.Show();
+        }
+
+        private void btnViewOrder_Click(object sender, EventArgs e)
+        {
+            Staff.ViewOrder Form = new Staff.ViewOrder();
             Form.Show();
         }
     }

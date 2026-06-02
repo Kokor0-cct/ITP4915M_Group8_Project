@@ -1,4 +1,5 @@
 using ITP4915M_Group8_Project.Staff;
+using ITP4915M_Group8_Project.Staff.Logistic;
 
 namespace ITP4915M_Group8_Project
 {
@@ -13,7 +14,7 @@ namespace ITP4915M_Group8_Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new StaffMenu());
+            Application.Run(new Staff.StaffMenu());
         }
     }
 }
