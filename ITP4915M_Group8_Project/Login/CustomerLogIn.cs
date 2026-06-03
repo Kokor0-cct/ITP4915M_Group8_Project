@@ -22,7 +22,7 @@ namespace ITP4915M_Group8_Project.Login
             cboBoxIdentity.Items.Clear();
             cboBoxIdentity.Items.Add("Customer");
             cboBoxIdentity.Items.Add("Staff");
-            cboBoxIdentity.SelectedIndex = 0; // 預設選擇第一個
+            cboBoxIdentity.SelectedIndex = 0; 
         }
 
         private void cboBoxIdentity_SelectedIndexChanged(object sender, EventArgs e)
@@ -31,7 +31,6 @@ namespace ITP4915M_Group8_Project.Login
 
             string selectedType = cboBoxIdentity.SelectedItem.ToString();
 
-            // 清空輸入欄位
             textBox_UserName.Clear();
             textBox_password.Clear();
         }
@@ -44,7 +43,7 @@ namespace ITP4915M_Group8_Project.Login
                 return;
             }
 
-            // 檢查是否選擇了身份類型
+            
             if (cboBoxIdentity.SelectedItem == null)
             {
                 MessageBox.Show("Please select login role. (Customer/Staff)", "Hint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -69,37 +68,30 @@ namespace ITP4915M_Group8_Project.Login
 
                     if (table.Rows.Count > 0)
                     {
-                        // 登入成功
+       
                         string welcomeMessage = $"Welcome Staff, {uname}!";
                         MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // 可以在這裡儲存登入資訊（如果需要）
-                        UserSession.StaffName = uname;
-                        UserSession.StaffPassword = pass;
+                 
+                        DataTable dt = DbConnect.GetStaffinfo(uname);
+               
 
-                        this.Hide(); // 隱藏登入表單
+                        UserSession.StaffName = Convert.ToString(dt.Rows[0]["sName"]);
+                        UserSession.StaffPhone = Convert.ToString(dt.Rows[0]["sPhone"]);
+                        UserSession.StaffPassword = Convert.ToString(dt.Rows[0]["sPassword"]);
+                        UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["deptCode"]);
+                        UserSession.StaffId = Convert.ToInt32(dt.Rows[0]["sUserID"]);
 
-                        // 可以根據不同身份開啟不同的主畫面
-                        // if (isStaff == "Staff")
-                        // {
-                        //     StaffMainForm staffForm = new StaffMainForm();
-                        //     staffForm.Show();
-                        // }
-                        // else
-                        // {
-                        //     CustomerMainForm customerForm = new CustomerMainForm();
-                        //     customerForm.Show();
-                        // }
+                        Staff.StaffMenu Form = new Staff.StaffMenu();
+                        Form.Show();
+                        this.Hide();
                     }
                     else
                     {
-                        // 登入失敗
-                        string errorMessage = (identity == "Staff") ?
-                            "Staff code or password incorrect!" :
-                            "Customer code or password incorrect!";
+                        string errorMessage = "Staff name or password incorrect!";
+                           
                         MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        // 清空密碼欄位讓使用者重新輸入
                         textBox_password.Clear();
                         textBox_password.Focus();
                     }
@@ -110,34 +102,34 @@ namespace ITP4915M_Group8_Project.Login
                     MySqlCommand cmd = new MySqlCommand(query);
                     cmd.Parameters.AddWithValue("@cName", uname);
                     cmd.Parameters.AddWithValue("@cPassword", pass);
+
                     DataTable table = customerLogin.getlist(cmd);
                     if (table.Rows.Count > 0)
                     {
-                        // 登入成功
-                        string welcomeMessage = $"Welcome Customer, {uname}!";
+                        string welcomeMessage = $"Welcome ! {uname}!";
                         MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // 可以在這裡儲存登入資訊（如果需要）
-                        // 例如：Session.LoginUser = uname;
-                        // Session.UserType = isStaff;
-                        this.Hide(); // 隱藏登入表單
-                        // 可以根據不同身份開啟不同的主畫面
-                        // if (isStaff == "Staff")
-                        // {
-                        //     StaffMainForm staffForm = new StaffMainForm();
-                        //     staffForm.Show();
-                        // }
-                        // else
-                        // {
-                        //     CustomerMainForm customerForm = new CustomerMainForm();
-                        //     customerForm.Show();
-                        // }
+
+
+                        DataTable dt = DbConnect.GetCustomerinfo(uname);
+
+
+                        UserSession.CustomerName = Convert.ToString(dt.Rows[0]["cName"]);
+                        UserSession.CustomerPhone = Convert.ToString(dt.Rows[0]["cPhone"]);
+                        UserSession.CustomerPassword = Convert.ToString(dt.Rows[0]["cPassword"]);
+                        UserSession.CustomerAddress = Convert.ToString(dt.Rows[0]["cAddress"]);
+                        UserSession.CustomerId = Convert.ToInt32(dt.Rows[0]["cUserID"]);
+                        UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBalance"]);
+                        UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
+
+                        Staff.StaffMenu Form = new Staff.StaffMenu();
+                        Form.Show();
+                        this.Hide();
+
                     }
                     else
                     {
-                        // 登入失敗
-                        string errorMessage = "Customer code or password incorrect!";
+                        string errorMessage = "Customer name or password incorrect!";
                         MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        // 清空密碼欄位讓使用者重新輸入
                         textBox_password.Clear();
                         textBox_password.Focus();
                     }
@@ -164,9 +156,11 @@ namespace ITP4915M_Group8_Project.Login
         private void llblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblRegister.LinkVisited = true;
-            Form1 form1 = new Form1();  // 保持原来的
+            Form1 form1 = new Form1(); 
             form1.Show();
-            // this.Hide();  // 如果需要隐藏当前登录窗体，取消注释这行
+
         }
+
+        
     }
 }

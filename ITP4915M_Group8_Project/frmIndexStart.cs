@@ -11,6 +11,7 @@ namespace ITP4915M_Group8_Project
         {
             Login.CustomerLogIn Form = new Login.CustomerLogIn();
             Form.Show();
+            this.Hide();
         }
     }
 }

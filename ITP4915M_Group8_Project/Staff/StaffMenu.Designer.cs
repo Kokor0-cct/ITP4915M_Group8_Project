@@ -200,8 +200,7 @@
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(25, 15);
             lblWelcome.TabIndex = 25;
-            lblWelcome.Text = "Hi, ";
-            // 
+            lblWelcome.Text = "Hi, "+ ITP4915M_Group8_Project.Login.UserSession.StaffName+" password: "+ITP4915M_Group8_Project.Login.UserSession.StaffPassword+"department: "+ITP4915M_Group8_Project.Login.UserSession.StaffDepartment;
             // btnViewOrder
             // 
             btnViewOrder.FlatStyle = FlatStyle.System;
