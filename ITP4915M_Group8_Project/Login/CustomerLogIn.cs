@@ -53,53 +53,94 @@ namespace ITP4915M_Group8_Project.Login
 
             string uname = textBox_UserName.Text;
             string pass = textBox_password.Text;
-            string identity = cboBoxIdentity.SelectedItem.ToString();
-            string isStaffValue = (identity == "Staff") ? "Y" : "N";
+            string isStaffValue = cboBoxIdentity.SelectedItem.ToString();
 
             try
             {
-                string query = "SELECT * FROM `customers` WHERE `cName` = @cName AND `cPassword` = @cPassword ";
-                MySqlCommand cmd = new MySqlCommand(query);
-                cmd.Parameters.AddWithValue("@cName", uname);
-                cmd.Parameters.AddWithValue("@cPassword", pass);
-
-                DataTable table = customerLogin.getlist(cmd);
-
-                if (table.Rows.Count > 0)
+                if (isStaffValue == "Staff")
                 {
-                    // 登入成功
-                    string welcomeMessage = (identity == "Staff") ? $"Welcome Staff, {uname}!" : $"Welcome Customer, {uname}!";
-                    MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 可以在這裡儲存登入資訊（如果需要）
-                    // 例如：Session.LoginUser = uname;
-                    // Session.UserType = isStaff;
+                    string query = "SELECT * FROM `staff` WHERE `sName` = @sName AND `sPassword` = @sPassword ";
+                    MySqlCommand cmd = new MySqlCommand(query);
+                    cmd.Parameters.AddWithValue("@sName", uname);
+                    cmd.Parameters.AddWithValue("@sPassword", pass);
 
-                    this.Hide(); // 隱藏登入表單
+                    DataTable table = customerLogin.getlist(cmd);
 
-                    // 可以根據不同身份開啟不同的主畫面
-                    // if (isStaff == "Staff")
-                    // {
-                    //     StaffMainForm staffForm = new StaffMainForm();
-                    //     staffForm.Show();
-                    // }
-                    // else
-                    // {
-                    //     CustomerMainForm customerForm = new CustomerMainForm();
-                    //     customerForm.Show();
-                    // }
+                    if (table.Rows.Count > 0)
+                    {
+                        // 登入成功
+                        string welcomeMessage = $"Welcome Staff, {uname}!";
+                        MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // 可以在這裡儲存登入資訊（如果需要）
+                        UserSession.StaffName = uname;
+                        UserSession.StaffPassword = pass;
+
+                        this.Hide(); // 隱藏登入表單
+
+                        // 可以根據不同身份開啟不同的主畫面
+                        // if (isStaff == "Staff")
+                        // {
+                        //     StaffMainForm staffForm = new StaffMainForm();
+                        //     staffForm.Show();
+                        // }
+                        // else
+                        // {
+                        //     CustomerMainForm customerForm = new CustomerMainForm();
+                        //     customerForm.Show();
+                        // }
+                    }
+                    else
+                    {
+                        // 登入失敗
+                        string errorMessage = (identity == "Staff") ?
+                            "Staff code or password incorrect!" :
+                            "Customer code or password incorrect!";
+                        MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        // 清空密碼欄位讓使用者重新輸入
+                        textBox_password.Clear();
+                        textBox_password.Focus();
+                    }
                 }
-                else
+                else if (isStaffValue == "Customer")
                 {
-                    // 登入失敗
-                    string errorMessage = (identity == "Staff") ?
-                        "Staff code or password incorrect!" :
-                        "Customer code or password incorrect!";
-                    MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    // 清空密碼欄位讓使用者重新輸入
-                    textBox_password.Clear();
-                    textBox_password.Focus();
+                    string query = "SELECT * FROM `customers` WHERE `cName` = @cName AND `cPassword` = @cPassword ";
+                    MySqlCommand cmd = new MySqlCommand(query);
+                    cmd.Parameters.AddWithValue("@cName", uname);
+                    cmd.Parameters.AddWithValue("@cPassword", pass);
+                    DataTable table = customerLogin.getlist(cmd);
+                    if (table.Rows.Count > 0)
+                    {
+                        // 登入成功
+                        string welcomeMessage = $"Welcome Customer, {uname}!";
+                        MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // 可以在這裡儲存登入資訊（如果需要）
+                        // 例如：Session.LoginUser = uname;
+                        // Session.UserType = isStaff;
+                        this.Hide(); // 隱藏登入表單
+                        // 可以根據不同身份開啟不同的主畫面
+                        // if (isStaff == "Staff")
+                        // {
+                        //     StaffMainForm staffForm = new StaffMainForm();
+                        //     staffForm.Show();
+                        // }
+                        // else
+                        // {
+                        //     CustomerMainForm customerForm = new CustomerMainForm();
+                        //     customerForm.Show();
+                        // }
+                    }
+                    else
+                    {
+                        // 登入失敗
+                        string errorMessage = "Customer code or password incorrect!";
+                        MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // 清空密碼欄位讓使用者重新輸入
+                        textBox_password.Clear();
+                        textBox_password.Focus();
+                    }
                 }
             }
             catch (Exception ex)
