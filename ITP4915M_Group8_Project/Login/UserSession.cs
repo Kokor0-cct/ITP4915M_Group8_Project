@@ -23,6 +23,7 @@ namespace ITP4915M_Group8_Project.Login
         public static string StaffDepartment { get; set; }
         public static string StaffPassword { get; set; }
 
+        
 
     }
 }

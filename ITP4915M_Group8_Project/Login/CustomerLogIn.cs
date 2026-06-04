@@ -79,7 +79,7 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.StaffName = Convert.ToString(dt.Rows[0]["sName"]);
                         UserSession.StaffPhone = Convert.ToString(dt.Rows[0]["sPhone"]);
                         UserSession.StaffPassword = Convert.ToString(dt.Rows[0]["sPassword"]);
-                        UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["deptCode"]);
+                        UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["Department"]);
                         UserSession.StaffId = Convert.ToInt32(dt.Rows[0]["sUserID"]);
 
                         Staff.StaffMenu Form = new Staff.StaffMenu();
