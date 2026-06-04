@@ -104,10 +104,10 @@ namespace ITP4915M_Group8_Project.Login
 
             if (verify())
             {
-                if (customer.InsertCustomer(cName, cPassword, cphone, cadd,company,isStaff))
+                if (customer.InsertCustomer(cName, cPassword, cphone, cadd, company, isStaff))
                 {
                     MessageBox.Show("Registration Successfully!", "Add customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                 }
                 else
                 {
@@ -116,7 +116,7 @@ namespace ITP4915M_Group8_Project.Login
             }
             else
             {
-                MessageBox.Show("Empty Field","Add Customer",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Empty Field", "Add Customer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -124,7 +124,7 @@ namespace ITP4915M_Group8_Project.Login
         bool verify()
         {
             if ((NametextBox.Text == "") || (PwtextBox.Text == "") ||
-                (PhonetextBox.Text == "") || (AddstextBox.Text == "")|| comboBox_identity.SelectedItem == null)
+                (PhonetextBox.Text == "") || (AddstextBox.Text == "") || comboBox_identity.SelectedItem == null)
             {
                 MessageBox.Show("Please fill in all required fields ", "hint",
               MessageBoxButtons.OK, MessageBoxIcon.Warning);
