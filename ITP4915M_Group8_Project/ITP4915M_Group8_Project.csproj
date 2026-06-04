@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Customer\" />
-    <Folder Include="Customer\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MySqlConnector" Version="2.5.0" />
     <PackageReference Include="ScottPlot.WinForms" Version="5.1.58" />
   </ItemGroup>

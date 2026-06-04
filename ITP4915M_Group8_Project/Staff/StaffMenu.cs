@@ -50,5 +50,10 @@ namespace ITP4915M_Group8_Project.Staff
             Staff.ViewOrder Form = new Staff.ViewOrder();
             Form.Show();
         }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
