@@ -121,5 +121,10 @@ namespace ITP4915M_Group8_Project.Staff
         {
 
         }
+
+        private void lblWelcome_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

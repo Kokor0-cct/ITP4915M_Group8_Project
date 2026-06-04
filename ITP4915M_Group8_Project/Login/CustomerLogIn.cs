@@ -121,8 +121,9 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBalance"]);
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
-                        Staff.StaffMenu Form = new Staff.StaffMenu();
-                        Form.Show();
+                        // 對於 Customer 登入，轉到 Buy 表單
+                        customer.Buy buyForm = new customer.Buy ();
+                        buyForm.Show();
                         this.Hide();
 
                     }
