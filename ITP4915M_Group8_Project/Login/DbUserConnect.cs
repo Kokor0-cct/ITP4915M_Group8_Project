@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ITP4915M_Group8_Project.Login
 {
-    internal class DbConnect
+    internal class DbUserConnect
     {
         //create connection with db
         private static readonly string connStr = "DataSource=localhost; server=localhost;port=3306;database=itp4915m_2526_projectdatabase;user=root;password=;";

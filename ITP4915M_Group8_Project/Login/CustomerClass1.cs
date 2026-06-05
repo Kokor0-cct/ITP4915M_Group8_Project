@@ -11,7 +11,7 @@ namespace ITP4915M_Group8_Project.Login
     internal class CustomerClass1
     {
         
-        DbConnect connect = new DbConnect();
+        DbUserConnect connect = new DbUserConnect();
 
         //cerate a fuction to add a customer to database
         public bool InsertCustomer( string cName, string cPhone,string cPassword, string cAddress, string company, string isStaff)

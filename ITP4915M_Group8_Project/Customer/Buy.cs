@@ -1,7 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using System.Data;
+﻿using ITP4915M_Group8_Project.Customer;
+
 using ITP4915M_Group8_Project.Staff.Inventory;
+using MySqlConnector;
+using System;
+using System.Data;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ITP4915M_Group8_Project.customer
 {
@@ -18,45 +22,41 @@ namespace ITP4915M_Group8_Project.customer
 
         private void btnAddToShopingCar_Click(object sender, EventArgs e)
         {
-            //var orderSofa = new OrderSofa();
-            //orderSofa.Show();
-            // this.Close();
+            if (comboBox1.SelectedItem == null || numUDProductQuantity.Value == 0)
+            {
+                MessageBox.Show("Please select an item and enter the quantity!");
+                return;
+            }
+
+            // 2. 获取选中的商品信息（从 ComboBox 自动拿）
+            DataRowView row = (DataRowView)comboBox1.SelectedItem;
+
+            int productId = Convert.ToInt32(row["fId"]);        // 商品ID
+            string productName = row["fName"].ToString();      // 商品名
+            decimal price = Convert.ToDecimal(row["fPrice"]);  // 单价
+            int qty = (int)numUDProductQuantity.Value;                // 数量
+
+            // 3. 加入购物车（用我之前给你的全局购物车）
+            ShoppingCart.AddItem(productId, productName, price, qty);
+
+            // 4. 提示成功
+            MessageBox.Show($"Already joined：{productName} × {qty}");
+
+            // 5. 清空选择（可选）
+            comboBox1.SelectedIndex = -1;
+            numUDProductQuantity.Value = 0;
+
         }
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            var selected = comboBox1.SelectedItem as string;
-            int quantity = (int)numUDProductQuantity.Value;
-
+           
             var billForm = new bill();
 
-            // 建立包含產品名稱和數量的資料物件
-            // 取得選取項目的價格（若使用 DataSource 並設定 ValueMember 為 fPrice，SelectedValue 會取得價格）
-            decimal selectedPrice = 0m;
-            if (comboBox1.SelectedValue != null)
-            {
-                decimal.TryParse(comboBox1.SelectedValue.ToString(), out selectedPrice);
-            }
-
-            var orderData = new Dictionary<string, object>
-    {
-        { "ProductName", selected ?? "未選擇" },
-        { "Quantity", quantity },
-        { "UnitPrice", selectedPrice }
-    };
-
-            // 透過 Tag 傳遞完整資料
-            billForm.Tag = orderData;
-
-            // 直接更新 product name label
-            var matches = billForm.Controls.Find("lalProductName", true);
-            if (matches.Length > 0 && matches[0] is Label lbl)
-            {
-                lbl.Text = selected ?? "未選擇";
-            }
+            
 
             billForm.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -92,20 +92,7 @@ namespace ITP4915M_Group8_Project.customer
 
         private void numUDProductQuantity_ValueChanged(object sender, EventArgs e)
         {
-            int quantity = (int)numUDProductQuantity.Value;
-
-            // 方式1：更新畫面上某個顯示數量的 Label
-            var matches = this.Controls.Find("lblQuantityDisplay", true);
-            if (matches.Length > 0 && matches[0] is Label lbl)
-            {
-                lbl.Text = $"數量: {quantity}";
-            }
-            else
-            {
-                // 不彈訊息方塊，因為數量變動頻繁，會一直干擾使用者
-                // 只寫在標題或狀態列較好
-                this.Text = $"購買 - 數量: {quantity}";
-            }
+            
         }
 
         private void Buy_Load(object sender, EventArgs e)
@@ -118,51 +105,39 @@ namespace ITP4915M_Group8_Project.customer
         {
             try
             {
-                string sql = "SELECT fName, fPrice FROM furniture";
-                DataTable dt = ITP4915M_Group8_Project.Staff.Inventory.DbConnect.Query(sql);
-                if (dt != null && dt.Rows.Count > 0)
+                string sql = "SELECT fId, fName, fPrice FROM furniture";
+                DataTable dt = DbConnect.Query(sql);
+
+                if (dt == null || dt.Rows.Count == 0)
                 {
-                    comboBox1.DisplayMember = "fName";
-                    comboBox1.ValueMember = "fPrice"; // price stored in SelectedValue
-                    comboBox1.DataSource = dt;
+                    MessageBox.Show("There are no products in the database!");
+                    return;
                 }
-                else
-                {
-                    // 若沒有資料，清空並顯示預設項目
-                    comboBox1.DataSource = null;
-                    comboBox1.Items.Clear();
-                    comboBox1.Items.AddRange(new object[] { "Sofa", "Chair" });
-                    if (comboBox1.Items.Count > 0)
-                        comboBox1.SelectedIndex = 0;
-                }
+
+                comboBox1.DataSource = null;          
+                comboBox1.DataSource = dt;            
+                comboBox1.DisplayMember = "fName";     
+                comboBox1.ValueMember = "fId";        
+
+       
             }
             catch (Exception ex)
             {
-                MessageBox.Show("載入家具資料失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Read failed：" + ex.Message);
             }
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = comboBox1.SelectedItem as string;
-            if (string.IsNullOrEmpty(selected))
-                return;
-
-            // 若表單中有名為 labelSelection 的 Label，更新它；否則顯示訊息方塊
-            var matches = this.Controls.Find("labelSelection", true);
-            if (matches.Length > 0 && matches[0] is Label lbl)
-            {
-                lbl.Text = $"已選: {selected}";
-            }
-            else
-            {
-                MessageBox.Show($"已選: {selected}", "選擇", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            
         }
 
        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
  
         }
+
+        
     }
 }

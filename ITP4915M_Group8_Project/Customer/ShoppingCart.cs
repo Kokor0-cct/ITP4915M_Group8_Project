@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITP4915M_Group8_Project.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +7,54 @@ using System.Threading.Tasks;
 
 namespace ITP4915M_Group8_Project.Customer
 {
-    internal class ShoppingCart
+    public static class ShoppingCart
     {
-        public class CartItem
+
+
+
+        public static int CustomerId = UserSession.CustomerId;
+
+
+
+        public static List<CartItem> Items { get; set; } = new List<CartItem>();
+
+
+
+        public static void AddItem(int id, string name, decimal price, int qty = 1)
         {
-            // 商品ID（必须有）
-            public int fID { get; set; }
+            var existItem = Items.FirstOrDefault(x => x.fID == id);
 
-            // 商品名称
-            public string fName { get; set; }
+            if (existItem != null)
+            {
+                existItem.fQuantity += qty;
+            }
+            else
+            {
+                Items.Add(new CartItem
+                {
+                    fID = id,
+                    fName = name,
+                    UnitPrice = price,
+                    fQuantity = qty
+                });
+            }
+        }
 
-            // 单价
-            public decimal Price { get; set; }
 
-            // 购买数量
-            public int fQuantity { get; set; }
 
-            // 小计（自动计算）
-            public decimal TotalPrice => Price * fQuantity;
+
+        public static void Clear()
+        {
+            Items.Clear();
+        }
+
+
+
+
+
+        public static decimal GetTotalAmount()
+        {
+            return Items.Sum(x => x.TotalPrice);
         }
     }
 }

@@ -48,8 +48,8 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(-8, 84);
-            btnBack.Margin = new Padding(4, 4, 4, 4);
+            btnBack.Location = new Point(44, 74);
+            btnBack.Margin = new Padding(4);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(97, 47);
             btnBack.TabIndex = 0;
@@ -62,7 +62,7 @@
             btnPoductCategory.FormattingEnabled = true;
             btnPoductCategory.Items.AddRange(new object[] { "Sofa", "Chair" });
             btnPoductCategory.Location = new Point(329, 20);
-            btnPoductCategory.Margin = new Padding(4, 4, 4, 4);
+            btnPoductCategory.Margin = new Padding(4);
             btnPoductCategory.Name = "btnPoductCategory";
             btnPoductCategory.Size = new Size(140, 25);
             btnPoductCategory.TabIndex = 20;
@@ -72,7 +72,7 @@
             // textBox1
             // 
             textBox1.Location = new Point(767, 23);
-            textBox1.Margin = new Padding(4, 4, 4, 4);
+            textBox1.Margin = new Padding(4);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(61, 23);
             textBox1.TabIndex = 19;
@@ -80,7 +80,7 @@
             // btnMyOder
             // 
             btnMyOder.Location = new Point(654, 20);
-            btnMyOder.Margin = new Padding(4, 4, 4, 4);
+            btnMyOder.Margin = new Padding(4);
             btnMyOder.Name = "btnMyOder";
             btnMyOder.Size = new Size(88, 33);
             btnMyOder.TabIndex = 18;
@@ -90,7 +90,7 @@
             // btnTailorMadeFurniture
             // 
             btnTailorMadeFurniture.Location = new Point(494, 20);
-            btnTailorMadeFurniture.Margin = new Padding(4, 4, 4, 4);
+            btnTailorMadeFurniture.Margin = new Padding(4);
             btnTailorMadeFurniture.Name = "btnTailorMadeFurniture";
             btnTailorMadeFurniture.Size = new Size(137, 33);
             btnTailorMadeFurniture.TabIndex = 17;
@@ -100,7 +100,7 @@
             // btnSearch
             // 
             btnSearch.Location = new Point(820, 23);
-            btnSearch.Margin = new Padding(4, 4, 4, 4);
+            btnSearch.Margin = new Padding(4);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(88, 33);
             btnSearch.TabIndex = 16;
@@ -110,7 +110,7 @@
             // btnHome
             // 
             btnHome.Location = new Point(214, 20);
-            btnHome.Margin = new Padding(4, 4, 4, 4);
+            btnHome.Margin = new Padding(4);
             btnHome.Name = "btnHome";
             btnHome.Size = new Size(88, 33);
             btnHome.TabIndex = 15;
@@ -120,7 +120,7 @@
             // btnShoppingCart
             // 
             btnShoppingCart.Location = new Point(108, 20);
-            btnShoppingCart.Margin = new Padding(4, 4, 4, 4);
+            btnShoppingCart.Margin = new Padding(4);
             btnShoppingCart.Name = "btnShoppingCart";
             btnShoppingCart.Size = new Size(88, 33);
             btnShoppingCart.TabIndex = 14;
@@ -130,7 +130,7 @@
             // btnLogin
             // 
             btnLogin.Location = new Point(1, 17);
-            btnLogin.Margin = new Padding(4, 4, 4, 4);
+            btnLogin.Margin = new Padding(4);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(88, 33);
             btnLogin.TabIndex = 13;
@@ -139,8 +139,8 @@
             // 
             // btnAddToShopingCar
             // 
-            btnAddToShopingCar.Location = new Point(46, 548);
-            btnAddToShopingCar.Margin = new Padding(4, 4, 4, 4);
+            btnAddToShopingCar.Location = new Point(13, 539);
+            btnAddToShopingCar.Margin = new Padding(4);
             btnAddToShopingCar.Name = "btnAddToShopingCar";
             btnAddToShopingCar.Size = new Size(148, 41);
             btnAddToShopingCar.TabIndex = 21;
@@ -150,19 +150,19 @@
             // 
             // btnCheckOut
             // 
-            btnCheckOut.Location = new Point(693, 548);
-            btnCheckOut.Margin = new Padding(4, 4, 4, 4);
+            btnCheckOut.Location = new Point(762, 539);
+            btnCheckOut.Margin = new Padding(4);
             btnCheckOut.Name = "btnCheckOut";
-            btnCheckOut.Size = new Size(126, 41);
+            btnCheckOut.Size = new Size(146, 41);
             btnCheckOut.TabIndex = 22;
-            btnCheckOut.Text = "CheckOut";
+            btnCheckOut.Text = "Go to payment";
             btnCheckOut.UseVisualStyleBackColor = true;
             btnCheckOut.Click += btnCheckOut_Click;
             // 
             // numUDProductQuantity
             // 
             numUDProductQuantity.Location = new Point(596, 264);
-            numUDProductQuantity.Margin = new Padding(4, 4, 4, 4);
+            numUDProductQuantity.Margin = new Padding(4);
             numUDProductQuantity.Name = "numUDProductQuantity";
             numUDProductQuantity.Size = new Size(52, 23);
             numUDProductQuantity.TabIndex = 29;
@@ -193,7 +193,7 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(379, 262);
-            comboBox1.Margin = new Padding(2, 2, 2, 2);
+            comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(117, 25);
             comboBox1.TabIndex = 32;
@@ -219,7 +219,7 @@
             Controls.Add(btnShoppingCart);
             Controls.Add(btnLogin);
             Controls.Add(btnBack);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Buy";
             Text = "buy";
             Load += Buy_Load;

@@ -1,5 +1,6 @@
 using ITP4915M_Group8_Project.Staff;
 using ITP4915M_Group8_Project.Staff.Logistic;
+using ITP4915M_Group8_Project.Login;
 
 namespace ITP4915M_Group8_Project
 {

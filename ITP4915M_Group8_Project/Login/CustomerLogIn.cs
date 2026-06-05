@@ -73,7 +73,7 @@ namespace ITP4915M_Group8_Project.Login
                         MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                  
-                        DataTable dt = DbConnect.GetStaffinfo(uname);
+                        DataTable dt = DbUserConnect.GetStaffinfo(uname);
                
 
                         UserSession.StaffName = Convert.ToString(dt.Rows[0]["sName"]);
@@ -84,7 +84,6 @@ namespace ITP4915M_Group8_Project.Login
 
                         Staff.StaffMenu Form = new Staff.StaffMenu();
                         Form.Show();
-                        this.Hide();
                     }
                     else
                     {
@@ -110,7 +109,7 @@ namespace ITP4915M_Group8_Project.Login
                         MessageBox.Show(welcomeMessage, "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-                        DataTable dt = DbConnect.GetCustomerinfo(uname);
+                        DataTable dt = DbUserConnect.GetCustomerinfo(uname);
 
 
                         UserSession.CustomerName = Convert.ToString(dt.Rows[0]["cName"]);
@@ -121,7 +120,6 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBalance"]);
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
-                        // 對於 Customer 登入，轉到 Buy 表單
                         customer.Buy buyForm = new customer.Buy ();
                         buyForm.Show();
                         this.Hide();
