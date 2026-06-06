@@ -55,12 +55,17 @@
             lblOrder = new Label();
             lblback = new Label();
             llBack = new LinkLabel();
+            btnUpdate = new Button();
+            nudQuantity = new NumericUpDown();
+            cbShipping = new ComboBox();
+            dtpDate = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(893, 457);
+            btnRefresh.Location = new Point(756, 454);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 26);
             btnRefresh.TabIndex = 29;
@@ -131,7 +136,7 @@
             // 
             // txtDeliveryDate
             // 
-            txtDeliveryDate.Location = new Point(455, 362);
+            txtDeliveryDate.Location = new Point(696, 357);
             txtDeliveryDate.Name = "txtDeliveryDate";
             txtDeliveryDate.Size = new Size(209, 23);
             txtDeliveryDate.TabIndex = 63;
@@ -154,9 +159,8 @@
             // 
             // txtShipping
             // 
-            txtShipping.Location = new Point(178, 420);
+            txtShipping.Location = new Point(184, 457);
             txtShipping.Name = "txtShipping";
-            txtShipping.ReadOnly = true;
             txtShipping.Size = new Size(132, 23);
             txtShipping.TabIndex = 60;
             // 
@@ -177,7 +181,7 @@
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(154, 332);
+            txtQuantity.Location = new Point(696, 328);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(162, 23);
             txtQuantity.TabIndex = 57;
@@ -239,9 +243,9 @@
             lblAmount.AutoSize = true;
             lblAmount.Location = new Point(356, 336);
             lblAmount.Name = "lblAmount";
-            lblAmount.Size = new Size(82, 15);
+            lblAmount.Size = new Size(54, 15);
             lblAmount.TabIndex = 50;
-            lblAmount.Text = "Total Amount:";
+            lblAmount.Text = "Amount:";
             // 
             // lblUser
             // 
@@ -255,7 +259,7 @@
             // lblQuantity
             // 
             lblQuantity.AutoSize = true;
-            lblQuantity.Location = new Point(92, 336);
+            lblQuantity.Location = new Point(94, 336);
             lblQuantity.Name = "lblQuantity";
             lblQuantity.Size = new Size(56, 15);
             lblQuantity.TabIndex = 48;
@@ -298,11 +302,47 @@
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(893, 454);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(131, 26);
+            btnUpdate.TabIndex = 68;
+            btnUpdate.Text = "Update Record";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // nudQuantity
+            // 
+            nudQuantity.Location = new Point(154, 334);
+            nudQuantity.Name = "nudQuantity";
+            nudQuantity.Size = new Size(162, 23);
+            nudQuantity.TabIndex = 69;
+            // 
+            // cbShipping
+            // 
+            cbShipping.FormattingEnabled = true;
+            cbShipping.Location = new Point(184, 419);
+            cbShipping.Name = "cbShipping";
+            cbShipping.Size = new Size(132, 23);
+            cbShipping.TabIndex = 70;
+            // 
+            // dtpDate
+            // 
+            dtpDate.Location = new Point(455, 361);
+            dtpDate.Name = "dtpDate";
+            dtpDate.Size = new Size(209, 23);
+            dtpDate.TabIndex = 71;
+            // 
             // EditOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(dtpDate);
+            Controls.Add(cbShipping);
+            Controls.Add(nudQuantity);
+            Controls.Add(btnUpdate);
             Controls.Add(llBack);
             Controls.Add(btnFindSimilar);
             Controls.Add(txtDeliveryDate);
@@ -333,6 +373,7 @@
             Name = "EditOrder";
             Text = "Edit Order";
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -366,5 +407,9 @@
         private Label lblOrder;
         private Label lblback;
         private LinkLabel llBack;
+        private Button btnUpdate;
+        private NumericUpDown nudQuantity;
+        private ComboBox cbShipping;
+        private DateTimePicker dtpDate;
     }
 }

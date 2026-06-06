@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
     public partial class EditOrder : Form
     {
         private string currentOid = "0";
+        private string currentfid = "0";
 
         public EditOrder()
         {
@@ -62,8 +64,9 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 return;
 
             //Get fName from furniture
+            currentfid = dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString();
             string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
-            MySqlParameter parameters = new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString());
+            MySqlParameter parameters = new MySqlParameter("@FID", currentfid);
             DataTable dt = DbConnect.Query(sql, parameters);
             String furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
 
@@ -89,6 +92,59 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string tool_sql = "";
+            string main_sql = @"SELECT * FROM orders WHERE orderID = @OID AND fid = @FID";
+            DataTable main_dt;
+            MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@FID", currentfid) };
+            main_dt = DbConnect.Query(main_sql, parameters);
+
+
+
+            //---Field Empty Handler---
+            if (txtQuantity.Text.Trim() == null)
+            {
+                MessageBox.Show("Quantity cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;     
+            }
+            else if (txtDeliveryDate.Text.Trim() == null)
+            {
+                MessageBox.Show("Delivery Date cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;    
+            }
+            else if (txtAddress.Text.Trim() == null)
+            {
+                MessageBox.Show("Delivery Address cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (txtShipping.Text.Trim() == null)
+            {
+                MessageBox.Show("Shipping Type cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (txtQuantity.Text.Trim() != main_dt.Rows[0]["Quantity"].ToString())
+            {
+                tool_sql = @"UPDATE order SET Quantity = @Q, Amount = @A WHERE orderID = @OID AND fid = @FID";
+            }
+
+            if (txtDeliveryDate.Text.Trim() != main_dt.Rows[0]["odeliverydate"].ToString())
+            {
+                tool_sql = @"UPDATE order SET odeliverydate = @DATE WHERE orderID = @OID";
+            }
+
+            if (txtAddress.Text.Trim() != main_dt.Rows[0]["odeliveryaddress"].ToString())
+            {
+                tool_sql = @"UPDATE order SET odeliveryaddress = @ADD WHERE orderID = @OID";
+            }
+
+            if(txtShipping.Text.Trim() != main_dt.Rows[0]["shippingType"].ToString())
+            {
+                tool_sql = @"UPDATE order SET shippingType = @TYPE WHERE orderID = @OID";
+            }
         }
 
         // Find the records with matching OrderID
@@ -127,7 +183,5 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtShipping.Clear();
             txtStatus.Clear();
         }
-
-
     }
 }
