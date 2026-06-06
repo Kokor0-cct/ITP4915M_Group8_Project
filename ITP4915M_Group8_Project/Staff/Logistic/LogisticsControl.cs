@@ -63,7 +63,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
 
             DataTable dt = DbConnect.Query(sql, parameters);
-            
+
             dgvOrderControl.DataSource = dt;
         }
 
@@ -175,10 +175,17 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
 
             string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE orderID = @OID AND statusType = 2 ORDER BY orderID" :
-                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 2 OR statusType = 3) ORDER BY statusType, orderID"; 
+                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 2 OR statusType = 3) ORDER BY statusType, orderID";
             MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvOrderControl.DataSource = dt;
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            StaffMenu menu = new StaffMenu();
+            menu.Show();
+            this.Close();
         }
     }
 }

@@ -56,6 +56,7 @@
             chkDelivered = new CheckBox();
             btnFindSimilar = new Button();
             groupBox1 = new GroupBox();
+            llBack = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             SuspendLayout();
             // 
@@ -313,11 +314,23 @@
             groupBox1.TabIndex = 45;
             groupBox1.TabStop = false;
             // 
+            // llBack
+            // 
+            llBack.AutoSize = true;
+            llBack.Location = new Point(77, 19);
+            llBack.Name = "llBack";
+            llBack.Size = new Size(91, 15);
+            llBack.TabIndex = 67;
+            llBack.TabStop = true;
+            llBack.Text = "< Back to Menu";
+            llBack.LinkClicked += llBack_LinkClicked;
+            // 
             // Logistics_Control
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(llBack);
             Controls.Add(btnFindSimilar);
             Controls.Add(chkDelivered);
             Controls.Add(txtDeliveryDate);
@@ -383,5 +396,6 @@
         private CheckBox chkDelivered;
         private Button btnFindSimilar;
         private GroupBox groupBox1;
+        private LinkLabel llBack;
     }
 }

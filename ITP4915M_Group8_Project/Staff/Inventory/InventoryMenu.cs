@@ -23,12 +23,21 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         {
             Staff.Inventory.InventoryFurniture Form = new Staff.Inventory.InventoryFurniture();
             Form.Show();
+            this.Close();
         }
 
         private void btnToMaterial_Click(object sender, EventArgs e)
         {
             Staff.Inventory.InventoryMaterials Form = new Staff.Inventory.InventoryMaterials();
             Form.Show();
+            this.Close();
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            StaffMenu menu = new StaffMenu();
+            menu.Show();
+            this.Close();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ITP4915M_Group8_Project.Login
 {
-    partial class Form1
+    partial class RegisterForm
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -28,226 +28,242 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.NametextBox = new System.Windows.Forms.TextBox();
-            this.PwtextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.PhonetextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.AddstextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonSubmit = new System.Windows.Forms.Button();
-            this.CompanyBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox_identity = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            label1 = new Label();
+            NametextBox = new TextBox();
+            PwtextBox = new TextBox();
+            label3 = new Label();
+            PhonetextBox = new TextBox();
+            label4 = new Label();
+            AddstextBox = new TextBox();
+            label5 = new Label();
+            label7 = new Label();
+            label2 = new Label();
+            panel1 = new Panel();
+            buttonSubmit = new Button();
+            CompanyBox = new TextBox();
+            label6 = new Label();
+            comboBox_identity = new ComboBox();
+            label8 = new Label();
+            llLogin = new LinkLabel();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(322, 176);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 39);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Name:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            label1.AutoSize = true;
+            label1.Font = new Font("Rockwell", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(250, 147);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(84, 27);
+            label1.TabIndex = 2;
+            label1.Text = "Name:";
             // 
             // NametextBox
             // 
-            this.NametextBox.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.NametextBox.Location = new System.Drawing.Point(324, 218);
-            this.NametextBox.Name = "NametextBox";
-            this.NametextBox.Size = new System.Drawing.Size(529, 51);
-            this.NametextBox.TabIndex = 3;
-            this.NametextBox.TextChanged += new System.EventHandler(this.NametextBox_TextChanged_1);
+            NametextBox.Font = new Font("PMingLiU", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            NametextBox.Location = new Point(252, 182);
+            NametextBox.Margin = new Padding(2, 2, 2, 2);
+            NametextBox.Name = "NametextBox";
+            NametextBox.Size = new Size(412, 36);
+            NametextBox.TabIndex = 3;
             // 
             // PwtextBox
             // 
-            this.PwtextBox.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.PwtextBox.Location = new System.Drawing.Point(321, 325);
-            this.PwtextBox.Name = "PwtextBox";
-            this.PwtextBox.Size = new System.Drawing.Size(532, 51);
-            this.PwtextBox.TabIndex = 13;
-            this.PwtextBox.TextChanged += new System.EventHandler(this.PwtextBox_TextChanged);
+            PwtextBox.Font = new Font("PMingLiU", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            PwtextBox.Location = new Point(250, 271);
+            PwtextBox.Margin = new Padding(2, 2, 2, 2);
+            PwtextBox.Name = "PwtextBox";
+            PwtextBox.Size = new Size(415, 36);
+            PwtextBox.TabIndex = 13;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(317, 283);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(178, 39);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Password:";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
+            label3.AutoSize = true;
+            label3.Font = new Font("Rockwell", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(247, 236);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(125, 27);
+            label3.TabIndex = 12;
+            label3.Text = "Password:";
             // 
             // PhonetextBox
             // 
-            this.PhonetextBox.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.PhonetextBox.Location = new System.Drawing.Point(324, 438);
-            this.PhonetextBox.Name = "PhonetextBox";
-            this.PhonetextBox.Size = new System.Drawing.Size(529, 51);
-            this.PhonetextBox.TabIndex = 15;
-            this.PhonetextBox.TextChanged += new System.EventHandler(this.PhonetextBox_TextChanged);
+            PhonetextBox.Font = new Font("PMingLiU", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            PhonetextBox.Location = new Point(252, 365);
+            PhonetextBox.Margin = new Padding(2, 2, 2, 2);
+            PhonetextBox.Name = "PhonetextBox";
+            PhonetextBox.Size = new Size(412, 36);
+            PhonetextBox.TabIndex = 15;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(317, 396);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(262, 39);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Phone Number:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            label4.AutoSize = true;
+            label4.Font = new Font("Rockwell", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(247, 330);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(184, 27);
+            label4.TabIndex = 14;
+            label4.Text = "Phone Number:";
             // 
             // AddstextBox
             // 
-            this.AddstextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddstextBox.Location = new System.Drawing.Point(321, 549);
-            this.AddstextBox.Name = "AddstextBox";
-            this.AddstextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.AddstextBox.Size = new System.Drawing.Size(527, 48);
-            this.AddstextBox.TabIndex = 17;
-            this.AddstextBox.TextChanged += new System.EventHandler(this.AddstextBox_TextChanged);
+            AddstextBox.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AddstextBox.Location = new Point(250, 458);
+            AddstextBox.Margin = new Padding(2, 2, 2, 2);
+            AddstextBox.Name = "AddstextBox";
+            AddstextBox.ScrollBars = ScrollBars.Vertical;
+            AddstextBox.Size = new Size(411, 35);
+            AddstextBox.TabIndex = 17;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(322, 507);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(154, 39);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Address:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            label5.AutoSize = true;
+            label5.Font = new Font("Rockwell", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(250, 422);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(108, 27);
+            label5.TabIndex = 16;
+            label5.Text = "Address:";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label7.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Location = new System.Drawing.Point(396, 129);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(371, 27);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Register a new customer Accont";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+            label7.AutoSize = true;
+            label7.BackColor = SystemColors.ControlLightLight;
+            label7.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = SystemColors.ControlText;
+            label7.Location = new Point(308, 108);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(243, 19);
+            label7.TabIndex = 20;
+            label7.Text = "Register a new customer Accont";
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Font = new System.Drawing.Font("Rockwell", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(430, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(302, 87);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Sign Up";
-            this.label2.UseMnemonic = false;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.BackColor = SystemColors.ControlLightLight;
+            label2.Font = new Font("Rockwell", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.Desktop;
+            label2.Location = new Point(334, 22);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(201, 59);
+            label2.TabIndex = 4;
+            label2.Text = "Sign Up";
+            label2.UseMnemonic = false;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(0, -9);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1157, 182);
-            this.panel1.TabIndex = 21;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(label2);
+            panel1.Location = new Point(0, -8);
+            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(900, 152);
+            panel1.TabIndex = 21;
             // 
             // buttonSubmit
             // 
-            this.buttonSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonSubmit.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSubmit.Location = new System.Drawing.Point(952, 710);
-            this.buttonSubmit.Name = "buttonSubmit";
-            this.buttonSubmit.Size = new System.Drawing.Size(182, 63);
-            this.buttonSubmit.TabIndex = 22;
-            this.buttonSubmit.Text = "Submit";
-            this.buttonSubmit.UseVisualStyleBackColor = false;
-            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            buttonSubmit.BackColor = SystemColors.ControlLight;
+            buttonSubmit.Font = new Font("Rockwell", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSubmit.Location = new Point(740, 592);
+            buttonSubmit.Margin = new Padding(2, 2, 2, 2);
+            buttonSubmit.Name = "buttonSubmit";
+            buttonSubmit.Size = new Size(142, 52);
+            buttonSubmit.TabIndex = 22;
+            buttonSubmit.Text = "Submit";
+            buttonSubmit.UseVisualStyleBackColor = false;
+            buttonSubmit.Click += buttonSubmit_Click;
             // 
             // CompanyBox
             // 
-            this.CompanyBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CompanyBox.Location = new System.Drawing.Point(324, 653);
-            this.CompanyBox.Name = "CompanyBox";
-            this.CompanyBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CompanyBox.Size = new System.Drawing.Size(527, 48);
-            this.CompanyBox.TabIndex = 23;
-            this.CompanyBox.TextChanged += new System.EventHandler(this.companyBox);
+            CompanyBox.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CompanyBox.Location = new Point(252, 544);
+            CompanyBox.Margin = new Padding(2, 2, 2, 2);
+            CompanyBox.Name = "CompanyBox";
+            CompanyBox.ScrollBars = ScrollBars.Vertical;
+            CompanyBox.Size = new Size(411, 35);
+            CompanyBox.TabIndex = 23;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Rockwell", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(322, 611);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(402, 39);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Your Company(optional)";
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
+            label6.AutoSize = true;
+            label6.Font = new Font("Rockwell", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(250, 509);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(279, 27);
+            label6.TabIndex = 24;
+            label6.Text = "Your Company(optional)";
             // 
             // comboBox_identity
             // 
-            this.comboBox_identity.FormattingEnabled = true;
-            this.comboBox_identity.Location = new System.Drawing.Point(78, 243);
-            this.comboBox_identity.Name = "comboBox_identity";
-            this.comboBox_identity.Size = new System.Drawing.Size(121, 26);
-            this.comboBox_identity.TabIndex = 25;
-            this.comboBox_identity.SelectedIndexChanged += new System.EventHandler(this.comboBox_identity_SelectedIndexChanged);
+            comboBox_identity.FormattingEnabled = true;
+            comboBox_identity.Location = new Point(61, 202);
+            comboBox_identity.Margin = new Padding(2, 2, 2, 2);
+            comboBox_identity.Name = "comboBox_identity";
+            comboBox_identity.Size = new Size(95, 23);
+            comboBox_identity.TabIndex = 25;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(75, 199);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(124, 29);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "You are ?";
+            label8.AutoSize = true;
+            label8.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(58, 166);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(81, 19);
+            label8.TabIndex = 26;
+            label8.Text = "You are ?";
+            // 
+            // llLogin
+            // 
+            llLogin.AutoSize = true;
+            llLogin.Location = new Point(58, 613);
+            llLogin.Name = "llLogin";
+            llLogin.Size = new Size(101, 15);
+            llLogin.TabIndex = 27;
+            llLogin.TabStop = true;
+            llLogin.Text = "Have an account?";
+            llLogin.LinkClicked += llLogin_LinkClicked;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1159, 798);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboBox_identity);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.CompanyBox);
-            this.Controls.Add(this.buttonSubmit);
-            this.Controls.Add(this.AddstextBox);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.PhonetextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.PwtextBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.NametextBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(1181, 854);
-            this.MinimumSize = new System.Drawing.Size(1181, 854);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(906, 679);
+            Controls.Add(llLogin);
+            Controls.Add(label8);
+            Controls.Add(comboBox_identity);
+            Controls.Add(label6);
+            Controls.Add(CompanyBox);
+            Controls.Add(buttonSubmit);
+            Controls.Add(AddstextBox);
+            Controls.Add(label5);
+            Controls.Add(PhonetextBox);
+            Controls.Add(label4);
+            Controls.Add(PwtextBox);
+            Controls.Add(label3);
+            Controls.Add(NametextBox);
+            Controls.Add(label1);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Margin = new Padding(2, 2, 2, 2);
+            MaximumSize = new Size(922, 718);
+            MinimumSize = new Size(922, 718);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -268,6 +284,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox_identity;
         private System.Windows.Forms.Label label8;
+        private LinkLabel llLogin;
     }
 }
 

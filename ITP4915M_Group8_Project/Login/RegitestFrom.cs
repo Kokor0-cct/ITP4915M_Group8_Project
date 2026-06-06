@@ -11,10 +11,10 @@ using System.Windows.Forms;
 namespace ITP4915M_Group8_Project.Login
 
 {
-    public partial class Form1 : Form
+    public partial class RegisterForm : Form
     {
         CustomerClass1 customer = new CustomerClass1();
-        public Form1()
+        public RegisterForm()
         {
             InitializeComponent();
         }
@@ -25,71 +25,6 @@ namespace ITP4915M_Group8_Project.Login
             comboBox_identity.Items.Add("Customer");
             comboBox_identity.Items.Add("Staff");
             comboBox_identity.SelectedIndex = 0;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddstextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void NametextBox_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
@@ -149,29 +84,13 @@ namespace ITP4915M_Group8_Project.Login
             }
         }
 
-        private void PwtextBox_TextChanged(object sender, EventArgs e)
+
+        private void llLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
-        }
-
-        private void PhonetextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void companyBox(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox_identity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            llLogin.LinkVisited = true;
+            CustomerLogIn form1 = new CustomerLogIn();
+            form1.Show();
+            this.Close();
         }
     }
 }

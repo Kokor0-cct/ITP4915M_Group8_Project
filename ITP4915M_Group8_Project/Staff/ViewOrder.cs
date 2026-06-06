@@ -36,6 +36,13 @@ namespace ITP4915M_Group8_Project.Staff
         }
 
         // ---------UI Interaction---------
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            StaffMenu form = new StaffMenu();
+            form.Show();
+            this.Close();
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ClearTextBox();
@@ -54,9 +61,10 @@ namespace ITP4915M_Group8_Project.Staff
                 MySqlParameter parameters = new MySqlParameter("@keyword", "%" + keyword + "%");
                 dt = DbConnect.Query(sql, parameters);
             }
-            
+
             dgvOrderControl.DataSource = dt;
         }
+
 
         private void rbPending_CheckedChanged(object sender, EventArgs e)
         {
@@ -137,7 +145,7 @@ namespace ITP4915M_Group8_Project.Staff
             if (checkStatus() != null)  // A status is selected
             {
                 sql = @"SELECT * FROM orders WHERE orderID = @OID AND statustype = @STATUS ORDER BY orderID";
-                MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@STATUS", checkStatus())};
+                MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
             }
             else    // A status is not selected / "all"
@@ -145,8 +153,8 @@ namespace ITP4915M_Group8_Project.Staff
                 MySqlParameter parameter = new MySqlParameter("@OID", currentOid);
                 dt = DbConnect.Query(sql, parameter);
             }
-            
-            
+
+
             dgvOrderControl.DataSource = dt;
         }
 
@@ -155,7 +163,7 @@ namespace ITP4915M_Group8_Project.Staff
             string sql = @"SELECT * FROM orders ORDER BY orderID";
             DataTable dt;
             if (checkStatus() != null) // A status is selected
-            {   
+            {
                 sql = @"SELECT * FROM orders WHERE statustype = @STATUS ORDER BY orderID";
                 MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
@@ -164,7 +172,7 @@ namespace ITP4915M_Group8_Project.Staff
             {
                 dt = DbConnect.Query(sql);
             }
-            
+
             dgvOrderControl.DataSource = dt;
             txtSearch.Clear();
             ClearTextBox();
@@ -238,7 +246,5 @@ namespace ITP4915M_Group8_Project.Staff
             else
                 return null;
         }
-
-
     }
 }

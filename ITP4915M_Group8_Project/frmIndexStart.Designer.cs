@@ -33,22 +33,22 @@
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(254, 97);
+            btnStart.Location = new Point(1, -1);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(261, 223);
+            btnStart.Size = new Size(261, 197);
             btnStart.TabIndex = 0;
             btnStart.Text = "Click to start the system";
             btnStart.UseVisualStyleBackColor = true;
             btnStart.Click += btnStart_Click;
             // 
-            // frmMainMenu
+            // frmIndexStart
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(263, 196);
             Controls.Add(btnStart);
-            Name = "frmMainMenu";
-            Text = "Form1";
+            Name = "frmIndexStart";
+            Text = "Manual Start";
             ResumeLayout(false);
         }
 

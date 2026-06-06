@@ -49,6 +49,7 @@
             btnfInsertFurniture = new Button();
             btnfRefresh = new Button();
             btnfClearTextBox = new Button();
+            llBack = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).BeginInit();
             SuspendLayout();
             // 
@@ -166,7 +167,7 @@
             btnfSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
             btnfSearch.Location = new Point(273, 42);
             btnfSearch.Name = "btnfSearch";
-            btnfSearch.Size = new Size(75, 20);
+            btnfSearch.Size = new Size(75, 23);
             btnfSearch.TabIndex = 14;
             btnfSearch.Text = "Search";
             btnfSearch.UseVisualStyleBackColor = true;
@@ -239,11 +240,23 @@
             btnfClearTextBox.UseVisualStyleBackColor = true;
             btnfClearTextBox.Click += btnClearTextBox_Click;
             // 
+            // llBack
+            // 
+            llBack.AutoSize = true;
+            llBack.Location = new Point(75, 9);
+            llBack.Name = "llBack";
+            llBack.Size = new Size(43, 15);
+            llBack.TabIndex = 67;
+            llBack.TabStop = true;
+            llBack.Text = "< Back";
+            llBack.LinkClicked += llBack_LinkClicked;
+            // 
             // InventoryFurniture
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 397);
+            Controls.Add(llBack);
             Controls.Add(btnfClearTextBox);
             Controls.Add(btnfRefresh);
             Controls.Add(btnfInsertFurniture);
@@ -296,5 +309,6 @@
         private Button btnfInsertFurniture;
         private Button btnfRefresh;
         private Button btnfClearTextBox;
+        private LinkLabel llBack;
     }
 }

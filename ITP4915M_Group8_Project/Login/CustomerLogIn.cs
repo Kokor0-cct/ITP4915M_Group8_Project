@@ -79,11 +79,12 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.StaffName = Convert.ToString(dt.Rows[0]["sName"]);
                         UserSession.StaffPhone = Convert.ToString(dt.Rows[0]["sPhone"]);
                         UserSession.StaffPassword = Convert.ToString(dt.Rows[0]["sPassword"]);
-                        UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["Department"]);
+                        UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["DeptCode"]);
                         UserSession.StaffId = Convert.ToInt32(dt.Rows[0]["sUserID"]);
 
                         Staff.StaffMenu Form = new Staff.StaffMenu();
                         Form.Show();
+                        this.Hide();
                     }
                     else
                     {
@@ -142,21 +143,12 @@ namespace ITP4915M_Group8_Project.Login
 
         }
 
-        private void textBox_UserName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_password_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void llblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblRegister.LinkVisited = true;
-            Form1 form1 = new Form1(); 
+            RegisterForm form1 = new RegisterForm(); 
             form1.Show();
+            this.Hide();
 
         }
 

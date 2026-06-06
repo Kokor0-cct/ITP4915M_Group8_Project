@@ -1,7 +1,7 @@
 ﻿using ITP4915M_Group8_Project.Login;
+using ITP4915M_Group8_Project.Staff;
 using ITP4915M_Group8_Project.Staff.Inventory;
-using ITP4915M_Group8_Project.Staff.Logistic;
-using ITP4915M_Group8_Project.Staff.Sales;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +26,7 @@ namespace ITP4915M_Group8_Project.Staff
         {
             Staff.Inventory.InventoryMenu Form = new Staff.Inventory.InventoryMenu();
             Form.Show();
+            this.Hide();
 
         }
 
@@ -33,24 +34,28 @@ namespace ITP4915M_Group8_Project.Staff
         {
             Staff.Sales.CustomerService Form = new Staff.Sales.CustomerService();
             Form.Show();
+            this.Hide();
         }
 
         private void btnSalesOrderEdit_Click(object sender, EventArgs e)
         {
-            //Staff.Sales.OderInfrommationEdit Form = new Staff.Sales.OderInfrommationEdit();
-            //Form.Show();
+            Staff.Sales.EditOrder Form = new Staff.Sales.EditOrder();
+            Form.Show();
+            this.Hide();
         }
 
         private void btnLogistic_Click(object sender, EventArgs e)
         {
             Staff.Logistic.Logistics_Control Form = new Staff.Logistic.Logistics_Control();
             Form.Show();
+            this.Hide();
         }
 
         private void btnViewOrder_Click(object sender, EventArgs e)
         {
             Staff.ViewOrder Form = new Staff.ViewOrder();
             Form.Show();
+            this.Hide();
         }
         private void StaffMenu_Load()
         {
@@ -73,7 +78,7 @@ namespace ITP4915M_Group8_Project.Staff
             DisableAll(designBtns);
 
             // 3.判断：管理员 → 全部启用
-            if (UserSession.StaffDepartment == "Admin")
+            if (UserSession.StaffDepartment == "1") // Admin login
             {
                 Action<List<Button>> EnableAll = (btns) =>
                 {
@@ -89,42 +94,37 @@ namespace ITP4915M_Group8_Project.Staff
             {
                 switch (UserSession.StaffDepartment)
                 {
-                    case "Sales":
+                    case "2":   // Sales Login
                         salesBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "Production":
+                    case "3": // Production Login
                         productionBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "Inventory":
+                    case "4": // Inventory Login
                         inventoryBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "Logistic":
+                    case "5": // Logistic Login
                         logisticBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "Design":
+                    case "6": // Design Login
                         designBtns.ForEach(x => x.Enabled = true);
                         break;
                 }
             }
 
-            lblWelcome.Text = $"Hi, {UserSession.StaffName}, department:{UserSession.StaffDepartment}";
+            String sql = @"SELECT deptName FROM Department WHERE deptcode = @CODE";
+            MySqlParameter parameter = new MySqlParameter("@CODE", UserSession.StaffDepartment); // Extract the department name from table Department
+            DataTable dt = DbConnect.Query(sql, parameter);
+            String deptName = dt.Rows[0]["deptName"].ToString();
+
+            lblWelcome.Text = $"Hi, {UserSession.StaffName} from department: {deptName}";
         }
 
         private void btnSignOut_Click(object sender, EventArgs e)
         {
             Login.CustomerLogIn Form = new Login.CustomerLogIn();
             Form.Show();
-            this.Hide();
-        }
-
-        private void lblWelcome_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblWelcome_Click_1(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
     }
 }

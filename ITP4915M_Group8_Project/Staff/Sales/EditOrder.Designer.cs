@@ -1,6 +1,6 @@
-﻿namespace ITP4915M_Group8_Project.Staff
+﻿namespace ITP4915M_Group8_Project.Staff.Sales
 {
-    partial class ViewOrder
+    partial class EditOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -54,17 +54,8 @@
             lblFurniture = new Label();
             lblOrder = new Label();
             lblback = new Label();
-            grpStatus = new GroupBox();
-            rbAll = new RadioButton();
-            rbCancel = new RadioButton();
-            rbFailed = new RadioButton();
-            rbDelivered = new RadioButton();
-            rbTransit = new RadioButton();
-            rbProduction = new RadioButton();
-            rbPending = new RadioButton();
             llBack = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
-            grpStatus.SuspendLayout();
             SuspendLayout();
             // 
             // btnRefresh
@@ -122,11 +113,11 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
-            lblTitle.Location = new Point(430, 38);
+            lblTitle.Location = new Point(404, 38);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(247, 31);
+            lblTitle.Size = new Size(236, 31);
             lblTitle.TabIndex = 24;
-            lblTitle.Text = "View Order Control";
+            lblTitle.Text = "Edit Order Control";
             // 
             // btnFindSimilar
             // 
@@ -142,7 +133,6 @@
             // 
             txtDeliveryDate.Location = new Point(455, 362);
             txtDeliveryDate.Name = "txtDeliveryDate";
-            txtDeliveryDate.ReadOnly = true;
             txtDeliveryDate.Size = new Size(209, 23);
             txtDeliveryDate.TabIndex = 63;
             // 
@@ -174,7 +164,6 @@
             // 
             txtAddress.Location = new Point(154, 390);
             txtAddress.Name = "txtAddress";
-            txtAddress.ReadOnly = true;
             txtAddress.Size = new Size(510, 23);
             txtAddress.TabIndex = 59;
             // 
@@ -190,7 +179,6 @@
             // 
             txtQuantity.Location = new Point(154, 332);
             txtQuantity.Name = "txtQuantity";
-            txtQuantity.ReadOnly = true;
             txtQuantity.Size = new Size(162, 23);
             txtQuantity.TabIndex = 57;
             // 
@@ -240,7 +228,7 @@
             // lblDeliveryDate
             // 
             lblDeliveryDate.AutoSize = true;
-            lblDeliveryDate.Location = new Point(359, 365);
+            lblDeliveryDate.Location = new Point(356, 365);
             lblDeliveryDate.Name = "lblDeliveryDate";
             lblDeliveryDate.Size = new Size(79, 15);
             lblDeliveryDate.TabIndex = 51;
@@ -299,124 +287,23 @@
             lblback.Size = new Size(597, 158);
             lblback.TabIndex = 45;
             // 
-            // grpStatus
-            // 
-            grpStatus.Controls.Add(rbAll);
-            grpStatus.Controls.Add(rbCancel);
-            grpStatus.Controls.Add(rbFailed);
-            grpStatus.Controls.Add(rbDelivered);
-            grpStatus.Controls.Add(rbTransit);
-            grpStatus.Controls.Add(rbProduction);
-            grpStatus.Controls.Add(rbPending);
-            grpStatus.Location = new Point(683, 293);
-            grpStatus.Name = "grpStatus";
-            grpStatus.Size = new Size(341, 158);
-            grpStatus.TabIndex = 65;
-            grpStatus.TabStop = false;
-            grpStatus.Text = "Status";
-            // 
-            // rbAll
-            // 
-            rbAll.AutoSize = true;
-            rbAll.Location = new Point(6, 22);
-            rbAll.Name = "rbAll";
-            rbAll.Size = new Size(39, 19);
-            rbAll.TabIndex = 6;
-            rbAll.TabStop = true;
-            rbAll.Text = "All";
-            rbAll.UseVisualStyleBackColor = true;
-            rbAll.CheckedChanged += rbAll_CheckedChanged;
-            // 
-            // rbCancel
-            // 
-            rbCancel.AutoSize = true;
-            rbCancel.Location = new Point(147, 110);
-            rbCancel.Name = "rbCancel";
-            rbCancel.Size = new Size(61, 19);
-            rbCancel.TabIndex = 5;
-            rbCancel.TabStop = true;
-            rbCancel.Text = "Cancel";
-            rbCancel.UseVisualStyleBackColor = true;
-            rbCancel.CheckedChanged += rbCancel_CheckedChanged;
-            // 
-            // rbFailed
-            // 
-            rbFailed.AutoSize = true;
-            rbFailed.Location = new Point(6, 110);
-            rbFailed.Name = "rbFailed";
-            rbFailed.Size = new Size(56, 19);
-            rbFailed.TabIndex = 4;
-            rbFailed.TabStop = true;
-            rbFailed.Text = "Failed";
-            rbFailed.UseVisualStyleBackColor = true;
-            rbFailed.CheckedChanged += rbFailed_CheckedChanged;
-            // 
-            // rbDelivered
-            // 
-            rbDelivered.AutoSize = true;
-            rbDelivered.Location = new Point(147, 85);
-            rbDelivered.Name = "rbDelivered";
-            rbDelivered.Size = new Size(74, 19);
-            rbDelivered.TabIndex = 3;
-            rbDelivered.TabStop = true;
-            rbDelivered.Text = "Delivered";
-            rbDelivered.UseVisualStyleBackColor = true;
-            rbDelivered.CheckedChanged += rbDelivered_CheckedChanged;
-            // 
-            // rbTransit
-            // 
-            rbTransit.AutoSize = true;
-            rbTransit.Location = new Point(6, 85);
-            rbTransit.Name = "rbTransit";
-            rbTransit.Size = new Size(72, 19);
-            rbTransit.TabIndex = 2;
-            rbTransit.TabStop = true;
-            rbTransit.Text = "In Transit";
-            rbTransit.UseVisualStyleBackColor = true;
-            rbTransit.CheckedChanged += rbTransit_CheckedChanged;
-            // 
-            // rbProduction
-            // 
-            rbProduction.AutoSize = true;
-            rbProduction.Location = new Point(147, 60);
-            rbProduction.Name = "rbProduction";
-            rbProduction.Size = new Size(97, 19);
-            rbProduction.TabIndex = 1;
-            rbProduction.TabStop = true;
-            rbProduction.Text = "In Production";
-            rbProduction.UseVisualStyleBackColor = true;
-            rbProduction.CheckedChanged += rbProduction_CheckedChanged;
-            // 
-            // rbPending
-            // 
-            rbPending.AutoSize = true;
-            rbPending.Location = new Point(6, 60);
-            rbPending.Name = "rbPending";
-            rbPending.Size = new Size(69, 19);
-            rbPending.TabIndex = 0;
-            rbPending.TabStop = true;
-            rbPending.Text = "Pending";
-            rbPending.UseVisualStyleBackColor = true;
-            rbPending.CheckedChanged += rbPending_CheckedChanged;
-            // 
             // llBack
             // 
             llBack.AutoSize = true;
             llBack.Location = new Point(80, 38);
             llBack.Name = "llBack";
             llBack.Size = new Size(91, 15);
-            llBack.TabIndex = 66;
+            llBack.TabIndex = 67;
             llBack.TabStop = true;
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
-            // ViewOrder
+            // EditOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
             Controls.Add(llBack);
-            Controls.Add(grpStatus);
             Controls.Add(btnFindSimilar);
             Controls.Add(txtDeliveryDate);
             Controls.Add(txtAmount);
@@ -443,11 +330,9 @@
             Controls.Add(lblSearch);
             Controls.Add(dgvOrderControl);
             Controls.Add(lblTitle);
-            Name = "ViewOrder";
-            Text = "ViewOrder";
+            Name = "EditOrder";
+            Text = "Edit Order";
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
-            grpStatus.ResumeLayout(false);
-            grpStatus.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -480,14 +365,6 @@
         private Label lblFurniture;
         private Label lblOrder;
         private Label lblback;
-        private GroupBox grpStatus;
-        private RadioButton rbCancel;
-        private RadioButton rbFailed;
-        private RadioButton rbDelivered;
-        private RadioButton rbTransit;
-        private RadioButton rbProduction;
-        private RadioButton rbPending;
-        private RadioButton rbAll;
         private LinkLabel llBack;
     }
 }

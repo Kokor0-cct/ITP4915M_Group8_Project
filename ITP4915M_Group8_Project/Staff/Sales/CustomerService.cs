@@ -29,8 +29,9 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            
-            this.Hide();
+            StaffMenu menu = new StaffMenu();
+            menu.Show();
+            this.Close();
         }
 
         private void btnCID1007_Click(object sender, EventArgs e)

@@ -216,12 +216,12 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 "Furniture Type : " + type + "\n" +
                 "Furniture Price : " + price + "\n" +
                 "Furniture Description : " + desc + "\n\n", "Are you sure?", MessageBoxButtons.YesNo);
-            
+
             if (result != DialogResult.Yes)
             {
                 return;
             }
-            
+
 
             string sql = @"UPDATE furniture SET fName = @name, fQuantity = @quantity, fType = @type, fPrice = @price, fDesc = @desc WHERE FID = @FID";
 
@@ -263,6 +263,13 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         private void btnClearTextBox_Click(object sender, EventArgs e)
         {
             ClearTextBox();
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            InventoryMenu menu = new InventoryMenu();
+            menu.Show();
+            this.Close();
         }
     }
 }

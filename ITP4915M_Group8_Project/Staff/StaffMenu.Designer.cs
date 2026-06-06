@@ -201,7 +201,6 @@
             lblWelcome.Size = new Size(428, 19);
             lblWelcome.TabIndex = 25;
             lblWelcome.Text = "Hi, ";
-            lblWelcome.Click += lblWelcome_Click_1;
             // 
             // btnViewOrder
             // 

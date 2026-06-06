@@ -31,17 +31,18 @@
             labInvCon = new Label();
             btnToFurniture = new Button();
             btnToMaterial = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            llBack = new LinkLabel();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // labInvCon
             // 
             labInvCon.AutoSize = true;
             labInvCon.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
-            labInvCon.Location = new Point(289, 9);
+            labInvCon.Location = new Point(67, 28);
             labInvCon.Name = "labInvCon";
             labInvCon.Size = new Size(210, 31);
             labInvCon.TabIndex = 0;
@@ -49,9 +50,10 @@
             // 
             // btnToFurniture
             // 
-            btnToFurniture.Location = new Point(159, 113);
+            btnToFurniture.Font = new Font("Segoe UI", 9F);
+            btnToFurniture.Location = new Point(27, 28);
             btnToFurniture.Name = "btnToFurniture";
-            btnToFurniture.Size = new Size(150, 52);
+            btnToFurniture.Size = new Size(150, 46);
             btnToFurniture.TabIndex = 1;
             btnToFurniture.Text = "Inventory Furniture";
             btnToFurniture.UseVisualStyleBackColor = true;
@@ -59,65 +61,61 @@
             // 
             // btnToMaterial
             // 
-            btnToMaterial.Location = new Point(159, 262);
+            btnToMaterial.Font = new Font("Segoe UI", 9F);
+            btnToMaterial.Location = new Point(26, 32);
             btnToMaterial.Name = "btnToMaterial";
-            btnToMaterial.Size = new Size(150, 52);
+            btnToMaterial.Size = new Size(150, 46);
             btnToMaterial.TabIndex = 2;
             btnToMaterial.Text = "Inventory Material";
             btnToMaterial.UseVisualStyleBackColor = true;
             btnToMaterial.Click += btnToMaterial_Click;
             // 
-            // label1
+            // groupBox1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label1.Location = new Point(100, 74);
-            label1.Name = "label1";
-            label1.Size = new Size(74, 19);
-            label1.TabIndex = 3;
-            label1.Text = "Furniture";
+            groupBox1.Controls.Add(btnToFurniture);
+            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(67, 79);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(200, 88);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Furniture";
             // 
-            // label2
+            // groupBox2
             // 
-            label2.BorderStyle = BorderStyle.Fixed3D;
-            label2.Location = new Point(90, 91);
-            label2.Name = "label2";
-            label2.Size = new Size(611, 93);
-            label2.TabIndex = 4;
+            groupBox2.Controls.Add(btnToMaterial);
+            groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.Location = new Point(67, 197);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(200, 100);
+            groupBox2.TabIndex = 8;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Material";
             // 
-            // label3
+            // llBack
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Bold);
-            label3.ForeColor = SystemColors.ControlText;
-            label3.Location = new Point(100, 225);
-            label3.Name = "label3";
-            label3.Size = new Size(71, 19);
-            label3.TabIndex = 5;
-            label3.Text = "Material ";
-            // 
-            // label4
-            // 
-            label4.BorderStyle = BorderStyle.Fixed3D;
-            label4.Location = new Point(90, 242);
-            label4.Name = "label4";
-            label4.Size = new Size(611, 93);
-            label4.TabIndex = 6;
+            llBack.AutoSize = true;
+            llBack.Location = new Point(231, 317);
+            llBack.Name = "llBack";
+            llBack.Size = new Size(91, 15);
+            llBack.TabIndex = 9;
+            llBack.TabStop = true;
+            llBack.Text = "< Back to Menu";
+            llBack.LinkClicked += llBack_LinkClicked;
             // 
             // InventoryMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(802, 449);
-            Controls.Add(label3);
-            Controls.Add(label1);
-            Controls.Add(btnToMaterial);
-            Controls.Add(btnToFurniture);
+            ClientSize = new Size(344, 341);
+            Controls.Add(llBack);
             Controls.Add(labInvCon);
-            Controls.Add(label4);
-            Controls.Add(label2);
+            Controls.Add(groupBox1);
+            Controls.Add(groupBox2);
             Name = "InventoryMenu";
             Text = "Inventory Menu";
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -127,9 +125,8 @@
         private Label labInvCon;
         private Button btnToFurniture;
         private Button btnToMaterial;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private LinkLabel llBack;
     }
 }

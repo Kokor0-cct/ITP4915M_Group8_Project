@@ -103,7 +103,6 @@
             textBox_UserName.Name = "textBox_UserName";
             textBox_UserName.Size = new Size(310, 36);
             textBox_UserName.TabIndex = 5;
-            textBox_UserName.TextChanged += textBox_UserName_TextChanged;
             // 
             // lblUsername
             // 
@@ -136,7 +135,6 @@
             textBox_password.PasswordChar = '*';
             textBox_password.Size = new Size(310, 36);
             textBox_password.TabIndex = 7;
-            textBox_password.TextChanged += textBox_password_TextChanged;
             // 
             // LogIn_button
             // 
