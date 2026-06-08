@@ -80,7 +80,7 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.StaffPhone = Convert.ToString(dt.Rows[0]["sPhone"]);
                         UserSession.StaffPassword = Convert.ToString(dt.Rows[0]["sPassword"]);
                         UserSession.StaffDepartment = Convert.ToString(dt.Rows[0]["DeptCode"]);
-                        UserSession.StaffId = Convert.ToInt32(dt.Rows[0]["sUserID"]);
+                        UserSession.StaffId = Convert.ToString(dt.Rows[0]["sUserID"]);
 
                         Staff.StaffMenu Form = new Staff.StaffMenu();
                         Form.Show();
@@ -117,7 +117,7 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerPhone = Convert.ToString(dt.Rows[0]["cPhone"]);
                         UserSession.CustomerPassword = Convert.ToString(dt.Rows[0]["cPassword"]);
                         UserSession.CustomerAddress = Convert.ToString(dt.Rows[0]["cAddress"]);
-                        UserSession.CustomerId = Convert.ToInt32(dt.Rows[0]["cUserID"]);
+                        UserSession.CustomerId = Convert.ToString(dt.Rows[0]["cUserID"]);
                         UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBalance"]);
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
@@ -152,6 +152,5 @@ namespace ITP4915M_Group8_Project.Login
 
         }
 
-        
     }
 }

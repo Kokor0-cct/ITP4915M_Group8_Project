@@ -1,15 +1,6 @@
 ﻿using ITP4915M_Group8_Project.Staff.Inventory;
 using MySqlConnector;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ITP4915M_Group8_Project.Staff.Sales
 {
@@ -27,7 +18,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statustype = 1 or statustype = 2 ORDER BY orderID "; // It only gets records with the status "In Transit"
+            string sql = "SELECT * FROM orders WHERE statustype = 'ST01' or statustype = 'ST02' ORDER BY orderID "; // It only gets records with the status "In Transit"
 
 
             DataTable dt = DbConnect.Query(sql);
@@ -49,7 +40,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         {
             ClearTextBox();
             string keyword = txtSearch.Text.Trim();
-            string sql = "SELECT * FROM orders WHERE orderID LIKE @keyword AND (statustype = 1 or statustype = 2) ORDER BY orderID";
+            string sql = "SELECT * FROM orders WHERE orderID LIKE @keyword AND (statustype = 'ST01' or statustype = 'ST02') ORDER BY orderID";
             DataTable dt;
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
             dt = DbConnect.Query(sql, parameters);
@@ -70,12 +61,6 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             DataTable dt = DbConnect.Query(sql, parameters);
             String furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
 
-            //Get soName from shippingoption
-            sql = @"SELECT soName FROM shippingoption WHERE soID = @SOID";
-            parameters = new MySqlParameter("@SOID", dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value.ToString());
-            dt = DbConnect.Query(sql, parameters);
-            String shippingName = dt.Rows[0]["soName"].ToString();      //<--Extract Shipping Type Name from table
-
             //Get statusDesc from status
             sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSCODE";
             parameters = new MySqlParameter("@STATUSCODE", dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
@@ -84,13 +69,17 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
             currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString(); //Stores the selected orderID
             txtOrderID.Text = currentOid;                       //Order ID cell content
-            txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
-            txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
+            txtFurniture.Text = furnitureName;                 //Furniture ID cell content         
+
+            nudQuantity.Maximum = (int)dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value;
+            nudQuantity.Value = (int)dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value;                 //Quantity cell content
+            
+
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oTotalAmount"].Value.ToString();           //Amount cell content
+            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
             txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
-            txtShipping.Text = shippingName;         //Shipping Type cell content    
+            cbShipping.SelectedIndex = (int)dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value;   //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
         }
 
@@ -99,51 +88,78 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             string tool_sql = "";
             string main_sql = @"SELECT * FROM orders WHERE orderID = @OID AND fid = @FID";
             DataTable main_dt;
+            DataTable tool_dt;
             MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@FID", currentfid) };
             main_dt = DbConnect.Query(main_sql, parameters);
 
 
-
             //---Field Empty Handler---
-            if (txtQuantity.Text.Trim() == null)
+            if (nudQuantity.Value == 0)
             {
-                MessageBox.Show("Quantity cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;     
+                MessageBox.Show("Quantity cannot be 0! \nDo you wish to cancel this record?", "Cancel Record?", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                return;
             }
             else if (txtDeliveryDate.Text.Trim() == null)
             {
                 MessageBox.Show("Delivery Date cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;    
+                return;
             }
             else if (txtAddress.Text.Trim() == null)
             {
                 MessageBox.Show("Delivery Address cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (txtShipping.Text.Trim() == null)
+            else if (cbShipping.SelectedIndex == 0)
             {
-                MessageBox.Show("Shipping Type cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a Shipping Type!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (txtQuantity.Text.Trim() != main_dt.Rows[0]["Quantity"].ToString())
+            if (nudQuantity.Value == (int) main_dt.Rows[0]["Quantity"] && txtDeliveryDate.Text.Trim() == main_dt.Rows[0]["odeliverydate"].ToString() && txtAddress.Text.Trim() == main_dt.Rows[0]["odeliveryaddress"].ToString() && cbShipping.SelectedIndex == (int) main_dt.Rows[0]["shippingType"])
             {
-                tool_sql = @"UPDATE order SET Quantity = @Q, Amount = @A WHERE orderID = @OID AND fid = @FID";
+                MessageBox.Show("No changes were made!", "No changes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-
-            if (txtDeliveryDate.Text.Trim() != main_dt.Rows[0]["odeliverydate"].ToString())
+            else
             {
-                tool_sql = @"UPDATE order SET odeliverydate = @DATE WHERE orderID = @OID";
-            }
+                if (nudQuantity.Value != (int)main_dt.Rows[0]["Quantity"])
+                { 
+                    int quantity = (int) nudQuantity.Value;
+                    
+                    String furniture_sql = @"SELECT fprice FROM furniture WHERE fid = @FID";
+                    MySqlParameter furniture_parameter = new MySqlParameter("@FID", currentfid);
+                    DataTable furniture_dt = DbConnect.Query(furniture_sql, furniture_parameter);
+                    float fprice = (float) furniture_dt.Rows[0]["price"]; // <-- Extract the furniture price for calculation
+                    
+                    float price = fprice * quantity;
 
-            if (txtAddress.Text.Trim() != main_dt.Rows[0]["odeliveryaddress"].ToString())
-            {
-                tool_sql = @"UPDATE order SET odeliveryaddress = @ADD WHERE orderID = @OID";
-            }
+                    tool_sql = @"UPDATE order SET Quantity = @Q, oAmount = @A WHERE orderID = @OID AND fid = @FID";
+                    MySqlParameter[] Qparameters = { new MySqlParameter("@Q", quantity), new MySqlParameter("@A", price), new MySqlParameter("@OID", currentOid), new MySqlParameter("@FID", currentfid) };
+                    tool_dt = DbConnect.Query(tool_sql, Qparameters);
+                }
 
-            if(txtShipping.Text.Trim() != main_dt.Rows[0]["shippingType"].ToString())
-            {
-                tool_sql = @"UPDATE order SET shippingType = @TYPE WHERE orderID = @OID";
+                if (txtDeliveryDate.Text.Trim() != main_dt.Rows[0]["odeliverydate"].ToString())
+                {
+                    tool_sql = @"UPDATE order SET odeliverydate = @DATE WHERE orderID = @OID";
+                    MySqlParameter[] Dparameters = { new MySqlParameter("@DATE", txtDeliveryDate.Text.Trim()), new MySqlParameter("@OID", currentOid) };
+                    tool_dt = DbConnect.Query(tool_sql, Dparameters);
+                }
+
+                if (txtAddress.Text.Trim() != main_dt.Rows[0]["odeliveryaddress"].ToString())
+                {
+                    tool_sql = @"UPDATE order SET odeliveryaddress = @ADD WHERE orderID = @OID";
+                    MySqlParameter[] Aparameters = { new MySqlParameter("@ADD", txtAddress.Text.Trim()), new MySqlParameter("@OID", currentOid) };
+                    tool_dt = DbConnect.Query(tool_sql, Aparameters);
+                }
+
+                if (cbShipping.SelectedIndex != (int) main_dt.Rows[0]["shippingType"])
+                {
+                    tool_sql = @"UPDATE order SET shippingType = @TYPE WHERE orderID = @OID";
+                    MySqlParameter[] Sparameters = { new MySqlParameter("@TYPE", cbShipping.SelectedIndex), new MySqlParameter("@OID", currentOid) };
+                    tool_dt = DbConnect.Query(tool_sql, Sparameters);
+                }
+
+                MessageBox.Show("Update Successful!", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -162,7 +178,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         {
             string sql = @"SELECT * FROM orders ORDER BY orderID";
             DataTable dt;
-            sql = @"SELECT * FROM orders WHERE statustype = 1 or statustype = 2 ORDER BY orderID";
+            sql = @"SELECT * FROM orders WHERE statustype = 'ST01' or statustype = 'ST02' ORDER BY orderID";
             dt = DbConnect.Query(sql);
 
             dgvOrderControl.DataSource = dt;
@@ -175,12 +191,13 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         {
             txtOrderID.Clear();
             txtFurniture.Clear();
-            txtQuantity.Clear();
+            nudQuantity.Value = 0;
+            nudQuantity.Maximum = 0;
             txtUserID.Clear();
             txtAmount.Clear();
             txtDeliveryDate.Clear();
             txtAddress.Clear();
-            txtShipping.Clear();
+            cbShipping.SelectedIndex = 0;
             txtStatus.Clear();
         }
     }

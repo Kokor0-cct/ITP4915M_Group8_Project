@@ -30,7 +30,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statusType = 2 ORDER BY orderID"; // It only gets records with the status "In Transit"
+            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID"; // It only gets records with the status "In Transit"
 
 
             DataTable dt = DbConnect.Query(sql);
@@ -55,8 +55,8 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             string keyword = txtSearch.Text.Trim();
 
 
-            string sql = (showDelivered == false) ? @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 2 ORDER BY orderID" :
-                @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 2 OR statusType = 3) ORDER BY statusType, orderID";
+            string sql = (showDelivered == false) ? @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 'ST02' ORDER BY orderID" :
+                @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
 
 
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
@@ -71,8 +71,8 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE statusType = 2 ORDER BY orderID" :
-                "SELECT * FROM orders WHERE (statusType = 2 OR statusType = 3) ORDER BY statusType, orderID";
+            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID" :
+                "SELECT * FROM orders WHERE (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
             DataTable dt = DbConnect.Query(sql);
             dgvOrderControl.DataSource = dt;
             txtSearch.Clear();
@@ -93,7 +93,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 3 WHERE statusType = 2 AND orderID = @orderID";
+            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE statusType = 'ST02' AND orderID = @orderID";
 
             MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
 
@@ -155,7 +155,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oTotalAmount"].Value.ToString();           //Amount cell content
+            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
             txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
@@ -174,8 +174,8 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         {
 
 
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE orderID = @OID AND statusType = 2 ORDER BY orderID" :
-                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 2 OR statusType = 3) ORDER BY statusType, orderID";
+            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE orderID = @OID AND statusType = 'ST02' ORDER BY orderID" :
+                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
             MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvOrderControl.DataSource = dt;

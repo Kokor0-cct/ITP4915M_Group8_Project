@@ -130,7 +130,7 @@ namespace ITP4915M_Group8_Project.Staff
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oTotalAmount"].Value.ToString();           //Amount cell content
+            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
             txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
@@ -189,22 +189,22 @@ namespace ITP4915M_Group8_Project.Staff
             switch (status)
             {
                 case 1:
-                    sqlstat = "1";
+                    sqlstat = "ST01";
                     break;
                 case 2:
-                    sqlstat = "2";
+                    sqlstat = "ST02";
                     break;
                 case 3:
-                    sqlstat = "3";
+                    sqlstat = "ST03";
                     break;
                 case 4:
-                    sqlstat = "4";
+                    sqlstat = "ST04";
                     break;
                 case 5:
-                    sqlstat = "5";
+                    sqlstat = "ST05";
                     break;
                 case 6:
-                    sqlstat = "6";
+                    sqlstat = "ST06";
                     break;
                 default:
                     sql = "SELECT * FROM orders ORDER BY orderID";
@@ -232,17 +232,17 @@ namespace ITP4915M_Group8_Project.Staff
         private String checkStatus()    // Used for generals
         {
             if (rbPending.Checked == true)
-                return "1";
+                return "ST01";
             else if (rbProduction.Checked == true)
-                return "2";
+                return "ST02";
             else if (rbTransit.Checked == true)
-                return "3";
+                return "ST03";
             else if (rbDelivered.Checked == true)
-                return "4";
+                return "ST04";
             else if (rbFailed.Checked == true)
-                return "5";
+                return "ST05";
             else if (rbCancel.Checked == true)
-                return "6";
+                return "ST06";
             else
                 return null;
         }

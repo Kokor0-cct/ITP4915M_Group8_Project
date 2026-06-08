@@ -14,7 +14,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
     public partial class InventoryMaterials : Form
     {
-        private int currentmaterialCode = 0;
+        private string currentmaterialCode = "0";
 
 
         public InventoryMaterials()
@@ -49,14 +49,14 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 {
                     // 清空输入框
                     ClearTextBox();
-                    currentmaterialCode = 0;
+                    currentmaterialCode = "0";
                     return;
                 }
                 txtMaterialName.Text = row.Cells["mName"].Value.ToString();
                 txtMaterialQuantity.Text = row.Cells["mQuantity"].Value.ToString();
                 txtMaterialUnit.Text = row.Cells["mUnit"].Value.ToString();
 
-                currentmaterialCode = Convert.ToInt32(row.Cells["materialCode"].Value);
+                currentmaterialCode = Convert.ToString(row.Cells["materialCode"].Value);
             }
         }
 
@@ -178,7 +178,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void btnmUpdateFurniture_Click(object sender, EventArgs e)
         {
-            if (currentmaterialCode == 0)
+            if (currentmaterialCode == "0")
             {
                 MessageBox.Show("Please select a row to update！");
                 return;
@@ -217,7 +217,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 MessageBox.Show("Update successful！");
                 LoadDataToGridView();
                 ClearTextBox();
-                currentmaterialCode = 0;
+                currentmaterialCode = "0";
             }
             else
             {

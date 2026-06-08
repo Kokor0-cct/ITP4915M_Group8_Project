@@ -148,6 +148,7 @@
             LogIn_button.Text = "login";
             LogIn_button.UseVisualStyleBackColor = false;
             LogIn_button.Click += LogIn_button_Click;
+            LogIn_button.Enter += LogIn_button_Click;
             // 
             // llblRegister
             // 

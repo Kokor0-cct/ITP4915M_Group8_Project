@@ -34,12 +34,12 @@ namespace ITP4915M_Group8_Project.Login
             string cPassword = PwtextBox.Text;
             string cphone = PhonetextBox.Text;
             string cadd = AddstextBox.Text;
-            string company = CompanyBox.Text;
+            string company = CompanyBox.Text.Trim();
             string isStaff = comboBox_identity.SelectedText.ToString() == "Staff" ? "Y" : "N";
 
             if (verify())
             {
-                if (customer.InsertCustomer(cName, cPassword, cphone, cadd, company, isStaff))
+                if (customer.InsertCustomer(cName, cPassword, cphone, cadd, company))
                 {
                     MessageBox.Show("Registration Successfully!", "Add customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

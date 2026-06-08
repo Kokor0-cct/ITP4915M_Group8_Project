@@ -12,7 +12,7 @@ namespace ITP4915M_Group8_Project.Customer
 
 
 
-        public static int CustomerId = UserSession.CustomerId;
+        public static string CustomerId = UserSession.CustomerId;
 
 
 

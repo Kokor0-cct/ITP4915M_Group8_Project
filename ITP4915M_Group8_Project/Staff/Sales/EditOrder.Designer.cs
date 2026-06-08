@@ -38,10 +38,8 @@
             txtDeliveryDate = new TextBox();
             txtAmount = new TextBox();
             txtStatus = new TextBox();
-            txtShipping = new TextBox();
             txtAddress = new TextBox();
             txtUserID = new TextBox();
-            txtQuantity = new TextBox();
             txtFurniture = new TextBox();
             txtOrderID = new TextBox();
             lblStatusType = new Label();
@@ -58,7 +56,6 @@
             btnUpdate = new Button();
             nudQuantity = new NumericUpDown();
             cbShipping = new ComboBox();
-            dtpDate = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             SuspendLayout();
@@ -136,7 +133,7 @@
             // 
             // txtDeliveryDate
             // 
-            txtDeliveryDate.Location = new Point(696, 357);
+            txtDeliveryDate.Location = new Point(455, 361);
             txtDeliveryDate.Name = "txtDeliveryDate";
             txtDeliveryDate.Size = new Size(209, 23);
             txtDeliveryDate.TabIndex = 63;
@@ -157,13 +154,6 @@
             txtStatus.Size = new Size(100, 23);
             txtStatus.TabIndex = 61;
             // 
-            // txtShipping
-            // 
-            txtShipping.Location = new Point(184, 457);
-            txtShipping.Name = "txtShipping";
-            txtShipping.Size = new Size(132, 23);
-            txtShipping.TabIndex = 60;
-            // 
             // txtAddress
             // 
             txtAddress.Location = new Point(154, 390);
@@ -178,13 +168,6 @@
             txtUserID.ReadOnly = true;
             txtUserID.Size = new Size(162, 23);
             txtUserID.TabIndex = 58;
-            // 
-            // txtQuantity
-            // 
-            txtQuantity.Location = new Point(696, 328);
-            txtQuantity.Name = "txtQuantity";
-            txtQuantity.Size = new Size(162, 23);
-            txtQuantity.TabIndex = 57;
             // 
             // txtFurniture
             // 
@@ -322,24 +305,17 @@
             // cbShipping
             // 
             cbShipping.FormattingEnabled = true;
+            cbShipping.Items.AddRange(new object[] { "-Select Shipping Type-", "Ordinary Transport", "Express Shipping" });
             cbShipping.Location = new Point(184, 419);
             cbShipping.Name = "cbShipping";
             cbShipping.Size = new Size(132, 23);
             cbShipping.TabIndex = 70;
-            // 
-            // dtpDate
-            // 
-            dtpDate.Location = new Point(455, 361);
-            dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(209, 23);
-            dtpDate.TabIndex = 71;
             // 
             // EditOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
-            Controls.Add(dtpDate);
             Controls.Add(cbShipping);
             Controls.Add(nudQuantity);
             Controls.Add(btnUpdate);
@@ -348,10 +324,8 @@
             Controls.Add(txtDeliveryDate);
             Controls.Add(txtAmount);
             Controls.Add(txtStatus);
-            Controls.Add(txtShipping);
             Controls.Add(txtAddress);
             Controls.Add(txtUserID);
-            Controls.Add(txtQuantity);
             Controls.Add(txtFurniture);
             Controls.Add(txtOrderID);
             Controls.Add(lblStatusType);
@@ -390,10 +364,8 @@
         private TextBox txtDeliveryDate;
         private TextBox txtAmount;
         private TextBox txtStatus;
-        private TextBox txtShipping;
         private TextBox txtAddress;
         private TextBox txtUserID;
-        private TextBox txtQuantity;
         private TextBox txtFurniture;
         private TextBox txtOrderID;
         private Label lblStatusType;
@@ -410,6 +382,5 @@
         private Button btnUpdate;
         private NumericUpDown nudQuantity;
         private ComboBox cbShipping;
-        private DateTimePicker dtpDate;
     }
 }

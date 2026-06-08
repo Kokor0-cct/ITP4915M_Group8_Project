@@ -15,7 +15,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
     public partial class InventoryFurniture : Form
 
     {
-        private int currentFid = 0;
+        private string currentFid = "0";
 
 
         public InventoryFurniture()
@@ -182,7 +182,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 {
                     // 清空输入框
                     ClearTextBox();
-                    currentFid = 0;
+                    currentFid = "0";
                     return;
                 }
                 txtFurnitureName.Text = row.Cells["fName"].Value.ToString();
@@ -191,13 +191,13 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 txtFurniturePrice.Text = row.Cells["fPrice"].Value.ToString();
                 txtFurnitureDesc.Text = row.Cells["fDesc"].Value.ToString();
 
-                currentFid = Convert.ToInt32(row.Cells["FID"].Value);
+                currentFid = Convert.ToString(row.Cells["FID"].Value);
             }
         }
 
         private void btnUpdateFurniture_Click(object sender, EventArgs e)
         {
-            if (currentFid == 0)
+            if (currentFid == "0")
             {
                 MessageBox.Show("Please select a row to update！");
                 return;
@@ -241,7 +241,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 MessageBox.Show("Update successful！");
                 LoadDataToGridView();
                 ClearTextBox();
-                currentFid = 0;
+                currentFid = "0";
             }
             else
             {

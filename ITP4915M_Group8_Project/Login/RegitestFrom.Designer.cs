@@ -180,6 +180,7 @@
             buttonSubmit.Text = "Submit";
             buttonSubmit.UseVisualStyleBackColor = false;
             buttonSubmit.Click += buttonSubmit_Click;
+            buttonSubmit.Enter += buttonSubmit_Click;
             // 
             // CompanyBox
             // 

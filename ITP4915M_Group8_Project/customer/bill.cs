@@ -62,7 +62,7 @@ namespace ITP4915M_Group8_Project.customer
    
 
             string address = txtAddress.Text;
-            int cUserID = UserSession.CustomerId;
+            string cUserID = UserSession.CustomerId;
             int status = 1;
             int shipType = 0;
             string dateStr = DateTime.Now.ToString("yyyy-MM-dd");

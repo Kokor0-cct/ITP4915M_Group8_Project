@@ -78,7 +78,7 @@ namespace ITP4915M_Group8_Project.Staff
             DisableAll(designBtns);
 
             // 3.判断：管理员 → 全部启用
-            if (UserSession.StaffDepartment == "1") // Admin login
+            if (UserSession.StaffDepartment == "D01") // Admin login
             {
                 Action<List<Button>> EnableAll = (btns) =>
                 {
@@ -94,19 +94,19 @@ namespace ITP4915M_Group8_Project.Staff
             {
                 switch (UserSession.StaffDepartment)
                 {
-                    case "2":   // Sales Login
+                    case "D02":   // Sales Login
                         salesBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "3": // Production Login
+                    case "D03": // Production Login
                         productionBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "4": // Inventory Login
+                    case "D04": // Inventory Login
                         inventoryBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "5": // Logistic Login
+                    case "D05": // Logistic Login
                         logisticBtns.ForEach(x => x.Enabled = true);
                         break;
-                    case "6": // Design Login
+                    case "D06": // Design Login
                         designBtns.ForEach(x => x.Enabled = true);
                         break;
                 }
