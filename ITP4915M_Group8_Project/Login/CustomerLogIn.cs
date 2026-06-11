@@ -118,7 +118,7 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerPassword = Convert.ToString(dt.Rows[0]["cPassword"]);
                         UserSession.CustomerAddress = Convert.ToString(dt.Rows[0]["cAddress"]);
                         UserSession.CustomerId = Convert.ToString(dt.Rows[0]["cUserID"]);
-                        UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBalance"]);
+                        UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBudget"]);
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
                         customer.Buy buyForm = new customer.Buy ();
