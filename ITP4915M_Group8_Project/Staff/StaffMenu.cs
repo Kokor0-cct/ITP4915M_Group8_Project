@@ -59,14 +59,12 @@ namespace ITP4915M_Group8_Project.Staff
         }
         private void StaffMenu_Load()
         {
-            // 1.先把所有部门按钮全部存到对应分组
             List<Button> salesBtns = new List<Button>() { btnSalesService, btnSalesOrderEdit, btnSalesReport };
             List<Button> productionBtns = new List<Button>() { btnProductionList, btnProductionMaterlalSheet };
             List<Button> inventoryBtns = new List<Button>() { btnInventoryManagement, btnInventoryMaterlalList };
             List<Button> logisticBtns = new List<Button>() { btnLogistic };
             List<Button> designBtns = new List<Button>() { btnDesign };
 
-            // 2.默认：全部按钮禁用
             Action<List<Button>> DisableAll = (btns) =>
             {
                 foreach (var btn in btns) btn.Enabled = false;
@@ -77,7 +75,6 @@ namespace ITP4915M_Group8_Project.Staff
             DisableAll(logisticBtns);
             DisableAll(designBtns);
 
-            // 3.判断：管理员 → 全部启用
             if (UserSession.StaffDepartment == "D01") // Admin login
             {
                 Action<List<Button>> EnableAll = (btns) =>
