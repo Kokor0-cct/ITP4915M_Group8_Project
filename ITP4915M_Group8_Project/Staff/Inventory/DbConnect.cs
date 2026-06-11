@@ -38,6 +38,10 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 {
                     MessageBox.Show("Database query error: " + ex.Message);
                 }
+                finally
+                {
+                    conn.Close();
+                }
             }
             return dt;
         }
@@ -58,13 +62,45 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                         {
                             cmd.Parameters.AddRange(parameters);
                         }
-                        // 执行增删改，返回影响行数
                         rowsAffected = cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Database execution error: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return rowsAffected;
+        }
+
+        public static int ExecuteScalar1(string sql, params MySqlParameter[] parameters)
+        {
+            int rowsAffected = 0;
+            using (MySqlConnection conn = new MySqlConnection(connection))
+            {
+                try
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        if (parameters != null)
+                        {
+                            cmd.Parameters.AddRange(parameters);
+                        }
+                        rowsAffected = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database execution error: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
             return rowsAffected;

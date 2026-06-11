@@ -1,3 +1,7 @@
+using ITP4915M_Group8_Project.Staff;
+using ITP4915M_Group8_Project.Staff.Logistic;
+using ITP4915M_Group8_Project.Login;
+
 namespace ITP4915M_Group8_Project
 {
     internal static class Program
@@ -11,7 +15,7 @@ namespace ITP4915M_Group8_Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Staff.Inventory.InventoryMenu());
+            Application.Run(new frmIndexStart());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ITP4915M_Group8_Project
 {
-    partial class frmMainMenu
+    partial class frmIndexStart
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            btnStart = new Button();
+            SuspendLayout();
+            // 
+            // btnStart
+            // 
+            btnStart.Location = new Point(1, -1);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(261, 197);
+            btnStart.TabIndex = 0;
+            btnStart.Text = "Click to start the system";
+            btnStart.UseVisualStyleBackColor = true;
+            btnStart.Click += btnStart_Click;
+            // 
+            // frmIndexStart
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Form1";
+            ClientSize = new Size(263, 196);
+            Controls.Add(btnStart);
+            Name = "frmIndexStart";
+            Text = "Manual Start";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnStart;
     }
 }

@@ -15,7 +15,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
     public partial class InventoryFurniture : Form
 
     {
-        private int currentFid = 0;
+        private string currentFid = "0";
 
 
         public InventoryFurniture()
@@ -34,7 +34,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             DataTable dt = DbConnect.Query(sql);
 
 
-            dgvInventoryControl.DataSource = dt;
+            dgvfInventoryControl.DataSource = dt;
         }
         //------get data from database and show in datagridview------
 
@@ -42,7 +42,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         //------search the textboxes text item in database------
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string keyword = txtSearch.Text.Trim();
+            string keyword = txtfSearch.Text.Trim();
 
 
             string sql = "SELECT * FROM furniture WHERE fName LIKE @keyword";
@@ -52,7 +52,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
             DataTable dt = DbConnect.Query(sql, parameters);
 
-            dgvInventoryControl.DataSource = dt;
+            dgvfInventoryControl.DataSource = dt;
         }
         //------search the textboxes text item in database------
 
@@ -64,8 +64,8 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         {
             string sql = "SELECT * FROM furniture";
             DataTable dt = DbConnect.Query(sql);
-            dgvInventoryControl.DataSource = dt;
-            txtSearch.Clear();
+            dgvfInventoryControl.DataSource = dt;
+            txtfSearch.Clear();
         }
         //------Refresh form to show database data ------
 
@@ -121,13 +121,13 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         private void btnDeleteFurniture_Click(object sender, EventArgs e)
         {
 
-            if (dgvInventoryControl.SelectedRows.Count == 0)
+            if (dgvfInventoryControl.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row to delete！");
                 return;
             }
 
-            int fid = Convert.ToInt32(dgvInventoryControl.SelectedRows[0].Cells["fID"].Value);
+            int fid = Convert.ToInt32(dgvfInventoryControl.SelectedRows[0].Cells["fID"].Value);
 
 
             string name = txtFurnitureName.Text.Trim();
@@ -173,20 +173,16 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         private void dgvInventoryControl_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
- 
-
-
             if (e.RowIndex >= 0)
             {
 
-
-                DataGridViewRow row = dgvInventoryControl.Rows[e.RowIndex];
+                DataGridViewRow row = dgvfInventoryControl.Rows[e.RowIndex];
 
                 if (row.IsNewRow)
                 {
                     // 清空输入框
                     ClearTextBox();
-                    currentFid = 0;
+                    currentFid = "0";
                     return;
                 }
                 txtFurnitureName.Text = row.Cells["fName"].Value.ToString();
@@ -195,13 +191,13 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 txtFurniturePrice.Text = row.Cells["fPrice"].Value.ToString();
                 txtFurnitureDesc.Text = row.Cells["fDesc"].Value.ToString();
 
-                currentFid = Convert.ToInt32(row.Cells["FID"].Value);
+                currentFid = Convert.ToString(row.Cells["FID"].Value);
             }
         }
 
         private void btnUpdateFurniture_Click(object sender, EventArgs e)
         {
-            if (currentFid == 0)
+            if (currentFid == "0")
             {
                 MessageBox.Show("Please select a row to update！");
                 return;
@@ -220,12 +216,12 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 "Furniture Type : " + type + "\n" +
                 "Furniture Price : " + price + "\n" +
                 "Furniture Description : " + desc + "\n\n", "Are you sure?", MessageBoxButtons.YesNo);
-            
+
             if (result != DialogResult.Yes)
             {
                 return;
             }
-            
+
 
             string sql = @"UPDATE furniture SET fName = @name, fQuantity = @quantity, fType = @type, fPrice = @price, fDesc = @desc WHERE FID = @FID";
 
@@ -245,7 +241,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 MessageBox.Show("Update successful！");
                 LoadDataToGridView();
                 ClearTextBox();
-                currentFid = 0;
+                currentFid = "0";
             }
             else
             {
@@ -267,6 +263,13 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         private void btnClearTextBox_Click(object sender, EventArgs e)
         {
             ClearTextBox();
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            InventoryMenu menu = new InventoryMenu();
+            menu.Show();
+            this.Close();
         }
     }
 }
