@@ -1,6 +1,7 @@
 ﻿using ITP4915M_Group8_Project.Staff.Inventory;
 using MySqlConnector;
 using System.Data;
+using System.Globalization;
 
 namespace ITP4915M_Group8_Project.Staff.Sales
 {
@@ -79,13 +80,14 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
             txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
-            cbShipping.SelectedIndex = (int)dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value;   //Shipping Type cell content    
+            cbShipping.SelectedIndex = ConvertSOIndex((string) dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value);   //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string tool_sql = "";
+            int rows = 0;
             string main_sql = @"SELECT * FROM orders WHERE orderID = @OID AND fid = @FID";
             DataTable main_dt;
             DataTable tool_dt;
@@ -122,6 +124,9 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             }
             else
             {
+                // ---No Empty fields, update proceeds---
+
+                // ---Updating Quantity---
                 if (nudQuantity.Value != (int)main_dt.Rows[0]["Quantity"])
                 { 
                     int quantity = (int) nudQuantity.Value;
@@ -129,22 +134,27 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                     String furniture_sql = @"SELECT fprice FROM furniture WHERE fid = @FID";
                     MySqlParameter furniture_parameter = new MySqlParameter("@FID", currentfid);
                     DataTable furniture_dt = DbConnect.Query(furniture_sql, furniture_parameter);
-                    float fprice = (float) furniture_dt.Rows[0]["price"]; // <-- Extract the furniture price for calculation
+                    Decimal fprice = (decimal) furniture_dt.Rows[0]["fprice"]; // <-- Extract the furniture price for calculation
                     
-                    float price = fprice * quantity;
+                    Decimal price = fprice * quantity; // Order Price
 
-                    tool_sql = @"UPDATE order SET Quantity = @Q, oAmount = @A WHERE orderID = @OID AND fid = @FID";
+                    tool_sql = @"UPDATE orders SET Quantity = @Q, oAmount = @A WHERE orderID = @OID AND fid = @FID";
                     MySqlParameter[] Qparameters = { new MySqlParameter("@Q", quantity), new MySqlParameter("@A", price), new MySqlParameter("@OID", currentOid), new MySqlParameter("@FID", currentfid) };
                     tool_dt = DbConnect.Query(tool_sql, Qparameters);
                 }
 
+                // ---Updating Delivery Date---
                 if (txtDeliveryDate.Text.Trim() != main_dt.Rows[0]["odeliverydate"].ToString())
                 {
+                    String dateString = txtDeliveryDate.Text.Trim();
+                    DateTime parsedDate = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
                     tool_sql = @"UPDATE order SET odeliverydate = @DATE WHERE orderID = @OID";
-                    MySqlParameter[] Dparameters = { new MySqlParameter("@DATE", txtDeliveryDate.Text.Trim()), new MySqlParameter("@OID", currentOid) };
+                    MySqlParameter[] Dparameters = { new MySqlParameter("@DATE", parsedDate.ToString("yyyy-mm-dd")), new MySqlParameter("@OID", currentOid) };
                     tool_dt = DbConnect.Query(tool_sql, Dparameters);
                 }
 
+                // ---Updating Delivery Address---
                 if (txtAddress.Text.Trim() != main_dt.Rows[0]["odeliveryaddress"].ToString())
                 {
                     tool_sql = @"UPDATE order SET odeliveryaddress = @ADD WHERE orderID = @OID";
@@ -152,14 +162,22 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                     tool_dt = DbConnect.Query(tool_sql, Aparameters);
                 }
 
-                if (cbShipping.SelectedIndex != (int) main_dt.Rows[0]["shippingType"])
+                // ---Updating Shipping Type---
+                if (cbShipping.SelectedIndex != ConvertSOIndex((string) main_dt.Rows[0]["shippingType"]))
                 {
+                    // Extract the soId from shippingOption
+                    String shippingOption_sql = @"SELECT soId FROM shippingOption WHERE soName = @SONAME";
+                    MySqlParameter shippingOption_parameter = new MySqlParameter("@SONAME", cbShipping.SelectedIndex.ToString());
+                    DataTable shippingOption_dt = DbConnect.Query(shippingOption_sql, shippingOption_parameter);
+                    String SOtype = (string) shippingOption_dt.Rows[0]["soId"];
+
                     tool_sql = @"UPDATE order SET shippingType = @TYPE WHERE orderID = @OID";
-                    MySqlParameter[] Sparameters = { new MySqlParameter("@TYPE", cbShipping.SelectedIndex), new MySqlParameter("@OID", currentOid) };
+                    MySqlParameter[] Sparameters = { new MySqlParameter("@TYPE", SOtype), new MySqlParameter("@OID", currentOid) };
                     tool_dt = DbConnect.Query(tool_sql, Sparameters);
                 }
 
                 MessageBox.Show("Update Successful!", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnRefresh_Click(sender, e);
             }
         }
 
@@ -199,6 +217,16 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtAddress.Clear();
             cbShipping.SelectedIndex = 0;
             txtStatus.Clear();
+        }
+
+        private int ConvertSOIndex(String shippingOptionString)
+        {
+            int shippingIndex = 0;
+            if (shippingOptionString.Equals("SO01"))
+                shippingIndex = 1;
+            else if (shippingOptionString.Equals("SO02"))
+                shippingIndex = 2;
+            return shippingIndex;
         }
     }
 }
