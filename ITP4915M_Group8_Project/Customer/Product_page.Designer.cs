@@ -34,9 +34,9 @@
             // flpMainProduct
             // 
             flpMainProduct.AutoScroll = true;
-            flpMainProduct.Location = new Point(63, 87);
+            flpMainProduct.Location = new Point(52, 87);
             flpMainProduct.Name = "flpMainProduct";
-            flpMainProduct.Size = new Size(925, 406);
+            flpMainProduct.Size = new Size(956, 406);
             flpMainProduct.TabIndex = 0;
             // 
             // Product_page

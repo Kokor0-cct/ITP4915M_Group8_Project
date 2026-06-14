@@ -18,7 +18,7 @@ namespace ITP4915M_Group8_Project.Customer
             InitializeComponent();
         }
 
-        public int FId { get; set; }
+        public string FId { get; set; }
 
         public string PName
         {

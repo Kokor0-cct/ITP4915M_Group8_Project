@@ -160,9 +160,14 @@ namespace ITP4915M_Group8_Project.customer
             }
         }
 
-       private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
- 
+
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

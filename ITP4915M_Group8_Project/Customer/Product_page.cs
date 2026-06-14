@@ -16,7 +16,7 @@ namespace ITP4915M_Group8_Project.Customer
         public Product_page()
         {
             InitializeComponent();
-            LoadAllProduct("SELECT fID,fName,fprice,fQuantity,fType FROM furniture");
+            LoadAllProduct("SELECT fID,fName,fprice,fQuantity,fType,fImgPath FROM furniture");
         }
     
 
@@ -32,22 +32,30 @@ namespace ITP4915M_Group8_Project.Customer
                 {
                     // 实例化单张商品卡片
                     ProductCard card = new ProductCard();
-
+                    
                     // 赋值数据库字段
-                    card.FId = Convert.ToInt32(row["fID"]);
+                    card.FId = row["fID"].ToString();
                     card.PName = row["fName"].ToString();
                     card.PPrice = Convert.ToDecimal(row["fPrice"]);
                     card.PStock = Convert.ToInt32(row["fQuantity"]);
                     card.PType = row["fType"].ToString();
 
+                    //
 
                     // 图片逻辑：如果存路径，读取本地图片
-                    // string imgPath = row["fImgPath"].ToString();
-                    // card.PImage = Image.FromFile(imgPath);
+                    string imgPath = row["fImgPath"].ToString();
+                    if (imgPath != null && imgPath.Length > 0)
+                    {
+                        card.PImage = Image.FromFile(imgPath);
+                    }
+                    else
+                    {
+                        card.PImage = Image.FromFile("../../../IMG/EmptyIMG.png");
+                    }
 
                     card.CardBtnClick += (s, e) =>
                     {
-                        int selectFid = card.FId;
+                        string selectFid = card.FId;
                         ProductDetail detailWin = new ProductDetail(selectFid);
                         detailWin.ShowDialog();
                     };
