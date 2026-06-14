@@ -43,7 +43,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 588);
+            ClientSize = new Size(1064, 581);
             Controls.Add(flpMainProduct);
             Name = "Product_page";
             Text = "Product_page";

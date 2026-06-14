@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            lblback = new Label();
+            labProductBack = new Label();
             SuspendLayout();
+            // 
+            // lblback
+            // 
+            lblback.BackColor = Color.FromArgb(224, 224, 224);
+            lblback.Location = new Point(-11, 59);
+            lblback.Name = "lblback";
+            lblback.Size = new Size(1081, 530);
+            lblback.TabIndex = 0;
+            // 
+            // labProductBack
+            // 
+            labProductBack.BackColor = Color.Silver;
+            labProductBack.BorderStyle = BorderStyle.Fixed3D;
+            labProductBack.Location = new Point(41, 98);
+            labProductBack.Name = "labProductBack";
+            labProductBack.Size = new Size(984, 311);
+            labProductBack.TabIndex = 1;
             // 
             // ProductDetail
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1064, 581);
+            Controls.Add(labProductBack);
+            Controls.Add(lblback);
             Name = "ProductDetail";
             Text = "ProductDetail";
             Load += ProductDetail_Load;
@@ -42,5 +63,8 @@
         }
 
         #endregion
+
+        private Label lblback;
+        private Label labProductBack;
     }
 }
