@@ -65,25 +65,32 @@ namespace ITP4915M_Group8_Project.customer
             string cUserID = UserSession.CustomerId;
             int status = 1;
             int shipType = 0;
+            int shipPrice ;
             string dateStr = DateTime.Now.ToString("yyyy-MM-dd");
+
 
 
             if (rdbOrdinaryTransportat.Checked == true)
             {
-                 shipType = 1;
+                shipType = 1;
+                shipPrice = 50;
+
+
             }
             else
             {
-                 shipType = 2;
+                shipType = 2;
+                shipPrice = 150;
+
             }
-                string sqlMaxId = "SELECT COALESCE(MAX(orderID), 0) FROM orders";
+            string sqlMaxId = "SELECT COALESCE(MAX(orderID), 0) FROM orders";
                 int newOrderId = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) ;
                 newOrderId++;
 
 
             foreach (CartItem item in ShoppingCart.Items)
                 {
-                    decimal itemSubTotal = item.GetTotalPrice();
+                    decimal itemSubTotal = item.GetTotalPrice() + shipPrice;
                     string insertSql = @"
                     INSERT INTO orders(orderID,fID,Quantity,cUserID,oTotalAmount,odeliverydate,odeliveryaddress,shippingType,statusType)
                     VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat)";
