@@ -116,7 +116,6 @@
             btnHome.TabIndex = 15;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = true;
-            btnHome.Click += btnHome_Click;
             // 
             // btnShoppingCart
             // 
