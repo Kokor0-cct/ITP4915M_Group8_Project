@@ -33,6 +33,7 @@
             lblpPrice = new Label();
             lblStockText = new Label();
             btnOperate = new Button();
+            lblCardBack = new Label();
             ((System.ComponentModel.ISupportInitialize)picImg).BeginInit();
             SuspendLayout();
             // 
@@ -80,6 +81,15 @@
             btnOperate.TabIndex = 4;
             btnOperate.Text = "Porduct Info";
             btnOperate.UseVisualStyleBackColor = true;
+            btnOperate.Click += btnOperate_Click_1;
+            // 
+            // lblCardBack
+            // 
+            lblCardBack.BackColor = Color.FromArgb(224, 224, 224);
+            lblCardBack.Location = new Point(0, 0);
+            lblCardBack.Name = "lblCardBack";
+            lblCardBack.Size = new Size(194, 299);
+            lblCardBack.TabIndex = 5;
             // 
             // ProductCard
             // 
@@ -90,6 +100,7 @@
             Controls.Add(lblpPrice);
             Controls.Add(lblpName);
             Controls.Add(picImg);
+            Controls.Add(lblCardBack);
             Name = "ProductCard";
             Size = new Size(194, 299);
             ((System.ComponentModel.ISupportInitialize)picImg).EndInit();
@@ -104,5 +115,6 @@
         private Label lblpPrice;
         private Label lblStockText;
         private Button btnOperate;
+        private Label lblCardBack;
     }
 }

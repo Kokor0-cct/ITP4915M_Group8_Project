@@ -56,7 +56,9 @@ namespace ITP4915M_Group8_Project.Customer
         }
 
         public event EventHandler CardBtnClick;
-        private void btnOperate_Click(object sender, EventArgs e)
+
+
+        private void btnOperate_Click_1(object sender, EventArgs e)
         {
             CardBtnClick?.Invoke(this, EventArgs.Empty);
         }

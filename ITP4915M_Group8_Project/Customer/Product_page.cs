@@ -1,4 +1,5 @@
-﻿using ITP4915M_Group8_Project.Staff.Inventory;
+﻿using ITP4915M_Group8_Project.customer;
+using ITP4915M_Group8_Project.Staff.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +19,9 @@ namespace ITP4915M_Group8_Project.Customer
             InitializeComponent();
             LoadAllProduct("SELECT fID,fName,fprice,fQuantity,fType,fImgPath FROM furniture");
         }
-    
 
-    private void LoadAllProduct(string sql)
+
+        private void LoadAllProduct(string sql)
         {
             flpMainProduct.Controls.Clear();
             try
@@ -32,7 +33,7 @@ namespace ITP4915M_Group8_Project.Customer
                 {
                     // 实例化单张商品卡片
                     ProductCard card = new ProductCard();
-                    
+
                     // 赋值数据库字段
                     card.FId = row["fID"].ToString();
                     card.PName = row["fName"].ToString();
@@ -93,6 +94,12 @@ namespace ITP4915M_Group8_Project.Customer
         {
             // 窗体打开默认按名称排序
             btnSortName_Click(null, null);
+        }
+
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            bill bill = new bill();
+            bill.ShowDialog();
         }
     }
 

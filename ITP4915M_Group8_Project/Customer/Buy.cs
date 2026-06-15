@@ -55,8 +55,7 @@ namespace ITP4915M_Group8_Project.customer
                 lbl.Text = selected ?? "未選擇";
             }
 
-            billForm.Show();
-            this.Close();
+            
         }
 
         private void btnBack_Click(object sender, EventArgs e)

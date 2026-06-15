@@ -29,21 +29,34 @@
         private void InitializeComponent()
         {
             flpMainProduct = new FlowLayoutPanel();
+            btnCheckOut = new Button();
             SuspendLayout();
             // 
             // flpMainProduct
             // 
             flpMainProduct.AutoScroll = true;
-            flpMainProduct.Location = new Point(52, 87);
+            flpMainProduct.Location = new Point(97, 98);
             flpMainProduct.Name = "flpMainProduct";
-            flpMainProduct.Size = new Size(956, 406);
+            flpMainProduct.Size = new Size(846, 406);
             flpMainProduct.TabIndex = 0;
+            // 
+            // btnCheckOut
+            // 
+            btnCheckOut.Location = new Point(913, 512);
+            btnCheckOut.Margin = new Padding(4, 5, 4, 5);
+            btnCheckOut.Name = "btnCheckOut";
+            btnCheckOut.Size = new Size(126, 42);
+            btnCheckOut.TabIndex = 23;
+            btnCheckOut.Text = "CheckOut";
+            btnCheckOut.UseVisualStyleBackColor = true;
+            btnCheckOut.Click += btnCheckOut_Click;
             // 
             // Product_page
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 581);
+            Controls.Add(btnCheckOut);
             Controls.Add(flpMainProduct);
             Name = "Product_page";
             Text = "Product_page";
@@ -53,5 +66,6 @@
         #endregion
 
         private FlowLayoutPanel flpMainProduct;
+        private Button btnCheckOut;
     }
 }
