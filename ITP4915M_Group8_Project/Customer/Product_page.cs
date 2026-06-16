@@ -17,6 +17,15 @@ namespace ITP4915M_Group8_Project.Customer
         public Product_page()
         {
             InitializeComponent();
+            cbofType.Items.Clear();
+            cbofType.Items.Add("All");
+            cbofType.Items.Add("Table");
+            cbofType.Items.Add("Chair");
+            cbofType.Items.Add("Sofa");
+            cbofType.Items.Add("Wardrobe");
+            cbofType.Items.Add("Shelf");
+            cbofType.Items.Add("Bed");
+            cbofType.SelectedIndex = 0;
             LoadAllProduct("SELECT fID,fName,fprice,fQuantity,fType,fImgPath FROM furniture");
         }
 
@@ -38,7 +47,7 @@ namespace ITP4915M_Group8_Project.Customer
                     card.PStock = Convert.ToInt32(row["fQuantity"]);
                     card.PType = row["fType"].ToString();
 
-                    
+
 
                     string imgPath = row["fImgPath"].ToString();
                     if (imgPath != null && imgPath.Length > 0)
@@ -66,36 +75,64 @@ namespace ITP4915M_Group8_Project.Customer
             }
         }
 
-        // 按名称升序
         private void btnSortName_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT fId,fName,fPrice,fStock FROM furniture ORDER BY fName ASC";
+            string sql = "SELECT fId,fName,fType,fprice,fQuantity,fImgPath FROM furniture ORDER BY fName ASC";
             LoadAllProduct(sql);
         }
 
-        // 按库存升序
-        private void btnSortStock_Click(object sender, EventArgs e)
-        {
-            string sql = "SELECT fId,fName,fPrice,fStock FROM furniture ORDER BY fStock ASC";
-            LoadAllProduct(sql);
-        }
-
-        // 按价格升序
-        private void btnSortPrice_Click(object sender, EventArgs e)
-        {
-            string sql = "SELECT fId,fName,fPrice,fStock FROM furniture ORDER BY fPrice ASC";
-            LoadAllProduct(sql);
-        }
-        private void frmBrowseProduct_Load(object sender, EventArgs e)
-        {
-            // 窗体打开默认按名称排序
-            btnSortName_Click(null, null);
-        }
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
             CheckOut bill = new CheckOut();
             bill.ShowDialog();
+        }
+
+        private void btnSortStock_Click_1(object sender, EventArgs e)
+        {
+            string sql = "SELECT fId,fName,fType,fprice,fQuantity,fImgPath FROM furniture ORDER BY fQuantity ASC";
+            LoadAllProduct(sql);
+        }
+
+        private void btnSortPrice_Click_1(object sender, EventArgs e)
+        {
+            string sql = "SELECT fId,fName,fType,fprice,fQuantity,fImgPath FROM furniture ORDER BY fprice ASC";
+            LoadAllProduct(sql);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbofType.SelectedItem == null) return;
+
+            string selected = cbofType.SelectedItem.ToString();
+            string sql = "SELECT fId,fName,fType,fprice,fQuantity,fImgPath FROM furniture";
+
+            if (selected == "Table")
+            {
+                sql += " WHERE fType = 'FT01'";
+            }
+            else if (selected == "Chair")
+            {
+                sql += " WHERE fType = 'FT02'";
+            }
+            else if (selected == "Sofa")
+            {
+                sql += " WHERE fType = 'FT03'";
+            }
+            else if (selected == "Wardrobe")
+            {
+                sql += " WHERE fType = 'FT04'";
+            }
+            else if (selected == "Shelf")
+            {
+                sql += " WHERE fType = 'FT05'";
+            }
+            else if (selected == "Bed")
+            {
+                sql += " WHERE fType = 'FT06'";
+            }
+
+            LoadAllProduct(sql);
         }
     }
 

@@ -34,7 +34,6 @@
             lblTitle = new Label();
             lblProductDESC = new Label();
             lblPrice = new Label();
-            btn = new Button();
             btnAddToCart = new Button();
             picProduct = new PictureBox();
             lblStock = new Label();
@@ -103,15 +102,6 @@
             lblPrice.TabIndex = 5;
             lblPrice.Text = "lblPrice";
             // 
-            // btn
-            // 
-            btn.Location = new Point(41, 507);
-            btn.Name = "btn";
-            btn.Size = new Size(231, 51);
-            btn.TabIndex = 6;
-            btn.Text = "???";
-            btn.UseVisualStyleBackColor = true;
-            // 
             // btnAddToCart
             // 
             btnAddToCart.Location = new Point(794, 507);
@@ -160,7 +150,6 @@
             Controls.Add(lblStock);
             Controls.Add(picProduct);
             Controls.Add(btnAddToCart);
-            Controls.Add(btn);
             Controls.Add(lblPrice);
             Controls.Add(lblProductDESC);
             Controls.Add(lblTitle);
@@ -184,7 +173,6 @@
         private Label lblTitle;
         private Label lblProductDESC;
         private Label lblPrice;
-        private Button btn;
         private Button btnAddToCart;
         private PictureBox picProduct;
         private Label lblStock;

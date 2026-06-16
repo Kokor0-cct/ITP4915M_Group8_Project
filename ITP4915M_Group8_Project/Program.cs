@@ -15,7 +15,7 @@ namespace ITP4915M_Group8_Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Staff.Inventory.InventoryMaterials());
+            Application.Run(new Customer.Product_page());
         }
     }
 }
