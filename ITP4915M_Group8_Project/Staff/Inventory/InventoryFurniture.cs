@@ -73,6 +73,11 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         //------Insert Furniture  to  database  ------
         private void btnInsertFurniture_Click(object sender, EventArgs e)
         {
+            string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(fID,2) AS UNSIGNED)) FROM furniture;";
+            int maxfID = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
+            string newfID = $"F{maxfID:D8}";
+
+            string fID = newfID;
             string name = txtFurnitureName.Text.Trim();
             string quantity = txtFurnitureQuantity.Text.Trim();
             string type = txtFurnitureType.Text.Trim();
@@ -80,6 +85,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             string desc = txtFurnitureDesc.Text.Trim();
 
             DialogResult result = MessageBox.Show("Are you sure you want to insert this data？\n" +
+                "Furniture ID : " + fID + "\n" +
                 "Furniture Name : " + name + "\n" +
                 "Furniture Quantity : " + quantity + "\n" +
                 "Furniture Type : " + type + "\n" +
@@ -91,9 +97,10 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             }
 
 
-            string sql = @"INSERT INTO furniture (fName, fQuantity, fType, fPrice, fDesc)VALUES (@name, @quantity, @type, @price, @desc)";
+            string sql = @"INSERT INTO furniture (fID,fName, fQuantity, fType, fPrice, fDesc)VALUES (@fID, @name, @quantity, @type, @price, @desc)";
 
             MySqlParameter[] parameters = {
+        new MySqlParameter("@fID", fID),
         new MySqlParameter("@name", name),
         new MySqlParameter("@quantity", quantity),
         new MySqlParameter("@type", type),
@@ -127,7 +134,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 return;
             }
 
-            int fid = Convert.ToInt32(dgvfInventoryControl.SelectedRows[0].Cells["fID"].Value);
+            string fid = dgvfInventoryControl.SelectedRows[0].Cells["fID"].Value.ToString();
 
 
             string name = txtFurnitureName.Text.Trim();
@@ -151,9 +158,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             string sql = "DELETE FROM furniture WHERE fID = @fID";
 
 
-            MySqlParameter[] parameters = {
-        new MySqlParameter("@fID", fid)
-    };
+            MySqlParameter[] parameters = {new MySqlParameter("@fID", fid)};
 
             int rows = DbConnect.Execute(sql, parameters);
 
@@ -223,7 +228,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             }
 
 
-            string sql = @"UPDATE furniture SET fName = @name, fQuantity = @quantity, fType = @type, fPrice = @price, fDesc = @desc WHERE FID = @FID";
+            string sql = @"UPDATE furniture SET fName = @name, fQuantity = @quantity, fType = @type, fprice = @price, fDesc = @desc WHERE fID = @FID";
 
             MySqlParameter[] parameters = {
         new MySqlParameter("@name", name),

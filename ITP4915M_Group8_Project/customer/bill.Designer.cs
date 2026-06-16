@@ -175,6 +175,7 @@
             rdbOrdinaryTransportat.TabStop = true;
             rdbOrdinaryTransportat.Text = "Ordinary Transportat          ($50)";
             rdbOrdinaryTransportat.UseVisualStyleBackColor = true;
+            rdbOrdinaryTransportat.CheckedChanged += rdbOrdinaryTransportat_CheckedChanged;
             // 
             // txtPhonenum
             // 
@@ -201,7 +202,6 @@
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(116, 23);
             txtLastName.TabIndex = 1;
-            txtLastName.TextChanged += txtLastName_TextChanged;
             // 
             // txtFirstName
             // 
@@ -231,7 +231,6 @@
             lalOrderName.Size = new Size(82, 17);
             lalOrderName.TabIndex = 0;
             lalOrderName.Text = "Order Name";
-            lalOrderName.Click += lalOrderName_Click;
             // 
             // lalQuantitty
             // 
@@ -258,7 +257,6 @@
             lalProductName.Size = new Size(88, 17);
             lalProductName.TabIndex = 4;
             lalProductName.Text = "ProductName";
-            lalProductName.Click += lalProductName_Click;
             // 
             // label6
             // 
@@ -288,7 +286,6 @@
             label1.Size = new Size(56, 17);
             label1.TabIndex = 9;
             label1.Text = "Quantity";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -299,7 +296,6 @@
             label2.Size = new Size(53, 17);
             label2.TabIndex = 10;
             label2.Text = "Amount";
-            label2.Click += totalPrice;
             // 
             // label3
             // 
@@ -318,7 +314,6 @@
             lblTotalPrice.Size = new Size(76, 17);
             lblTotalPrice.TabIndex = 12;
             lblTotalPrice.Text = "Total Price :";
-            lblTotalPrice.Click += TotalPriceLib_Click;
             // 
             // TotalPriceLib2
             // 

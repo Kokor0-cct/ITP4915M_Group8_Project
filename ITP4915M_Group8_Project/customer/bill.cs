@@ -46,26 +46,26 @@ namespace ITP4915M_Group8_Project.customer
 
         private void label6_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
 
 
         private void button1_Click(object sender, EventArgs e)
-        {   
-            if(txtFirstName.Text == "" || txtLastName.Text == "" || txtAddress.Text == ""|| txtPhonenum.Text == "")
+        {
+            if (txtFirstName.Text == "" || txtLastName.Text == "" || txtAddress.Text == "" || txtPhonenum.Text == "")
             {
                 MessageBox.Show("Please fill in the name！");
                 return;
             }
-   
+
 
             string address = txtAddress.Text;
             string cUserID = UserSession.CustomerId;
             int status = 1;
             int shipType = 0;
-            int shipPrice ;
+            int shipPrice;
             string dateStr = DateTime.Now.ToString("yyyy-MM-dd");
 
 
@@ -76,26 +76,27 @@ namespace ITP4915M_Group8_Project.customer
                 shipPrice = 50;
 
 
+
             }
             else
             {
                 shipType = 2;
                 shipPrice = 150;
 
-            }
-            string sqlMaxId = "SELECT COALESCE(MAX(orderID), 0) FROM orders";
-                int newOrderId = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) ;
-                newOrderId++;
+            }                   
+            string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2))) FROM orders;";
+            int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) +1;
+            string newOrderId = $"C{maxOrderid:D7}"; 
 
 
             foreach (CartItem item in ShoppingCart.Items)
-                {
-                    decimal itemSubTotal = item.GetTotalPrice() + shipPrice;
-                    string insertSql = @"
+            {
+                decimal itemSubTotal = item.GetTotalPrice() + shipPrice;
+                string insertSql = @"
                     INSERT INTO orders(orderID,fID,Quantity,cUserID,oTotalAmount,odeliverydate,odeliveryaddress,shippingType,statusType)
                     VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat)";
 
-                    MySqlParameter[] para = {
+                MySqlParameter[] para = {
                         new MySqlParameter("@oid",newOrderId),
                         new MySqlParameter("@fid",item.fID),
                         new MySqlParameter("@qty",item.fQuantity),
@@ -106,29 +107,15 @@ namespace ITP4915M_Group8_Project.customer
                         new MySqlParameter("@ship",shipType),
                         new MySqlParameter("@stat",status)
                     };
-                    DbConnect.Execute(insertSql, para);
-                }
+                DbConnect.Execute(insertSql, para);
+            }
 
-                ShoppingCart.Clear();
-                MessageBox.Show($"Order successfully! Order Number：{newOrderId}");
+            ShoppingCart.Clear();
+            MessageBox.Show($"Order successfully! Order Number：{newOrderId}");
 
-                this.Close();
+            this.Close();
         }
-        
 
-        private void txtLastName_TextChanged(object sender, EventArgs e) { }
-        private void lalProductName_Click(object sender, EventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void lalOrderName_Click(object sender, EventArgs e) { }
-        private void lalAmount_Click(object sender, EventArgs e)
-        {
-        }
-        private void totalPrice(object sender, EventArgs e) { }
-
-        private void TotalPriceLib_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TotalPriceLib2_Click(object sender, EventArgs e)
         {
@@ -139,6 +126,29 @@ namespace ITP4915M_Group8_Project.customer
         {
 
             this.Close();
+        }
+
+        private void rdbOrdinaryTransportat_CheckedChanged(object sender, EventArgs e)
+        {
+            int shipType = 0;
+            int shipPrice= 0;
+
+            if (rdbOrdinaryTransportat.Checked == true)
+            {
+                shipType = 1;
+                shipPrice = 50;
+
+
+
+            }
+            else if (rdbOrdinaryTransportat.Checked == false)
+            {
+                shipType = 2;
+                shipPrice = 150;
+
+            }
+
+            lblTotalPrice.Text = (ShoppingCart.GetTotalAmount()+shipPrice).ToString("0.00");
         }
     }
 }

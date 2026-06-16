@@ -58,7 +58,7 @@ namespace ITP4915M_Group8_Project.Customer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读取商品失败：" + ex.Message);
+                MessageBox.Show("Product loading failed：" + ex.Message);
             }
         }
 
@@ -67,12 +67,12 @@ namespace ITP4915M_Group8_Project.Customer
 
             if (numNumOfProduct.Value <= 0)
             {
-                MessageBox.Show("请输入有效的购买数量！");
+                MessageBox.Show("Please enter a valid purchase quantity.");
                 return;
             }
             if (numNumOfProduct.Value > ProdStock)
             {
-                MessageBox.Show("库存不足，无法加入购物车！");
+                MessageBox.Show("Insufficient stock, cannot add to cart！");
                 return;
             }
 
@@ -84,8 +84,8 @@ namespace ITP4915M_Group8_Project.Customer
                 fQuantity = (int)numNumOfProduct.Value
             };
 
-            ShoppingCart.AddItem(item.fID, item.fName, item.TotalPrice, item.fQuantity);
-            MessageBox.Show("成功加入购物车！");
+            ShoppingCart.AddItem(item.fID, item.fName, item.UnitPrice, item.fQuantity);
+            MessageBox.Show("Successfully added to cart!");
 
             numNumOfProduct.Value = 0;
 

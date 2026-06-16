@@ -28,22 +28,18 @@ namespace ITP4915M_Group8_Project.Customer
             {
                 DataTable dt = DbConnect.Query(sql);
 
-                // 循环每一行商品（数据库增删自动改变循环次数）
                 foreach (DataRow row in dt.Rows)
                 {
-                    // 实例化单张商品卡片
                     ProductCard card = new ProductCard();
 
-                    // 赋值数据库字段
                     card.FId = row["fID"].ToString();
                     card.PName = row["fName"].ToString();
                     card.PPrice = Convert.ToDecimal(row["fPrice"]);
                     card.PStock = Convert.ToInt32(row["fQuantity"]);
                     card.PType = row["fType"].ToString();
 
-                    //
+                    
 
-                    // 图片逻辑：如果存路径，读取本地图片
                     string imgPath = row["fImgPath"].ToString();
                     if (imgPath != null && imgPath.Length > 0)
                     {
