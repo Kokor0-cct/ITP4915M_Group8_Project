@@ -79,6 +79,11 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void btnmInsertFurniture_Click(object sender, EventArgs e)
         {
+            string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(materialCode,2) AS UNSIGNED)) FROM material;";
+            int maxMcode = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
+            string newMcode = $"M{maxMcode:D4}";
+
+
             string name = txtMaterialName.Text.Trim();
             string quantity = txtMaterialQuantity.Text.Trim();
             string unit = txtMaterialUnit.Text.Trim();
@@ -94,9 +99,10 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             }
 
 
-            string sql = @"INSERT INTO material (mName, mQuantity, mUnit)VALUES (@name, @quantity, @unit)";
+            string sql = @"INSERT INTO material (materialCode, mName, mQuantity, mUnit)VALUES (@materialCode, @name, @quantity, @unit)";
 
             MySqlParameter[] parameters = {
+        new MySqlParameter("@materialCode", newMcode),
         new MySqlParameter("@name", name),
         new MySqlParameter("@quantity", quantity),
         new MySqlParameter("@unit", unit)};
@@ -131,7 +137,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 return;
             }
 
-            int materialCode = Convert.ToInt32(dgvmInventoryControl.SelectedRows[0].Cells["materialCode"].Value);
+            string materialCode = Convert.ToString(dgvmInventoryControl.SelectedRows[0].Cells["materialCode"].Value);
 
 
             string name = txtMaterialName.Text.Trim();
