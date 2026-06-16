@@ -1,6 +1,7 @@
 ﻿using ITP4915M_Group8_Project.Login;
 using ITP4915M_Group8_Project.Staff;
 using ITP4915M_Group8_Project.Staff.Inventory;
+using ITP4915M_Group8_Project.Staff.Production;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
 
 namespace ITP4915M_Group8_Project.Staff
 {
@@ -122,6 +125,13 @@ namespace ITP4915M_Group8_Project.Staff
             Login.CustomerLogIn Form = new Login.CustomerLogIn();
             Form.Show();
             this.Close();
+        }
+
+        private void btnProductionMaterlalSheet_Click(object sender, EventArgs e)
+        {
+            Production.FMaterialRequirementSheet Form = new Production.FMaterialRequirementSheet();
+            Form.Show();
+            this.Close(); 
         }
     }
 }

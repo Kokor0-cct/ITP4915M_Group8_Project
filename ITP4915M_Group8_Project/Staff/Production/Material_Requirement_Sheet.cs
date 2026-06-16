@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Material_Requirement_Sheet
+namespace ITP4915M_Group8_Project.Staff.Production
 {
     public partial class Material_Requirement_Sheet : UserControl
     {

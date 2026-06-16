@@ -143,6 +143,7 @@
             btnProductionMaterlalSheet.TabIndex = 19;
             btnProductionMaterlalSheet.Text = "Materlal Requirement Sheet";
             btnProductionMaterlalSheet.UseVisualStyleBackColor = true;
+            btnProductionMaterlalSheet.Click += btnProductionMaterlalSheet_Click;
             // 
             // grpSales
             // 
