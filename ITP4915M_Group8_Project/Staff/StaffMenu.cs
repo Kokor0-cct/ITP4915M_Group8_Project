@@ -37,28 +37,24 @@ namespace ITP4915M_Group8_Project.Staff
         {
             Staff.Sales.CustomerService Form = new Staff.Sales.CustomerService();
             Form.Show();
-            this.Hide();
         }
 
         private void btnSalesOrderEdit_Click(object sender, EventArgs e)
         {
             Staff.Sales.EditOrder Form = new Staff.Sales.EditOrder();
             Form.Show();
-            this.Hide();
         }
 
         private void btnLogistic_Click(object sender, EventArgs e)
         {
             Staff.Logistic.Logistics_Control Form = new Staff.Logistic.Logistics_Control();
             Form.Show();
-            this.Hide();
         }
 
         private void btnViewOrder_Click(object sender, EventArgs e)
         {
             Staff.ViewOrder Form = new Staff.ViewOrder();
             Form.Show();
-            this.Hide();
         }
         private void StaffMenu_Load()
         {
@@ -130,8 +126,7 @@ namespace ITP4915M_Group8_Project.Staff
         private void btnProductionMaterlalSheet_Click(object sender, EventArgs e)
         {
             Production.FMaterialRequirementSheet Form = new Production.FMaterialRequirementSheet();
-            Form.Show();
-            this.Close(); 
+            Form.ShowDialog();
         }
     }
 }

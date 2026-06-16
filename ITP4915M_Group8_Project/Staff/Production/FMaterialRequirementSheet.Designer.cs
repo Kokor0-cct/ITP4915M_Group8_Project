@@ -36,13 +36,14 @@
             fpMaterialRequirement = new FlowLayoutPanel();
             lalMaterial = new Label();
             lalQuantity = new Label();
+            cmbLevel = new ComboBox();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
             // 
             lalMaterialRequirementSheet.AutoSize = true;
             lalMaterialRequirementSheet.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterialRequirementSheet.Location = new Point(11, 18);
+            lalMaterialRequirementSheet.Location = new Point(11, 20);
             lalMaterialRequirementSheet.Margin = new Padding(2, 0, 2, 0);
             lalMaterialRequirementSheet.Name = "lalMaterialRequirementSheet";
             lalMaterialRequirementSheet.Size = new Size(377, 35);
@@ -51,29 +52,31 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(481, 309);
+            btnBack.Location = new Point(481, 350);
             btnBack.Margin = new Padding(2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(79, 23);
+            btnBack.Size = new Size(79, 26);
             btnBack.TabIndex = 10;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
             // 
             // btnSubmitRequest
             // 
-            btnSubmitRequest.Location = new Point(350, 309);
+            btnSubmitRequest.Location = new Point(350, 350);
             btnSubmitRequest.Margin = new Padding(2);
             btnSubmitRequest.Name = "btnSubmitRequest";
-            btnSubmitRequest.Size = new Size(112, 23);
+            btnSubmitRequest.Size = new Size(112, 26);
             btnSubmitRequest.TabIndex = 11;
             btnSubmitRequest.Text = "Submit Request";
             btnSubmitRequest.UseVisualStyleBackColor = true;
+            btnSubmitRequest.Click += btnSubmitRequest_Click;
             // 
             // btnADDMaterialRequirement
             // 
-            btnADDMaterialRequirement.Location = new Point(12, 76);
+            btnADDMaterialRequirement.Location = new Point(12, 86);
             btnADDMaterialRequirement.Name = "btnADDMaterialRequirement";
-            btnADDMaterialRequirement.Size = new Size(111, 23);
+            btnADDMaterialRequirement.Size = new Size(111, 26);
             btnADDMaterialRequirement.TabIndex = 14;
             btnADDMaterialRequirement.Text = "Add  Material";
             btnADDMaterialRequirement.UseVisualStyleBackColor = true;
@@ -81,9 +84,9 @@
             // 
             // btndeleteMaterialRequirement
             // 
-            btndeleteMaterialRequirement.Location = new Point(144, 76);
+            btndeleteMaterialRequirement.Location = new Point(144, 86);
             btndeleteMaterialRequirement.Name = "btndeleteMaterialRequirement";
-            btndeleteMaterialRequirement.Size = new Size(111, 23);
+            btndeleteMaterialRequirement.Size = new Size(111, 26);
             btndeleteMaterialRequirement.TabIndex = 15;
             btndeleteMaterialRequirement.Text = "Delete Material";
             btndeleteMaterialRequirement.UseVisualStyleBackColor = true;
@@ -92,34 +95,44 @@
             // fpMaterialRequirement
             // 
             fpMaterialRequirement.AutoScroll = true;
-            fpMaterialRequirement.Location = new Point(12, 131);
+            fpMaterialRequirement.Location = new Point(12, 148);
             fpMaterialRequirement.Name = "fpMaterialRequirement";
-            fpMaterialRequirement.Size = new Size(350, 141);
+            fpMaterialRequirement.Size = new Size(350, 160);
             fpMaterialRequirement.TabIndex = 16;
             // 
             // lalMaterial
             // 
             lalMaterial.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterial.Location = new Point(12, 105);
+            lalMaterial.Location = new Point(12, 119);
             lalMaterial.Name = "lalMaterial";
-            lalMaterial.Size = new Size(59, 23);
+            lalMaterial.Size = new Size(59, 26);
             lalMaterial.TabIndex = 0;
             lalMaterial.Text = "Material";
             // 
             // lalQuantity
             // 
             lalQuantity.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalQuantity.Location = new Point(260, 105);
+            lalQuantity.Location = new Point(260, 119);
             lalQuantity.Name = "lalQuantity";
-            lalQuantity.Size = new Size(56, 23);
+            lalQuantity.Size = new Size(56, 26);
             lalQuantity.TabIndex = 17;
             lalQuantity.Text = "Quantity";
             // 
+            // cmbLevel
+            // 
+            cmbLevel.FormattingEnabled = true;
+            cmbLevel.Location = new Point(392, 148);
+            cmbLevel.Name = "cmbLevel";
+            cmbLevel.Size = new Size(121, 25);
+            cmbLevel.TabIndex = 18;
+            cmbLevel.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // FMaterialRequirementSheet
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(595, 355);
+            ClientSize = new Size(595, 402);
+            Controls.Add(cmbLevel);
             Controls.Add(lalQuantity);
             Controls.Add(lalMaterial);
             Controls.Add(fpMaterialRequirement);
@@ -145,5 +158,6 @@
         private FlowLayoutPanel fpMaterialRequirement;
         private Label lalMaterial;
         private Label lalQuantity;
+        private ComboBox cmbLevel;
     }
 }

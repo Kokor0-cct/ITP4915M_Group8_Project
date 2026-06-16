@@ -71,7 +71,7 @@ namespace ITP4915M_Group8_Project.Customer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读取商品失败：" + ex.Message);
+                MessageBox.Show("Product loading failed：" + ex.Message);
             }
         }
 
