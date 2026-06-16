@@ -37,6 +37,7 @@
             lalMaterial = new Label();
             lalQuantity = new Label();
             cmbLevel = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
@@ -97,7 +98,7 @@
             fpMaterialRequirement.AutoScroll = true;
             fpMaterialRequirement.Location = new Point(12, 148);
             fpMaterialRequirement.Name = "fpMaterialRequirement";
-            fpMaterialRequirement.Size = new Size(350, 160);
+            fpMaterialRequirement.Size = new Size(350, 197);
             fpMaterialRequirement.TabIndex = 16;
             // 
             // lalMaterial
@@ -127,6 +128,14 @@
             cmbLevel.TabIndex = 18;
             cmbLevel.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
+            // label1
+            // 
+            label1.BorderStyle = BorderStyle.Fixed3D;
+            label1.Location = new Point(7, 145);
+            label1.Name = "label1";
+            label1.Size = new Size(359, 203);
+            label1.TabIndex = 0;
+            // 
             // FMaterialRequirementSheet
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -141,6 +150,7 @@
             Controls.Add(btnSubmitRequest);
             Controls.Add(btnBack);
             Controls.Add(lalMaterialRequirementSheet);
+            Controls.Add(label1);
             Margin = new Padding(2);
             Name = "FMaterialRequirementSheet";
             Text = "Material Requirement Sheet";
@@ -159,5 +169,6 @@
         private Label lalMaterial;
         private Label lalQuantity;
         private ComboBox cmbLevel;
+        private Label label1;
     }
 }
