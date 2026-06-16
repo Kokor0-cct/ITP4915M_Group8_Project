@@ -98,7 +98,7 @@ namespace ITP4915M_Group8_Project.Customer
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            bill bill = new bill();
+            CheckOut bill = new CheckOut();
             bill.ShowDialog();
         }
     }

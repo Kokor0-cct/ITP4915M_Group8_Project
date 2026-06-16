@@ -1,6 +1,6 @@
 ﻿namespace ITP4915M_Group8_Project.customer
 {
-    partial class bill
+    partial class CheckOut
     {
         /// <summary>
         /// Required designer variable.
@@ -349,7 +349,7 @@
             dgvCartList.Size = new Size(321, 263);
             dgvCartList.TabIndex = 15;
             // 
-            // bill
+            // CheckOut
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -371,7 +371,7 @@
             Controls.Add(lalOrderName);
             Controls.Add(lalQuantitty);
             Margin = new Padding(4, 5, 4, 5);
-            Name = "bill";
+            Name = "CheckOut";
             Text = "bill";
             grpbBillingDetails.ResumeLayout(false);
             grpbBillingDetails.PerformLayout();

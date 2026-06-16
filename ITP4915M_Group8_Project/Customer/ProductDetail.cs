@@ -18,12 +18,12 @@ namespace ITP4915M_Group8_Project.Customer
 {
     public partial class ProductDetail : Form
     {
-        public int CurrentFId { get; set; }
         int ProdStock = 0;
+        string CurrentFId;
         public ProductDetail(string selectFid)
         {
             InitializeComponent();
-
+            CurrentFId = selectFid;
             LoadDetail("SELECT * FROM furniture WHERE fID = '" + selectFid + "'");
 
         }

@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace ITP4915M_Group8_Project.customer
 {
-    public partial class bill : Form
+    public partial class CheckOut : Form
     {
         private int currentQuantity;
         private string currentProductName;
         private decimal unitPrice;
 
-        public bill()
+        public CheckOut()
         {
             InitializeComponent();
             this.Load += Bill_Load;
@@ -111,9 +111,8 @@ namespace ITP4915M_Group8_Project.customer
 
                 ShoppingCart.Clear();
                 MessageBox.Show($"Order successfully! Order Number：{newOrderId}");
-                customer.Buy form1 = new customer.Buy();
-                form1.Show();
-                this.Hide();
+
+                this.Close();
         }
         
 
@@ -138,9 +137,8 @@ namespace ITP4915M_Group8_Project.customer
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            customer.Buy form1 = new customer.Buy();
-            form1.Show();
-            this.Hide();
+
+            this.Close();
         }
     }
 }

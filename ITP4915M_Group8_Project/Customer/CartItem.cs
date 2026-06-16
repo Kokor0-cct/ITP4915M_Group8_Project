@@ -8,7 +8,7 @@ namespace ITP4915M_Group8_Project.Customer
 {
     public class CartItem
     {
-        public int fID { get; set; }
+        public string fID { get; set; }
 
         public string fName { get; set; }
 
