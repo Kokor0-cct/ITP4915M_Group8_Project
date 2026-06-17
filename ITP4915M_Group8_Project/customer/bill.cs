@@ -63,8 +63,8 @@ namespace ITP4915M_Group8_Project.customer
 
             string address = txtAddress.Text;
             string cUserID = UserSession.CustomerId;
-            int status = 1;
-            int shipType = 0;
+            string status = "ST01";
+            string shipType = "";
             int shipPrice;
             string Createdate = DateTime.Now.ToString("yyyy-MM-dd");
             string deliverydate = dateChoose.Value.ToString("yyyy-MM-dd");
@@ -73,7 +73,7 @@ namespace ITP4915M_Group8_Project.customer
 
             if (rdbOrdinaryTransportat.Checked == true)
             {
-                shipType = 1;
+                shipType = "SO01";
                 shipPrice = 50;
 
 
@@ -81,7 +81,7 @@ namespace ITP4915M_Group8_Project.customer
             }
             else
             {
-                shipType = 2;
+                shipType = "SO02";
                 shipPrice = 150;
 
             }                   

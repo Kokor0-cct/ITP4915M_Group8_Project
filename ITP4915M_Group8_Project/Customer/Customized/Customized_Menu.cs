@@ -26,7 +26,8 @@ namespace ITP4915M_Group8_Project.Customer.Customized
 
         private void btnDesignList_Click(object sender, EventArgs e)
         {
-
+            DesignList designList = new DesignList();
+            designList.ShowDialog();
         }
     }
 }

@@ -67,6 +67,7 @@
             btnfRefresh.TabIndex = 87;
             btnfRefresh.Text = "Refresh";
             btnfRefresh.UseVisualStyleBackColor = true;
+            btnfRefresh.Click += btnfRefresh_Click;
             // 
             // btnNotAccepted
             // 
@@ -188,6 +189,7 @@
             dgvfInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvfInventoryControl.Size = new Size(664, 169);
             dgvfInventoryControl.TabIndex = 70;
+            dgvfInventoryControl.SelectionChanged += dgvfInventoryControl_SelectionChanged;
             // 
             // lblInventoryFurnitureTitle
             // 

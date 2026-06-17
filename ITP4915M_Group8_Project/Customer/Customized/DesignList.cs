@@ -30,10 +30,11 @@ namespace ITP4915M_Group8_Project.Customer.Customized
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM customfurniture WHERE cUserID = @cUserID";
+            string sql = "SELECT * FROM customfurniture WHERE cUserID = @cUserID AND cfState = @cfState";
             string cUserID = UserSession.CustomerId;
             MySqlParameter[] parameters = {
-                new MySqlParameter("@cUserID", cUserID)
+                new MySqlParameter("@cUserID", cUserID),
+                new MySqlParameter("@cfState", "Pending approval")
             };
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvfInventoryControl.DataSource = dt;
@@ -141,6 +142,11 @@ namespace ITP4915M_Group8_Project.Customer.Customized
             {
                 MessageBox.Show("Cancel failed！");
             }
+        }
+
+        private void btnfRefresh_Click(object sender, EventArgs e)
+        {
+            LoadDataToGridView();
         }
     }
 }
