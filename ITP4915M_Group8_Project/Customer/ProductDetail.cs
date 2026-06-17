@@ -88,6 +88,7 @@ namespace ITP4915M_Group8_Project.Customer
             MessageBox.Show("Successfully added to cart!");
 
             numNumOfProduct.Value = 0;
+            this.Close();
 
         }
 

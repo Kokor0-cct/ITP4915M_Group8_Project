@@ -39,9 +39,29 @@ namespace ITP4915M_Group8_Project.Customer
                 });
             }
         }
+        public static bool UpdateItem(string id, int qty)
+        {
+            var existItem = Items.FirstOrDefault(x => x.fID == id);
+            
+            if (existItem != null)
+            {
+                existItem.fQuantity = qty;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static void DeleteItem(string id)
+        {
+            var existItem = Items.FirstOrDefault(x => x.fID == id);
 
-
-
+            if (existItem != null)
+            {
+                Items.Remove(existItem);
+            }
+        }
 
         public static void Clear()
         {

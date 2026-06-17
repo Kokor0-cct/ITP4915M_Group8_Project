@@ -32,15 +32,12 @@
             grpbBillingDetails = new GroupBox();
             lalShoppingAddres = new Label();
             lalPhoneNumber = new Label();
-            lalLastName = new Label();
-            lalFristName = new Label();
+            lalName = new Label();
             rdbExpressShipping = new RadioButton();
             lblshippingType = new Label();
             txtAddress = new TextBox();
             rdbOrdinaryTransportat = new RadioButton();
             txtPhonenum = new TextBox();
-            txtPhone = new ComboBox();
-            txtLastName = new TextBox();
             txtFirstName = new TextBox();
             btnContinue = new Button();
             lalOrderName = new Label();
@@ -56,6 +53,8 @@
             TotalPriceLib2 = new Label();
             btnBack = new Button();
             dgvCartList = new DataGridView();
+            lblDate = new Label();
+            dateChoose = new DateTimePicker();
             grpbBillingDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCartList).BeginInit();
             SuspendLayout();
@@ -74,17 +73,16 @@
             // 
             // grpbBillingDetails
             // 
+            grpbBillingDetails.Controls.Add(dateChoose);
+            grpbBillingDetails.Controls.Add(lblDate);
             grpbBillingDetails.Controls.Add(lalShoppingAddres);
             grpbBillingDetails.Controls.Add(lalPhoneNumber);
-            grpbBillingDetails.Controls.Add(lalLastName);
-            grpbBillingDetails.Controls.Add(lalFristName);
+            grpbBillingDetails.Controls.Add(lalName);
             grpbBillingDetails.Controls.Add(rdbExpressShipping);
             grpbBillingDetails.Controls.Add(lblshippingType);
             grpbBillingDetails.Controls.Add(txtAddress);
             grpbBillingDetails.Controls.Add(rdbOrdinaryTransportat);
             grpbBillingDetails.Controls.Add(txtPhonenum);
-            grpbBillingDetails.Controls.Add(txtPhone);
-            grpbBillingDetails.Controls.Add(txtLastName);
             grpbBillingDetails.Controls.Add(txtFirstName);
             grpbBillingDetails.Location = new Point(128, 126);
             grpbBillingDetails.Margin = new Padding(4, 5, 4, 5);
@@ -108,32 +106,22 @@
             // lalPhoneNumber
             // 
             lalPhoneNumber.AutoSize = true;
-            lalPhoneNumber.Location = new Point(134, 103);
+            lalPhoneNumber.Location = new Point(139, 39);
             lalPhoneNumber.Margin = new Padding(4, 0, 4, 0);
             lalPhoneNumber.Name = "lalPhoneNumber";
             lalPhoneNumber.Size = new Size(96, 17);
             lalPhoneNumber.TabIndex = 10;
             lalPhoneNumber.Text = "Phone Number";
             // 
-            // lalLastName
+            // lalName
             // 
-            lalLastName.AutoSize = true;
-            lalLastName.Location = new Point(132, 39);
-            lalLastName.Margin = new Padding(4, 0, 4, 0);
-            lalLastName.Name = "lalLastName";
-            lalLastName.Size = new Size(70, 17);
-            lalLastName.TabIndex = 9;
-            lalLastName.Text = "Last Name";
-            // 
-            // lalFristName
-            // 
-            lalFristName.AutoSize = true;
-            lalFristName.Location = new Point(20, 39);
-            lalFristName.Margin = new Padding(4, 0, 4, 0);
-            lalFristName.Name = "lalFristName";
-            lalFristName.Size = new Size(71, 17);
-            lalFristName.TabIndex = 8;
-            lalFristName.Text = "First Name";
+            lalName.AutoSize = true;
+            lalName.Location = new Point(20, 39);
+            lalName.Margin = new Padding(4, 0, 4, 0);
+            lalName.Name = "lalName";
+            lalName.Size = new Size(43, 17);
+            lalName.TabIndex = 8;
+            lalName.Text = "Name";
             // 
             // rdbExpressShipping
             // 
@@ -179,36 +167,18 @@
             // 
             // txtPhonenum
             // 
-            txtPhonenum.Location = new Point(132, 129);
+            txtPhonenum.Location = new Point(139, 62);
             txtPhonenum.Margin = new Padding(4, 5, 4, 5);
             txtPhonenum.Name = "txtPhonenum";
-            txtPhonenum.Size = new Size(136, 23);
+            txtPhonenum.Size = new Size(129, 23);
             txtPhonenum.TabIndex = 3;
-            // 
-            // txtPhone
-            // 
-            txtPhone.FormattingEnabled = true;
-            txtPhone.Location = new Point(20, 127);
-            txtPhone.Margin = new Padding(4, 5, 4, 5);
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(77, 25);
-            txtPhone.TabIndex = 2;
-            txtPhone.Text = "+852";
-            // 
-            // txtLastName
-            // 
-            txtLastName.Location = new Point(134, 62);
-            txtLastName.Margin = new Padding(4, 5, 4, 5);
-            txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(116, 23);
-            txtLastName.TabIndex = 1;
             // 
             // txtFirstName
             // 
             txtFirstName.Location = new Point(20, 62);
             txtFirstName.Margin = new Padding(4, 5, 4, 5);
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(89, 23);
+            txtFirstName.Size = new Size(111, 23);
             txtFirstName.TabIndex = 0;
             // 
             // btnContinue
@@ -344,6 +314,22 @@
             dgvCartList.Size = new Size(321, 263);
             dgvCartList.TabIndex = 15;
             // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(20, 98);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(84, 17);
+            lblDate.TabIndex = 12;
+            lblDate.Text = "Delivery date";
+            // 
+            // dateChoose
+            // 
+            dateChoose.Location = new Point(20, 118);
+            dateChoose.Name = "dateChoose";
+            dateChoose.Size = new Size(248, 23);
+            dateChoose.TabIndex = 13;
+            // 
             // CheckOut
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -382,14 +368,13 @@
         private System.Windows.Forms.GroupBox grpbBillingDetails;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtPhonenum;
-        private System.Windows.Forms.ComboBox txtPhone;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.RadioButton rbPaypal;
         private System.Windows.Forms.Label lblshippingType;
         private System.Windows.Forms.Label lalPhoneNumber;
         private System.Windows.Forms.Label lalLastName;
-        private System.Windows.Forms.Label lalFristName;
+        private System.Windows.Forms.Label lalName;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.Label lalOrderName;
         private System.Windows.Forms.Label lalQuantitty;
@@ -407,5 +392,7 @@
         private DataGridView dgvCartList;
         private RadioButton rdbExpressShipping;
         private RadioButton rdbOrdinaryTransportat;
+        private DateTimePicker dateChoose;
+        private Label lblDate;
     }
 }

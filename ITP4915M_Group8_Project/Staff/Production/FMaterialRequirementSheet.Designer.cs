@@ -38,6 +38,7 @@
             lalQuantity = new Label();
             cmbLevel = new ComboBox();
             label1 = new Label();
+            lblUrgencyLevel = new Label();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
@@ -136,11 +137,22 @@
             label1.Size = new Size(359, 203);
             label1.TabIndex = 0;
             // 
+            // lblUrgencyLevel
+            // 
+            lblUrgencyLevel.AutoSize = true;
+            lblUrgencyLevel.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            lblUrgencyLevel.Location = new Point(392, 118);
+            lblUrgencyLevel.Name = "lblUrgencyLevel";
+            lblUrgencyLevel.Size = new Size(94, 17);
+            lblUrgencyLevel.TabIndex = 19;
+            lblUrgencyLevel.Text = "Urgency Level";
+            // 
             // FMaterialRequirementSheet
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(595, 402);
+            Controls.Add(lblUrgencyLevel);
             Controls.Add(cmbLevel);
             Controls.Add(lalQuantity);
             Controls.Add(lalMaterial);
@@ -170,5 +182,6 @@
         private Label lalQuantity;
         private ComboBox cmbLevel;
         private Label label1;
+        private Label lblUrgencyLevel;
     }
 }

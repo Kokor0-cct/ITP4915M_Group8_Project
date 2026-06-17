@@ -54,7 +54,7 @@ namespace ITP4915M_Group8_Project.customer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtFirstName.Text == "" || txtLastName.Text == "" || txtAddress.Text == "" || txtPhonenum.Text == "")
+            if (txtFirstName.Text == ""|| txtAddress.Text == "" || txtPhonenum.Text == "")
             {
                 MessageBox.Show("Please fill in the name！");
                 return;
@@ -148,7 +148,7 @@ namespace ITP4915M_Group8_Project.customer
 
             }
 
-            lblTotalPrice.Text = (ShoppingCart.GetTotalAmount()+shipPrice).ToString("0.00");
+            lblTotalPrice.Text ="Total Amount: $" + (ShoppingCart.GetTotalAmount()+shipPrice).ToString("0.00");
         }
     }
 }

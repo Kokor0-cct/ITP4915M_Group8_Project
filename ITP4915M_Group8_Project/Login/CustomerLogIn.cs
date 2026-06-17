@@ -121,7 +121,7 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerBalance = Convert.ToInt32(dt.Rows[0]["cBudget"]);
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
-                        Customer.Product_page buyForm = new Customer.Product_page();
+                        Customer.CustomerMenu buyForm = new Customer.CustomerMenu();
                         buyForm.Show();
                         this.Hide();
 
