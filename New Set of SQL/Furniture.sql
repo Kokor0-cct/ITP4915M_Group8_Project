@@ -1,32 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- 主机： 127.0.0.1
--- 生成日期： 2026-06-15 14:51:38
--- 服务器版本： 10.4.32-MariaDB
--- PHP 版本： 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- 数据库： `itp4915m_2526_projectdatabase`
---
 
--- --------------------------------------------------------
-
---
--- 表的结构 `furniture`
---
-
+DROP TABLE IF EXISTS `furniture`;
 CREATE TABLE `furniture` (
   `fID` char(9) NOT NULL,
   `fName` varchar(50) NOT NULL,
@@ -34,12 +16,8 @@ CREATE TABLE `furniture` (
   `fType` char(4) NOT NULL,
   `fprice` decimal(8,2) NOT NULL,
   `fDesc` text NOT NULL,
-  `fImgPath` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 转存表中的数据 `furniture`
---
+  `fImgPath` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `furniture` (`fID`, `fName`, `fQuantity`, `fType`, `fprice`, `fDesc`, `fImgPath`) VALUES
 ('F00000001', 'Oak Dining Chair', 200, 'FT02', 450.00, 'Classic style dining chair made of solid oak.', '../../../IMG/Oak_Dining_Chair.png'),
@@ -49,24 +27,12 @@ INSERT INTO `furniture` (`fID`, `fName`, `fQuantity`, `fType`, `fprice`, `fDesc`
 ('F00000005', 'Industrial Bookshelf', 50, 'FT04', 1200.00, 'Modern style bookshelf with steel frame.', '../../../IMG/Industrial Bookshelf.png'),
 ('F00000006', 'Queen Size Bed Frame', 230, 'FT06', 2200.00, 'Sturdy bed frame for queen size mattress.', '../../../IMG/Queen Size Bed Frame.png');
 
---
--- 转储表的索引
---
 
---
--- 表的索引 `furniture`
---
 ALTER TABLE `furniture`
   ADD PRIMARY KEY (`fID`),
   ADD KEY `fk_fType` (`fType`);
 
---
--- 限制导出的表
---
 
---
--- 限制表 `furniture`
---
 ALTER TABLE `furniture`
   ADD CONSTRAINT `fk_fType` FOREIGN KEY (`fType`) REFERENCES `furnituretype` (`fType`);
 COMMIT;
