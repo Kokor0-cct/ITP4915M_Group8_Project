@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ITP4915M_Group8_Project.Customer.Customized;
 using ITP4915M_Group8_Project.Login;
 
 namespace ITP4915M_Group8_Project.Customer
@@ -31,6 +32,13 @@ namespace ITP4915M_Group8_Project.Customer
         {
             ShoppingCart_Page from = new ShoppingCart_Page();
             from.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Customized_Menu customized_Menu = new Customized_Menu();
+            customized_Menu.ShowDialog();
+
         }
     }
 }

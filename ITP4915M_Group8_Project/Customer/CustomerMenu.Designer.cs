@@ -82,6 +82,7 @@
             button4.TabIndex = 4;
             button4.Text = "Customized products";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // lblMsg
             // 

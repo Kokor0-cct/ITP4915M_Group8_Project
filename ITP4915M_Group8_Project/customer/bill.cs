@@ -66,7 +66,8 @@ namespace ITP4915M_Group8_Project.customer
             int status = 1;
             int shipType = 0;
             int shipPrice;
-            string dateStr = DateTime.Now.ToString("yyyy-MM-dd");
+            string Createdate = DateTime.Now.ToString("yyyy-MM-dd");
+            string deliverydate = dateChoose.Value.ToString("yyyy-MM-dd");
 
 
 
@@ -93,8 +94,8 @@ namespace ITP4915M_Group8_Project.customer
             {
                 decimal itemSubTotal = item.GetTotalPrice() + shipPrice;
                 string insertSql = @"
-                    INSERT INTO orders(orderID,fID,Quantity,cUserID,oTotalAmount,odeliverydate,odeliveryaddress,shippingType,statusType)
-                    VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat)";
+                    INSERT INTO orders(orderID,fID,Quantity,cUserID,oTotalAmount,odeliverydate,oCreateDate,odeliveryaddress,shippingType,statusType)
+                    VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@createdate,@addr,@ship,@stat)";
 
                 MySqlParameter[] para = {
                         new MySqlParameter("@oid",newOrderId),
@@ -102,7 +103,8 @@ namespace ITP4915M_Group8_Project.customer
                         new MySqlParameter("@qty",item.fQuantity),
                         new MySqlParameter("@uid",cUserID),
                         new MySqlParameter("@subtotal",itemSubTotal),
-                        new MySqlParameter("@date",dateStr),
+                        new MySqlParameter("@date",Createdate),
+                        new MySqlParameter("@createdate",Createdate),
                         new MySqlParameter("@addr",address),
                         new MySqlParameter("@ship",shipType),
                         new MySqlParameter("@stat",status)
