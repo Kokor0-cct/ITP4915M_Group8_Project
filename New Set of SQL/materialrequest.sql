@@ -1,32 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- 主机： 127.0.0.1
--- 生成日期： 2026-06-16 07:55:25
--- 服务器版本： 10.4.32-MariaDB
--- PHP 版本： 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- 数据库： `itp4915m_2526_projectdatabase`
---
 
--- --------------------------------------------------------
-
---
--- 表的结构 `materialrequest`
---
-
+DROP TABLE IF EXISTS `materialrequest`;
 CREATE TABLE `materialrequest` (
   `mrID` char(10) NOT NULL,
   `materialCode` char(5) NOT NULL,
@@ -36,38 +18,16 @@ CREATE TABLE `materialrequest` (
   `sUserID` char(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- 转存表中的数据 `materialrequest`
---
-
 INSERT INTO `materialrequest` (`mrID`, `materialCode`, `mrQuantity`, `UrgencyLevel`, `createDate`, `sUserID`) VALUES
 ('MR00000001', 'M0001', 5, 'Medium', '2012-12-12', 'S0000001'),
 ('MR00000002', 'M0001', 2, 'Low', '2026-06-16', 'S0000001'),
 ('MR00000002', 'M0003', 1, 'Low', '2026-06-16', 'S0000001');
 
---
--- 转储表的索引
---
 
---
--- 表的索引 `materialrequest`
---
 ALTER TABLE `materialrequest`
   ADD PRIMARY KEY (`mrID`,`materialCode`),
   ADD KEY `fk_mCode` (`materialCode`),
   ADD KEY `fk_staffID` (`sUserID`);
-
---
--- 限制导出的表
---
-
---
--- 限制表 `materialrequest`
---
-ALTER TABLE `materialrequest`
-  ADD CONSTRAINT `fk_SuserID` FOREIGN KEY (`materialCode`) REFERENCES `material` (`materialCode`),
-  ADD CONSTRAINT `fk_mCode` FOREIGN KEY (`materialCode`) REFERENCES `material` (`materialCode`),
-  ADD CONSTRAINT `fk_staffID` FOREIGN KEY (`sUserID`) REFERENCES `staff` (`sUserID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
