@@ -77,7 +77,6 @@ namespace ITP4915M_Group8_Project.customer
                 shipPrice = 50;
 
 
-
             }
             else
             {
