@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:57
+-- 生成日期： 2026-06-18 13:53:51
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `materialrequest`
+-- 表的结构 `material`
 --
 
-CREATE TABLE `materialrequest` (
-  `mrID` char(10) NOT NULL,
+CREATE TABLE `material` (
   `materialCode` char(5) NOT NULL,
-  `mrQuantity` int(20) NOT NULL,
-  `UrgencyLevel` enum('Low','Medium','High') NOT NULL,
-  `createDate` date NOT NULL,
-  `sUserID` char(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `mName` varchar(30) NOT NULL,
+  `mQuantity` int(10) NOT NULL DEFAULT 0,
+  `munit` varchar(18) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `materialrequest`
+-- 转存表中的数据 `material`
 --
 
-INSERT INTO `materialrequest` (`mrID`, `materialCode`, `mrQuantity`, `UrgencyLevel`, `createDate`, `sUserID`) VALUES
-('MR00000001', 'M0001', 5, 'Medium', '2012-12-12', 'S0000001'),
-('MR00000002', 'M0001', 2, 'Low', '2026-06-16', 'S0000001'),
-('MR00000002', 'M0003', 1, 'Low', '2026-06-16', 'S0000001');
+INSERT INTO `material` (`materialCode`, `mName`, `mQuantity`, `munit`) VALUES
+('M0001', 'Oak Wood Plank', 500, 'pcs'),
+('M0002', 'Steel Tube', 200, 'meter'),
+('M0003', 'Fabric Cloth', 100, 'meter'),
+('M0004', 'High Density Foam', 50, 'block');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `materialrequest`
+-- 表的索引 `material`
 --
-ALTER TABLE `materialrequest`
-  ADD PRIMARY KEY (`mrID`,`materialCode`),
-  ADD KEY `fk_staffID` (`sUserID`);
+ALTER TABLE `material`
+  ADD PRIMARY KEY (`materialCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
