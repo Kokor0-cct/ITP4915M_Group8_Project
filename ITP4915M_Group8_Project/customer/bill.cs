@@ -85,7 +85,7 @@ namespace ITP4915M_Group8_Project.customer
                 shipPrice = 150;
 
             }                   
-            string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2)AS UNSIGNED)) FROM orders;";
+            string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2))) FROM orders;";
             int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) +1;
             string newOrderId = $"O{maxOrderid:D7}"; 
 
@@ -94,9 +94,8 @@ namespace ITP4915M_Group8_Project.customer
             {
                 decimal itemSubTotal = item.GetTotalPrice() + shipPrice;
                 string insertSql = @"
-                    INSERT INTO orders(orderID,fID,Quantity,cUserID,oAmount,odeliverydate,oCreateDate,odeliveryaddress,shippingType ,statusType )
+                    INSERT INTO orders(orderID,fID,Quantity,cUserID,oTotalAmount,odeliverydate,oCreateDate,odeliveryaddress,shippingType,statusType)
                     VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@createdate,@addr,@ship,@stat)";
-
 
                 MySqlParameter[] para = {
                         new MySqlParameter("@oid",newOrderId),
@@ -111,25 +110,9 @@ namespace ITP4915M_Group8_Project.customer
                         new MySqlParameter("@stat",status)
                     };
                 DbConnect.Execute(insertSql, para);
-
-
-                string sqlStock = "SELECT fQuantity FROM furniture WHERE fID = @fid;";
-                MySqlParameter[] Stock = {
-                        new MySqlParameter("@fid",item.fID),
-                    };
-              
-                int newStock = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlStock, Stock)) - item.fQuantity;
-                string updateStockSql = "UPDATE furniture SET fQuantity = @newStock WHERE fID = @fid;";
-                MySqlParameter[] UpdateStock = {
-                        new MySqlParameter("@newStock", newStock),
-                        new MySqlParameter("@fid",item.fID)
-                    };
-                
-                DbConnect.Execute(updateStockSql, UpdateStock);
             }
 
             ShoppingCart.Clear();
-
             MessageBox.Show($"Order successfully! Order Number：{newOrderId}");
 
             this.Close();
