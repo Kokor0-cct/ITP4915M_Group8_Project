@@ -117,11 +117,12 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(41, 27);
+            lblTitle.Font = new Font("Microsoft YaHei UI", 15F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            lblTitle.Location = new Point(51, 20);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(43, 17);
+            lblTitle.Size = new Size(234, 27);
             lblTitle.TabIndex = 8;
-            lblTitle.Text = "label4";
+            lblTitle.Text = "Tailor-made Furniture";
             // 
             // lblBack
             // 

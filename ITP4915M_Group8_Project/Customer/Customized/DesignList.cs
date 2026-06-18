@@ -30,11 +30,12 @@ namespace ITP4915M_Group8_Project.Customer.Customized
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM customfurniture WHERE cUserID = @cUserID AND cfState = @cfState";
+            string sql = "SELECT * FROM customfurniture WHERE cUserID = @cUserID AND (cfState = @cfState OR cfState = @cfState2)";
             string cUserID = UserSession.CustomerId;
             MySqlParameter[] parameters = {
                 new MySqlParameter("@cUserID", cUserID),
-                new MySqlParameter("@cfState", "Pending approval")
+                new MySqlParameter("@cfState", "Pending approval"),
+                new MySqlParameter("@cfState2", "Design completed")
             };
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvfInventoryControl.DataSource = dt;
@@ -147,6 +148,39 @@ namespace ITP4915M_Group8_Project.Customer.Customized
         private void btnfRefresh_Click(object sender, EventArgs e)
         {
             LoadDataToGridView();
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dgvfInventoryControl_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnBuy_Click(object sender, EventArgs e)
+        {
+            if (currentCFid == "0")
+            {
+                MessageBox.Show("Please select a row to Buy！");
+                return;
+            }
+            if (numBuy.Value <= 0)
+            {
+                MessageBox.Show("Please enter a valid purchase quantity.");
+                return;
+            }
+            decimal price =  Convert.ToDecimal(txtFurniturePrice.Text);
+            string name = txtFurnitureName.Text.ToString();
+            cf_bill from = new cf_bill(currentCFid, numBuy.Value, price, name);
+            from.ShowDialog();
+
+
+
+
+
         }
     }
 }

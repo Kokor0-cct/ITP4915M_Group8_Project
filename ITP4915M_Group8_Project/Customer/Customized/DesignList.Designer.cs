@@ -46,7 +46,11 @@
             dgvfInventoryControl = new DataGridView();
             lblInventoryFurnitureTitle = new Label();
             lblback = new Label();
+            btnBuy = new Button();
+            numBuy = new NumericUpDown();
+            lblQty = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numBuy).BeginInit();
             SuspendLayout();
             // 
             // llBack
@@ -58,6 +62,7 @@
             llBack.TabIndex = 89;
             llBack.TabStop = true;
             llBack.Text = "< Back";
+            llBack.LinkClicked += llBack_LinkClicked;
             // 
             // btnfRefresh
             // 
@@ -189,6 +194,7 @@
             dgvfInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvfInventoryControl.Size = new Size(664, 169);
             dgvfInventoryControl.TabIndex = 70;
+            dgvfInventoryControl.CellContentClick += dgvfInventoryControl_CellContentClick;
             dgvfInventoryControl.SelectionChanged += dgvfInventoryControl_SelectionChanged;
             // 
             // lblInventoryFurnitureTitle
@@ -209,11 +215,41 @@
             lblback.Size = new Size(684, 136);
             lblback.TabIndex = 85;
             // 
+            // btnBuy
+            // 
+            btnBuy.Location = new Point(337, 411);
+            btnBuy.Name = "btnBuy";
+            btnBuy.Size = new Size(131, 27);
+            btnBuy.TabIndex = 90;
+            btnBuy.Text = "Buy Product";
+            btnBuy.UseVisualStyleBackColor = true;
+            btnBuy.Click += btnBuy_Click;
+            // 
+            // numBuy
+            // 
+            numBuy.Location = new Point(263, 414);
+            numBuy.Maximum = new decimal(new int[] { 1410065407, 2, 0, 0 });
+            numBuy.Name = "numBuy";
+            numBuy.Size = new Size(68, 23);
+            numBuy.TabIndex = 91;
+            // 
+            // lblQty
+            // 
+            lblQty.AutoSize = true;
+            lblQty.Location = new Point(194, 416);
+            lblQty.Name = "lblQty";
+            lblQty.Size = new Size(63, 17);
+            lblQty.TabIndex = 92;
+            lblQty.Text = "Quantity :";
+            // 
             // DesignList
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblQty);
+            Controls.Add(numBuy);
+            Controls.Add(btnBuy);
             Controls.Add(llBack);
             Controls.Add(btnfRefresh);
             Controls.Add(btnNotAccepted);
@@ -235,6 +271,7 @@
             Name = "DesignList";
             Text = "DesignList";
             ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numBuy).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -263,5 +300,8 @@
         private Label lblfSearch;
         private Label lblInventoryFurnitureTitle;
         private Label lblback;
+        private Button btnBuy;
+        private NumericUpDown numBuy;
+        private Label lblQty;
     }
 }

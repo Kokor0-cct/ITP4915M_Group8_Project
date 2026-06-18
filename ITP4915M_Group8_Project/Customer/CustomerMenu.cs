@@ -40,5 +40,12 @@ namespace ITP4915M_Group8_Project.Customer
             customized_Menu.ShowDialog();
 
         }
+
+        private void btnSignOut_Click(object sender, EventArgs e)
+        {
+            Login.CustomerLogIn logIn = new Login.CustomerLogIn();
+            logIn.Show();
+            this.Close();
+        }
     }
 }

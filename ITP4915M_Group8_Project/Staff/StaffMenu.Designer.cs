@@ -125,6 +125,7 @@
             btnDesign.TabIndex = 17;
             btnDesign.Text = "Upload Design";
             btnDesign.UseVisualStyleBackColor = true;
+            btnDesign.Click += btnDesign_Click;
             // 
             // btnProductionList
             // 

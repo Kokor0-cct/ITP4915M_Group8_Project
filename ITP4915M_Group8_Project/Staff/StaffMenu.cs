@@ -128,5 +128,11 @@ namespace ITP4915M_Group8_Project.Staff
             Production.FMaterialRequirementSheet Form = new Production.FMaterialRequirementSheet();
             Form.ShowDialog();
         }
+
+        private void btnDesign_Click(object sender, EventArgs e)
+        {
+            Design.UploadDesign Form = new Design.UploadDesign();
+            Form.ShowDialog();
+        }
     }
 }

@@ -35,6 +35,7 @@
             button4 = new Button();
             lblMsg = new Label();
             button6 = new Button();
+            btnSignOut = new Button();
             SuspendLayout();
             // 
             // lblback
@@ -102,11 +103,22 @@
             button6.Text = "Problem Feedback";
             button6.UseVisualStyleBackColor = true;
             // 
+            // btnSignOut
+            // 
+            btnSignOut.Location = new Point(460, 327);
+            btnSignOut.Name = "btnSignOut";
+            btnSignOut.Size = new Size(193, 64);
+            btnSignOut.TabIndex = 8;
+            btnSignOut.Text = "Sign Out";
+            btnSignOut.UseVisualStyleBackColor = true;
+            btnSignOut.Click += btnSignOut_Click;
+            // 
             // CustomerMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSignOut);
             Controls.Add(button6);
             Controls.Add(lblMsg);
             Controls.Add(button4);
@@ -129,5 +141,6 @@
         private Button button4;
         private Label lblMsg;
         private Button button6;
+        private Button btnSignOut;
     }
 }

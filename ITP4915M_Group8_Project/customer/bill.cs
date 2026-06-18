@@ -87,7 +87,7 @@ namespace ITP4915M_Group8_Project.customer
             }                   
             string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2))) FROM orders;";
             int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) +1;
-            string newOrderId = $"C{maxOrderid:D7}"; 
+            string newOrderId = $"O{maxOrderid:D7}"; 
 
 
             foreach (CartItem item in ShoppingCart.Items)
@@ -103,7 +103,7 @@ namespace ITP4915M_Group8_Project.customer
                         new MySqlParameter("@qty",item.fQuantity),
                         new MySqlParameter("@uid",cUserID),
                         new MySqlParameter("@subtotal",itemSubTotal),
-                        new MySqlParameter("@date",Createdate),
+                        new MySqlParameter("@date",deliverydate),
                         new MySqlParameter("@createdate",Createdate),
                         new MySqlParameter("@addr",address),
                         new MySqlParameter("@ship",shipType),
@@ -132,12 +132,10 @@ namespace ITP4915M_Group8_Project.customer
 
         private void rdbOrdinaryTransportat_CheckedChanged(object sender, EventArgs e)
         {
-            int shipType = 0;
             int shipPrice= 0;
 
             if (rdbOrdinaryTransportat.Checked == true)
             {
-                shipType = 1;
                 shipPrice = 50;
 
 
@@ -145,7 +143,6 @@ namespace ITP4915M_Group8_Project.customer
             }
             else if (rdbOrdinaryTransportat.Checked == false)
             {
-                shipType = 2;
                 shipPrice = 150;
 
             }
