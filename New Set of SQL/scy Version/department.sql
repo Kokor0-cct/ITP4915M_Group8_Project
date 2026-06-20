@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:16
+-- 生成日期： 2026-06-18 13:53:32
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- 表的结构 `department`
 --
 
-CREATE TABLE `status` (
-  `statusCode` char(4) NOT NULL,
-  `statusDesc` varchar(30) NOT NULL
+CREATE TABLE `department` (
+  `deptCode` char(3) NOT NULL,
+  `deptName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `status`
+-- 转存表中的数据 `department`
 --
 
-INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
-('ST01', 'Pending'),
-('ST02', 'In Production'),
-('ST03', 'In Transit'),
-('ST04', 'Delivered'),
-('ST05', 'Failed'),
-('ST06', 'Cancel'),
-('ST07', 'Accepted'),
-('ST08', 'Completed');
+INSERT INTO `department` (`deptCode`, `deptName`) VALUES
+('D01', 'Admin'),
+('D02', 'Sales'),
+('D03', 'Production'),
+('D04', 'Inventory'),
+('D05', 'Logistic'),
+('D06', 'Design');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `status`
+-- 表的索引 `department`
 --
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`statusCode`);
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`deptCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

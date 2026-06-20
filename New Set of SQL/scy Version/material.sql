@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:16
+-- 生成日期： 2026-06-18 13:53:51
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- 表的结构 `material`
 --
 
-CREATE TABLE `status` (
-  `statusCode` char(4) NOT NULL,
-  `statusDesc` varchar(30) NOT NULL
+CREATE TABLE `material` (
+  `materialCode` char(5) NOT NULL,
+  `mName` varchar(30) NOT NULL,
+  `mQuantity` int(10) NOT NULL DEFAULT 0,
+  `munit` varchar(18) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `status`
+-- 转存表中的数据 `material`
 --
 
-INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
-('ST01', 'Pending'),
-('ST02', 'In Production'),
-('ST03', 'In Transit'),
-('ST04', 'Delivered'),
-('ST05', 'Failed'),
-('ST06', 'Cancel'),
-('ST07', 'Accepted'),
-('ST08', 'Completed');
+INSERT INTO `material` (`materialCode`, `mName`, `mQuantity`, `munit`) VALUES
+('M0001', 'Oak Wood Plank', 500, 'pcs'),
+('M0002', 'Steel Tube', 200, 'meter'),
+('M0003', 'Fabric Cloth', 100, 'meter'),
+('M0004', 'High Density Foam', 50, 'block');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `status`
+-- 表的索引 `material`
 --
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`statusCode`);
+ALTER TABLE `material`
+  ADD PRIMARY KEY (`materialCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

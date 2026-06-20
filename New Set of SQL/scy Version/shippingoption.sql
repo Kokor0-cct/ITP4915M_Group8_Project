@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:16
+-- 生成日期： 2026-06-18 13:54:07
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- 表的结构 `shippingoption`
 --
 
-CREATE TABLE `status` (
-  `statusCode` char(4) NOT NULL,
-  `statusDesc` varchar(30) NOT NULL
+CREATE TABLE `shippingoption` (
+  `soId` char(4) NOT NULL,
+  `soName` varchar(20) NOT NULL,
+  `Charge` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `status`
+-- 转存表中的数据 `shippingoption`
 --
 
-INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
-('ST01', 'Pending'),
-('ST02', 'In Production'),
-('ST03', 'In Transit'),
-('ST04', 'Delivered'),
-('ST05', 'Failed'),
-('ST06', 'Cancel'),
-('ST07', 'Accepted'),
-('ST08', 'Completed');
+INSERT INTO `shippingoption` (`soId`, `soName`, `Charge`) VALUES
+('SO01', 'Ordinary Transport', 50.00),
+('SO02', 'Express Shipping', 100.00);
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `status`
+-- 表的索引 `shippingoption`
 --
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`statusCode`);
+ALTER TABLE `shippingoption`
+  ADD PRIMARY KEY (`soId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

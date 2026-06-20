@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:16
+-- 生成日期： 2026-06-18 13:53:04
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- 表的结构 `customers`
 --
 
-CREATE TABLE `status` (
-  `statusCode` char(4) NOT NULL,
-  `statusDesc` varchar(30) NOT NULL
+CREATE TABLE `customers` (
+  `cUserID` char(8) NOT NULL,
+  `cName` varchar(30) NOT NULL,
+  `cPhone` varchar(20) NOT NULL,
+  `cPassword` varchar(20) NOT NULL,
+  `cAddress` varchar(255) NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `cBudget` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `status`
+-- 转存表中的数据 `customers`
 --
 
-INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
-('ST01', 'Pending'),
-('ST02', 'In Production'),
-('ST03', 'In Transit'),
-('ST04', 'Delivered'),
-('ST05', 'Failed'),
-('ST06', 'Cancel'),
-('ST07', 'Accepted'),
-('ST08', 'Completed');
+INSERT INTO `customers` (`cUserID`, `cName`, `cPhone`, `cPassword`, `cAddress`, `company`, `cBudget`) VALUES
+('C0000001', 'taiman', '23456789', 'cust123', 'Flat A, 12/F, Sunshine Building, Mong Kok, Kowloon', 'ABC Trading Ltd.', 0),
+('C0000002', 'siuming', '98765432', 'cust456', 'Room 8, 3/F, Harbour View Court, Tsuen Wan, New Territories', NULL, 0);
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `status`
+-- 表的索引 `customers`
 --
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`statusCode`);
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`cUserID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
