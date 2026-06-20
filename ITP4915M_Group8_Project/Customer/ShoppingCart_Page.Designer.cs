@@ -46,9 +46,9 @@
             // dgvShoppingCart
             // 
             dgvShoppingCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvShoppingCart.Location = new Point(57, 88);
+            dgvShoppingCart.Location = new Point(57, 78);
             dgvShoppingCart.Name = "dgvShoppingCart";
-            dgvShoppingCart.Size = new Size(673, 178);
+            dgvShoppingCart.Size = new Size(673, 157);
             dgvShoppingCart.TabIndex = 0;
             dgvShoppingCart.SelectionChanged += dgvShoppingCart_SelectionChanged;
             // 
@@ -56,7 +56,7 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft YaHei UI", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblTitle.Location = new Point(57, 27);
+            lblTitle.Location = new Point(57, 24);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(273, 46);
             lblTitle.TabIndex = 1;
@@ -66,16 +66,16 @@
             // 
             lblBack.BackColor = Color.FromArgb(224, 224, 224);
             lblBack.BorderStyle = BorderStyle.Fixed3D;
-            lblBack.Location = new Point(57, 278);
+            lblBack.Location = new Point(57, 245);
             lblBack.Name = "lblBack";
-            lblBack.Size = new Size(673, 134);
+            lblBack.Size = new Size(673, 118);
             lblBack.TabIndex = 2;
             // 
             // btnCheckOut
             // 
-            btnCheckOut.Location = new Point(618, 415);
+            btnCheckOut.Location = new Point(618, 366);
             btnCheckOut.Name = "btnCheckOut";
-            btnCheckOut.Size = new Size(112, 23);
+            btnCheckOut.Size = new Size(112, 24);
             btnCheckOut.TabIndex = 3;
             btnCheckOut.Text = "Check Out";
             btnCheckOut.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             // 
             lblTotalPrice.AutoSize = true;
             lblTotalPrice.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblTotalPrice.Location = new Point(78, 349);
+            lblTotalPrice.Location = new Point(78, 308);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(59, 22);
             lblTotalPrice.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(134, 286);
+            txtName.Location = new Point(134, 252);
             txtName.Name = "txtName";
             txtName.Size = new Size(192, 23);
             txtName.TabIndex = 5;
@@ -101,26 +101,26 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(78, 289);
+            lblName.Location = new Point(78, 255);
             lblName.Name = "lblName";
-            lblName.Size = new Size(50, 17);
+            lblName.Size = new Size(45, 15);
             lblName.TabIndex = 7;
             lblName.Text = "Name :";
             // 
             // lblQty
             // 
             lblQty.AutoSize = true;
-            lblQty.Location = new Point(332, 289);
+            lblQty.Location = new Point(332, 255);
             lblQty.Name = "lblQty";
-            lblQty.Size = new Size(63, 17);
+            lblQty.Size = new Size(59, 15);
             lblQty.TabIndex = 8;
             lblQty.Text = "Quantity :";
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(547, 286);
+            btnUpdate.Location = new Point(564, 252);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.Size = new Size(75, 24);
             btnUpdate.TabIndex = 9;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
@@ -128,16 +128,16 @@
             // 
             // numQty
             // 
-            numQty.Location = new Point(401, 287);
+            numQty.Location = new Point(401, 253);
             numQty.Name = "numQty";
             numQty.Size = new Size(120, 23);
             numQty.TabIndex = 10;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(645, 289);
+            btnDelete.Location = new Point(645, 252);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
+            btnDelete.Size = new Size(75, 24);
             btnDelete.TabIndex = 11;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -145,9 +145,9 @@
             // 
             // ShoppingCart_Page
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 397);
             Controls.Add(btnDelete);
             Controls.Add(numQty);
             Controls.Add(btnUpdate);

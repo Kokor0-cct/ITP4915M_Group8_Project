@@ -271,7 +271,7 @@
             lblback.BorderStyle = BorderStyle.Fixed3D;
             lblback.Location = new Point(80, 293);
             lblback.Name = "lblback";
-            lblback.Size = new Size(597, 158);
+            lblback.Size = new Size(606, 158);
             lblback.TabIndex = 45;
             // 
             // llBack

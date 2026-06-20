@@ -68,6 +68,7 @@ namespace ITP4915M_Group8_Project.Customer
         {
             CheckOut from = new CheckOut();
             from.ShowDialog();
+            this.Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

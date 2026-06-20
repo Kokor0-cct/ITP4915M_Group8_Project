@@ -127,12 +127,28 @@ namespace ITP4915M_Group8_Project.Staff
         {
             Production.FMaterialRequirementSheet Form = new Production.FMaterialRequirementSheet();
             Form.ShowDialog();
+            this.Close();
         }
 
         private void btnDesign_Click(object sender, EventArgs e)
         {
             Design.UploadDesign Form = new Design.UploadDesign();
             Form.ShowDialog();
+            this.Close();
+        }
+
+        private void btnProductionList_Click(object sender, EventArgs e)
+        {
+            Production.Production_Control Form = new Production.Production_Control();
+            Form.Show();
+            this.Close();
+        }
+
+        private void btnInventoryMaterlalList_Click(object sender, EventArgs e)
+        {
+            Inventory.MaterialRequirementList Form = new Inventory.MaterialRequirementList();
+            Form.Show();
+            this.Close();
         }
     }
 }

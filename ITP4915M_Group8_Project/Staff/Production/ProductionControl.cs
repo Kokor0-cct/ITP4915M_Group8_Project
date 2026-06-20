@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace ITP4915M_Group8_Project.Staff.Logistic
+namespace ITP4915M_Group8_Project.Staff.Production
 {
-    public partial class Logistics_Control : Form
+    public partial class Production_Control : Form
     {
 
         private string currentOid = "0";
-        private Boolean showDelivered = false;
 
-        public Logistics_Control()
+        public Production_Control()
         {
             InitializeComponent();
             LoadDataToGridView();
@@ -30,22 +29,13 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST03' ORDER BY orderID"; // It only gets records with the status "In Transit"
+            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID"; // It only gets records with the status "In Transit"
 
 
             DataTable dt = DbConnect.Query(sql);
 
 
             dgvOrderControl.DataSource = dt;
-        }
-
-        private void chkDelivered_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDelivered.Checked == true)
-                showDelivered = true;
-            else
-                showDelivered = false;
-            btnRefresh_Click(sender, e);
         }
 
         //------search the textboxes text item in database------
@@ -55,8 +45,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             string keyword = txtSearch.Text.Trim();
 
 
-            string sql = (showDelivered == false) ? @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 'ST03' ORDER BY orderID" :
-                @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 'ST03' OR statusType = 'ST04') ORDER BY statusType, orderID";
+            string sql = @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 'ST02' ORDER BY orderID";
 
 
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
@@ -71,8 +60,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE statusType = 'ST03' ORDER BY orderID" :
-                "SELECT * FROM orders WHERE (statusType = 'ST03' OR statusType = 'ST04') ORDER BY statusType, orderID";
+            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID";
             DataTable dt = DbConnect.Query(sql);
             dgvOrderControl.DataSource = dt;
             txtSearch.Clear();
@@ -80,7 +68,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         }
         //------Refresh form to show database data ------
 
-        private void btnCompleteDelivery_Click(object sender, EventArgs e)
+        private void btnCompleteProduction_Click(object sender, EventArgs e)
         {
             if (currentOid == "0")
             {
@@ -88,12 +76,12 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to complete delivery for this order? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Are you sure you want to complete production for this order? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 'ST04' WHERE statusType = 'ST03' AND orderID = @orderID";
+            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE statusType = 'ST02' AND orderID = @orderID";
 
             MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
 
@@ -101,7 +89,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
             if (rows > 0)
             {
-                MessageBox.Show("Delivery completed！", "Update Successful");
+                MessageBox.Show("Production completed！", "Update Successful");
                 LoadDataToGridView();
                 ClearTextBox();
                 currentOid = "0";
@@ -160,22 +148,13 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
-
-            if (dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() != "ST04")
-                btnCompleteDelivery.Enabled = false;
-            else
-                btnCompleteDelivery.Enabled = true;
-
         }
 
 
         // Find the records with matching OrderID
         private void btnFindSimilar_Click(object sender, EventArgs e)
         {
-
-
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE orderID = @OID AND statusType = 'ST03' ORDER BY orderID" :
-                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 'ST03' OR statusType = 'ST04') ORDER BY statusType, orderID";
+            string sql = "SELECT * FROM orders WHERE orderID = @OID AND statusType = 'ST02' ORDER BY orderID";
             MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvOrderControl.DataSource = dt;

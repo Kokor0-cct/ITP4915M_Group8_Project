@@ -37,15 +37,16 @@
             lalMaterial = new Label();
             lalQuantity = new Label();
             cmbLevel = new ComboBox();
-            label1 = new Label();
             lblUrgencyLevel = new Label();
+            txtRequiredDate = new TextBox();
+            lblRequiredDate = new Label();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
             // 
             lalMaterialRequirementSheet.AutoSize = true;
             lalMaterialRequirementSheet.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterialRequirementSheet.Location = new Point(11, 20);
+            lalMaterialRequirementSheet.Location = new Point(11, 18);
             lalMaterialRequirementSheet.Margin = new Padding(2, 0, 2, 0);
             lalMaterialRequirementSheet.Name = "lalMaterialRequirementSheet";
             lalMaterialRequirementSheet.Size = new Size(377, 35);
@@ -54,10 +55,10 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(481, 350);
+            btnBack.Location = new Point(481, 309);
             btnBack.Margin = new Padding(2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(79, 26);
+            btnBack.Size = new Size(79, 23);
             btnBack.TabIndex = 10;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
@@ -65,10 +66,10 @@
             // 
             // btnSubmitRequest
             // 
-            btnSubmitRequest.Location = new Point(350, 350);
+            btnSubmitRequest.Location = new Point(365, 309);
             btnSubmitRequest.Margin = new Padding(2);
             btnSubmitRequest.Name = "btnSubmitRequest";
-            btnSubmitRequest.Size = new Size(112, 26);
+            btnSubmitRequest.Size = new Size(112, 23);
             btnSubmitRequest.TabIndex = 11;
             btnSubmitRequest.Text = "Submit Request";
             btnSubmitRequest.UseVisualStyleBackColor = true;
@@ -76,9 +77,9 @@
             // 
             // btnADDMaterialRequirement
             // 
-            btnADDMaterialRequirement.Location = new Point(12, 86);
+            btnADDMaterialRequirement.Location = new Point(12, 67);
             btnADDMaterialRequirement.Name = "btnADDMaterialRequirement";
-            btnADDMaterialRequirement.Size = new Size(111, 26);
+            btnADDMaterialRequirement.Size = new Size(111, 23);
             btnADDMaterialRequirement.TabIndex = 14;
             btnADDMaterialRequirement.Text = "Add  Material";
             btnADDMaterialRequirement.UseVisualStyleBackColor = true;
@@ -86,9 +87,9 @@
             // 
             // btndeleteMaterialRequirement
             // 
-            btndeleteMaterialRequirement.Location = new Point(144, 86);
+            btndeleteMaterialRequirement.Location = new Point(129, 67);
             btndeleteMaterialRequirement.Name = "btndeleteMaterialRequirement";
-            btndeleteMaterialRequirement.Size = new Size(111, 26);
+            btndeleteMaterialRequirement.Size = new Size(111, 23);
             btndeleteMaterialRequirement.TabIndex = 15;
             btndeleteMaterialRequirement.Text = "Delete Material";
             btndeleteMaterialRequirement.UseVisualStyleBackColor = true;
@@ -97,61 +98,72 @@
             // fpMaterialRequirement
             // 
             fpMaterialRequirement.AutoScroll = true;
-            fpMaterialRequirement.Location = new Point(12, 148);
+            fpMaterialRequirement.BorderStyle = BorderStyle.Fixed3D;
+            fpMaterialRequirement.Location = new Point(12, 125);
             fpMaterialRequirement.Name = "fpMaterialRequirement";
-            fpMaterialRequirement.Size = new Size(350, 197);
+            fpMaterialRequirement.Size = new Size(359, 179);
             fpMaterialRequirement.TabIndex = 16;
             // 
             // lalMaterial
             // 
             lalMaterial.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterial.Location = new Point(12, 119);
+            lalMaterial.Location = new Point(12, 99);
             lalMaterial.Name = "lalMaterial";
-            lalMaterial.Size = new Size(59, 26);
+            lalMaterial.Size = new Size(59, 23);
             lalMaterial.TabIndex = 0;
             lalMaterial.Text = "Material";
             // 
             // lalQuantity
             // 
             lalQuantity.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalQuantity.Location = new Point(260, 119);
+            lalQuantity.Location = new Point(261, 99);
             lalQuantity.Name = "lalQuantity";
-            lalQuantity.Size = new Size(56, 26);
+            lalQuantity.Size = new Size(62, 23);
             lalQuantity.TabIndex = 17;
             lalQuantity.Text = "Quantity";
             // 
             // cmbLevel
             // 
             cmbLevel.FormattingEnabled = true;
-            cmbLevel.Location = new Point(392, 148);
+            cmbLevel.Location = new Point(392, 131);
             cmbLevel.Name = "cmbLevel";
-            cmbLevel.Size = new Size(121, 25);
+            cmbLevel.Size = new Size(121, 23);
             cmbLevel.TabIndex = 18;
-            cmbLevel.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
-            // label1
-            // 
-            label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Location = new Point(7, 145);
-            label1.Name = "label1";
-            label1.Size = new Size(359, 203);
-            label1.TabIndex = 0;
             // 
             // lblUrgencyLevel
             // 
             lblUrgencyLevel.AutoSize = true;
             lblUrgencyLevel.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblUrgencyLevel.Location = new Point(392, 118);
+            lblUrgencyLevel.Location = new Point(392, 111);
             lblUrgencyLevel.Name = "lblUrgencyLevel";
             lblUrgencyLevel.Size = new Size(94, 17);
             lblUrgencyLevel.TabIndex = 19;
             lblUrgencyLevel.Text = "Urgency Level";
             // 
+            // txtRequiredDate
+            // 
+            txtRequiredDate.Location = new Point(392, 183);
+            txtRequiredDate.Name = "txtRequiredDate";
+            txtRequiredDate.Size = new Size(121, 23);
+            txtRequiredDate.TabIndex = 20;
+            // 
+            // lblRequiredDate
+            // 
+            lblRequiredDate.AutoSize = true;
+            lblRequiredDate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            lblRequiredDate.Location = new Point(392, 163);
+            lblRequiredDate.Name = "lblRequiredDate";
+            lblRequiredDate.Size = new Size(96, 17);
+            lblRequiredDate.TabIndex = 21;
+            lblRequiredDate.Text = "Required Date";
+            // 
             // FMaterialRequirementSheet
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(595, 402);
+            ClientSize = new Size(595, 355);
+            Controls.Add(lblRequiredDate);
+            Controls.Add(txtRequiredDate);
             Controls.Add(lblUrgencyLevel);
             Controls.Add(cmbLevel);
             Controls.Add(lalQuantity);
@@ -162,7 +174,6 @@
             Controls.Add(btnSubmitRequest);
             Controls.Add(btnBack);
             Controls.Add(lalMaterialRequirementSheet);
-            Controls.Add(label1);
             Margin = new Padding(2);
             Name = "FMaterialRequirementSheet";
             Text = "Material Requirement Sheet";
@@ -181,7 +192,8 @@
         private Label lalMaterial;
         private Label lalQuantity;
         private ComboBox cmbLevel;
-        private Label label1;
         private Label lblUrgencyLevel;
+        private TextBox txtRequiredDate;
+        private Label lblRequiredDate;
     }
 }
