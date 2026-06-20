@@ -34,7 +34,7 @@ CREATE TABLE `orders` (
   `cUserID` char(8) NOT NULL,
   `oAmount` decimal(10,2) NOT NULL,
   `odeliverydate` date NOT NULL,
-  `oCreateDate` date NOT NULL,
+  `oCreateDate` date NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `odeliveryaddress` text NOT NULL,
   `shippingType` char(4) NOT NULL,
   `statusType` char(4) NOT NULL
