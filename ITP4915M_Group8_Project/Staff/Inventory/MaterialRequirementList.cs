@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace ITP4915M_Group8_Project.Staff.Inventory
 {
-    public partial class MaterialRequirementList: Form
+    public partial class MaterialRequirementList : Form
     {
 
         private string currentMRid = "0";
@@ -81,7 +81,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE materialrequest SET statusType = 'ST07' WHERE statusType = 'ST01' AND mrID = @mrID";
+            string sql = @"UPDATE materialrequest SET statusType = 'ST08' WHERE statusType = 'ST07' AND mrID = @mrID";
 
             MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
 
@@ -115,9 +115,16 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvMaterialRequestControl.CurrentRow.Selected = true;
-            if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
-                return;
+            //try
+            //{
+                dgvMaterialRequestControl.CurrentRow.Selected = true;
+                if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
+                    return;
+            //}catch(NullReferenceException ex)
+            //{
+                
+            //}
+            
 
             //Get mName from Material
             string sql = @"SELECT mName FROM material WHERE materialCode = @MID";
@@ -134,12 +141,22 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             currentMRid = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["mrID"].Value.ToString(); //Stores the selected orderID
             txtMRID.Text = currentMRid;                       //Material Request ID cell content
             txtFurniture.Text = materialName;                 //Material name ID cell content 
-            txtQuantity.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
-            txtUserID.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["sUserID"].Value.ToString();                //UserID cell content
-            txtCreationDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString();           //Amount cell content
-            txtRequiredDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["RequiredDate"].Value.ToString();    //Delivery Date cell content
-            txtUrgencyLevel.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["UrgencyLevel"].Value.ToString();      //Delivery Address cell content  
+            txtQuantity.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["mrQuantity"].Value.ToString();          //Quantity cell content
+            txtUserID.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["sUserID"].Value.ToString();               //UserID cell content
+            txtCreationDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString();      // cell content
+            txtRequiredDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["RequiredDate"].Value.ToString();    //RequiredDate cell content
+            txtUrgencyLevel.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["UrgencyLevel"].Value.ToString();    //Urgencylvl cell content  
             txtStatus.Text = statusName;             //Status Type cell content      
+
+            if (dgvMaterialRequestControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST01")
+                btnAccept.Enabled = true;
+            else
+                btnAccept.Enabled = false;
+
+            if (dgvMaterialRequestControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() != "ST07")
+                btnCompleteRequest.Enabled = false;
+            else
+                btnCompleteRequest.Enabled = true;
         }
 
 
@@ -157,6 +174,38 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             StaffMenu menu = new StaffMenu();
             menu.Show();
             this.Close();
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (currentMRid == "0")
+            {
+                MessageBox.Show("Please select a row to complete!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to ACCEPT the material request? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            string sql = @"UPDATE materialrequest SET statusType = 'ST07' WHERE statusType = 'ST01' AND mrID = @mrID";
+
+            MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
+
+            int rows = DbConnect.Execute(sql, parameters);
+
+            if (rows > 0)
+            {
+                MessageBox.Show("Material Request Accepted！", "Update Successful");
+                LoadDataToGridView();
+                ClearTextBox();
+                currentMRid = "0";
+            }
+            else
+            {
+                MessageBox.Show("Update failed！", "Update Unsuccessful");
+            }
         }
     }
 }

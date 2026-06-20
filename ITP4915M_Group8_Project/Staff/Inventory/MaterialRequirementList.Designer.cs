@@ -54,6 +54,7 @@
             lblStatusType = new Label();
             txtStatus = new TextBox();
             llBack = new LinkLabel();
+            btnAccept = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMaterialRequestControl).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -111,7 +112,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(753, 432);
+            btnRefresh.Location = new Point(616, 432);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 26);
             btnRefresh.TabIndex = 23;
@@ -309,11 +310,22 @@
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // btnAccept
+            // 
+            btnAccept.Location = new Point(753, 432);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(131, 26);
+            btnAccept.TabIndex = 68;
+            btnAccept.Text = "Accept";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
+            // 
             // MaterialRequirementList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(btnAccept);
             Controls.Add(llBack);
             Controls.Add(btnFindSimilar);
             Controls.Add(lblUser);
@@ -363,5 +375,6 @@
         private LinkLabel llBack;
         private TextBox txtStatus;
         private Label lblStatusType;
+        private Button btnAccept;
     }
 }
