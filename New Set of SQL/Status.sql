@@ -42,7 +42,8 @@ INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
 ('ST03', 'In Transit'),
 ('ST04', 'Delivered'),
 ('ST05', 'Failed'),
-('ST06', 'Cancel');
+('ST06', 'Cancel'),
+('ST07', 'Completed');
 
 --
 -- 转储表的索引
