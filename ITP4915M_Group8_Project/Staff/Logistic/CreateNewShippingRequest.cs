@@ -65,14 +65,16 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (cmbAddress.Text.Trim() != null)
+            try
             {
-                collectAddress = cmbAddress.Text.Trim();
-            }else if (cmbAddress.SelectedItem.ToString() != null)
-            {
-                collectAddress = cmbAddress.SelectedItem.ToString();
-            }
-            else
+                if (cmbAddress.Text.Trim() != "")
+                {
+                    collectAddress = cmbAddress.Text.Trim();
+                }else if (cmbAddress.SelectedItem.ToString() != "")
+                {
+                    collectAddress = cmbAddress.SelectedItem.ToString();
+                }
+            }catch(Exception ex)
             {
                 MessageBox.Show("Please enter or select a Shipping Address!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
