@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lblTitle = new Label();
-            dgvDeliveryControl = new DataGridView();
+            dgvLogisticsControl = new DataGridView();
             lblSearch = new Label();
             txtSearch = new TextBox();
             btnSearch = new Button();
@@ -59,7 +59,7 @@
             rbMaterial = new RadioButton();
             grpRadio = new GroupBox();
             rbAll = new RadioButton();
-            ((System.ComponentModel.ISupportInitialize)dgvDeliveryControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvLogisticsControl).BeginInit();
             groupBox1.SuspendLayout();
             grpRadio.SuspendLayout();
             SuspendLayout();
@@ -74,19 +74,19 @@
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Logistic Delivery Control";
             // 
-            // dgvDeliveryControl
+            // dgvLogisticsControl
             // 
-            dgvDeliveryControl.AllowUserToAddRows = false;
-            dgvDeliveryControl.AllowUserToDeleteRows = false;
-            dgvDeliveryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeliveryControl.Location = new Point(77, 93);
-            dgvDeliveryControl.MultiSelect = false;
-            dgvDeliveryControl.Name = "dgvDeliveryControl";
-            dgvDeliveryControl.ReadOnly = true;
-            dgvDeliveryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDeliveryControl.Size = new Size(944, 149);
-            dgvDeliveryControl.TabIndex = 3;
-            dgvDeliveryControl.CellClick += dgvOrderControl_CellClick;
+            dgvLogisticsControl.AllowUserToAddRows = false;
+            dgvLogisticsControl.AllowUserToDeleteRows = false;
+            dgvLogisticsControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLogisticsControl.Location = new Point(77, 93);
+            dgvLogisticsControl.MultiSelect = false;
+            dgvLogisticsControl.Name = "dgvLogisticsControl";
+            dgvLogisticsControl.ReadOnly = true;
+            dgvLogisticsControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLogisticsControl.Size = new Size(944, 149);
+            dgvLogisticsControl.TabIndex = 3;
+            dgvLogisticsControl.CellClick += dgvOrderControl_CellClick;
             // 
             // lblSearch
             // 
@@ -387,13 +387,13 @@
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(lblSearch);
-            Controls.Add(dgvDeliveryControl);
+            Controls.Add(dgvLogisticsControl);
             Controls.Add(lblTitle);
             Controls.Add(groupBox1);
             Controls.Add(grpRadio);
             Name = "Logistics_Control";
             Text = "Logistics Delivery Control";
-            ((System.ComponentModel.ISupportInitialize)dgvDeliveryControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvLogisticsControl).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             grpRadio.ResumeLayout(false);
@@ -405,7 +405,7 @@
         #endregion
 
         private Label lblTitle;
-        private DataGridView dgvDeliveryControl;
+        private DataGridView dgvLogisticsControl;
         private Label lblSearch;
         private TextBox txtSearch;
         private Button btnSearch;

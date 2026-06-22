@@ -37,7 +37,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             DataTable dt = DbConnect.Query(sql);
 
 
-            dgvDeliveryControl.DataSource = dt;
+            dgvLogisticsControl.DataSource = dt;
         }
 
         //------search the textboxes text item in database------
@@ -56,7 +56,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
             DataTable dt = DbConnect.Query(sql, parameters);
 
-            dgvDeliveryControl.DataSource = dt;
+            dgvLogisticsControl.DataSource = dt;
         }
 
         //------Refresh form to show database data ------
@@ -65,7 +65,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         {
             string sql = rbCheck("SELECT * FROM shippingrequest ");
             DataTable dt = DbConnect.Query(sql);
-            dgvDeliveryControl.DataSource = dt;
+            dgvLogisticsControl.DataSource = dt;
             txtSearch.Clear();
             ClearTextBox();
         }
@@ -154,20 +154,25 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvDeliveryControl.CurrentRow.Selected = true;
-            if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
-                return;
+            try { 
+                dgvLogisticsControl.CurrentRow.Selected = true;
+                if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
+                    return;
+            }catch(Exception ex)
+            {
+                return; //Clicked on the fields but the table is empty
+            }
 
             //Get statusDesc from status
             string sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSCODE";
-            MySqlParameter parameters = new MySqlParameter("@STATUSCODE", dgvDeliveryControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
+            MySqlParameter parameters = new MySqlParameter("@STATUSCODE", dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
             DataTable dt = DbConnect.Query(sql, parameters);
             String statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
 
-            currentsrid = dgvDeliveryControl.Rows[e.RowIndex].Cells["SRID"].Value.ToString(); 
+            currentsrid = dgvLogisticsControl.Rows[e.RowIndex].Cells["SRID"].Value.ToString(); 
             txtSRID.Text = currentsrid;                       
 
-            currentItemid = dgvDeliveryControl.Rows[e.RowIndex].Cells["IID"].Value.ToString();
+            currentItemid = dgvLogisticsControl.Rows[e.RowIndex].Cells["IID"].Value.ToString();
             txtIID.Text = currentItemid;
             if (currentItemid.StartsWith("O"))
                 txtItemType.Text = "Order";
@@ -178,17 +183,17 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             else
                 txtItemType.Text = "Invalid Data Type";
 
-            txtCreatedDate.Text = dgvDeliveryControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString().Split(' ')[0];               //Created Date cell content
-            txtDeliveryDate.Text = dgvDeliveryControl.Rows[e.RowIndex].Cells["deliveryDate"].Value.ToString().Split(' ')[0];            //Delivery Date cell content
-            txtCollectionAddress.Text = dgvDeliveryControl.Rows[e.RowIndex].Cells["collectAddress"].Value.ToString();     //Collection Address cell content 
-            txtDeliveryAddress.Text = dgvDeliveryControl.Rows[e.RowIndex].Cells["deliveryAddress"].Value.ToString();      //Delivery Address cell content 
+            txtCreatedDate.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString().Split(' ')[0];               //Created Date cell content
+            txtDeliveryDate.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["deliveryDate"].Value.ToString().Split(' ')[0];            //Delivery Date cell content
+            txtCollectionAddress.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["collectAddress"].Value.ToString();     //Collection Address cell content 
+            txtDeliveryAddress.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["deliveryAddress"].Value.ToString();      //Delivery Address cell content 
             txtStatus.Text = statusName;             //Status Type cell content      
 
-            if (dgvDeliveryControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST06")
+            if (dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST06")
                 btnCompleteDelivery.Enabled = true;
             else
                 btnCompleteDelivery.Enabled = false;
-            if (dgvDeliveryControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST05")
+            if (dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST05")
                 btnAccept.Enabled = true;
             else
                 btnAccept.Enabled = false;

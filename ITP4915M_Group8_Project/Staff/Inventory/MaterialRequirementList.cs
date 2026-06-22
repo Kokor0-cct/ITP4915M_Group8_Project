@@ -156,15 +156,15 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 dgvMaterialRequestControl.CurrentRow.Selected = true;
                 if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
                     return;
-            //}catch(NullReferenceException ex)
-            //{
-                
-            //}
+            }catch(Exception ex)
+            {
+                return; //Clicked on the fields but the table is empty
+            }
 
             //Get mName from Material
             string sql = @"SELECT mName FROM material WHERE materialCode = @MID";

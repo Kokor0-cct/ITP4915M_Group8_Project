@@ -191,9 +191,14 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvOrderControl.CurrentRow.Selected = true;
-            if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
-                return;
+            try {
+                dgvOrderControl.CurrentRow.Selected = true;
+                if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
+                    return;
+            }catch(Exception ex)
+            {
+                return; //Clicked on the fields but the table is empty
+            }
 
             //Get fName from furniture
             string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
