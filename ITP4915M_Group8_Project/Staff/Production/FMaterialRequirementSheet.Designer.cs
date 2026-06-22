@@ -40,6 +40,8 @@
             lblUrgencyLevel = new Label();
             txtRequiredDate = new TextBox();
             lblRequiredDate = new Label();
+            lblDeliveryAddress = new Label();
+            cmbProductionSite = new ComboBox();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
@@ -124,6 +126,7 @@
             // 
             // cmbLevel
             // 
+            cmbLevel.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbLevel.FormattingEnabled = true;
             cmbLevel.Location = new Point(392, 131);
             cmbLevel.Name = "cmbLevel";
@@ -157,11 +160,31 @@
             lblRequiredDate.TabIndex = 21;
             lblRequiredDate.Text = "Required Date";
             // 
+            // lblDeliveryAddress
+            // 
+            lblDeliveryAddress.AutoSize = true;
+            lblDeliveryAddress.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            lblDeliveryAddress.Location = new Point(392, 218);
+            lblDeliveryAddress.Name = "lblDeliveryAddress";
+            lblDeliveryAddress.Size = new Size(112, 17);
+            lblDeliveryAddress.TabIndex = 22;
+            lblDeliveryAddress.Text = "Delivery Address";
+            // 
+            // cmbProductionSite
+            // 
+            cmbProductionSite.FormattingEnabled = true;
+            cmbProductionSite.Location = new Point(392, 238);
+            cmbProductionSite.Name = "cmbProductionSite";
+            cmbProductionSite.Size = new Size(121, 23);
+            cmbProductionSite.TabIndex = 23;
+            // 
             // FMaterialRequirementSheet
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(595, 355);
+            Controls.Add(cmbProductionSite);
+            Controls.Add(lblDeliveryAddress);
             Controls.Add(lblRequiredDate);
             Controls.Add(txtRequiredDate);
             Controls.Add(lblUrgencyLevel);
@@ -195,5 +218,7 @@
         private Label lblUrgencyLevel;
         private TextBox txtRequiredDate;
         private Label lblRequiredDate;
+        private Label lblDeliveryAddress;
+        private ComboBox cmbProductionSite;
     }
 }

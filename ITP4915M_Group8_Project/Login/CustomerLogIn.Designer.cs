@@ -65,6 +65,7 @@
             // 
             // cboBoxIdentity
             // 
+            cboBoxIdentity.DropDownStyle = ComboBoxStyle.DropDownList;
             cboBoxIdentity.FormattingEnabled = true;
             cboBoxIdentity.Location = new Point(366, 123);
             cboBoxIdentity.Margin = new Padding(2);
@@ -97,7 +98,7 @@
             // 
             // textBox_UserName
             // 
-            textBox_UserName.Font = new Font("新細明體", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            textBox_UserName.Font = new Font("PMingLiU", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             textBox_UserName.Location = new Point(241, 252);
             textBox_UserName.Margin = new Padding(2);
             textBox_UserName.Name = "textBox_UserName";
@@ -128,7 +129,7 @@
             // 
             // textBox_password
             // 
-            textBox_password.Font = new Font("新細明體", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            textBox_password.Font = new Font("PMingLiU", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             textBox_password.Location = new Point(241, 374);
             textBox_password.Margin = new Padding(2);
             textBox_password.Name = "textBox_password";
@@ -153,7 +154,7 @@
             // llblRegister
             // 
             llblRegister.AutoSize = true;
-            llblRegister.Font = new Font("新細明體", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            llblRegister.Font = new Font("PMingLiU", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
             llblRegister.Location = new Point(632, 543);
             llblRegister.Margin = new Padding(2, 0, 2, 0);
             llblRegister.Name = "llblRegister";

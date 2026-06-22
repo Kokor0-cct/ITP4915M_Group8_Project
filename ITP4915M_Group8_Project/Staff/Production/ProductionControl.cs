@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID"; // It only gets records with the status "In Transit"
+            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY orderID"; // It only gets records with the status "In Transit"
 
 
             DataTable dt = DbConnect.Query(sql);
@@ -45,7 +46,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
             string keyword = txtSearch.Text.Trim();
 
 
-            string sql = @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 'ST02' ORDER BY orderID";
+            string sql = @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04') ORDER BY orderID";
 
 
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
@@ -60,7 +61,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID";
+            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY orderID";
             DataTable dt = DbConnect.Query(sql);
             dgvOrderControl.DataSource = dt;
             txtSearch.Clear();
@@ -68,6 +69,37 @@ namespace ITP4915M_Group8_Project.Staff.Production
         }
         //------Refresh form to show database data ------
 
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (currentOid == "0")
+            {
+                MessageBox.Show("Please select a row to complete!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to accept this order for production? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE  orderId = @OID";
+
+            MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
+
+            int rows = DbConnect.Execute(sql, parameters);
+
+            if (rows > 0)
+            {
+                MessageBox.Show("Order Accepted！", "Update Successful");
+                LoadDataToGridView();
+                ClearTextBox();
+                currentOid = "0";
+            }
+            else
+            {
+                MessageBox.Show("Update failed！", "Update Unsuccessful");
+            }
+        }
         private void btnCompleteProduction_Click(object sender, EventArgs e)
         {
             if (currentOid == "0")
@@ -81,7 +113,50 @@ namespace ITP4915M_Group8_Project.Staff.Production
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE statusType = 'ST02' AND orderID = @orderID";
+            string sql = @"UPDATE orders SET statusType = 'ST04' WHERE statusType = 'ST03' AND orderID = @orderID";
+
+            MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
+
+            int rows = DbConnect.Execute(sql, parameters);
+
+            if (rows > 0)
+            {
+                MessageBox.Show("Production completed！", "Update Successful");
+                LoadDataToGridView();
+                ClearTextBox();
+                currentOid = "0";
+            }
+            else
+            {
+                MessageBox.Show("Update failed！", "Update Unsuccessful");
+            }
+        }
+
+        private void btnReadyForDelivery_Click(object sender, EventArgs e)
+        {
+            if (currentOid == "0")
+            {
+                MessageBox.Show("Please select a row to complete!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Is the order ready for delivery? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            DateTime parsedDate = DateTime.ParseExact(txtDeliveryDate.Text.Trim(), "M/dd/yyyy", CultureInfo.InvariantCulture); // Format the date
+            Staff.Logistic.CreateNewShippingRequest Form = new Staff.Logistic.CreateNewShippingRequest();
+            Form.collectShippingDetails(currentOid, parsedDate, txtAddress.Text.Trim());
+            Form.ShowDialog();
+            if (Form.inserted == false)
+            {
+                MessageBox.Show("Collection Address not inserted, update order cancelled", "Collection Address not inserted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+           
+
+            string sql = @"UPDATE orders SET statusType = 'ST05' WHERE statusType = 'ST04' AND orderID = @orderID";
 
             MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
 
@@ -144,7 +219,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
             txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
-            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
+            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
@@ -162,9 +237,9 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StaffMenu menu = new StaffMenu();
-            menu.Show();
             this.Close();
         }
+
+        
     }
 }

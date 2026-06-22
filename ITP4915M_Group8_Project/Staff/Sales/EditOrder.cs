@@ -1,4 +1,5 @@
 ﻿using ITP4915M_Group8_Project.Staff.Inventory;
+using ITP4915M_Group8_Project.Staff.Logistic;
 using MySqlConnector;
 using System.Data;
 using System.Globalization;
@@ -19,6 +20,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtDeliveryDate.Enabled = false;
             txtAddress.Enabled = false;
             cbShipping.Enabled = false;
+            cmbStatus.Enabled = false;
         }
 
         private void LoadDataToGridView()
@@ -37,8 +39,6 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StaffMenu menu = new StaffMenu();
-            menu.Show();
             this.Close();
         }
 
@@ -83,7 +83,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             cbShipping.SelectedIndex = ConvertSOIndex((string) dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value);   //Shipping Type cell content    
-            txtStatus.Text = statusName;             //Status Type cell content      
+            cmbStatus.SelectedIndex = ConvertStatusIndex((string)dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value);  
             
             //---Activate the buttons for editing---
             btnUpdate.Enabled = true;
@@ -91,6 +91,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtDeliveryDate.Enabled = true;
             txtAddress.Enabled = true;
             cbShipping.Enabled = true;
+            cmbStatus.Enabled = true;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -108,13 +109,16 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             int old_quantity = (int) main_dt.Rows[0]["Quantity"];
             String old_date = main_dt.Rows[0]["odeliverydate"].ToString().Split(' ')[0];
             String old_address = main_dt.Rows[0]["odeliveryaddress"].ToString();
-            String old_shippingType_typeID = (string) main_dt.Rows[0]["shippingType"]; // 'ST**'
+            String old_shippingType_typeID = (string) main_dt.Rows[0]["shippingType"]; // 'SO**'
+            String old_statusType_typeID = (string)main_dt.Rows[0]["statusType"]; // 'ST**'
 
             int new_quantity = (int) nudQuantity.Value;
             String new_date = txtDeliveryDate.Text.Trim();
             String new_address = txtAddress.Text.Trim();
             int new_shippingType_index = cbShipping.SelectedIndex;  // Selected index of shipping type
             String new_shippingType_String = cbShipping.SelectedItem.ToString();
+            int new_statusType_index = cmbStatus.SelectedIndex;  // Selected index of status type
+            String new_statusType_String = cmbStatus.SelectedItem.ToString();
 
             //---Field Empty Handler---
             if (new_quantity == 0)
@@ -158,10 +162,14 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             {
                 MessageBox.Show("Please select a Shipping Type!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }else if (new_statusType_index == 0)
+            {
+                MessageBox.Show("Please select a Status Type!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             //---No changes were made---
-            if (new_quantity == old_quantity && new_date == old_date && new_address == old_address && new_shippingType_index == ConvertSOIndex(old_shippingType_typeID))
+            if (new_quantity == old_quantity && new_date == old_date && new_address == old_address && new_shippingType_index == ConvertSOIndex(old_shippingType_typeID) && new_statusType_index == ConvertStatusIndex(old_statusType_typeID))
             {
                 MessageBox.Show("No changes were made!", "No changes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -206,12 +214,34 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
                     confirmationMessage += "\nShipping Option: " + SOName + " --> " + new_shippingType_String;
                 }
+                if (new_statusType_index != ConvertStatusIndex(old_statusType_typeID))
+                {
+                    String status_sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSID";
+                    MySqlParameter status_parameter = new MySqlParameter("@STATUSID", old_statusType_typeID);
+                    DataTable status_dt = DbConnect.Query(status_sql, status_parameter);
+                    String STName = (string)status_dt.Rows[0]["statusDesc"];
+
+                    confirmationMessage += "\nStatus Type: " + STName + " --> " + new_statusType_String;
+                }
                     
 
                 DialogResult dialogResult = MessageBox.Show(confirmationMessage, "Update Record?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.No)
                     return;
 
+                if (new_statusType_index == 3)
+                {
+                    DateTime parsedDate = DateTime.ParseExact(new_date, "M/dd/yyyy", CultureInfo.InvariantCulture); // Format the date
+                    Staff.Logistic.CreateNewShippingRequest Form = new Staff.Logistic.CreateNewShippingRequest();
+                    Form.collectShippingDetails(currentOid, parsedDate, new_address);
+                    Form.ShowDialog();
+                    if (Form.inserted == false)
+                    {
+                        MessageBox.Show("Collection Address not inserted, update order cancelled", "Collection Address not inserted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                
                 // ---Updating Quantity---
                 if (new_quantity != old_quantity)
                 {                     
@@ -263,6 +293,21 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                     tool_dt = DbConnect.Query(tool_sql, Sparameters);
                 }
 
+                // ---Updating Status Type---
+                if (new_statusType_index != ConvertStatusIndex(old_shippingType_typeID))
+                {
+                    // Extract the soId from shippingOption
+                    String status_sql = @"SELECT statusCode FROM status WHERE statusDesc = @STATUS";
+                    MySqlParameter status_parameter = new MySqlParameter("@STATUS", new_statusType_String);
+                    DataTable status_dt = DbConnect.Query(status_sql, status_parameter);
+                    String STtype = (string) status_dt.Rows[0]["statusCode"];
+
+                    tool_sql = @"UPDATE orders SET statusType = @TYPE WHERE orderID = @OID";
+                    MySqlParameter[] Sparameters = { new MySqlParameter("@TYPE", STtype), new MySqlParameter("@OID", currentOid) };
+                    tool_dt = DbConnect.Query(tool_sql, Sparameters);
+                }
+
+
                 MessageBox.Show("Update Successful!", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnRefresh_Click(sender, e);
             }
@@ -294,6 +339,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtDeliveryDate.Enabled = false;
             txtAddress.Enabled = false;
             cbShipping.Enabled = false;
+            cmbStatus.Enabled = false;
         }
 
         // ---------Methods---------
@@ -308,7 +354,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtDeliveryDate.Clear();
             txtAddress.Clear();
             cbShipping.SelectedIndex = 0;
-            txtStatus.Clear();
+            cmbStatus.SelectedIndex = 0;
         }
 
         private int ConvertSOIndex(String shippingOptionString)
@@ -319,6 +365,23 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             else if (shippingOptionString.Equals("SO02"))
                 shippingIndex = 2;
             return shippingIndex;
+        }
+
+        private int ConvertStatusIndex(String StatusString)
+        {
+            int statusIndex = 0;
+            if (StatusString.Equals("ST01"))
+                statusIndex = 1;
+            else if (StatusString.Equals("ST02"))
+                statusIndex = 2;
+            else if (StatusString.Equals("ST05"))
+                statusIndex = 3;
+            return statusIndex;
+        }
+
+        private void CreateShippingRequest()
+        {
+
         }
     }
 }

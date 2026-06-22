@@ -19,6 +19,11 @@ namespace ITP4915M_Group8_Project.Staff.Production
             cmbLevel.Items.Add("Medium");
             cmbLevel.Items.Add("High");
             cmbLevel.SelectedIndex = 0;
+            cmbProductionSite.Items.Clear();
+            cmbProductionSite.Items.Add("Production Site 1");
+            cmbProductionSite.Items.Add("Production Site 2");
+            cmbProductionSite.Items.Add("Production Site 3");
+            cmbProductionSite.SelectedIndex = 0;
         }
 
 
@@ -97,7 +102,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
                 string newfID = $"MR{maxfID:D8}";
                 DateTime parsedDate = DateTime.ParseExact(Rdate, "M/dd/yyyy", CultureInfo.InvariantCulture);
 
-                string insertSql = @"INSERT INTO materialrequest(mrID, sUserID, materialCode, mrQuantity, UrgencyLevel, RequiredDate) VALUES(@mrID, @sUserID, @materialCode, @mrQuantity, @UrgencyLevel, @RequiredDate)";
+                string insertSql = @"INSERT INTO materialrequest(mrID, sUserID, materialCode, mrQuantity, UrgencyLevel, RequiredDate, mrdeliveryaddress) VALUES(@mrID, @sUserID, @materialCode, @mrQuantity, @UrgencyLevel, @RequiredDate, @MRDA)";
 
                 foreach (var sheet in allSheets)
                 {
@@ -107,16 +112,18 @@ namespace ITP4915M_Group8_Project.Staff.Production
                     string mCode = dt.Rows[0]["materialCode"].ToString();
                     int qty = sheet.RequireQuantity;
                     string Level = cmbLevel.SelectedItem.ToString();
+                    string deliveryAddress = cmbProductionSite.SelectedItem.ToString();
                     string sUserID = UserSession.StaffId;
 
 
                     MySqlParameter[] parameters = {
                     new MySqlParameter("@mrID", newfID),
-                    new MySqlParameter("@sUserID", UserSession.StaffId),
+                    new MySqlParameter("@sUserID", sUserID),
                     new MySqlParameter("@materialCode",mCode),
                     new MySqlParameter("@mrQuantity", qty),
                     new MySqlParameter("@UrgencyLevel", Level),
-                    new MySqlParameter("@RequiredDate", parsedDate) };
+                    new MySqlParameter("@RequiredDate", parsedDate), 
+                    new MySqlParameter("@MRDA", deliveryAddress)};
                     
                     int rows = DbConnect.Execute(insertSql, parameters);
 
@@ -136,8 +143,6 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            StaffMenu menu = new StaffMenu();
-            menu.Show();
             this.Close();
         }
     }

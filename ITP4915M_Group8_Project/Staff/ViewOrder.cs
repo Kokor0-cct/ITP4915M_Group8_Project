@@ -38,8 +38,6 @@ namespace ITP4915M_Group8_Project.Staff
         // ---------UI Interaction---------
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StaffMenu form = new StaffMenu();
-            form.Show();
             this.Close();
         }
 
@@ -131,7 +129,7 @@ namespace ITP4915M_Group8_Project.Staff
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
             txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
-            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
+            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      

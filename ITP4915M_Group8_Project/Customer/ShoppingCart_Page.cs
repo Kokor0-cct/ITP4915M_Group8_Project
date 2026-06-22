@@ -66,9 +66,14 @@ namespace ITP4915M_Group8_Project.Customer
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            CheckOut from = new CheckOut();
-            from.ShowDialog();
-            this.Close();
+            if (lblTotalPrice.Text.Split(" ")[2] == "$0.00")
+                MessageBox.Show("No item in cart!");
+            else
+            {
+                CheckOut from = new CheckOut();
+                from.ShowDialog();
+            }
+                
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

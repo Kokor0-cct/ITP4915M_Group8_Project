@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,7 +68,37 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             ClearTextBox();
         }
         //------Refresh form to show database data ------
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (currentMRid == "0")
+            {
+                MessageBox.Show("Please select a row to complete!");
+                return;
+            }
 
+            DialogResult result = MessageBox.Show("Are you sure you want to ACCEPT the material request? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            string sql = @"UPDATE materialrequest SET statusType = 'ST02' WHERE statusType = 'ST01' AND mrID = @mrID";
+
+            MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
+
+            int rows = DbConnect.Execute(sql, parameters);
+
+            if (rows > 0)
+            {
+                MessageBox.Show("Material Request Accepted！", "Update Successful");
+                LoadDataToGridView();
+                ClearTextBox();
+                currentMRid = "0";
+            }
+            else
+            {
+                MessageBox.Show("Update failed！", "Update Unsuccessful");
+            }
+        }
         private void btnCompleteProduction_Click(object sender, EventArgs e)
         {
             if (currentMRid == "0")
@@ -81,7 +112,17 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE materialrequest SET statusType = 'ST08' WHERE statusType = 'ST07' AND mrID = @mrID";
+            DateTime parsedDate = DateTime.ParseExact(txtRequiredDate.Text.Trim().Split(" ")[0], "M/dd/yyyy", CultureInfo.InvariantCulture); // Format the date
+            Staff.Logistic.CreateNewShippingRequest Form = new Staff.Logistic.CreateNewShippingRequest();
+            Form.collectShippingDetails(currentMRid, parsedDate, txtAddress.Text.Trim());
+            Form.ShowDialog();
+            if (Form.inserted == false)
+            {
+                MessageBox.Show("Collection Address not inserted, update order cancelled", "Collection Address not inserted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string sql = @"UPDATE materialrequest SET statusType = 'ST05' WHERE statusType = 'ST02' AND mrID = @mrID";
 
             MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
 
@@ -124,7 +165,6 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             //{
                 
             //}
-            
 
             //Get mName from Material
             string sql = @"SELECT mName FROM material WHERE materialCode = @MID";
@@ -143,8 +183,9 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             txtFurniture.Text = materialName;                 //Material name ID cell content 
             txtQuantity.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["mrQuantity"].Value.ToString();          //Quantity cell content
             txtUserID.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["sUserID"].Value.ToString();               //UserID cell content
-            txtCreationDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString();      // cell content
+            txtCreationDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString();      //CreateDate cell content
             txtRequiredDate.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["RequiredDate"].Value.ToString();    //RequiredDate cell content
+            txtAddress.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["mrdeliveryAddress"].Value.ToString();
             txtUrgencyLevel.Text = dgvMaterialRequestControl.Rows[e.RowIndex].Cells["UrgencyLevel"].Value.ToString();    //Urgencylvl cell content  
             txtStatus.Text = statusName;             //Status Type cell content      
 
@@ -153,7 +194,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             else
                 btnAccept.Enabled = false;
 
-            if (dgvMaterialRequestControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() != "ST07")
+            if (dgvMaterialRequestControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() != "ST02")
                 btnCompleteRequest.Enabled = false;
             else
                 btnCompleteRequest.Enabled = true;
@@ -171,41 +212,9 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StaffMenu menu = new StaffMenu();
-            menu.Show();
             this.Close();
         }
 
-        private void btnAccept_Click(object sender, EventArgs e)
-        {
-            if (currentMRid == "0")
-            {
-                MessageBox.Show("Please select a row to complete!");
-                return;
-            }
-
-            DialogResult result = MessageBox.Show("Are you sure you want to ACCEPT the material request? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result != DialogResult.Yes)
-                return;
-
-            string sql = @"UPDATE materialrequest SET statusType = 'ST07' WHERE statusType = 'ST01' AND mrID = @mrID";
-
-            MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
-
-            int rows = DbConnect.Execute(sql, parameters);
-
-            if (rows > 0)
-            {
-                MessageBox.Show("Material Request Accepted！", "Update Successful");
-                LoadDataToGridView();
-                ClearTextBox();
-                currentMRid = "0";
-            }
-            else
-            {
-                MessageBox.Show("Update failed！", "Update Unsuccessful");
-            }
-        }
+        
     }
 }

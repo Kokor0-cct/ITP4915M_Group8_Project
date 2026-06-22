@@ -51,6 +51,8 @@
             txtRequiredDate = new TextBox();
             btnFindSimilar = new Button();
             groupBox1 = new GroupBox();
+            txtAddress = new TextBox();
+            lblAddress = new Label();
             lblStatusType = new Label();
             txtStatus = new TextBox();
             llBack = new LinkLabel();
@@ -251,7 +253,7 @@
             // 
             // btnFindSimilar
             // 
-            btnFindSimilar.Location = new Point(712, 386);
+            btnFindSimilar.Location = new Point(638, 21);
             btnFindSimilar.Name = "btnFindSimilar";
             btnFindSimilar.Size = new Size(129, 23);
             btnFindSimilar.TabIndex = 44;
@@ -261,6 +263,9 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtAddress);
+            groupBox1.Controls.Add(lblAddress);
+            groupBox1.Controls.Add(btnFindSimilar);
             groupBox1.Controls.Add(lblStatusType);
             groupBox1.Controls.Add(txtStatus);
             groupBox1.Controls.Add(txtMRID);
@@ -282,10 +287,27 @@
             groupBox1.TabIndex = 45;
             groupBox1.TabStop = false;
             // 
+            // txtAddress
+            // 
+            txtAddress.Location = new Point(132, 138);
+            txtAddress.Name = "txtAddress";
+            txtAddress.ReadOnly = true;
+            txtAddress.Size = new Size(162, 23);
+            txtAddress.TabIndex = 71;
+            // 
+            // lblAddress
+            // 
+            lblAddress.AutoSize = true;
+            lblAddress.Location = new Point(14, 141);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new Size(52, 15);
+            lblAddress.TabIndex = 70;
+            lblAddress.Text = "Address:";
+            // 
             // lblStatusType
             // 
             lblStatusType.AutoSize = true;
-            lblStatusType.Location = new Point(14, 142);
+            lblStatusType.Location = new Point(590, 152);
             lblStatusType.Name = "lblStatusType";
             lblStatusType.Size = new Size(42, 15);
             lblStatusType.TabIndex = 69;
@@ -293,10 +315,10 @@
             // 
             // txtStatus
             // 
-            txtStatus.Location = new Point(62, 139);
+            txtStatus.Location = new Point(638, 149);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(100, 23);
+            txtStatus.Size = new Size(129, 23);
             txtStatus.TabIndex = 68;
             // 
             // llBack
@@ -327,7 +349,6 @@
             ClientSize = new Size(1105, 514);
             Controls.Add(btnAccept);
             Controls.Add(llBack);
-            Controls.Add(btnFindSimilar);
             Controls.Add(lblUser);
             Controls.Add(lblMRID);
             Controls.Add(btnCompleteRequest);
@@ -339,7 +360,7 @@
             Controls.Add(lblTitle);
             Controls.Add(groupBox1);
             Name = "MaterialRequirementList";
-            Text = "Logistics Delivery Control";
+            Text = "Material Requirement List";
             ((System.ComponentModel.ISupportInitialize)dgvMaterialRequestControl).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -376,5 +397,7 @@
         private TextBox txtStatus;
         private Label lblStatusType;
         private Button btnAccept;
+        private TextBox txtAddress;
+        private Label lblAddress;
     }
 }

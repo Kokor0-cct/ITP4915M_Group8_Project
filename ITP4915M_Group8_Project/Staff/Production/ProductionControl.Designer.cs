@@ -56,6 +56,8 @@
             btnFindSimilar = new Button();
             groupBox1 = new GroupBox();
             llBack = new LinkLabel();
+            btnAccept = new Button();
+            btnReadyForDelivery = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             SuspendLayout();
             // 
@@ -112,7 +114,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(753, 432);
+            btnRefresh.Location = new Point(479, 432);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 26);
             btnRefresh.TabIndex = 23;
@@ -122,7 +124,7 @@
             // 
             // btnCompleteProduction
             // 
-            btnCompleteProduction.Location = new Point(890, 432);
+            btnCompleteProduction.Location = new Point(753, 432);
             btnCompleteProduction.Name = "btnCompleteProduction";
             btnCompleteProduction.Size = new Size(131, 26);
             btnCompleteProduction.TabIndex = 24;
@@ -313,11 +315,33 @@
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // btnAccept
+            // 
+            btnAccept.Location = new Point(616, 433);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(131, 26);
+            btnAccept.TabIndex = 69;
+            btnAccept.Text = "Accept Request";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
+            // 
+            // btnReadyForDelivery
+            // 
+            btnReadyForDelivery.Location = new Point(890, 433);
+            btnReadyForDelivery.Name = "btnReadyForDelivery";
+            btnReadyForDelivery.Size = new Size(131, 25);
+            btnReadyForDelivery.TabIndex = 70;
+            btnReadyForDelivery.Text = "Ready to Deliver";
+            btnReadyForDelivery.UseVisualStyleBackColor = true;
+            btnReadyForDelivery.Click += btnReadyForDelivery_Click;
+            // 
             // Production_Control
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(btnReadyForDelivery);
+            Controls.Add(btnAccept);
             Controls.Add(llBack);
             Controls.Add(btnFindSimilar);
             Controls.Add(txtDeliveryDate);
@@ -383,5 +407,7 @@
         private Button btnFindSimilar;
         private GroupBox groupBox1;
         private LinkLabel llBack;
+        private Button btnAccept;
+        private Button btnReadyForDelivery;
     }
 }
