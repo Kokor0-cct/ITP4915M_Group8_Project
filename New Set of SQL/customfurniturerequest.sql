@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:46
+-- 生成日期： 2026-06-18 13:53:23
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,35 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `furnituretype`
+-- 表的结构 `customfurniturerequest`
 --
 
-CREATE TABLE `furnituretype` (
+CREATE TABLE `customfurniturerequest` (
+  `cfrID` char(8) NOT NULL,
+  `cUserID` char(8) NOT NULL,
   `fType` char(4) NOT NULL,
-  `typeName` varchar(30) NOT NULL
+  `cfrBudget` int(11) NOT NULL,
+  `cfrDESC` text NOT NULL,
+  `cfrCreateDate` date NOT NULL,
+  `Completed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `furnituretype`
+-- 转存表中的数据 `customfurniturerequest`
 --
 
-INSERT INTO `furnituretype` (`fType`, `typeName`) VALUES
-('FT01', 'Table'),
-('FT02', 'Chair'),
-('FT03', 'Sofa'),
-('FT04', 'Shelf'),
-('FT05', 'Wardrobe'),
-('FT06', 'Bed');
+INSERT INTO `customfurniturerequest` (`cfrID`, `cUserID`, `fType`, `cfrBudget`, `cfrDESC`, `cfrCreateDate`, `Completed`) VALUES
+('CFR00001', 'C0000001', 'FT02', 4500, 'you kown who ?', '2025-01-01', 1),
+('CFR00002', 'C0000001', 'FT01', 2500, 'you kown who ?2.0', '2025-01-02', 1),
+('CFR00003', 'C0000001', 'FT03', 1500, 'you kown who ?3.0', '2025-01-02', 1);
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `furnituretype`
+-- 表的索引 `customfurniturerequest`
 --
-ALTER TABLE `furnituretype`
-  ADD PRIMARY KEY (`fType`);
+ALTER TABLE `customfurniturerequest`
+  ADD PRIMARY KEY (`cfrID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
