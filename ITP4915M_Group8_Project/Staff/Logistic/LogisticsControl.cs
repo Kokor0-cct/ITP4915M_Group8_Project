@@ -1,4 +1,5 @@
 ﻿using ITP4915M_Group8_Project.Staff.Inventory;
+using Microsoft.VisualBasic;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
     public partial class Logistics_Control : Form
     {
 
-        private string currentOid = "0";
-        private Boolean showDelivered = false;
+        private string currentsrid = "0";
+        private string currentItemid = "0";
 
         public Logistics_Control()
         {
@@ -30,33 +31,24 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID"; // It only gets records with the status "In Transit"
+            string sql = rbCheck("SELECT * FROM shippingrequest ");
 
 
             DataTable dt = DbConnect.Query(sql);
 
 
-            dgvOrderControl.DataSource = dt;
-        }
-
-        private void chkDelivered_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDelivered.Checked == true)
-                showDelivered = true;
-            else
-                showDelivered = false;
-            btnRefresh_Click(sender, e);
+            dgvLogisticsControl.DataSource = dt;
         }
 
         //------search the textboxes text item in database------
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            rbAll.Checked = true;
             ClearTextBox();
             string keyword = txtSearch.Text.Trim();
 
 
-            string sql = (showDelivered == false) ? @"SELECT * FROM orders WHERE orderID LIKE @keyword AND statusType = 'ST02' ORDER BY orderID" :
-                @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
+            string sql = @"SELECT * FROM shippingrequest WHERE SRID LIKE @keyword ";
 
 
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
@@ -64,47 +56,82 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
 
             DataTable dt = DbConnect.Query(sql, parameters);
 
-            dgvOrderControl.DataSource = dt;
+            dgvLogisticsControl.DataSource = dt;
         }
 
         //------Refresh form to show database data ------
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE statusType = 'ST02' ORDER BY orderID" :
-                "SELECT * FROM orders WHERE (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
+            string sql = rbCheck("SELECT * FROM shippingrequest ");
             DataTable dt = DbConnect.Query(sql);
-            dgvOrderControl.DataSource = dt;
+            dgvLogisticsControl.DataSource = dt;
             txtSearch.Clear();
             ClearTextBox();
         }
         //------Refresh form to show database data ------
 
-        private void btnCompleteDelivery_Click(object sender, EventArgs e)
+        private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (currentOid == "0")
+            if (currentsrid == "0")
             {
                 MessageBox.Show("Please select a row to complete!");
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to complete delivery for this data? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Are you sure you want to accept this delivery? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE statusType = 'ST02' AND orderID = @orderID";
+            string sql = @"UPDATE shippingrequest SET statusType = 'ST06' WHERE  srID = @SRID";
 
-            MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
+            MySqlParameter parameters = new MySqlParameter("@SRID", currentsrid);
 
             int rows = DbConnect.Execute(sql, parameters);
+            int other_rows = updateStatusOther(currentItemid, "ST06");
 
-            if (rows > 0)
+            if (rows > 0 && other_rows == 1)
+            {
+                MessageBox.Show("Delivery Accepted！", "Update Successful");
+                LoadDataToGridView();
+                ClearTextBox();
+                currentsrid = "0";
+                currentItemid = "0";
+            }
+            else
+            {
+                MessageBox.Show("Update failed！", "Update Unsuccessful");
+            }
+        }
+
+        private void btnCompleteDelivery_Click(object sender, EventArgs e)
+        {
+            if (currentsrid == "0")
+            {
+                MessageBox.Show("Please select a row to complete!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to complete this delivery? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            string sql = @"UPDATE shippingrequest SET statusType = 'ST07' WHERE  srID = @SRID";
+
+            MySqlParameter parameters = new MySqlParameter("@SRID", currentsrid);
+
+            int rows = DbConnect.Execute(sql, parameters);
+            int other_rows = updateStatusOther(currentItemid, "ST07");
+
+            if (rows > 0 && other_rows == 1)
             {
                 MessageBox.Show("Delivery completed！", "Update Successful");
                 LoadDataToGridView();
                 ClearTextBox();
-                currentOid = "0";
+                currentsrid = "0";
+                currentItemid = "0";
             }
             else
             {
@@ -115,77 +142,144 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
         //------Clear TextBox  ------
         private void ClearTextBox()
         {
-            txtOrderID.Clear();
-            txtFurniture.Clear();
-            txtQuantity.Clear();
-            txtUserID.Clear();
-            txtAmount.Clear();
+            txtSRID.Clear();
+            txtIID.Clear();
+            txtItemType.Clear();
+            txtCreatedDate.Clear();
+            txtCollectionAddress.Clear();
             txtDeliveryDate.Clear();
-            txtAddress.Clear();
-            txtShipping.Clear();
+            txtDeliveryAddress.Clear();
             txtStatus.Clear();
         }//------Clear TextBox  ------
 
         private void dgvOrderControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvOrderControl.CurrentRow.Selected = true;
-            if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
-                return;
-
-            //Get fName from furniture
-            string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
-            MySqlParameter parameters = new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString());
-            DataTable dt = DbConnect.Query(sql, parameters);
-            String furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
-
-            //Get soName from shippingoption
-            sql = @"SELECT soName FROM shippingoption WHERE soID = @SOID";
-            parameters = new MySqlParameter("@SOID", dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value.ToString());
-            dt = DbConnect.Query(sql, parameters);
-            String shippingName = dt.Rows[0]["soName"].ToString();      //<--Extract Shipping Type Name from table
+            try { 
+                dgvLogisticsControl.CurrentRow.Selected = true;
+                if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
+                    return;
+            }catch(Exception ex)
+            {
+                return; //Clicked on the fields but the table is empty
+            }
 
             //Get statusDesc from status
-            sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSCODE";
-            parameters = new MySqlParameter("@STATUSCODE", dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
-            dt = DbConnect.Query(sql, parameters);
+            string sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSCODE";
+            MySqlParameter parameters = new MySqlParameter("@STATUSCODE", dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
+            DataTable dt = DbConnect.Query(sql, parameters);
             String statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
 
-            currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString(); //Stores the selected orderID
-            txtOrderID.Text = currentOid;                       //Order ID cell content
-            txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
-            txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
-            txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
-            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString();    //Delivery Date cell content
-            txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
-            txtShipping.Text = shippingName;         //Shipping Type cell content    
+            currentsrid = dgvLogisticsControl.Rows[e.RowIndex].Cells["SRID"].Value.ToString(); 
+            txtSRID.Text = currentsrid;                       
+
+            currentItemid = dgvLogisticsControl.Rows[e.RowIndex].Cells["IID"].Value.ToString();
+            txtIID.Text = currentItemid;
+            if (currentItemid.StartsWith("O"))
+                txtItemType.Text = "Order";
+            else if (currentItemid.StartsWith("CO"))
+                txtItemType.Text = "Custom Order";
+            else if (currentItemid.StartsWith("MR"))
+                txtItemType.Text = "Material";
+            else
+                txtItemType.Text = "Invalid Data Type";
+
+            txtCreatedDate.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["createDate"].Value.ToString().Split(' ')[0];               //Created Date cell content
+            txtDeliveryDate.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["deliveryDate"].Value.ToString().Split(' ')[0];            //Delivery Date cell content
+            txtCollectionAddress.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["collectAddress"].Value.ToString();     //Collection Address cell content 
+            txtDeliveryAddress.Text = dgvLogisticsControl.Rows[e.RowIndex].Cells["deliveryAddress"].Value.ToString();      //Delivery Address cell content 
             txtStatus.Text = statusName;             //Status Type cell content      
 
-            if (dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() != "2")
-                btnCompleteDelivery.Enabled = false;
-            else
+            if (dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST06")
                 btnCompleteDelivery.Enabled = true;
+            else
+                btnCompleteDelivery.Enabled = false;
+            if (dgvLogisticsControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString() == "ST05")
+                btnAccept.Enabled = true;
+            else
+                btnAccept.Enabled = false;
 
-        }
-
-
-        // Find the records with matching OrderID
-        private void btnFindSimilar_Click(object sender, EventArgs e)
-        {
-
-
-            string sql = (showDelivered == false) ? "SELECT * FROM orders WHERE orderID = @OID AND statusType = 'ST02' ORDER BY orderID" :
-                "SELECT * FROM orders WHERE orderID = @OID AND (statusType = 'ST02' OR statusType = 'ST03') ORDER BY statusType, orderID";
-            MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
-            DataTable dt = DbConnect.Query(sql, parameters);
-            dgvOrderControl.DataSource = dt;
         }
 
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StaffMenu menu = new StaffMenu();
-            menu.Show();
             this.Close();
+        }
+
+        private void rbOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            ClearTextBox();
+            LoadDataToGridView();
+        }
+
+        private void rbCO_CheckedChanged(object sender, EventArgs e)
+        {
+            ClearTextBox();
+            LoadDataToGridView();
+        }
+
+        private void rbMaterial_CheckedChanged(object sender, EventArgs e)
+        {
+            ClearTextBox();
+            LoadDataToGridView();
+        }
+
+        private void rbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            ClearTextBox();
+            LoadDataToGridView();
+        }
+
+        public string rbCheck(string sql)
+        {
+            if (rbAll.Checked)
+            {
+                sql += "ORDER BY deliveryDate";
+                return sql;
+            }
+            else
+            {
+                sql += "WHERE IID LIKE ";
+                if (rbOrder.Checked)
+                {
+                    sql += "'O%'";
+                }
+                else if(rbCO.Checked)
+                {
+                    sql += "'CO%'";
+                }else if (rbMaterial.Checked)
+                {
+                    sql += "'MR%'";
+                }
+                sql += " ORDER BY deliveryDate";
+                return sql;
+            }
+        }
+
+        public int updateStatusOther(String ItemID, string statusID)
+        {
+            String sql = "";
+            if (ItemID.StartsWith("O"))
+            {
+                sql = @"UPDATE orders SET statusType = @STATUS WHERE orderID = @ID";
+            }
+            else if (ItemID.StartsWith("CO"))
+            {
+                sql = @"UPDATE customorders SET statusType = @STATUS WHERE corderID = @ID";
+            }
+            else if (ItemID.StartsWith("MR"))
+            {
+                sql = @"UPDATE materialRequest SET statusType = @STATUS WHERE mrID = @ID";
+            }
+            MySqlParameter[] parameters = { new MySqlParameter("@STATUS", statusID), new MySqlParameter("@ID", ItemID) } ;
+            int rows = DbConnect.Execute(sql, parameters);
+            if (rows > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

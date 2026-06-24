@@ -3,6 +3,7 @@ using ITP4915M_Group8_Project.Staff.Inventory;
 using MySqlConnector;
 using ScottPlot.MultiplotLayouts;
 using System.Data;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
@@ -18,6 +19,11 @@ namespace ITP4915M_Group8_Project.Staff.Production
             cmbLevel.Items.Add("Medium");
             cmbLevel.Items.Add("High");
             cmbLevel.SelectedIndex = 0;
+            cmbProductionSite.Items.Clear();
+            cmbProductionSite.Items.Add("Production Site 1");
+            cmbProductionSite.Items.Add("Production Site 2");
+            cmbProductionSite.Items.Add("Production Site 3");
+            cmbProductionSite.SelectedIndex = 0;
         }
 
 
@@ -45,9 +51,31 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
+            String Rdate = txtRequiredDate.Text.Trim();
+
             if (fpMaterialRequirement.Controls.Count == 0)
             {
                 MessageBox.Show("Please add at least one material requirement！");
+                return;
+            }else if (Rdate == null)
+            {
+                MessageBox.Show("Required Date cannot be left empty!", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                DateTime parsedDate = DateTime.ParseExact(Rdate, "M/dd/yyyy", CultureInfo.InvariantCulture);
+
+                //---Date has passed---
+                if (parsedDate < DateTime.Now.Date)
+                {
+                    MessageBox.Show("Delivery Date has passed!", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Delivery Date Invalid! \nFormat: {M/dd/yyyy}", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             List<Material_Requirement_Sheet> allSheets = new List<Material_Requirement_Sheet>();
@@ -72,8 +100,9 @@ namespace ITP4915M_Group8_Project.Staff.Production
                 string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(mrID,3) AS UNSIGNED)) FROM materialrequest;";
                 int maxfID = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
                 string newfID = $"MR{maxfID:D8}";
+                DateTime parsedDate = DateTime.ParseExact(Rdate, "M/dd/yyyy", CultureInfo.InvariantCulture);
 
-                string insertSql = @"INSERT INTO materialrequest(mrID, materialCode, mrQuantity,UrgencyLevel,createDate,sUserID) VALUES(@mrID, @materialCode, @mrQuantity, @UrgencyLevel, @createDate, @sUserID)";
+                string insertSql = @"INSERT INTO materialrequest(mrID, sUserID, materialCode, mrQuantity, UrgencyLevel, RequiredDate, mrdeliveryaddress) VALUES(@mrID, @sUserID, @materialCode, @mrQuantity, @UrgencyLevel, @RequiredDate, @MRDA)";
 
                 foreach (var sheet in allSheets)
                 {
@@ -83,37 +112,32 @@ namespace ITP4915M_Group8_Project.Staff.Production
                     string mCode = dt.Rows[0]["materialCode"].ToString();
                     int qty = sheet.RequireQuantity;
                     string Level = cmbLevel.SelectedItem.ToString();
-                    string date = DateTime.Now.ToString("yyyy-MM-dd");
+                    string deliveryAddress = cmbProductionSite.SelectedItem.ToString();
                     string sUserID = UserSession.StaffId;
 
 
                     MySqlParameter[] parameters = {
                     new MySqlParameter("@mrID", newfID),
+                    new MySqlParameter("@sUserID", sUserID),
                     new MySqlParameter("@materialCode",mCode),
                     new MySqlParameter("@mrQuantity", qty),
                     new MySqlParameter("@UrgencyLevel", Level),
-                    new MySqlParameter("@createDate", DateTime.Now),
-                    new MySqlParameter("@sUserID", UserSession.StaffId)};
-
+                    new MySqlParameter("@RequiredDate", parsedDate), 
+                    new MySqlParameter("@MRDA", deliveryAddress)};
+                    
                     int rows = DbConnect.Execute(insertSql, parameters);
-
 
                 }
 
 
-                MessageBox.Show("所有物料需求提交成功！");
+                MessageBox.Show("Material Request Submitted！");
                 fpMaterialRequirement.Controls.Clear(); // 提交完成清空所有表单
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("提交失败，已撤销全部数据：" + ex.Message);
+                MessageBox.Show("Failed submission，all data has been withdrawn：" + ex.Message);
             }
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 

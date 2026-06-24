@@ -29,35 +29,39 @@
         private void InitializeComponent()
         {
             lblTitle = new Label();
-            dgvOrderControl = new DataGridView();
+            dgvLogisticsControl = new DataGridView();
             lblSearch = new Label();
             txtSearch = new TextBox();
             btnSearch = new Button();
             btnRefresh = new Button();
             btnCompleteDelivery = new Button();
-            lblOrder = new Label();
-            lblFurniture = new Label();
-            lblQuantity = new Label();
-            lblUser = new Label();
-            lblAmount = new Label();
+            lblShippingRequest = new Label();
+            lblItem = new Label();
+            lblItemType = new Label();
+            lblCreateDate = new Label();
+            lblCollectionAddress = new Label();
             lblDeliveryDate = new Label();
-            lblAddress = new Label();
-            lblShippingType = new Label();
+            lblDeliveryAddress = new Label();
             lblStatusType = new Label();
-            txtOrderID = new TextBox();
-            txtFurniture = new TextBox();
-            txtQuantity = new TextBox();
-            txtUserID = new TextBox();
-            txtAddress = new TextBox();
-            txtShipping = new TextBox();
+            txtSRID = new TextBox();
+            txtIID = new TextBox();
+            txtItemType = new TextBox();
+            txtCreatedDate = new TextBox();
+            txtDeliveryAddress = new TextBox();
             txtStatus = new TextBox();
-            txtAmount = new TextBox();
+            txtCollectionAddress = new TextBox();
             txtDeliveryDate = new TextBox();
-            chkDelivered = new CheckBox();
-            btnFindSimilar = new Button();
             groupBox1 = new GroupBox();
             llBack = new LinkLabel();
-            ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
+            btnAccept = new Button();
+            rbOrder = new RadioButton();
+            rbCO = new RadioButton();
+            rbMaterial = new RadioButton();
+            grpRadio = new GroupBox();
+            rbAll = new RadioButton();
+            ((System.ComponentModel.ISupportInitialize)dgvLogisticsControl).BeginInit();
+            groupBox1.SuspendLayout();
+            grpRadio.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -70,32 +74,32 @@
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Logistic Delivery Control";
             // 
-            // dgvOrderControl
+            // dgvLogisticsControl
             // 
-            dgvOrderControl.AllowUserToAddRows = false;
-            dgvOrderControl.AllowUserToDeleteRows = false;
-            dgvOrderControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOrderControl.Location = new Point(77, 93);
-            dgvOrderControl.MultiSelect = false;
-            dgvOrderControl.Name = "dgvOrderControl";
-            dgvOrderControl.ReadOnly = true;
-            dgvOrderControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvOrderControl.Size = new Size(944, 149);
-            dgvOrderControl.TabIndex = 3;
-            dgvOrderControl.CellClick += dgvOrderControl_CellClick;
+            dgvLogisticsControl.AllowUserToAddRows = false;
+            dgvLogisticsControl.AllowUserToDeleteRows = false;
+            dgvLogisticsControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLogisticsControl.Location = new Point(77, 93);
+            dgvLogisticsControl.MultiSelect = false;
+            dgvLogisticsControl.Name = "dgvLogisticsControl";
+            dgvLogisticsControl.ReadOnly = true;
+            dgvLogisticsControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLogisticsControl.Size = new Size(944, 149);
+            dgvLogisticsControl.TabIndex = 3;
+            dgvLogisticsControl.CellClick += dgvOrderControl_CellClick;
             // 
             // lblSearch
             // 
             lblSearch.AutoSize = true;
             lblSearch.Location = new Point(77, 66);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(92, 15);
+            lblSearch.Size = new Size(157, 15);
             lblSearch.TabIndex = 4;
-            lblSearch.Text = "Search OrderID :";
+            lblSearch.Text = "Search Shipping Request ID :";
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(175, 63);
+            txtSearch.Location = new Point(240, 63);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(172, 23);
             txtSearch.TabIndex = 9;
@@ -103,7 +107,7 @@
             // btnSearch
             // 
             btnSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            btnSearch.Location = new Point(353, 63);
+            btnSearch.Location = new Point(418, 62);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 24);
             btnSearch.TabIndex = 15;
@@ -113,7 +117,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(753, 432);
+            btnRefresh.Location = new Point(616, 458);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 26);
             btnRefresh.TabIndex = 23;
@@ -123,7 +127,7 @@
             // 
             // btnCompleteDelivery
             // 
-            btnCompleteDelivery.Location = new Point(890, 432);
+            btnCompleteDelivery.Location = new Point(890, 458);
             btnCompleteDelivery.Name = "btnCompleteDelivery";
             btnCompleteDelivery.Size = new Size(131, 26);
             btnCompleteDelivery.TabIndex = 24;
@@ -131,186 +135,163 @@
             btnCompleteDelivery.UseVisualStyleBackColor = true;
             btnCompleteDelivery.Click += btnCompleteDelivery_Click;
             // 
-            // lblOrder
+            // lblShippingRequest
             // 
-            lblOrder.AutoSize = true;
-            lblOrder.Location = new Point(91, 272);
-            lblOrder.Name = "lblOrder";
-            lblOrder.Size = new Size(54, 15);
-            lblOrder.TabIndex = 25;
-            lblOrder.Text = "Order ID:";
+            lblShippingRequest.AutoSize = true;
+            lblShippingRequest.Location = new Point(91, 272);
+            lblShippingRequest.Name = "lblShippingRequest";
+            lblShippingRequest.Size = new Size(116, 15);
+            lblShippingRequest.TabIndex = 25;
+            lblShippingRequest.Text = "Shipping Request ID:";
             // 
-            // lblFurniture
+            // lblItem
             // 
-            lblFurniture.AutoSize = true;
-            lblFurniture.Location = new Point(353, 272);
-            lblFurniture.Name = "lblFurniture";
-            lblFurniture.Size = new Size(93, 15);
-            lblFurniture.TabIndex = 26;
-            lblFurniture.Text = "Furniture Name:";
+            lblItem.AutoSize = true;
+            lblItem.Location = new Point(270, 24);
+            lblItem.Name = "lblItem";
+            lblItem.Size = new Size(48, 15);
+            lblItem.TabIndex = 26;
+            lblItem.Text = "Item ID:";
             // 
-            // lblQuantity
+            // lblItemType
             // 
-            lblQuantity.AutoSize = true;
-            lblQuantity.Location = new Point(89, 302);
-            lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new Size(56, 15);
-            lblQuantity.TabIndex = 27;
-            lblQuantity.Text = "Quantity:";
+            lblItemType.AutoSize = true;
+            lblItemType.Location = new Point(456, 25);
+            lblItemType.Name = "lblItemType";
+            lblItemType.Size = new Size(61, 15);
+            lblItemType.TabIndex = 27;
+            lblItemType.Text = "Item Type:";
             // 
-            // lblUser
+            // lblCreateDate
             // 
-            lblUser.AutoSize = true;
-            lblUser.Location = new Point(91, 331);
-            lblUser.Name = "lblUser";
-            lblUser.Size = new Size(47, 15);
-            lblUser.TabIndex = 28;
-            lblUser.Text = "User ID:";
+            lblCreateDate.AutoSize = true;
+            lblCreateDate.Location = new Point(52, 54);
+            lblCreateDate.Name = "lblCreateDate";
+            lblCreateDate.Size = new Size(78, 15);
+            lblCreateDate.TabIndex = 28;
+            lblCreateDate.Text = "Created Date:";
             // 
-            // lblAmount
+            // lblCollectionAddress
             // 
-            lblAmount.AutoSize = true;
-            lblAmount.Location = new Point(353, 302);
-            lblAmount.Name = "lblAmount";
-            lblAmount.Size = new Size(82, 15);
-            lblAmount.TabIndex = 29;
-            lblAmount.Text = "Total Amount:";
+            lblCollectionAddress.AutoSize = true;
+            lblCollectionAddress.Location = new Point(21, 83);
+            lblCollectionAddress.Name = "lblCollectionAddress";
+            lblCollectionAddress.Size = new Size(109, 15);
+            lblCollectionAddress.TabIndex = 29;
+            lblCollectionAddress.Text = "Collection Address:";
             // 
             // lblDeliveryDate
             // 
             lblDeliveryDate.AutoSize = true;
-            lblDeliveryDate.Location = new Point(356, 331);
+            lblDeliveryDate.Location = new Point(315, 54);
             lblDeliveryDate.Name = "lblDeliveryDate";
             lblDeliveryDate.Size = new Size(79, 15);
             lblDeliveryDate.TabIndex = 30;
             lblDeliveryDate.Text = "Delivery Date:";
             // 
-            // lblAddress
+            // lblDeliveryAddress
             // 
-            lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(91, 359);
-            lblAddress.Name = "lblAddress";
-            lblAddress.Size = new Size(52, 15);
-            lblAddress.TabIndex = 31;
-            lblAddress.Text = "Address:";
-            // 
-            // lblShippingType
-            // 
-            lblShippingType.AutoSize = true;
-            lblShippingType.Location = new Point(91, 388);
-            lblShippingType.Name = "lblShippingType";
-            lblShippingType.Size = new Size(84, 15);
-            lblShippingType.TabIndex = 32;
-            lblShippingType.Text = "Shipping Type:";
+            lblDeliveryAddress.AutoSize = true;
+            lblDeliveryAddress.Location = new Point(430, 83);
+            lblDeliveryAddress.Name = "lblDeliveryAddress";
+            lblDeliveryAddress.Size = new Size(97, 15);
+            lblDeliveryAddress.TabIndex = 31;
+            lblDeliveryAddress.Text = "Delivery Address:";
             // 
             // lblStatusType
             // 
             lblStatusType.AutoSize = true;
-            lblStatusType.Location = new Point(353, 389);
+            lblStatusType.Location = new Point(597, 155);
             lblStatusType.Name = "lblStatusType";
             lblStatusType.Size = new Size(42, 15);
             lblStatusType.TabIndex = 33;
             lblStatusType.Text = "Status:";
             // 
-            // txtOrderID
+            // txtSRID
             // 
-            txtOrderID.Location = new Point(151, 269);
-            txtOrderID.Name = "txtOrderID";
-            txtOrderID.ReadOnly = true;
-            txtOrderID.Size = new Size(162, 23);
-            txtOrderID.TabIndex = 34;
+            txtSRID.Location = new Point(324, 22);
+            txtSRID.Name = "txtSRID";
+            txtSRID.ReadOnly = true;
+            txtSRID.Size = new Size(111, 23);
+            txtSRID.TabIndex = 34;
             // 
-            // txtFurniture
+            // txtIID
             // 
-            txtFurniture.Location = new Point(452, 269);
-            txtFurniture.Name = "txtFurniture";
-            txtFurniture.ReadOnly = true;
-            txtFurniture.Size = new Size(389, 23);
-            txtFurniture.TabIndex = 35;
+            txtIID.Location = new Point(136, 21);
+            txtIID.Name = "txtIID";
+            txtIID.ReadOnly = true;
+            txtIID.Size = new Size(111, 23);
+            txtIID.TabIndex = 35;
             // 
-            // txtQuantity
+            // txtItemType
             // 
-            txtQuantity.Location = new Point(151, 298);
-            txtQuantity.Name = "txtQuantity";
-            txtQuantity.ReadOnly = true;
-            txtQuantity.Size = new Size(162, 23);
-            txtQuantity.TabIndex = 36;
+            txtItemType.Location = new Point(523, 21);
+            txtItemType.Name = "txtItemType";
+            txtItemType.ReadOnly = true;
+            txtItemType.Size = new Size(162, 23);
+            txtItemType.TabIndex = 36;
             // 
-            // txtUserID
+            // txtCreatedDate
             // 
-            txtUserID.Location = new Point(151, 327);
-            txtUserID.Name = "txtUserID";
-            txtUserID.ReadOnly = true;
-            txtUserID.Size = new Size(162, 23);
-            txtUserID.TabIndex = 37;
+            txtCreatedDate.Location = new Point(136, 51);
+            txtCreatedDate.Name = "txtCreatedDate";
+            txtCreatedDate.ReadOnly = true;
+            txtCreatedDate.Size = new Size(162, 23);
+            txtCreatedDate.TabIndex = 37;
             // 
-            // txtAddress
+            // txtDeliveryAddress
             // 
-            txtAddress.Location = new Point(151, 356);
-            txtAddress.Name = "txtAddress";
-            txtAddress.ReadOnly = true;
-            txtAddress.Size = new Size(690, 23);
-            txtAddress.TabIndex = 38;
-            // 
-            // txtShipping
-            // 
-            txtShipping.Location = new Point(175, 386);
-            txtShipping.Name = "txtShipping";
-            txtShipping.ReadOnly = true;
-            txtShipping.Size = new Size(132, 23);
-            txtShipping.TabIndex = 39;
+            txtDeliveryAddress.Location = new Point(533, 80);
+            txtDeliveryAddress.Name = "txtDeliveryAddress";
+            txtDeliveryAddress.ReadOnly = true;
+            txtDeliveryAddress.Size = new Size(274, 23);
+            txtDeliveryAddress.TabIndex = 38;
             // 
             // txtStatus
             // 
-            txtStatus.Location = new Point(401, 386);
+            txtStatus.Location = new Point(645, 152);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(100, 23);
+            txtStatus.Size = new Size(162, 23);
             txtStatus.TabIndex = 40;
             // 
-            // txtAmount
+            // txtCollectionAddress
             // 
-            txtAmount.Location = new Point(452, 298);
-            txtAmount.Name = "txtAmount";
-            txtAmount.ReadOnly = true;
-            txtAmount.Size = new Size(92, 23);
-            txtAmount.TabIndex = 41;
+            txtCollectionAddress.Location = new Point(136, 80);
+            txtCollectionAddress.Name = "txtCollectionAddress";
+            txtCollectionAddress.ReadOnly = true;
+            txtCollectionAddress.Size = new Size(274, 23);
+            txtCollectionAddress.TabIndex = 41;
             // 
             // txtDeliveryDate
             // 
-            txtDeliveryDate.Location = new Point(452, 328);
+            txtDeliveryDate.Location = new Point(400, 51);
             txtDeliveryDate.Name = "txtDeliveryDate";
             txtDeliveryDate.ReadOnly = true;
-            txtDeliveryDate.Size = new Size(209, 23);
+            txtDeliveryDate.Size = new Size(162, 23);
             txtDeliveryDate.TabIndex = 42;
-            // 
-            // chkDelivered
-            // 
-            chkDelivered.AutoSize = true;
-            chkDelivered.Location = new Point(869, 62);
-            chkDelivered.Name = "chkDelivered";
-            chkDelivered.Size = new Size(152, 19);
-            chkDelivered.TabIndex = 43;
-            chkDelivered.Text = "Show Delivered Records";
-            chkDelivered.UseVisualStyleBackColor = true;
-            chkDelivered.CheckedChanged += chkDelivered_CheckedChanged;
-            // 
-            // btnFindSimilar
-            // 
-            btnFindSimilar.Location = new Point(712, 386);
-            btnFindSimilar.Name = "btnFindSimilar";
-            btnFindSimilar.Size = new Size(129, 23);
-            btnFindSimilar.TabIndex = 44;
-            btnFindSimilar.Text = "Find Related Records";
-            btnFindSimilar.UseVisualStyleBackColor = true;
-            btnFindSimilar.Click += btnFindSimilar_Click;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtSRID);
+            groupBox1.Controls.Add(lblItem);
+            groupBox1.Controls.Add(txtIID);
+            groupBox1.Controls.Add(txtDeliveryAddress);
+            groupBox1.Controls.Add(txtStatus);
+            groupBox1.Controls.Add(txtDeliveryDate);
+            groupBox1.Controls.Add(txtCollectionAddress);
+            groupBox1.Controls.Add(lblStatusType);
+            groupBox1.Controls.Add(lblCollectionAddress);
+            groupBox1.Controls.Add(txtItemType);
+            groupBox1.Controls.Add(txtCreatedDate);
+            groupBox1.Controls.Add(lblDeliveryAddress);
+            groupBox1.Controls.Add(lblDeliveryDate);
+            groupBox1.Controls.Add(lblCreateDate);
+            groupBox1.Controls.Add(lblItemType);
             groupBox1.FlatStyle = FlatStyle.Popup;
             groupBox1.Location = new Point(77, 248);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(773, 178);
+            groupBox1.Size = new Size(826, 189);
             groupBox1.TabIndex = 45;
             groupBox1.TabStop = false;
             // 
@@ -325,43 +306,98 @@
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // btnAccept
+            // 
+            btnAccept.Location = new Point(753, 458);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(131, 26);
+            btnAccept.TabIndex = 68;
+            btnAccept.Text = "Accept Request";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
+            // 
+            // rbOrder
+            // 
+            rbOrder.AutoSize = true;
+            rbOrder.Location = new Point(12, 11);
+            rbOrder.Name = "rbOrder";
+            rbOrder.Size = new Size(55, 19);
+            rbOrder.TabIndex = 69;
+            rbOrder.Text = "Order";
+            rbOrder.UseVisualStyleBackColor = true;
+            rbOrder.CheckedChanged += rbOrder_CheckedChanged;
+            // 
+            // rbCO
+            // 
+            rbCO.AutoSize = true;
+            rbCO.Location = new Point(73, 11);
+            rbCO.Name = "rbCO";
+            rbCO.Size = new Size(100, 19);
+            rbCO.TabIndex = 70;
+            rbCO.Text = "Custom Order";
+            rbCO.UseVisualStyleBackColor = true;
+            rbCO.CheckedChanged += rbCO_CheckedChanged;
+            // 
+            // rbMaterial
+            // 
+            rbMaterial.AutoSize = true;
+            rbMaterial.Location = new Point(179, 11);
+            rbMaterial.Name = "rbMaterial";
+            rbMaterial.Size = new Size(68, 19);
+            rbMaterial.TabIndex = 71;
+            rbMaterial.Text = "Material";
+            rbMaterial.UseVisualStyleBackColor = true;
+            rbMaterial.CheckedChanged += rbMaterial_CheckedChanged;
+            // 
+            // grpRadio
+            // 
+            grpRadio.Controls.Add(rbAll);
+            grpRadio.Controls.Add(rbOrder);
+            grpRadio.Controls.Add(rbCO);
+            grpRadio.Controls.Add(rbMaterial);
+            grpRadio.Location = new Point(720, 52);
+            grpRadio.Name = "grpRadio";
+            grpRadio.Size = new Size(301, 34);
+            grpRadio.TabIndex = 72;
+            grpRadio.TabStop = false;
+            // 
+            // rbAll
+            // 
+            rbAll.AutoSize = true;
+            rbAll.Checked = true;
+            rbAll.Location = new Point(253, 11);
+            rbAll.Name = "rbAll";
+            rbAll.Size = new Size(39, 19);
+            rbAll.TabIndex = 72;
+            rbAll.TabStop = true;
+            rbAll.Text = "All";
+            rbAll.UseVisualStyleBackColor = true;
+            rbAll.CheckedChanged += rbAll_CheckedChanged;
+            // 
             // Logistics_Control
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(btnAccept);
             Controls.Add(llBack);
-            Controls.Add(btnFindSimilar);
-            Controls.Add(chkDelivered);
-            Controls.Add(txtDeliveryDate);
-            Controls.Add(txtAmount);
-            Controls.Add(txtStatus);
-            Controls.Add(txtShipping);
-            Controls.Add(txtAddress);
-            Controls.Add(txtUserID);
-            Controls.Add(txtQuantity);
-            Controls.Add(txtFurniture);
-            Controls.Add(txtOrderID);
-            Controls.Add(lblStatusType);
-            Controls.Add(lblShippingType);
-            Controls.Add(lblAddress);
-            Controls.Add(lblDeliveryDate);
-            Controls.Add(lblAmount);
-            Controls.Add(lblUser);
-            Controls.Add(lblQuantity);
-            Controls.Add(lblFurniture);
-            Controls.Add(lblOrder);
+            Controls.Add(lblShippingRequest);
             Controls.Add(btnCompleteDelivery);
             Controls.Add(btnRefresh);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(lblSearch);
-            Controls.Add(dgvOrderControl);
+            Controls.Add(dgvLogisticsControl);
             Controls.Add(lblTitle);
             Controls.Add(groupBox1);
+            Controls.Add(grpRadio);
             Name = "Logistics_Control";
             Text = "Logistics Delivery Control";
-            ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvLogisticsControl).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            grpRadio.ResumeLayout(false);
+            grpRadio.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -369,33 +405,35 @@
         #endregion
 
         private Label lblTitle;
-        private DataGridView dgvOrderControl;
+        private DataGridView dgvLogisticsControl;
         private Label lblSearch;
         private TextBox txtSearch;
         private Button btnSearch;
         private Button btnRefresh;
         private Button btnCompleteDelivery;
-        private Label lblOrder;
-        private Label lblFurniture;
-        private Label lblQuantity;
-        private Label lblUser;
-        private Label lblAmount;
+        private Label lblShippingRequest;
+        private Label lblItem;
+        private Label lblItemType;
+        private Label lblCreateDate;
+        private Label lblCollectionAddress;
         private Label lblDeliveryDate;
-        private Label lblAddress;
-        private Label lblShippingType;
+        private Label lblDeliveryAddress;
         private Label lblStatusType;
-        private TextBox txtOrderID;
-        private TextBox txtFurniture;
-        private TextBox txtQuantity;
-        private TextBox txtUserID;
-        private TextBox txtAddress;
-        private TextBox txtShipping;
+        private TextBox txtSRID;
+        private TextBox txtIID;
+        private TextBox txtItemType;
+        private TextBox txtCreatedDate;
+        private TextBox txtDeliveryAddress;
         private TextBox txtStatus;
-        private TextBox txtAmount;
+        private TextBox txtCollectionAddress;
         private TextBox txtDeliveryDate;
-        private CheckBox chkDelivered;
-        private Button btnFindSimilar;
         private GroupBox groupBox1;
         private LinkLabel llBack;
+        private Button btnAccept;
+        private RadioButton rbOrder;
+        private RadioButton rbCO;
+        private RadioButton rbMaterial;
+        private GroupBox grpRadio;
+        private RadioButton rbAll;
     }
 }

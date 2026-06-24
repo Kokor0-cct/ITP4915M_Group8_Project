@@ -37,7 +37,6 @@
             btnFindSimilar = new Button();
             txtDeliveryDate = new TextBox();
             txtAmount = new TextBox();
-            txtStatus = new TextBox();
             txtAddress = new TextBox();
             txtUserID = new TextBox();
             txtFurniture = new TextBox();
@@ -56,13 +55,14 @@
             btnUpdate = new Button();
             nudQuantity = new NumericUpDown();
             cbShipping = new ComboBox();
+            cmbStatus = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             SuspendLayout();
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(756, 454);
+            btnRefresh.Location = new Point(893, 293);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 26);
             btnRefresh.TabIndex = 29;
@@ -123,7 +123,7 @@
             // 
             // btnFindSimilar
             // 
-            btnFindSimilar.Location = new Point(535, 420);
+            btnFindSimilar.Location = new Point(670, 303);
             btnFindSimilar.Name = "btnFindSimilar";
             btnFindSimilar.Size = new Size(129, 23);
             btnFindSimilar.TabIndex = 64;
@@ -145,14 +145,6 @@
             txtAmount.ReadOnly = true;
             txtAmount.Size = new Size(92, 23);
             txtAmount.TabIndex = 62;
-            // 
-            // txtStatus
-            // 
-            txtStatus.Location = new Point(404, 420);
-            txtStatus.Name = "txtStatus";
-            txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(100, 23);
-            txtStatus.TabIndex = 61;
             // 
             // txtAddress
             // 
@@ -188,7 +180,7 @@
             // lblStatusType
             // 
             lblStatusType.AutoSize = true;
-            lblStatusType.Location = new Point(356, 423);
+            lblStatusType.Location = new Point(356, 422);
             lblStatusType.Name = "lblStatusType";
             lblStatusType.Size = new Size(42, 15);
             lblStatusType.TabIndex = 54;
@@ -271,7 +263,7 @@
             lblback.BorderStyle = BorderStyle.Fixed3D;
             lblback.Location = new Point(80, 293);
             lblback.Name = "lblback";
-            lblback.Size = new Size(597, 158);
+            lblback.Size = new Size(729, 158);
             lblback.TabIndex = 45;
             // 
             // llBack
@@ -287,7 +279,7 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(893, 454);
+            btnUpdate.Location = new Point(893, 425);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(131, 26);
             btnUpdate.TabIndex = 68;
@@ -304,6 +296,7 @@
             // 
             // cbShipping
             // 
+            cbShipping.DropDownStyle = ComboBoxStyle.DropDownList;
             cbShipping.FormattingEnabled = true;
             cbShipping.Items.AddRange(new object[] { "-Select Shipping Type-", "Ordinary Transport", "Express Shipping" });
             cbShipping.Location = new Point(184, 419);
@@ -311,11 +304,22 @@
             cbShipping.Size = new Size(132, 23);
             cbShipping.TabIndex = 70;
             // 
+            // cmbStatus
+            // 
+            cmbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbStatus.FormattingEnabled = true;
+            cmbStatus.Items.AddRange(new object[] { "--Select Status--", "Pending", "Accepted", "Waiting For Delivery" });
+            cmbStatus.Location = new Point(455, 419);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(130, 23);
+            cmbStatus.TabIndex = 71;
+            // 
             // EditOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(cmbStatus);
             Controls.Add(cbShipping);
             Controls.Add(nudQuantity);
             Controls.Add(btnUpdate);
@@ -323,7 +327,6 @@
             Controls.Add(btnFindSimilar);
             Controls.Add(txtDeliveryDate);
             Controls.Add(txtAmount);
-            Controls.Add(txtStatus);
             Controls.Add(txtAddress);
             Controls.Add(txtUserID);
             Controls.Add(txtFurniture);
@@ -363,7 +366,6 @@
         private Button btnFindSimilar;
         private TextBox txtDeliveryDate;
         private TextBox txtAmount;
-        private TextBox txtStatus;
         private TextBox txtAddress;
         private TextBox txtUserID;
         private TextBox txtFurniture;
@@ -382,5 +384,6 @@
         private Button btnUpdate;
         private NumericUpDown nudQuantity;
         private ComboBox cbShipping;
+        private ComboBox cmbStatus;
     }
 }

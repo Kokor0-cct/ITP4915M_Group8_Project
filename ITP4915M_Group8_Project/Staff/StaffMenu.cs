@@ -28,33 +28,31 @@ namespace ITP4915M_Group8_Project.Staff
         private void btnInventoryManagement_Click(object sender, EventArgs e)
         {
             Staff.Inventory.InventoryMenu Form = new Staff.Inventory.InventoryMenu();
-            Form.Show();
-            this.Hide();
-
+            Form.ShowDialog();
         }
 
         private void btnSalesService_Click(object sender, EventArgs e)
         {
             Staff.Sales.CustomerService Form = new Staff.Sales.CustomerService();
-            Form.Show();
+            Form.ShowDialog();
         }
 
         private void btnSalesOrderEdit_Click(object sender, EventArgs e)
         {
             Staff.Sales.EditOrder Form = new Staff.Sales.EditOrder();
-            Form.Show();
+            Form.ShowDialog();
         }
 
         private void btnLogistic_Click(object sender, EventArgs e)
         {
             Staff.Logistic.Logistics_Control Form = new Staff.Logistic.Logistics_Control();
-            Form.Show();
+            Form.ShowDialog();
         }
 
         private void btnViewOrder_Click(object sender, EventArgs e)
         {
             Staff.ViewOrder Form = new Staff.ViewOrder();
-            Form.Show();
+            Form.ShowDialog();
         }
         private void StaffMenu_Load()
         {
@@ -118,9 +116,7 @@ namespace ITP4915M_Group8_Project.Staff
 
         private void btnSignOut_Click(object sender, EventArgs e)
         {
-            Login.CustomerLogIn Form = new Login.CustomerLogIn();
-            Form.Show();
-            this.Close();
+            Close();
         }
 
         private void btnProductionMaterlalSheet_Click(object sender, EventArgs e)
@@ -132,6 +128,18 @@ namespace ITP4915M_Group8_Project.Staff
         private void btnDesign_Click(object sender, EventArgs e)
         {
             Design.UploadDesign Form = new Design.UploadDesign();
+            Form.ShowDialog();
+        }
+
+        private void btnProductionList_Click(object sender, EventArgs e)
+        {
+            Production.Production_Control Form = new Production.Production_Control();
+            Form.ShowDialog();
+        }
+
+        private void btnInventoryMaterlalList_Click(object sender, EventArgs e)
+        {
+            Inventory.MaterialRequirementList Form = new Inventory.MaterialRequirementList();
             Form.ShowDialog();
         }
     }

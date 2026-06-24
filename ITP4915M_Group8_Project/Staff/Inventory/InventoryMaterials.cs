@@ -240,8 +240,6 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
 
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            InventoryMenu menu = new InventoryMenu();
-            menu.Show();
             this.Close();
         }
     }
