@@ -38,11 +38,15 @@ CREATE TABLE `status` (
 
 INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
 ('ST01', 'Pending'),
-('ST02', 'In Production'),
-('ST03', 'In Transit'),
-('ST04', 'Delivered'),
-('ST05', 'Failed'),
-('ST06', 'Cancel');
+('ST02', 'Accepted'),
+('ST03', 'In Production'),
+('ST04', 'Produced'),
+('ST05', 'Waiting for Delivery'),
+('ST06', 'In Transit'),
+('ST07', 'Delivered'),
+('ST08', 'Failed'),
+('ST09', 'Completed'),
+('ST10', 'Cancelled');
 
 --
 -- 转储表的索引
