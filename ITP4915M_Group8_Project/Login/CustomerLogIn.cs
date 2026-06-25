@@ -83,7 +83,8 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.StaffId = Convert.ToString(dt.Rows[0]["sUserID"]);
 
                         Staff.StaffMenu Form = new Staff.StaffMenu();
-                        Form.ShowDialog();
+                        Form.Show();
+                        this.Close();
                         textBox_password.Clear();
                         textBox_UserName.Clear();
                     }
@@ -123,9 +124,11 @@ namespace ITP4915M_Group8_Project.Login
                         UserSession.CustomerCompany = Convert.ToString(dt.Rows[0]["company"]);
 
                         Customer.CustomerMenu buyForm = new Customer.CustomerMenu();
-                        buyForm.ShowDialog();
+                        buyForm.Show();
                         textBox_password.Clear();
                         textBox_UserName.Clear();
+                        this.Close();
+
                     }
                     else
                     {

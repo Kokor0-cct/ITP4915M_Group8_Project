@@ -116,7 +116,9 @@ namespace ITP4915M_Group8_Project.Staff
 
         private void btnSignOut_Click(object sender, EventArgs e)
         {
-            Close();
+            Login.CustomerLogIn logIn = new Login.CustomerLogIn();
+            logIn.Show();
+            this.Close();
         }
 
         private void btnProductionMaterlalSheet_Click(object sender, EventArgs e)

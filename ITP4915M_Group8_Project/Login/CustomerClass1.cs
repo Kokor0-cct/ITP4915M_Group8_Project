@@ -53,8 +53,8 @@ namespace ITP4915M_Group8_Project.Login
             //---Applying the values---
 
             MySqlCommand command = new MySqlCommand(
-    "INSERT INTO Customers(cUserID, cName, cPhone, cPassword, cAddress, company) VALUES (@cid,@cn,@cp,@cpw,@cads,@cmpy)",
-    connect.Connection);
+            "INSERT INTO Customers(cUserID, cName, cPhone, cPassword, cAddress, company) VALUES (@cid,@cn,@cp,@cpw,@cads,@cmpy)",
+            connect.Connection);
 
             command.Parameters.Add("@cid", MySqlDbType.VarChar).Value = new_cid;
             command.Parameters.Add("@cn", MySqlDbType.VarChar).Value = cName;

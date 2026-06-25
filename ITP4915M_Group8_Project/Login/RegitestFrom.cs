@@ -21,10 +21,7 @@ namespace ITP4915M_Group8_Project.Login
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox_identity.Items.Clear();
-            comboBox_identity.Items.Add("Customer");
-            comboBox_identity.Items.Add("Staff");
-            comboBox_identity.SelectedIndex = 0;
+
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
@@ -35,7 +32,6 @@ namespace ITP4915M_Group8_Project.Login
             string cphone = PhonetextBox.Text;
             string cadd = AddstextBox.Text;
             string company = CompanyBox.Text.Trim();
-            string isStaff = comboBox_identity.SelectedText.ToString() == "Staff" ? "Y" : "N";
 
             if (verify())
             {
@@ -59,7 +55,7 @@ namespace ITP4915M_Group8_Project.Login
         bool verify()
         {
             if ((NametextBox.Text == "") || (PwtextBox.Text == "") ||
-                (PhonetextBox.Text == "") || (AddstextBox.Text == "") || comboBox_identity.SelectedItem == null)
+                (PhonetextBox.Text == "") || (AddstextBox.Text == "") )
             {
                 MessageBox.Show("Please fill in all required fields ", "hint",
               MessageBoxButtons.OK, MessageBoxIcon.Warning);

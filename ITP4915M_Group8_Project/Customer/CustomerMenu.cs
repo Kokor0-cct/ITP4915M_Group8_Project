@@ -47,5 +47,11 @@ namespace ITP4915M_Group8_Project.Customer
             logIn.Show();
             this.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Order from = new Order();
+            from.ShowDialog();
+        }
     }
 }
