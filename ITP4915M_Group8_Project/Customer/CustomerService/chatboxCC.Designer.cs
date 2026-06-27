@@ -38,7 +38,7 @@
             // lblWHO
             // 
             lblWHO.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblWHO.Location = new Point(84, 20);
+            lblWHO.Location = new Point(0, 0);
             lblWHO.Name = "lblWHO";
             lblWHO.Size = new Size(304, 23);
             lblWHO.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // txtMSG
             // 
-            txtMSG.Location = new Point(84, 46);
+            txtMSG.Location = new Point(0, 26);
             txtMSG.Multiline = true;
             txtMSG.Name = "txtMSG";
             txtMSG.ReadOnly = true;
@@ -56,7 +56,7 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(84, 110);
+            lblDate.Location = new Point(3, 90);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(43, 17);
             lblDate.TabIndex = 4;
@@ -66,7 +66,7 @@
             // 
             picBox.Location = new Point(0, 0);
             picBox.Name = "picBox";
-            picBox.Size = new Size(603, 149);
+            picBox.Size = new Size(478, 107);
             picBox.TabIndex = 5;
             picBox.TabStop = false;
             // 
@@ -79,7 +79,7 @@
             Controls.Add(lblWHO);
             Controls.Add(picBox);
             Name = "chatboxCC";
-            Size = new Size(603, 149);
+            Size = new Size(481, 107);
             ((System.ComponentModel.ISupportInitialize)picBox).EndInit();
             ResumeLayout(false);
             PerformLayout();

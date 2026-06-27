@@ -39,6 +39,8 @@
             btnProductionList = new Button();
             btnProductionMaterlalSheet = new Button();
             grpSales = new GroupBox();
+            btnCustomerSupport = new Button();
+            btnreplacerequest = new Button();
             grpProduction = new GroupBox();
             grpInventory = new GroupBox();
             grpLogistics = new GroupBox();
@@ -46,9 +48,9 @@
             lblWelcome = new Label();
             btnViewOrder = new Button();
             btnSignOut = new Button();
-            btnreplacerequest = new Button();
             grpSales.SuspendLayout();
             grpProduction.SuspendLayout();
+            grpInventory.SuspendLayout();
             grpLogistics.SuspendLayout();
             SuspendLayout();
             // 
@@ -64,7 +66,7 @@
             // 
             // btnSalesService
             // 
-            btnSalesService.Location = new Point(92, 224);
+            btnSalesService.Location = new Point(21, 27);
             btnSalesService.Name = "btnSalesService";
             btnSalesService.Size = new Size(75, 75);
             btnSalesService.TabIndex = 11;
@@ -74,7 +76,7 @@
             // 
             // btnSalesOrderEdit
             // 
-            btnSalesOrderEdit.Location = new Point(198, 224);
+            btnSalesOrderEdit.Location = new Point(111, 24);
             btnSalesOrderEdit.Name = "btnSalesOrderEdit";
             btnSalesOrderEdit.Size = new Size(85, 75);
             btnSalesOrderEdit.TabIndex = 12;
@@ -84,7 +86,7 @@
             // 
             // btnSalesReport
             // 
-            btnSalesReport.Location = new Point(352, 28);
+            btnSalesReport.Location = new Point(292, 24);
             btnSalesReport.Name = "btnSalesReport";
             btnSalesReport.Size = new Size(75, 75);
             btnSalesReport.TabIndex = 13;
@@ -93,7 +95,7 @@
             // 
             // btnInventoryManagement
             // 
-            btnInventoryManagement.Location = new Point(110, 375);
+            btnInventoryManagement.Location = new Point(21, 27);
             btnInventoryManagement.Name = "btnInventoryManagement";
             btnInventoryManagement.Size = new Size(93, 75);
             btnInventoryManagement.TabIndex = 14;
@@ -103,7 +105,7 @@
             // 
             // btnInventoryMaterlalList
             // 
-            btnInventoryMaterlalList.Location = new Point(233, 375);
+            btnInventoryMaterlalList.Location = new Point(136, 28);
             btnInventoryMaterlalList.Name = "btnInventoryMaterlalList";
             btnInventoryMaterlalList.Size = new Size(101, 75);
             btnInventoryMaterlalList.TabIndex = 15;
@@ -154,22 +156,45 @@
             // 
             // grpSales
             // 
+            grpSales.Controls.Add(btnCustomerSupport);
             grpSales.Controls.Add(btnreplacerequest);
             grpSales.Controls.Add(btnSalesReport);
+            grpSales.Controls.Add(btnSalesOrderEdit);
+            grpSales.Controls.Add(btnSalesService);
             grpSales.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpSales.Location = new Point(62, 197);
             grpSales.Name = "grpSales";
-            grpSales.Size = new Size(447, 122);
+            grpSales.Size = new Size(478, 122);
             grpSales.TabIndex = 20;
             grpSales.TabStop = false;
             grpSales.Text = "Sales Department";
+            // 
+            // btnCustomerSupport
+            // 
+            btnCustomerSupport.Location = new Point(384, 24);
+            btnCustomerSupport.Name = "btnCustomerSupport";
+            btnCustomerSupport.Size = new Size(75, 75);
+            btnCustomerSupport.TabIndex = 29;
+            btnCustomerSupport.Text = "Customer Support";
+            btnCustomerSupport.UseVisualStyleBackColor = true;
+            btnCustomerSupport.Click += btnCustomerSupport_Click;
+            // 
+            // btnreplacerequest
+            // 
+            btnreplacerequest.Location = new Point(211, 24);
+            btnreplacerequest.Name = "btnreplacerequest";
+            btnreplacerequest.Size = new Size(75, 75);
+            btnreplacerequest.TabIndex = 28;
+            btnreplacerequest.Text = "Replace Request List";
+            btnreplacerequest.UseVisualStyleBackColor = true;
+            btnreplacerequest.Click += btnreplacerequest_Click;
             // 
             // grpProduction
             // 
             grpProduction.Controls.Add(btnProductionMaterlalSheet);
             grpProduction.Controls.Add(btnProductionList);
             grpProduction.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpProduction.Location = new Point(515, 197);
+            grpProduction.Location = new Point(327, 348);
             grpProduction.Name = "grpProduction";
             grpProduction.Size = new Size(219, 122);
             grpProduction.TabIndex = 21;
@@ -178,10 +203,12 @@
             // 
             // grpInventory
             // 
+            grpInventory.Controls.Add(btnInventoryManagement);
+            grpInventory.Controls.Add(btnInventoryMaterlalList);
             grpInventory.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpInventory.Location = new Point(62, 348);
             grpInventory.Name = "grpInventory";
-            grpInventory.Size = new Size(305, 122);
+            grpInventory.Size = new Size(247, 122);
             grpInventory.TabIndex = 22;
             grpInventory.TabStop = false;
             grpInventory.Text = "Inventory Control Department";
@@ -190,7 +217,7 @@
             // 
             grpLogistics.Controls.Add(btnLogistic);
             grpLogistics.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpLogistics.Location = new Point(391, 348);
+            grpLogistics.Location = new Point(572, 197);
             grpLogistics.Name = "grpLogistics";
             grpLogistics.Size = new Size(162, 122);
             grpLogistics.TabIndex = 23;
@@ -236,40 +263,27 @@
             btnSignOut.UseVisualStyleBackColor = true;
             btnSignOut.Click += btnSignOut_Click;
             // 
-            // btnreplacerequest
-            // 
-            btnreplacerequest.Location = new Point(249, 28);
-            btnreplacerequest.Name = "btnreplacerequest";
-            btnreplacerequest.Size = new Size(75, 75);
-            btnreplacerequest.TabIndex = 28;
-            btnreplacerequest.Text = "Replace Request List";
-            btnreplacerequest.UseVisualStyleBackColor = true;
-            btnreplacerequest.Click += btnreplacerequest_Click;
-            // 
             // StaffMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 527);
             Controls.Add(btnSignOut);
+            Controls.Add(grpProduction);
             Controls.Add(btnViewOrder);
             Controls.Add(lblWelcome);
             Controls.Add(btnDesign);
-            Controls.Add(btnInventoryMaterlalList);
-            Controls.Add(btnInventoryManagement);
-            Controls.Add(btnSalesOrderEdit);
-            Controls.Add(btnSalesService);
             Controls.Add(grpSales);
-            Controls.Add(grpProduction);
             Controls.Add(grpInventory);
             Controls.Add(grpLogistics);
             Controls.Add(grpDesign);
             Controls.Add(lblback);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "StaffMenu";
             Text = "StaffMenu";
             grpSales.ResumeLayout(false);
             grpProduction.ResumeLayout(false);
+            grpInventory.ResumeLayout(false);
             grpLogistics.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -295,5 +309,6 @@
         private Button btnViewOrder;
         private Button btnSignOut;
         private Button btnreplacerequest;
+        private Button btnCustomerSupport;
     }
 }

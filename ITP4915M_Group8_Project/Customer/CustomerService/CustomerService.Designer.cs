@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flpChatPanel = new FlowLayoutPanel();
             lblTaital = new Label();
             txtSendMsg = new TextBox();
-            button2 = new Button();
+            btnSubmit = new Button();
             linlblBack = new LinkLabel();
             label1 = new Label();
             SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flpChatPanel
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(66, 65);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(677, 245);
-            flowLayoutPanel1.TabIndex = 0;
-            flowLayoutPanel1.WrapContents = false;
+            flpChatPanel.AutoScroll = true;
+            flpChatPanel.FlowDirection = FlowDirection.TopDown;
+            flpChatPanel.Location = new Point(66, 65);
+            flpChatPanel.Name = "flpChatPanel";
+            flpChatPanel.Size = new Size(677, 245);
+            flpChatPanel.TabIndex = 0;
+            flpChatPanel.WrapContents = false;
             // 
             // lblTaital
             // 
@@ -67,14 +67,15 @@
             txtSendMsg.TabIndex = 2;
             txtSendMsg.Text = "Please edit your requirements.";
             // 
-            // button2
+            // btnSubmit
             // 
-            button2.Location = new Point(626, 391);
-            button2.Name = "button2";
-            button2.Size = new Size(107, 28);
-            button2.TabIndex = 4;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnSubmit.Location = new Point(626, 391);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new Size(107, 28);
+            btnSubmit.TabIndex = 4;
+            btnSubmit.Text = "Submit";
+            btnSubmit.UseVisualStyleBackColor = true;
+            btnSubmit.Click += btnSubmit_Click;
             // 
             // linlblBack
             // 
@@ -102,10 +103,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(linlblBack);
-            Controls.Add(button2);
+            Controls.Add(btnSubmit);
             Controls.Add(txtSendMsg);
             Controls.Add(lblTaital);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(flpChatPanel);
             Controls.Add(label1);
             Name = "CustomerService";
             Text = "CustomerService";
@@ -115,10 +116,10 @@
 
         #endregion
 
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flpChatPanel;
         private Label lblTaital;
         private TextBox txtSendMsg;
-        private Button button2;
+        private Button btnSubmit;
         private LinkLabel linlblBack;
         private Label label1;
     }

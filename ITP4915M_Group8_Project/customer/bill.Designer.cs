@@ -63,7 +63,7 @@
             // 
             lalBillplease.AutoSize = true;
             lalBillplease.Font = new Font("Microsoft Sans Serif", 30F);
-            lalBillplease.Location = new Point(350, 40);
+            lalBillplease.Location = new Point(350, 45);
             lalBillplease.Margin = new Padding(4, 0, 4, 0);
             lalBillplease.Name = "lalBillplease";
             lalBillplease.Size = new Size(202, 46);
@@ -84,18 +84,18 @@
             grpbBillingDetails.Controls.Add(rdbOrdinaryTransportat);
             grpbBillingDetails.Controls.Add(txtPhonenum);
             grpbBillingDetails.Controls.Add(txtFirstName);
-            grpbBillingDetails.Location = new Point(128, 111);
-            grpbBillingDetails.Margin = new Padding(4, 4, 4, 4);
+            grpbBillingDetails.Location = new Point(128, 126);
+            grpbBillingDetails.Margin = new Padding(4, 5, 4, 5);
             grpbBillingDetails.Name = "grpbBillingDetails";
-            grpbBillingDetails.Padding = new Padding(4, 4, 4, 4);
-            grpbBillingDetails.Size = new Size(295, 389);
+            grpbBillingDetails.Padding = new Padding(4, 5, 4, 5);
+            grpbBillingDetails.Size = new Size(295, 441);
             grpbBillingDetails.TabIndex = 1;
             grpbBillingDetails.TabStop = false;
             grpbBillingDetails.Text = "Billing Details";
             // 
             // dateChoose
             // 
-            dateChoose.Location = new Point(20, 104);
+            dateChoose.Location = new Point(20, 118);
             dateChoose.Name = "dateChoose";
             dateChoose.Size = new Size(248, 23);
             dateChoose.TabIndex = 13;
@@ -103,48 +103,48 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(20, 86);
+            lblDate.Location = new Point(20, 97);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(75, 15);
+            lblDate.Size = new Size(84, 17);
             lblDate.TabIndex = 12;
             lblDate.Text = "Delivery date";
             // 
             // lalShoppingAddres
             // 
             lalShoppingAddres.AutoSize = true;
-            lalShoppingAddres.Location = new Point(20, 146);
+            lalShoppingAddres.Location = new Point(20, 165);
             lalShoppingAddres.Margin = new Padding(4, 0, 4, 0);
             lalShoppingAddres.Name = "lalShoppingAddres";
-            lalShoppingAddres.Size = new Size(99, 15);
+            lalShoppingAddres.Size = new Size(111, 17);
             lalShoppingAddres.TabIndex = 11;
             lalShoppingAddres.Text = "Shipping Address";
             // 
             // lalPhoneNumber
             // 
             lalPhoneNumber.AutoSize = true;
-            lalPhoneNumber.Location = new Point(139, 34);
+            lalPhoneNumber.Location = new Point(139, 39);
             lalPhoneNumber.Margin = new Padding(4, 0, 4, 0);
             lalPhoneNumber.Name = "lalPhoneNumber";
-            lalPhoneNumber.Size = new Size(88, 15);
+            lalPhoneNumber.Size = new Size(96, 17);
             lalPhoneNumber.TabIndex = 10;
             lalPhoneNumber.Text = "Phone Number";
             // 
             // lalName
             // 
             lalName.AutoSize = true;
-            lalName.Location = new Point(20, 34);
+            lalName.Location = new Point(20, 39);
             lalName.Margin = new Padding(4, 0, 4, 0);
             lalName.Name = "lalName";
-            lalName.Size = new Size(39, 15);
+            lalName.Size = new Size(43, 17);
             lalName.TabIndex = 8;
             lalName.Text = "Name";
             // 
             // rdbExpressShipping
             // 
-            rdbExpressShipping.Location = new Point(19, 322);
-            rdbExpressShipping.Margin = new Padding(4, 4, 4, 4);
+            rdbExpressShipping.Location = new Point(19, 365);
+            rdbExpressShipping.Margin = new Padding(4, 5, 4, 5);
             rdbExpressShipping.Name = "rdbExpressShipping";
-            rdbExpressShipping.Size = new Size(251, 30);
+            rdbExpressShipping.Size = new Size(251, 34);
             rdbExpressShipping.TabIndex = 7;
             rdbExpressShipping.Text = "Express Shipping                ($150)";
             rdbExpressShipping.UseVisualStyleBackColor = true;
@@ -152,57 +152,55 @@
             // lblshippingType
             // 
             lblshippingType.AutoSize = true;
-            lblshippingType.Location = new Point(104, 250);
+            lblshippingType.Location = new Point(104, 283);
             lblshippingType.Margin = new Padding(4, 0, 4, 0);
             lblshippingType.Name = "lblshippingType";
-            lblshippingType.Size = new Size(80, 15);
+            lblshippingType.Size = new Size(90, 17);
             lblshippingType.TabIndex = 5;
             lblshippingType.Text = "shipping Type";
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(20, 161);
-            txtAddress.Margin = new Padding(4, 4, 4, 4);
+            txtAddress.Location = new Point(20, 182);
+            txtAddress.Margin = new Padding(4, 5, 4, 5);
             txtAddress.Multiline = true;
             txtAddress.Name = "txtAddress";
-            txtAddress.Size = new Size(250, 73);
+            txtAddress.Size = new Size(250, 82);
             txtAddress.TabIndex = 4;
             // 
             // rdbOrdinaryTransportat
             // 
-            rdbOrdinaryTransportat.Checked = true;
-            rdbOrdinaryTransportat.Location = new Point(20, 286);
-            rdbOrdinaryTransportat.Margin = new Padding(4, 4, 4, 4);
+            rdbOrdinaryTransportat.Location = new Point(20, 324);
+            rdbOrdinaryTransportat.Margin = new Padding(4, 5, 4, 5);
             rdbOrdinaryTransportat.Name = "rdbOrdinaryTransportat";
-            rdbOrdinaryTransportat.Size = new Size(251, 29);
+            rdbOrdinaryTransportat.Size = new Size(251, 33);
             rdbOrdinaryTransportat.TabIndex = 6;
-            rdbOrdinaryTransportat.TabStop = true;
             rdbOrdinaryTransportat.Text = "Ordinary Transport             ($50)";
             rdbOrdinaryTransportat.UseVisualStyleBackColor = true;
             rdbOrdinaryTransportat.CheckedChanged += rdbOrdinaryTransportat_CheckedChanged;
             // 
             // txtPhonenum
             // 
-            txtPhonenum.Location = new Point(139, 55);
-            txtPhonenum.Margin = new Padding(4, 4, 4, 4);
+            txtPhonenum.Location = new Point(139, 62);
+            txtPhonenum.Margin = new Padding(4, 5, 4, 5);
             txtPhonenum.Name = "txtPhonenum";
             txtPhonenum.Size = new Size(129, 23);
             txtPhonenum.TabIndex = 3;
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(20, 55);
-            txtFirstName.Margin = new Padding(4, 4, 4, 4);
+            txtFirstName.Location = new Point(20, 62);
+            txtFirstName.Margin = new Padding(4, 5, 4, 5);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(111, 23);
             txtFirstName.TabIndex = 0;
             // 
             // btnContinue
             // 
-            btnContinue.Location = new Point(515, 449);
-            btnContinue.Margin = new Padding(4, 4, 4, 4);
+            btnContinue.Location = new Point(515, 509);
+            btnContinue.Margin = new Padding(4, 5, 4, 5);
             btnContinue.Name = "btnContinue";
-            btnContinue.Size = new Size(321, 51);
+            btnContinue.Size = new Size(321, 58);
             btnContinue.TabIndex = 3;
             btnContinue.Text = "Continue";
             btnContinue.UseVisualStyleBackColor = true;
@@ -211,10 +209,10 @@
             // lalOrderName
             // 
             lalOrderName.AutoSize = true;
-            lalOrderName.Location = new Point(529, 150);
+            lalOrderName.Location = new Point(529, 170);
             lalOrderName.Margin = new Padding(4, 0, 4, 0);
             lalOrderName.Name = "lalOrderName";
-            lalOrderName.Size = new Size(72, 15);
+            lalOrderName.Size = new Size(82, 17);
             lalOrderName.TabIndex = 0;
             lalOrderName.Text = "Order Name";
             // 
@@ -223,7 +221,7 @@
             lalQuantitty.Location = new Point(0, 0);
             lalQuantitty.Margin = new Padding(2, 0, 2, 0);
             lalQuantitty.Name = "lalQuantitty";
-            lalQuantitty.Size = new Size(64, 15);
+            lalQuantitty.Size = new Size(64, 17);
             lalQuantitty.TabIndex = 8;
             // 
             // label4
@@ -231,26 +229,26 @@
             label4.Location = new Point(0, 0);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(64, 15);
+            label4.Size = new Size(64, 17);
             label4.TabIndex = 7;
             // 
             // lalProductName
             // 
             lalProductName.AutoSize = true;
-            lalProductName.Location = new Point(529, 198);
+            lalProductName.Location = new Point(529, 224);
             lalProductName.Margin = new Padding(4, 0, 4, 0);
             lalProductName.Name = "lalProductName";
-            lalProductName.Size = new Size(81, 15);
+            lalProductName.Size = new Size(88, 17);
             lalProductName.TabIndex = 4;
             lalProductName.Text = "ProductName";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(640, 198);
+            label6.Location = new Point(640, 224);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(19, 15);
+            label6.Size = new Size(21, 17);
             label6.TabIndex = 5;
             label6.Text = "x1";
             label6.Click += label6_Click;
@@ -260,26 +258,26 @@
             lalTotalAmount.Location = new Point(0, 0);
             lalTotalAmount.Margin = new Padding(2, 0, 2, 0);
             lalTotalAmount.Name = "lalTotalAmount";
-            lalTotalAmount.Size = new Size(64, 15);
+            lalTotalAmount.Size = new Size(64, 17);
             lalTotalAmount.TabIndex = 11;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(624, 150);
+            label1.Location = new Point(624, 170);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(53, 15);
+            label1.Size = new Size(56, 17);
             label1.TabIndex = 9;
             label1.Text = "Quantity";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(720, 150);
+            label2.Location = new Point(720, 170);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(51, 15);
+            label2.Size = new Size(53, 17);
             label2.TabIndex = 10;
             label2.Text = "Amount";
             // 
@@ -288,35 +286,35 @@
             label3.Location = new Point(0, 0);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(64, 15);
+            label3.Size = new Size(64, 17);
             label3.TabIndex = 0;
             // 
             // lblTotalPrice
             // 
             lblTotalPrice.AutoSize = true;
-            lblTotalPrice.Location = new Point(529, 411);
+            lblTotalPrice.Location = new Point(529, 466);
             lblTotalPrice.Margin = new Padding(4, 0, 4, 0);
             lblTotalPrice.Name = "lblTotalPrice";
-            lblTotalPrice.Size = new Size(67, 15);
+            lblTotalPrice.Size = new Size(76, 17);
             lblTotalPrice.TabIndex = 12;
             lblTotalPrice.Text = "Total Price :";
             // 
             // TotalPriceLib2
             // 
             TotalPriceLib2.AutoSize = true;
-            TotalPriceLib2.Location = new Point(739, 198);
+            TotalPriceLib2.Location = new Point(739, 224);
             TotalPriceLib2.Margin = new Padding(4, 0, 4, 0);
             TotalPriceLib2.Name = "TotalPriceLib2";
-            TotalPriceLib2.Size = new Size(13, 15);
+            TotalPriceLib2.Size = new Size(15, 17);
             TotalPriceLib2.TabIndex = 13;
             TotalPriceLib2.Text = "0";
             TotalPriceLib2.Click += TotalPriceLib2_Click;
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(29, 449);
+            btnBack.Location = new Point(29, 509);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(75, 51);
+            btnBack.Size = new Size(75, 58);
             btnBack.TabIndex = 14;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
@@ -325,16 +323,16 @@
             // dgvCartList
             // 
             dgvCartList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCartList.Location = new Point(515, 113);
+            dgvCartList.Location = new Point(515, 128);
             dgvCartList.Name = "dgvCartList";
-            dgvCartList.Size = new Size(321, 232);
+            dgvCartList.Size = new Size(321, 263);
             dgvCartList.TabIndex = 15;
             // 
             // CheckOut
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(934, 562);
+            ClientSize = new Size(934, 637);
             Controls.Add(dgvCartList);
             Controls.Add(btnBack);
             Controls.Add(TotalPriceLib2);
@@ -351,7 +349,7 @@
             Controls.Add(lalBillplease);
             Controls.Add(lalOrderName);
             Controls.Add(lalQuantitty);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "CheckOut";
             Text = "bill";
             grpbBillingDetails.ResumeLayout(false);

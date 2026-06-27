@@ -16,6 +16,7 @@ namespace ITP4915M_Group8_Project.customer
         private string currentProductName;
         private decimal unitPrice;
 
+
         public CheckOut()
         {
             InitializeComponent();
@@ -39,8 +40,23 @@ namespace ITP4915M_Group8_Project.customer
             dgvCartList.DataSource = ShoppingCart.Items;
             txtPhonenum.Text = UserSession.CustomerPhone;
             txtAddress.Text = UserSession.CustomerAddress;
+            string shipType = "";
+            int shipPrice = 0;
 
-            lblTotalPrice.Text = "Total Amount : $" + ShoppingCart.GetTotalAmount().ToString("0.00");
+            if (rdbOrdinaryTransportat.Checked == true)
+            {
+                shipType = "SO01";
+                shipPrice = 50;
+
+
+            }
+            else if (rdbExpressShipping.Checked == true)
+            {
+                shipType = "SO02";
+                shipPrice = 150;
+
+            }
+            lblTotalPrice.Text = "Total Amount : $" + (ShoppingCart.GetTotalAmount() + shipPrice).ToString("0.00");
 
             txtFirstName.Text = UserSession.CustomerName;
         }
@@ -174,7 +190,7 @@ namespace ITP4915M_Group8_Project.customer
 
         private void rdbOrdinaryTransportat_CheckedChanged(object sender, EventArgs e)
         {
-            int shipPrice= 0;
+            int shipPrice= 50;
 
             if (rdbOrdinaryTransportat.Checked == true)
             {

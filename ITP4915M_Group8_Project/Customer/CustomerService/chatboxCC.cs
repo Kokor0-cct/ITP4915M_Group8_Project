@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ITP4915M_Group8_Project.Login;
+using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,33 +9,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ITP4915M_Group8_Project.Staff.Inventory;
 
 namespace ITP4915M_Group8_Project.Customer.CustomerService
 {
     public partial class chatboxCC : UserControl
     {
         public bool IsCustomerSide { get; set; }
-        public chatboxCC()
+        public chatboxCC(string senderType, string cid, string message, string createdAt)
         {
             InitializeComponent();
 
-        }
-        public void SetMessage(string senderText, string content, string timeText, bool isCustomer)
-        {
-            IsCustomerSide = isCustomer;
-            lblWHO.Text = senderText;
-            txtMSG.Text = content;
-            lblDate.Text = timeText;
+            lblWHO.Text = cid;
+            txtMSG.Text = message;
+            lblDate.Text = createdAt;
 
-            if (IsCustomerSide)
+            bool isCustomerSide = senderType == "customer";
+            if (isCustomerSide)
             {
-                this.BackColor = Color.FromArgb(225, 230, 225);
+                BackColor = Color.FromArgb(225, 230, 225);
             }
             else
             {
-                this.BackColor = Color.FromArgb(232, 230, 228);
+                BackColor = Color.FromArgb(232, 230, 228);
             }
         }
+    }
+
+        
+       
 
     }
-}
+
