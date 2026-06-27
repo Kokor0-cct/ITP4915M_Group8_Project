@@ -56,7 +56,7 @@ namespace ITP4915M_Group8_Project.Staff
         }
         private void StaffMenu_Load()
         {
-            List<Button> salesBtns = new List<Button>() { btnSalesService, btnSalesOrderEdit, btnSalesReport };
+            List<Button> salesBtns = new List<Button>() { btnSalesService, btnSalesOrderEdit, btnSalesReport,btnreplacerequest };
             List<Button> productionBtns = new List<Button>() { btnProductionList, btnProductionMaterlalSheet };
             List<Button> inventoryBtns = new List<Button>() { btnInventoryManagement, btnInventoryMaterlalList };
             List<Button> logisticBtns = new List<Button>() { btnLogistic };
@@ -142,6 +142,12 @@ namespace ITP4915M_Group8_Project.Staff
         private void btnInventoryMaterlalList_Click(object sender, EventArgs e)
         {
             Inventory.MaterialRequirementList Form = new Inventory.MaterialRequirementList();
+            Form.ShowDialog();
+        }
+
+        private void btnreplacerequest_Click(object sender, EventArgs e)
+        {
+            Sales.Replace_Request_List Form = new Sales.Replace_Request_List();
             Form.ShowDialog();
         }
     }

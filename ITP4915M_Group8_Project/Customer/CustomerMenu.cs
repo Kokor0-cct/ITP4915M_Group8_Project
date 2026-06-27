@@ -53,5 +53,11 @@ namespace ITP4915M_Group8_Project.Customer
             Order from = new Order();
             from.ShowDialog();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            CustomerService.CustomerService from = new CustomerService.CustomerService();
+            from.ShowDialog();
+        }
     }
 }

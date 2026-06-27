@@ -46,6 +46,10 @@
             lblWelcome = new Label();
             btnViewOrder = new Button();
             btnSignOut = new Button();
+            btnreplacerequest = new Button();
+            grpSales.SuspendLayout();
+            grpProduction.SuspendLayout();
+            grpLogistics.SuspendLayout();
             SuspendLayout();
             // 
             // lblback
@@ -53,16 +57,16 @@
             lblback.BackColor = SystemColors.Control;
             lblback.BorderStyle = BorderStyle.FixedSingle;
             lblback.ForeColor = SystemColors.ActiveCaptionText;
-            lblback.Location = new Point(34, 149);
+            lblback.Location = new Point(34, 169);
             lblback.Name = "lblback";
-            lblback.Size = new Size(731, 285);
+            lblback.Size = new Size(731, 323);
             lblback.TabIndex = 0;
             // 
             // btnSalesService
             // 
-            btnSalesService.Location = new Point(92, 198);
+            btnSalesService.Location = new Point(92, 224);
             btnSalesService.Name = "btnSalesService";
-            btnSalesService.Size = new Size(75, 66);
+            btnSalesService.Size = new Size(75, 75);
             btnSalesService.TabIndex = 11;
             btnSalesService.Text = "Customer service";
             btnSalesService.UseVisualStyleBackColor = true;
@@ -70,9 +74,9 @@
             // 
             // btnSalesOrderEdit
             // 
-            btnSalesOrderEdit.Location = new Point(198, 198);
+            btnSalesOrderEdit.Location = new Point(198, 224);
             btnSalesOrderEdit.Name = "btnSalesOrderEdit";
-            btnSalesOrderEdit.Size = new Size(85, 66);
+            btnSalesOrderEdit.Size = new Size(85, 75);
             btnSalesOrderEdit.TabIndex = 12;
             btnSalesOrderEdit.Text = "Order information Edit";
             btnSalesOrderEdit.UseVisualStyleBackColor = true;
@@ -80,18 +84,18 @@
             // 
             // btnSalesReport
             // 
-            btnSalesReport.Location = new Point(313, 198);
+            btnSalesReport.Location = new Point(352, 28);
             btnSalesReport.Name = "btnSalesReport";
-            btnSalesReport.Size = new Size(75, 66);
+            btnSalesReport.Size = new Size(75, 75);
             btnSalesReport.TabIndex = 13;
             btnSalesReport.Text = "Report";
             btnSalesReport.UseVisualStyleBackColor = true;
             // 
             // btnInventoryManagement
             // 
-            btnInventoryManagement.Location = new Point(110, 331);
+            btnInventoryManagement.Location = new Point(110, 375);
             btnInventoryManagement.Name = "btnInventoryManagement";
-            btnInventoryManagement.Size = new Size(93, 66);
+            btnInventoryManagement.Size = new Size(93, 75);
             btnInventoryManagement.TabIndex = 14;
             btnInventoryManagement.Text = "Inventory Management";
             btnInventoryManagement.UseVisualStyleBackColor = true;
@@ -99,9 +103,9 @@
             // 
             // btnInventoryMaterlalList
             // 
-            btnInventoryMaterlalList.Location = new Point(233, 331);
+            btnInventoryMaterlalList.Location = new Point(233, 375);
             btnInventoryMaterlalList.Name = "btnInventoryMaterlalList";
-            btnInventoryMaterlalList.Size = new Size(101, 66);
+            btnInventoryMaterlalList.Size = new Size(101, 75);
             btnInventoryMaterlalList.TabIndex = 15;
             btnInventoryMaterlalList.Text = "Materlal Requirements List";
             btnInventoryMaterlalList.UseVisualStyleBackColor = true;
@@ -109,9 +113,9 @@
             // 
             // btnLogistic
             // 
-            btnLogistic.Location = new Point(426, 331);
+            btnLogistic.Location = new Point(23, 27);
             btnLogistic.Name = "btnLogistic";
-            btnLogistic.Size = new Size(92, 66);
+            btnLogistic.Size = new Size(116, 75);
             btnLogistic.TabIndex = 16;
             btnLogistic.Text = "Logistics\n status\n Modification";
             btnLogistic.UseVisualStyleBackColor = true;
@@ -119,10 +123,10 @@
             // 
             // btnDesign
             // 
-            btnDesign.Location = new Point(614, 331);
+            btnDesign.Location = new Point(614, 375);
             btnDesign.Name = "btnDesign";
             btnDesign.RightToLeft = RightToLeft.No;
-            btnDesign.Size = new Size(75, 66);
+            btnDesign.Size = new Size(75, 75);
             btnDesign.TabIndex = 17;
             btnDesign.Text = "Upload Design";
             btnDesign.UseVisualStyleBackColor = true;
@@ -130,9 +134,9 @@
             // 
             // btnProductionList
             // 
-            btnProductionList.Location = new Point(473, 198);
+            btnProductionList.Location = new Point(12, 27);
             btnProductionList.Name = "btnProductionList";
-            btnProductionList.Size = new Size(75, 66);
+            btnProductionList.Size = new Size(75, 75);
             btnProductionList.TabIndex = 18;
             btnProductionList.Text = "Task List";
             btnProductionList.UseVisualStyleBackColor = true;
@@ -140,9 +144,9 @@
             // 
             // btnProductionMaterlalSheet
             // 
-            btnProductionMaterlalSheet.Location = new Point(595, 198);
+            btnProductionMaterlalSheet.Location = new Point(119, 28);
             btnProductionMaterlalSheet.Name = "btnProductionMaterlalSheet";
-            btnProductionMaterlalSheet.Size = new Size(94, 66);
+            btnProductionMaterlalSheet.Size = new Size(94, 75);
             btnProductionMaterlalSheet.TabIndex = 19;
             btnProductionMaterlalSheet.Text = "Material Requirement Sheet";
             btnProductionMaterlalSheet.UseVisualStyleBackColor = true;
@@ -150,20 +154,24 @@
             // 
             // grpSales
             // 
+            grpSales.Controls.Add(btnreplacerequest);
+            grpSales.Controls.Add(btnSalesReport);
             grpSales.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpSales.Location = new Point(62, 174);
+            grpSales.Location = new Point(62, 197);
             grpSales.Name = "grpSales";
-            grpSales.Size = new Size(358, 108);
+            grpSales.Size = new Size(447, 122);
             grpSales.TabIndex = 20;
             grpSales.TabStop = false;
             grpSales.Text = "Sales Department";
             // 
             // grpProduction
             // 
+            grpProduction.Controls.Add(btnProductionMaterlalSheet);
+            grpProduction.Controls.Add(btnProductionList);
             grpProduction.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpProduction.Location = new Point(443, 174);
+            grpProduction.Location = new Point(515, 197);
             grpProduction.Name = "grpProduction";
-            grpProduction.Size = new Size(291, 108);
+            grpProduction.Size = new Size(219, 122);
             grpProduction.TabIndex = 21;
             grpProduction.TabStop = false;
             grpProduction.Text = "Production Department";
@@ -171,19 +179,20 @@
             // grpInventory
             // 
             grpInventory.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpInventory.Location = new Point(62, 307);
+            grpInventory.Location = new Point(62, 348);
             grpInventory.Name = "grpInventory";
-            grpInventory.Size = new Size(305, 108);
+            grpInventory.Size = new Size(305, 122);
             grpInventory.TabIndex = 22;
             grpInventory.TabStop = false;
             grpInventory.Text = "Inventory Control Department";
             // 
             // grpLogistics
             // 
+            grpLogistics.Controls.Add(btnLogistic);
             grpLogistics.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpLogistics.Location = new Point(391, 307);
+            grpLogistics.Location = new Point(391, 348);
             grpLogistics.Name = "grpLogistics";
-            grpLogistics.Size = new Size(162, 108);
+            grpLogistics.Size = new Size(162, 122);
             grpLogistics.TabIndex = 23;
             grpLogistics.TabStop = false;
             grpLogistics.Text = "Logistic Department";
@@ -191,27 +200,27 @@
             // grpDesign
             // 
             grpDesign.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpDesign.Location = new Point(571, 307);
+            grpDesign.Location = new Point(571, 348);
             grpDesign.Name = "grpDesign";
-            grpDesign.Size = new Size(163, 108);
+            grpDesign.Size = new Size(163, 122);
             grpDesign.TabIndex = 24;
             grpDesign.TabStop = false;
             grpDesign.Text = "Design Department";
             // 
             // lblWelcome
             // 
-            lblWelcome.Location = new Point(34, 17);
+            lblWelcome.Location = new Point(34, 19);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(428, 17);
+            lblWelcome.Size = new Size(428, 19);
             lblWelcome.TabIndex = 25;
             lblWelcome.Text = "Hi, ";
             // 
             // btnViewOrder
             // 
             btnViewOrder.FlatStyle = FlatStyle.System;
-            btnViewOrder.Location = new Point(34, 75);
+            btnViewOrder.Location = new Point(34, 85);
             btnViewOrder.Name = "btnViewOrder";
-            btnViewOrder.Size = new Size(731, 60);
+            btnViewOrder.Size = new Size(731, 68);
             btnViewOrder.TabIndex = 26;
             btnViewOrder.Text = "View Orders";
             btnViewOrder.UseVisualStyleBackColor = true;
@@ -219,29 +228,35 @@
             // 
             // btnSignOut
             // 
-            btnSignOut.Location = new Point(690, 43);
+            btnSignOut.Location = new Point(690, 49);
             btnSignOut.Name = "btnSignOut";
-            btnSignOut.Size = new Size(75, 26);
+            btnSignOut.Size = new Size(75, 29);
             btnSignOut.TabIndex = 27;
             btnSignOut.Text = "Sign Out";
             btnSignOut.UseVisualStyleBackColor = true;
             btnSignOut.Click += btnSignOut_Click;
             // 
+            // btnreplacerequest
+            // 
+            btnreplacerequest.Location = new Point(249, 28);
+            btnreplacerequest.Name = "btnreplacerequest";
+            btnreplacerequest.Size = new Size(75, 75);
+            btnreplacerequest.TabIndex = 28;
+            btnreplacerequest.Text = "Replace Request List";
+            btnreplacerequest.UseVisualStyleBackColor = true;
+            btnreplacerequest.Click += btnreplacerequest_Click;
+            // 
             // StaffMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 465);
+            ClientSize = new Size(800, 527);
             Controls.Add(btnSignOut);
             Controls.Add(btnViewOrder);
             Controls.Add(lblWelcome);
-            Controls.Add(btnProductionMaterlalSheet);
-            Controls.Add(btnProductionList);
             Controls.Add(btnDesign);
-            Controls.Add(btnLogistic);
             Controls.Add(btnInventoryMaterlalList);
             Controls.Add(btnInventoryManagement);
-            Controls.Add(btnSalesReport);
             Controls.Add(btnSalesOrderEdit);
             Controls.Add(btnSalesService);
             Controls.Add(grpSales);
@@ -250,9 +265,12 @@
             Controls.Add(grpLogistics);
             Controls.Add(grpDesign);
             Controls.Add(lblback);
-            Margin = new Padding(5, 4, 5, 4);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "StaffMenu";
             Text = "StaffMenu";
+            grpSales.ResumeLayout(false);
+            grpProduction.ResumeLayout(false);
+            grpLogistics.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -276,5 +294,6 @@
         private Label lblWelcome;
         private Button btnViewOrder;
         private Button btnSignOut;
+        private Button btnreplacerequest;
     }
 }

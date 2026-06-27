@@ -16,6 +16,8 @@ namespace ITP4915M_Group8_Project.Customer
     public partial class Order : Form
     {
         private string currentOid = "0";
+        private string currentStatus = "0";
+        private string currentFid = "0";
 
         public Order()
         {
@@ -53,16 +55,16 @@ namespace ITP4915M_Group8_Project.Customer
             if (checkStatus() != null) // A status is selected
             {
                 sql = @"SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword AND statustype = @STATUS ORDER BY orderID";
-                MySqlParameter[] parameters = { 
-                    new MySqlParameter("@customerId", UserSession.CustomerId), 
-                    new MySqlParameter("@keyword", "%" + keyword + "%"), 
+                MySqlParameter[] parameters = {
+                    new MySqlParameter("@customerId", UserSession.CustomerId),
+                    new MySqlParameter("@keyword", "%" + keyword + "%"),
                     new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
             }
             else
             { // A status is not selected / "all"
-                MySqlParameter[] parameters = { 
-                    new MySqlParameter("@customerId", UserSession.CustomerId), 
+                MySqlParameter[] parameters = {
+                    new MySqlParameter("@customerId", UserSession.CustomerId),
                     new MySqlParameter("@keyword", "%" + keyword + "%") };
                 dt = DbConnect.Query(sql, parameters);
             }
@@ -114,7 +116,7 @@ namespace ITP4915M_Group8_Project.Customer
 
             //Get fName from furniture
             string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
-            MySqlParameter[] parameters = { 
+            MySqlParameter[] parameters = {
                 new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString()) };
             DataTable dt = DbConnect.Query(sql, parameters);
             string furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
@@ -131,7 +133,11 @@ namespace ITP4915M_Group8_Project.Customer
             dt = DbConnect.Query(sql, parameters);
             string statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
 
+
+
             currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString(); //Stores the selected orderID
+            currentFid = dgvOrderControl.Rows[e.RowIndex].Cells["fID"].Value.ToString(); //Stores the selected furnitureID
+            currentStatus = dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString(); //Stores the selected statusType
             txtOrderID.Text = currentOid;                       //Order ID cell content
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
@@ -141,6 +147,7 @@ namespace ITP4915M_Group8_Project.Customer
             txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
+            txtStaffNote.Text = dgvOrderControl.Rows[e.RowIndex].Cells["StaffNote"].Value.ToString(); ;
         }
 
         // Find the records with matching OrderID
@@ -221,7 +228,7 @@ namespace ITP4915M_Group8_Project.Customer
                     dgvOrderControl.DataSource = dt;
                     return;
             }
-            MySqlParameter[] parameters = { new MySqlParameter("@customerId", UserSession.CustomerId),new MySqlParameter("@STATUS", sqlstat) };
+            MySqlParameter[] parameters = { new MySqlParameter("@customerId", UserSession.CustomerId), new MySqlParameter("@STATUS", sqlstat) };
             dt = DbConnect.Query(sql, parameters);
             dgvOrderControl.DataSource = dt;
         }
@@ -254,6 +261,47 @@ namespace ITP4915M_Group8_Project.Customer
                 return "ST06";
             else
                 return null;
+        }
+
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+
+
+            if (currentOid == "0")
+            {
+                MessageBox.Show("Please select a row ！");
+                return;
+            }else if (currentStatus=="ST11")
+            {
+                MessageBox.Show("Your service application is in progress.");
+                return;
+            }
+            else if (currentStatus=="ST12" || currentStatus=="ST13")
+            {
+                MessageBox.Show("Your service application has been completed.");
+                return;
+            }
+            else if (currentStatus=="ST10")
+            {
+                MessageBox.Show("Your order has been cancelled.");
+                return;
+            }
+            else if (currentStatus == "ST08")
+            {
+                MessageBox.Show("The order has expired.");
+                return;
+            }
+            else if (currentStatus != "ST09")
+            {
+                MessageBox.Show("If you wish to cancel your order, please click \"Cancel Order\".");
+                return;
+            }
+            else
+            {
+                CustomerService.After_sales_Request form = new CustomerService.After_sales_Request(currentOid, currentFid);
+                form.ShowDialog();
+            }
+
         }
     }
 }

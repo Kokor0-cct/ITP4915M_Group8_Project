@@ -101,8 +101,9 @@
             button6.Name = "button6";
             button6.Size = new Size(193, 64);
             button6.TabIndex = 7;
-            button6.Text = "Problem Feedback";
+            button6.Text = "Customer Service";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // btnSignOut
             // 

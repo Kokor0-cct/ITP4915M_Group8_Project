@@ -63,6 +63,10 @@
             lblSearch = new Label();
             dgvOrderControl = new DataGridView();
             lblTitle = new Label();
+            btnCancel = new Button();
+            btnReplace = new Button();
+            txtStaffNote = new TextBox();
+            lblStaffNote = new Label();
             grpStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             SuspendLayout();
@@ -89,7 +93,7 @@
             grpStatus.Controls.Add(rbPending);
             grpStatus.Location = new Point(639, 325);
             grpStatus.Name = "grpStatus";
-            grpStatus.Size = new Size(341, 179);
+            grpStatus.Size = new Size(341, 230);
             grpStatus.TabIndex = 93;
             grpStatus.TabStop = false;
             grpStatus.Text = "Status";
@@ -180,7 +184,7 @@
             // 
             // btnFindSimilar
             // 
-            btnFindSimilar.Location = new Point(491, 469);
+            btnFindSimilar.Location = new Point(491, 519);
             btnFindSimilar.Name = "btnFindSimilar";
             btnFindSimilar.Size = new Size(129, 26);
             btnFindSimilar.TabIndex = 92;
@@ -206,7 +210,7 @@
             // 
             // txtStatus
             // 
-            txtStatus.Location = new Point(360, 469);
+            txtStatus.Location = new Point(360, 519);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
             txtStatus.Size = new Size(100, 23);
@@ -214,7 +218,7 @@
             // 
             // txtShipping
             // 
-            txtShipping.Location = new Point(134, 469);
+            txtShipping.Location = new Point(149, 519);
             txtShipping.Name = "txtShipping";
             txtShipping.ReadOnly = true;
             txtShipping.Size = new Size(132, 23);
@@ -222,7 +226,7 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(110, 435);
+            txtAddress.Location = new Point(119, 438);
             txtAddress.Name = "txtAddress";
             txtAddress.ReadOnly = true;
             txtAddress.Size = new Size(510, 23);
@@ -230,7 +234,7 @@
             // 
             // txtUserID
             // 
-            txtUserID.Location = new Point(110, 402);
+            txtUserID.Location = new Point(119, 404);
             txtUserID.Name = "txtUserID";
             txtUserID.ReadOnly = true;
             txtUserID.Size = new Size(162, 23);
@@ -238,7 +242,7 @@
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(110, 369);
+            txtQuantity.Location = new Point(119, 369);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.ReadOnly = true;
             txtQuantity.Size = new Size(162, 23);
@@ -254,7 +258,7 @@
             // 
             // txtOrderID
             // 
-            txtOrderID.Location = new Point(110, 336);
+            txtOrderID.Location = new Point(119, 336);
             txtOrderID.Name = "txtOrderID";
             txtOrderID.ReadOnly = true;
             txtOrderID.Size = new Size(162, 23);
@@ -263,7 +267,7 @@
             // lblStatusType
             // 
             lblStatusType.AutoSize = true;
-            lblStatusType.Location = new Point(312, 472);
+            lblStatusType.Location = new Point(312, 522);
             lblStatusType.Name = "lblStatusType";
             lblStatusType.Size = new Size(46, 17);
             lblStatusType.TabIndex = 82;
@@ -272,7 +276,7 @@
             // lblShippingType
             // 
             lblShippingType.AutoSize = true;
-            lblShippingType.Location = new Point(50, 471);
+            lblShippingType.Location = new Point(50, 521);
             lblShippingType.Name = "lblShippingType";
             lblShippingType.Size = new Size(94, 17);
             lblShippingType.TabIndex = 81;
@@ -281,7 +285,7 @@
             // lblAddress
             // 
             lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(50, 438);
+            lblAddress.Location = new Point(48, 441);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(59, 17);
             lblAddress.TabIndex = 80;
@@ -346,12 +350,12 @@
             lblback.BorderStyle = BorderStyle.Fixed3D;
             lblback.Location = new Point(36, 325);
             lblback.Name = "lblback";
-            lblback.Size = new Size(597, 179);
+            lblback.Size = new Size(597, 230);
             lblback.TabIndex = 73;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(849, 511);
+            btnRefresh.Location = new Point(1010, 475);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(131, 29);
             btnRefresh.TabIndex = 72;
@@ -396,7 +400,7 @@
             dgvOrderControl.Name = "dgvOrderControl";
             dgvOrderControl.ReadOnly = true;
             dgvOrderControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvOrderControl.Size = new Size(944, 184);
+            dgvOrderControl.Size = new Size(1120, 184);
             dgvOrderControl.TabIndex = 68;
             dgvOrderControl.CellClick += dgvOrderControl_CellClick;
             // 
@@ -404,17 +408,58 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
-            lblTitle.Location = new Point(386, 36);
+            lblTitle.Location = new Point(559, 24);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(247, 31);
             lblTitle.TabIndex = 67;
             lblTitle.Text = "View Order Control";
             // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(1010, 407);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(131, 27);
+            btnCancel.TabIndex = 95;
+            btnCancel.Text = "Cancel Order";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnReplace
+            // 
+            btnReplace.Location = new Point(1010, 334);
+            btnReplace.Name = "btnReplace";
+            btnReplace.Size = new Size(129, 28);
+            btnReplace.TabIndex = 96;
+            btnReplace.Text = "Return/Replace";
+            btnReplace.UseVisualStyleBackColor = true;
+            btnReplace.Click += btnReplace_Click;
+            // 
+            // txtStaffNote
+            // 
+            txtStaffNote.Location = new Point(130, 467);
+            txtStaffNote.Multiline = true;
+            txtStaffNote.Name = "txtStaffNote";
+            txtStaffNote.ReadOnly = true;
+            txtStaffNote.Size = new Size(499, 46);
+            txtStaffNote.TabIndex = 98;
+            // 
+            // lblStaffNote
+            // 
+            lblStaffNote.AutoSize = true;
+            lblStaffNote.Location = new Point(50, 467);
+            lblStaffNote.Name = "lblStaffNote";
+            lblStaffNote.Size = new Size(74, 17);
+            lblStaffNote.TabIndex = 97;
+            lblStaffNote.Text = "Staff Note :";
+            // 
             // Order
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1011, 567);
+            ClientSize = new Size(1203, 567);
+            Controls.Add(txtStaffNote);
+            Controls.Add(lblStaffNote);
+            Controls.Add(btnReplace);
+            Controls.Add(btnCancel);
             Controls.Add(llBack);
             Controls.Add(grpStatus);
             Controls.Add(btnFindSimilar);
@@ -489,5 +534,9 @@
         private Label lblSearch;
         private DataGridView dgvOrderControl;
         private Label lblTitle;
+        private Button btnCancel;
+        private Button btnReplace;
+        private TextBox txtStaffNote;
+        private Label lblStaffNote;
     }
 }

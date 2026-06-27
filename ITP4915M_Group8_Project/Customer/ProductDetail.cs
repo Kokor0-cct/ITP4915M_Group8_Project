@@ -75,6 +75,11 @@ namespace ITP4915M_Group8_Project.Customer
                 MessageBox.Show("Insufficient stock, cannot add to cart！");
                 return;
             }
+            if (ShoppingCart.Items.Any(item => item.fID == CurrentFId))
+            {
+                MessageBox.Show("This product is already in the cart. Please adjust the quantity in the shopping cart.");
+                return;
+            }
 
             CartItem item = new CartItem()
             {
