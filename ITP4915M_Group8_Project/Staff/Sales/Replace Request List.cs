@@ -27,7 +27,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         private string currentOid = "0";
         private string currentFid = "0";
         private string currentStatus = "0";
-        private bool isOrder =false;
+        private bool isOrder = false;
 
 
         public Replace_Request_List()
@@ -79,7 +79,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 }
                 else if (getoid.StartsWith("O", StringComparison.OrdinalIgnoreCase))
                 {
-                    isOrder = true; 
+                    isOrder = true;
                 }
                 else
                 {
@@ -146,7 +146,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 string sql = "";
                 if (isOrder)
                 {
-                     sql = "UPDATE orders SET statusType = @type ,StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
+                    sql = "UPDATE orders SET statusType = @type ,StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
                     MySqlParameter[] updateorder = {
                         new MySqlParameter("@type", "ST10"),
                         new MySqlParameter("@oid",currentOid),
@@ -157,7 +157,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 }
                 else
                 {
-                     sql = "UPDATE customorders SET statusType = @type ,StaffNote = @note WHERE corderID = @oid AND cfID = @fID;";
+                    sql = "UPDATE customorders SET statusType = @type ,StaffNote = @note WHERE corderID = @oid AND cfID = @fID;";
                     MySqlParameter[] updateorder = {
                         new MySqlParameter("@type", "ST10"),
                         new MySqlParameter("@oid",currentOid),
@@ -166,9 +166,9 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                     };
                     DbConnect.Execute(sql, updateorder);
                 }
-               
 
-                 string sq2l = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
+
+                string sq2l = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
                 MySqlParameter[] updaterequest = {
                         new MySqlParameter("@type", "Rejected"),
                         new MySqlParameter("@rid",currentRid),
@@ -327,7 +327,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
 
 
-                    
+
 
                         sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
                         MySqlParameter[] updaterequest = {
@@ -374,7 +374,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         string address = row["codeliveryaddress"].ToString();
                         string shipType = row["shippingType"].ToString();
 
-                       
+
                         string deliveryDate = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
                         string insertSql = @"
                             INSERT INTO customorders(corderID, cfID, Quantity, cUserID, coAmount, codeliverydate, codeliveryaddress, shippingType,statusType, StaffNote
@@ -383,7 +383,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                                 @date, @addr, @ship, 
                                  @stat, @note
                             )";
-                                    MySqlParameter[] insertParam = {
+                        MySqlParameter[] insertParam = {
                             new MySqlParameter("@oid", coid),
                             new MySqlParameter("@fid", fID),
                             new MySqlParameter("@qty", qty),
@@ -424,19 +424,24 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
 
                 }
-                
-            }
-
-
-
-
 
             }
-        
+
+
+
+
+
+        }
+
 
         private void txtStaffNote_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void brnrefresh_Click(object sender, EventArgs e)
+        {
+            LoadDataToGridView();
         }
     }
 }
