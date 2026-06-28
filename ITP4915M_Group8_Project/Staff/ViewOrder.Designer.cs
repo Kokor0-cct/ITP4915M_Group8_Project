@@ -63,8 +63,12 @@
             rbProduction = new RadioButton();
             rbPending = new RadioButton();
             llBack = new LinkLabel();
+            gbOC = new GroupBox();
+            rbCustomOrders = new RadioButton();
+            rbOrders = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             grpStatus.SuspendLayout();
+            gbOC.SuspendLayout();
             SuspendLayout();
             // 
             // btnRefresh
@@ -410,11 +414,46 @@
             llBack.Text = "< Back to Menu";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // gbOC
+            // 
+            gbOC.Controls.Add(rbCustomOrders);
+            gbOC.Controls.Add(rbOrders);
+            gbOC.Location = new Point(879, 72);
+            gbOC.Name = "gbOC";
+            gbOC.Size = new Size(145, 34);
+            gbOC.TabIndex = 67;
+            gbOC.TabStop = false;
+            // 
+            // rbCustomOrders
+            // 
+            rbCustomOrders.AutoSize = true;
+            rbCustomOrders.Location = new Point(72, 11);
+            rbCustomOrders.Name = "rbCustomOrders";
+            rbCustomOrders.Size = new Size(67, 19);
+            rbCustomOrders.TabIndex = 68;
+            rbCustomOrders.TabStop = true;
+            rbCustomOrders.Text = "Custom";
+            rbCustomOrders.UseVisualStyleBackColor = true;
+            rbCustomOrders.CheckedChanged += rbCustomOrders_CheckedChanged;
+            // 
+            // rbOrders
+            // 
+            rbOrders.AutoSize = true;
+            rbOrders.Location = new Point(6, 11);
+            rbOrders.Name = "rbOrders";
+            rbOrders.Size = new Size(60, 19);
+            rbOrders.TabIndex = 68;
+            rbOrders.TabStop = true;
+            rbOrders.Text = "Orders";
+            rbOrders.UseVisualStyleBackColor = true;
+            rbOrders.CheckedChanged += rbOrders_CheckedChanged;
+            // 
             // ViewOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 514);
+            Controls.Add(gbOC);
             Controls.Add(llBack);
             Controls.Add(grpStatus);
             Controls.Add(btnFindSimilar);
@@ -448,6 +487,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
             grpStatus.ResumeLayout(false);
             grpStatus.PerformLayout();
+            gbOC.ResumeLayout(false);
+            gbOC.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -489,5 +530,8 @@
         private RadioButton rbPending;
         private RadioButton rbAll;
         private LinkLabel llBack;
+        private GroupBox gbOC;
+        private RadioButton rbOrders;
+        private RadioButton rbCustomOrders;
     }
 }
