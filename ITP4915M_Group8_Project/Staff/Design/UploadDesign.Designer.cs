@@ -171,7 +171,7 @@
             dgvCFR.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCFR.Size = new Size(664, 137);
             dgvCFR.TabIndex = 91;
-            dgvCFR.SelectionChanged += dgvCFR_SelectionChanged;
+            dgvCFR.CellClick += dgvCFR_CellClick;
             // 
             // lblInventoryFurnitureTitle
             // 
@@ -270,7 +270,7 @@
             dgvCF.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCF.Size = new Size(664, 145);
             dgvCF.TabIndex = 121;
-            dgvCF.SelectionChanged += dgvCF_SelectionChanged;
+            dgvCF.CellClick += dgvCF_CellClick;
             // 
             // numcfPrice
             // 
