@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:07
+-- 生成日期： 2026-06-27 16:39:45
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,32 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `shippingoption`
+-- 表的结构 `material`
 --
 
-CREATE TABLE `shippingoption` (
-  `soId` char(4) NOT NULL,
-  `soName` varchar(20) NOT NULL,
-  `Charge` decimal(5,2) NOT NULL
+CREATE TABLE `material` (
+  `materialCode` char(5) NOT NULL,
+  `mName` varchar(30) NOT NULL,
+  `mQuantity` int(10) NOT NULL DEFAULT 0,
+  `munit` varchar(18) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `shippingoption`
+-- 转存表中的数据 `material`
 --
 
-INSERT INTO `shippingoption` (`soId`, `soName`, `Charge`) VALUES
-('SO01', 'Ordinary Transport', 50.00),
-('SO02', 'Express Shipping', 100.00);
+INSERT INTO `material` (`materialCode`, `mName`, `mQuantity`, `munit`) VALUES
+('M0001', 'Oak Wood Plank', 500, 'pcs'),
+('M0002', 'Steel Tube', 200, 'meter'),
+('M0003', 'Fabric Cloth', 100, 'meter'),
+('M0004', 'High Density Foam', 50, 'block');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `shippingoption`
+-- 表的索引 `material`
 --
-ALTER TABLE `shippingoption`
-  ADD PRIMARY KEY (`soId`);
+ALTER TABLE `material`
+  ADD PRIMARY KEY (`materialCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

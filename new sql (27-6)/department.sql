@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:23
+-- 生成日期： 2026-06-27 16:39:24
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,37 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `customfurniturerequest`
+-- 表的结构 `department`
 --
 
-CREATE TABLE `customfurniturerequest` (
-  `cfrID` char(8) NOT NULL,
-  `cUserID` char(8) NOT NULL,
-  `fType` char(4) NOT NULL,
-  `cfrBudget` int(11) NOT NULL,
-  `cfrDESC` text NOT NULL,
-  `cfrCreateDate` date NOT NULL,
-  `Completed` tinyint(1) NOT NULL
+CREATE TABLE `department` (
+  `deptCode` char(3) NOT NULL,
+  `deptName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `customfurniturerequest`
+-- 转存表中的数据 `department`
 --
 
-INSERT INTO `customfurniturerequest` (`cfrID`, `cUserID`, `fType`, `cfrBudget`, `cfrDESC`, `cfrCreateDate`, `Completed`) VALUES
-('CFR00001', 'C0000001', 'FT02', 4500, 'you kown who ?', '2025-01-01', 1),
-('CFR00002', 'C0000001', 'FT01', 2500, 'you kown who ?2.0', '2025-01-02', 1),
-('CFR00003', 'C0000001', 'FT03', 1500, 'you kown who ?3.0', '2025-01-02', 1);
+INSERT INTO `department` (`deptCode`, `deptName`) VALUES
+('D01', 'Admin'),
+('D02', 'Sales'),
+('D03', 'Production'),
+('D04', 'Inventory'),
+('D05', 'Logistic'),
+('D06', 'Design');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `customfurniturerequest`
+-- 表的索引 `department`
 --
-ALTER TABLE `customfurniturerequest`
-  ADD PRIMARY KEY (`cfrID`);
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`deptCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

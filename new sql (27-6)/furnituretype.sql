@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:04
+-- 生成日期： 2026-06-27 16:39:40
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,36 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `customers`
+-- 表的结构 `furnituretype`
 --
 
-CREATE TABLE `customers` (
-  `cUserID` char(8) NOT NULL,
-  `cName` varchar(30) NOT NULL,
-  `cPhone` varchar(20) NOT NULL,
-  `cPassword` varchar(20) NOT NULL,
-  `cAddress` varchar(255) NOT NULL,
-  `company` varchar(255) DEFAULT NULL,
-  `cBudget` int(11) DEFAULT 0
+CREATE TABLE `furnituretype` (
+  `fType` char(4) NOT NULL,
+  `typeName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `customers`
+-- 转存表中的数据 `furnituretype`
 --
 
-INSERT INTO `customers` (`cUserID`, `cName`, `cPhone`, `cPassword`, `cAddress`, `company`, `cBudget`) VALUES
-('C0000001', 'taiman', '23456789', 'cust123', 'Flat A, 12/F, Sunshine Building, Mong Kok, Kowloon', 'ABC Trading Ltd.', 0),
-('C0000002', 'siuming', '98765432', 'cust456', 'Room 8, 3/F, Harbour View Court, Tsuen Wan, New Territories', NULL, 0);
+INSERT INTO `furnituretype` (`fType`, `typeName`) VALUES
+('FT01', 'Table'),
+('FT02', 'Chair'),
+('FT03', 'Sofa'),
+('FT04', 'Shelf'),
+('FT05', 'Wardrobe'),
+('FT06', 'Bed');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `customers`
+-- 表的索引 `furnituretype`
 --
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`cUserID`);
+ALTER TABLE `furnituretype`
+  ADD PRIMARY KEY (`fType`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

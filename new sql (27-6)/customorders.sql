@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:27
+-- 生成日期： 2026-06-27 16:39:19
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -61,19 +61,6 @@ ALTER TABLE `customorders`
   ADD KEY `fk_cUserID` (`cUserID`),
   ADD KEY `fk_ShippingID` (`shippingType`),
   ADD KEY `fk_Status` (`statusType`);
-
---
--- 限制导出的表
---
-
---
--- 限制表 `customorders`
---
-ALTER TABLE `customorders`
-  ADD CONSTRAINT `fk_ShippingID` FOREIGN KEY (`shippingType`) REFERENCES `shippingoption` (`soId`),
-  ADD CONSTRAINT `fk_Status` FOREIGN KEY (`statusType`) REFERENCES `status` (`statusCode`),
-  ADD CONSTRAINT `fk_cUserID` FOREIGN KEY (`cUserID`) REFERENCES `customers` (`cUserID`),
-  ADD CONSTRAINT `fk_cfid` FOREIGN KEY (`cfID`) REFERENCES `customfurniture` (`cfID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

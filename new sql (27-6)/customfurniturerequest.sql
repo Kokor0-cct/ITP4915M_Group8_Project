@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:54:16
+-- 生成日期： 2026-06-27 16:39:15
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,39 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- 表的结构 `customfurniturerequest`
 --
 
-CREATE TABLE `status` (
-  `statusCode` char(4) NOT NULL,
-  `statusDesc` varchar(30) NOT NULL
+CREATE TABLE `customfurniturerequest` (
+  `cfrID` char(8) NOT NULL,
+  `cUserID` char(8) NOT NULL,
+  `fType` char(4) NOT NULL,
+  `cfrBudget` int(11) NOT NULL,
+  `cfrDESC` text NOT NULL,
+  `cfrCreateDate` date NOT NULL,
+  `Completed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `status`
+-- 转存表中的数据 `customfurniturerequest`
 --
 
-INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
-('ST01', 'Pending'),
-('ST02', 'Accepted'),
-('ST03', 'In Production'),
-('ST04', 'Produced'),
-('ST05', 'Waiting for Delivery'),
-('ST06', 'In Transit'),
-('ST07', 'Delivered'),
-('ST08', 'Failed'),
-('ST09', 'Completed'),
-('ST10', 'Cancelled');
+INSERT INTO `customfurniturerequest` (`cfrID`, `cUserID`, `fType`, `cfrBudget`, `cfrDESC`, `cfrCreateDate`, `Completed`) VALUES
+('CFR00001', 'C0000001', 'FT02', 4500, 'you kown who ?', '2025-01-01', 1),
+('CFR00002', 'C0000001', 'FT01', 2500, 'you kown who ?2.0', '2025-01-02', 1),
+('CFR00003', 'C0000001', 'FT03', 1500, 'you kown who ?3.0', '2025-01-02', 1);
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `status`
+-- 表的索引 `customfurniturerequest`
 --
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`statusCode`);
+ALTER TABLE `customfurniturerequest`
+  ADD PRIMARY KEY (`cfrID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

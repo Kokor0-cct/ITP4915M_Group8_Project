@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:51
+-- 生成日期： 2026-06-27 16:40:31
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,35 +24,42 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `material`
+-- 表的结构 `status`
 --
 
-CREATE TABLE `material` (
-  `materialCode` char(5) NOT NULL,
-  `mName` varchar(30) NOT NULL,
-  `mQuantity` int(10) NOT NULL DEFAULT 0,
-  `munit` varchar(18) NOT NULL
+CREATE TABLE `status` (
+  `statusCode` char(4) NOT NULL,
+  `statusDesc` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 转存表中的数据 `material`
+-- 转存表中的数据 `status`
 --
 
-INSERT INTO `material` (`materialCode`, `mName`, `mQuantity`, `munit`) VALUES
-('M0001', 'Oak Wood Plank', 500, 'pcs'),
-('M0002', 'Steel Tube', 200, 'meter'),
-('M0003', 'Fabric Cloth', 100, 'meter'),
-('M0004', 'High Density Foam', 50, 'block');
+INSERT INTO `status` (`statusCode`, `statusDesc`) VALUES
+('ST01', 'Pending'),
+('ST02', 'Accepted'),
+('ST03', 'In Production'),
+('ST04', 'Produced'),
+('ST05', 'Waiting for Delivery'),
+('ST06', 'In Transit'),
+('ST07', 'Delivered'),
+('ST08', 'Failed'),
+('ST09', 'Completed'),
+('ST10', 'Cancelled'),
+('ST11', 'Under review'),
+('ST12', 'Refund'),
+('ST13', 'Replace');
 
 --
 -- 转储表的索引
 --
 
 --
--- 表的索引 `material`
+-- 表的索引 `status`
 --
-ALTER TABLE `material`
-  ADD PRIMARY KEY (`materialCode`);
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`statusCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

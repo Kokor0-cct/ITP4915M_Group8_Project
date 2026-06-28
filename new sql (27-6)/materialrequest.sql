@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2026-06-18 13:53:57
+-- 生成日期： 2026-06-27 16:39:51
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `materialrequest` (
   `mrID` char(10) NOT NULL,
-  `createDate` date NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `createDate` date NOT NULL DEFAULT current_timestamp(),
   `sUserID` char(8) NOT NULL,
   `materialCode` char(5) NOT NULL,
   `mrQuantity` int(20) NOT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE `materialrequest` (
 -- 转存表中的数据 `materialrequest`
 --
 
-INSERT INTO `materialrequest` (`mrID`, `createDate`, `sUserID`, `materialCode`, `mrQuantity`, `UrgencyLevel`, `RequiredDate`, `mrdeliveryaddress`) VALUES
-('MR00000001', '2012-12-12', 'S0000001', 'M0001', 5, 'Medium', '2013-01-20', 'Production Site 1'),
-('MR00000002', '2026-06-16', 'S0000002', 'M0001', 2, 'Low', '2026-07-16', 'Production Site 2'),
-('MR00000002', '2026-06-16', 'S0000003', 'M0003', 1, 'Low', '2026-07-01', 'Production Site 3');
+INSERT INTO `materialrequest` (`mrID`, `createDate`, `sUserID`, `materialCode`, `mrQuantity`, `UrgencyLevel`, `RequiredDate`, `mrdeliveryaddress`, `statusType`) VALUES
+('MR00000001', '2012-12-12', 'S0000001', 'M0001', 5, 'Medium', '2013-01-20', 'Production Site 1', 'ST01'),
+('MR00000002', '2026-06-16', 'S0000002', 'M0001', 2, 'Low', '2026-07-16', 'Production Site 2', 'ST01'),
+('MR00000002', '2026-06-16', 'S0000003', 'M0003', 1, 'Low', '2026-07-01', 'Production Site 3', 'ST01');
 
 --
 -- 转储表的索引
