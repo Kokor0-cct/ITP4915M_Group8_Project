@@ -72,7 +72,6 @@ namespace ITP4915M_Group8_Project.Staff.Production
                 {
                     DateTime parsedDate = DateTime.ParseExact(Rdate, "M/dd/yyyy", CultureInfo.InvariantCulture);
 
-                    //---Date has passed---
                     if (parsedDate < DateTime.Now.Date)
                     {
                         MessageBox.Show("Delivery Date has passed!", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -137,7 +136,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
 
                     MessageBox.Show("Material Request Submitted！");
-                    fpMaterialRequirement.Controls.Clear(); // 提交完成清空所有表单
+                    fpMaterialRequirement.Controls.Clear();
 
                 }
                 catch (Exception ex)

@@ -49,12 +49,12 @@ namespace ITP4915M_Group8_Project.Customer
         {
             ClearTextBox();
             string keyword = txtSearch.Text.Trim();
-            string sql = "SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword ORDER BY orderID";
+            string sql = (checkOrder()=="order") ? "SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword ORDER BY orderID" : "SELECT * FROM customorders WHERE cUserID = @customerId AND corderID LIKE @keyword ORDER BY corderID";
             DataTable dt;
 
             if (checkStatus() != null) // A status is selected
             {
-                sql = @"SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword AND statustype = @STATUS ORDER BY orderID";
+                sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND corderID LIKE @keyword AND statustype = @STATUS ORDER BY corderID";
                 MySqlParameter[] parameters = {
                     new MySqlParameter("@customerId", UserSession.CustomerId),
                     new MySqlParameter("@keyword", "%" + keyword + "%"),
@@ -114,37 +114,69 @@ namespace ITP4915M_Group8_Project.Customer
             if (e.RowIndex < 0) //If the selected row are the field names, skip all codes below
                 return;
 
-            //Get fName from furniture
-            string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
-            MySqlParameter[] parameters = {
-                new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString()) };
-            DataTable dt = DbConnect.Query(sql, parameters);
-            string furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
+            string sql = "";
+            MySqlParameter parameters = null;
+            DataTable dt = null;
+            String furnitureName = "";
+
+            if (checkOrder() == "order")
+            {
+                //Get fName from furniture
+                sql = @"SELECT fName FROM furniture WHERE fID = @FID";
+                parameters = new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString());
+                dt = DbConnect.Query(sql, parameters);
+                furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
+            }
+            else
+            {
+                sql = @"SELECT cfName FROM customfurniture WHERE cfID = @CFID";
+                parameters = new MySqlParameter("@CFID", dgvOrderControl.Rows[e.RowIndex].Cells["cfId"].Value.ToString());
+                dt = DbConnect.Query(sql, parameters);
+                furnitureName = dt.Rows[0]["cfname"].ToString();
+            }
 
             //Get soName from shippingoption
             sql = @"SELECT soName FROM shippingoption WHERE soID = @SOID";
-            parameters = new MySqlParameter[] { new MySqlParameter("@SOID", dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value.ToString()) };
+            parameters = new MySqlParameter("@SOID", dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value.ToString());
             dt = DbConnect.Query(sql, parameters);
-            string shippingName = dt.Rows[0]["soName"].ToString();      //<--Extract Shipping Type Name from table
+            String shippingName = dt.Rows[0]["soName"].ToString();      //<--Extract Shipping Type Name from table
+
 
             //Get statusDesc from status
             sql = @"SELECT statusDesc FROM status WHERE statusCode = @STATUSCODE";
-            parameters = new MySqlParameter[] { new MySqlParameter("@STATUSCODE", dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString()) };
+            parameters = new MySqlParameter("@STATUSCODE", dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString());
             dt = DbConnect.Query(sql, parameters);
-            string statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
+            String statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
 
 
 
-            currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString(); //Stores the selected orderID
+
+
+            currentOid = (checkOrder() == "order") ? dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString() : dgvOrderControl.Rows[e.RowIndex].Cells["corderID"].Value.ToString();
             currentFid = dgvOrderControl.Rows[e.RowIndex].Cells["fID"].Value.ToString(); //Stores the selected furnitureID
             currentStatus = dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString(); //Stores the selected statusType
+            
             txtOrderID.Text = currentOid;                       //Order ID cell content
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
-            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
-            txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
+
+
+
+            if (checkOrder() == "order")
+            {
+                txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
+                txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
+                txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
+            }
+            else
+            {
+                txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["coAmount"].Value.ToString();           //Amount cell content
+                txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
+                txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliveryaddress"].Value.ToString();      //Delivery Address cell content
+            }
+
+
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
             txtStaffNote.Text = dgvOrderControl.Rows[e.RowIndex].Cells["StaffNote"].Value.ToString(); ;
@@ -153,11 +185,11 @@ namespace ITP4915M_Group8_Project.Customer
         // Find the records with matching OrderID
         private void btnFindSimilar_Click(object sender, EventArgs e)
         {
-            string sql = @"SELECT * FROM orders WHERE cUserID = @customerId AND orderID = @OID ORDER BY orderID";
+            string sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND orderID = @OID ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND corderID = @OID ORDER BY corderID";
             DataTable dt;
             if (checkStatus() != null)  // A status is selected
             {
-                sql = @"SELECT * FROM orders WHERE orderID = @OID AND statustype = @STATUS ORDER BY orderID";
+                sql =(checkOrder() == "order") ? @"SELECT * FROM orders WHERE orderID = @OID AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE corderID = @OID AND statustype = @STATUS ORDER BY corderID";
                 MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
             }
@@ -173,11 +205,11 @@ namespace ITP4915M_Group8_Project.Customer
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID";
+            string sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId ORDER BY corderID";
             DataTable dt;
             if (checkStatus() != null) // A status is selected
             {
-                sql = @"SELECT * FROM orders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY orderID";
+                sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY corderID";
                 MySqlParameter[] parameters = { new MySqlParameter("@customerId", UserSession.CustomerId), new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
             }
@@ -196,7 +228,7 @@ namespace ITP4915M_Group8_Project.Customer
         private void updateStatus(int status) // Used by Radio Buttons
         {
             DataTable dt;
-            string sql = @"SELECT * FROM orders WHERE cUserID = @customerId AND statusType = @STATUS ORDER BY orderID";
+            string sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND statusType = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND statusType = @STATUS ORDER BY corderID";
 
             string sqlstat = "";
             ClearTextBox();
@@ -234,7 +266,7 @@ namespace ITP4915M_Group8_Project.Customer
                     sqlstat = "ST13";
                     break;
                 default:
-                    sql = "SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID";
+                    sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId ORDER BY corderID";
                     MySqlParameter parameter = new MySqlParameter("@customerId", UserSession.CustomerId);
                     dt = DbConnect.Query(sql, parameter);
                     dgvOrderControl.DataSource = dt;
@@ -339,6 +371,45 @@ namespace ITP4915M_Group8_Project.Customer
         {
             updateStatus(10);
 
+        }
+
+        private void rbOrders_CheckedChanged(object sender, EventArgs e)
+        {
+            updateTableView("Orders");
+        }
+
+        private void rbCustomOrders_CheckedChanged(object sender, EventArgs e)
+        {
+            updateTableView("Custom");
+        }
+
+        private void updateTableView(string orderType) // Used by Radio Buttons
+        {
+            DataTable dt;
+            String sql = "";
+            ClearTextBox();
+
+            switch (orderType)
+            {
+                case "Orders":
+                    sql = "SELECT * FROM orders";
+                    break;
+                case "Custom":
+                    sql = "SELECT * FROM customOrders";
+                    break;
+            }
+            dt = DbConnect.Query(sql);
+            dgvOrderControl.DataSource = dt;
+        }
+
+        private String checkOrder()    // Used for generals
+        {
+            if (rbOrders.Checked == true)
+                return "order";
+            else if (rbCustomOrders.Checked == true)
+                return "custom";
+            else
+                return null;
         }
     }
 }
