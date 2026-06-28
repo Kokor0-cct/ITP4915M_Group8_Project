@@ -346,6 +346,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         DbConnect.Execute(sql, updateorder);
                     }
 
+
                     else
                     {
                         string sqlcustom = "SELECT * FROM customorders WHERE corderID = @oid AND cfrID = @fid;";
