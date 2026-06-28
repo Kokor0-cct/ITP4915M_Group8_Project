@@ -14,16 +14,19 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ITP4915M_Group8_Project.Login;
 using Microsoft.VisualBasic;
+using static ITP4915M_Group8_Project.Customer.Order;
 
 namespace ITP4915M_Group8_Project.Customer.CustomerService
 {
     public partial class After_sales_Request : Form
     {
-        public After_sales_Request(string orderId, string furnitureId)
+        private bool checkorder= false;
+        public After_sales_Request(string orderId, string furnitureId, bool isCustom)
         {
             InitializeComponent();
             txtoid.Text = orderId;
             txtfID.Text = furnitureId;
+            checkorder = isCustom;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -59,16 +62,39 @@ namespace ITP4915M_Group8_Project.Customer.CustomerService
                     };
             DbConnect.Execute(insertSql, para);
 
-            string updateStockSql = "UPDATE orders SET statusType = @type WHERE orderID = @oid;";
-            MySqlParameter[] UpdateStock = {
-                        new MySqlParameter("@type", "ST11"),
-                        new MySqlParameter("@oid",oid)
-                    };
-            DbConnect.Execute(updateStockSql, UpdateStock);
-            
+
+
+
+
+
+
+
+
+            if(checkorder)
+            {
+                string updateStockSql = "UPDATE orders SET statusType = @type WHERE orderID = @oid;";
+                MySqlParameter[] UpdateStock = {
+                            new MySqlParameter("@type", "ST11"),
+                            new MySqlParameter("@oid",oid)
+                        };
+                DbConnect.Execute(updateStockSql, UpdateStock);
+
+            }
+            else
+            {
+                string updateStockSql = "UPDATE customorders SET statusType = @type WHERE corderID = @oid;";
+                MySqlParameter[] UpdateStock = {
+                            new MySqlParameter("@type", "ST11"),
+                            new MySqlParameter("@oid",oid)
+                        };
+                DbConnect.Execute(updateStockSql, UpdateStock);
+            }
+
             MsgBoxResult result = Interaction.MsgBox("Request submitted successfully!", MsgBoxStyle.OkOnly, "Success");
             this.Close();
 
         }
+
+        
     }
 }

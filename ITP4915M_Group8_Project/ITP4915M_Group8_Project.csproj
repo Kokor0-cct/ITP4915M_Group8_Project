@@ -23,9 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Customer\customOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Staff\Inventory\MaterialRequirementList.cs">
       <SubType>Form</SubType>
     </Compile>

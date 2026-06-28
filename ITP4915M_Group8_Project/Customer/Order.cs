@@ -1,15 +1,19 @@
 ﻿using ITP4915M_Group8_Project.Login;
 using ITP4915M_Group8_Project.Staff.Inventory;
 using MySqlConnector;
+using ScottPlot.Colormaps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ITP4915M_Group8_Project.Customer
 {
@@ -22,8 +26,13 @@ namespace ITP4915M_Group8_Project.Customer
         public Order()
         {
             InitializeComponent();
-            LoadDataToGridView();
+
+
             rbAll.Checked = true;
+
+            rbOrders.Checked = true;
+            Refresh();
+            LoadDataToGridView();
         }
 
         private void LoadDataToGridView()
@@ -49,7 +58,7 @@ namespace ITP4915M_Group8_Project.Customer
         {
             ClearTextBox();
             string keyword = txtSearch.Text.Trim();
-            string sql = (checkOrder()=="order") ? "SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword ORDER BY orderID" : "SELECT * FROM customorders WHERE cUserID = @customerId AND corderID LIKE @keyword ORDER BY corderID";
+            string sql = (checkOrder() == "order") ? "SELECT * FROM orders WHERE cUserID = @customerId AND orderID LIKE @keyword ORDER BY orderID" : "SELECT * FROM customorders WHERE cUserID = @customerId AND corderID LIKE @keyword ORDER BY corderID";
             DataTable dt;
 
             if (checkStatus() != null) // A status is selected
@@ -153,9 +162,8 @@ namespace ITP4915M_Group8_Project.Customer
 
 
             currentOid = (checkOrder() == "order") ? dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString() : dgvOrderControl.Rows[e.RowIndex].Cells["corderID"].Value.ToString();
-            currentFid = dgvOrderControl.Rows[e.RowIndex].Cells["fID"].Value.ToString(); //Stores the selected furnitureID
             currentStatus = dgvOrderControl.Rows[e.RowIndex].Cells["statusType"].Value.ToString(); //Stores the selected statusType
-            
+
             txtOrderID.Text = currentOid;                       //Order ID cell content
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
@@ -165,12 +173,16 @@ namespace ITP4915M_Group8_Project.Customer
 
             if (checkOrder() == "order")
             {
+                currentFid = dgvOrderControl.Rows[e.RowIndex].Cells["fID"].Value.ToString(); //Stores the selected furnitureID
+
                 txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
                 txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
                 txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
             }
             else
             {
+                currentFid = dgvOrderControl.Rows[e.RowIndex].Cells["cfID"].Value.ToString(); //Stores the selected furnitureID
+
                 txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["coAmount"].Value.ToString();           //Amount cell content
                 txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
                 txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliveryaddress"].Value.ToString();      //Delivery Address cell content
@@ -189,7 +201,7 @@ namespace ITP4915M_Group8_Project.Customer
             DataTable dt;
             if (checkStatus() != null)  // A status is selected
             {
-                sql =(checkOrder() == "order") ? @"SELECT * FROM orders WHERE orderID = @OID AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE corderID = @OID AND statustype = @STATUS ORDER BY corderID";
+                sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE orderID = @OID AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE corderID = @OID AND statustype = @STATUS ORDER BY corderID";
                 MySqlParameter[] parameters = { new MySqlParameter("@OID", currentOid), new MySqlParameter("@STATUS", checkStatus()) };
                 dt = DbConnect.Query(sql, parameters);
             }
@@ -205,23 +217,7 @@ namespace ITP4915M_Group8_Project.Customer
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId ORDER BY corderID";
-            DataTable dt;
-            if (checkStatus() != null) // A status is selected
-            {
-                sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY corderID";
-                MySqlParameter[] parameters = { new MySqlParameter("@customerId", UserSession.CustomerId), new MySqlParameter("@STATUS", checkStatus()) };
-                dt = DbConnect.Query(sql, parameters);
-            }
-            else    // A status is not selected / "all"
-            {
-                MySqlParameter parameter = new MySqlParameter("@customerId", UserSession.CustomerId);
-                dt = DbConnect.Query(sql, parameter);
-            }
-
-            dgvOrderControl.DataSource = dt;
-            txtSearch.Clear();
-            ClearTextBox();
+            Refresh();
         }
 
         // ---------Methods---------
@@ -264,6 +260,13 @@ namespace ITP4915M_Group8_Project.Customer
                     break;
                 case 10:
                     sqlstat = "ST13";
+                    break;
+
+                case 11:
+                    sqlstat = "ST04";
+                    break;
+                case 12:
+                    sqlstat = "ST05";
                     break;
                 default:
                     sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId ORDER BY corderID";
@@ -310,7 +313,6 @@ namespace ITP4915M_Group8_Project.Customer
         private void btnReplace_Click(object sender, EventArgs e)
         {
 
-
             if (currentOid == "0")
             {
                 MessageBox.Show("Please select a row ！");
@@ -343,7 +345,7 @@ namespace ITP4915M_Group8_Project.Customer
             }
             else
             {
-                CustomerService.After_sales_Request form = new CustomerService.After_sales_Request(currentOid, currentFid);
+                CustomerService.After_sales_Request form = new CustomerService.After_sales_Request(currentOid, currentFid, checkOrder()== "order");
                 form.ShowDialog();
             }
 
@@ -376,6 +378,7 @@ namespace ITP4915M_Group8_Project.Customer
         private void rbOrders_CheckedChanged(object sender, EventArgs e)
         {
             updateTableView("Orders");
+
         }
 
         private void rbCustomOrders_CheckedChanged(object sender, EventArgs e)
@@ -402,7 +405,7 @@ namespace ITP4915M_Group8_Project.Customer
             dgvOrderControl.DataSource = dt;
         }
 
-        private String checkOrder()    // Used for generals
+        public String checkOrder()    // Used for generals
         {
             if (rbOrders.Checked == true)
                 return "order";
@@ -410,6 +413,200 @@ namespace ITP4915M_Group8_Project.Customer
                 return "custom";
             else
                 return null;
+        }
+
+        public void Refresh()
+        {
+            string sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId ORDER BY corderID";
+            DataTable dt;
+            if (checkStatus() != null) // A status is selected
+            {
+                sql = (checkOrder() == "order") ? @"SELECT * FROM orders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY orderID" : @"SELECT * FROM customorders WHERE cUserID = @customerId AND statustype = @STATUS ORDER BY corderID";
+                MySqlParameter[] parameters = { new MySqlParameter("@customerId", UserSession.CustomerId), new MySqlParameter("@STATUS", checkStatus()) };
+                dt = DbConnect.Query(sql, parameters);
+            }
+            else    // A status is not selected / "all"
+            {
+                MySqlParameter parameter = new MySqlParameter("@customerId", UserSession.CustomerId);
+                dt = DbConnect.Query(sql, parameter);
+            }
+
+            dgvOrderControl.DataSource = dt;
+            txtSearch.Clear();
+            ClearTextBox();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (currentOid == "0")
+            {
+                MessageBox.Show("Please select an order row first！", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!(currentStatus == "ST01" || currentStatus == "ST02" || currentStatus == "ST03" || currentStatus == "ST04" || currentStatus == "ST05"|| currentStatus == "ST06" ))
+            {
+                MessageBox.Show("This order cannot be cancelled due to its current status！", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure to cancel this order? This action cannot be undone.", "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            string oid = currentOid;
+            string sssssql = "";
+            MySqlParameter[] param = { new MySqlParameter("@oid", currentOid) };
+
+            if (checkOrder() == "order")
+            {
+
+                 sssssql = "SELECT * FROM orders WHERE orderID = @oid";
+              
+            }
+            else
+            {
+                 sssssql = "SELECT * FROM customorders WHERE corderID = @oid";
+            }
+
+            DataTable dtDetail = DbConnect.Query(sssssql, param);
+            if (dtDetail.Rows.Count == 0)
+            {
+                MessageBox.Show("No order items found！");
+                return;
+            }
+
+
+
+            decimal totalRefund = 0;
+            foreach (DataRow row in dtDetail.Rows)
+            {
+                string fid = (checkOrder() == "order") ? row["fID"].ToString() : row["cfID"].ToString();
+                decimal qty = Convert.ToDecimal(row["Quantity"]);
+                decimal price = (checkOrder() == "order") ? Convert.ToDecimal(row["oAmount"].ToString()) : Convert.ToDecimal(row["coAmount"].ToString()); 
+                totalRefund += price;
+
+                if(checkOrder() == "order"){
+                    string sql = @"UPDATE furniture SET fQuantity = fQuantity + @Quantity WHERE fID = @FID";
+                    MySqlParameter[] parameters = {
+                        new MySqlParameter("@Quantity", qty), 
+                        new MySqlParameter("@FID", fid) };
+                    DataTable dt = DbConnect.Query(sql, parameters);
+                }
+                else
+                {
+                    if (currentStatus == "ST01" || currentStatus == "ST02" || currentStatus == "ST03")
+                    {
+                        totalRefund = Convert.ToDecimal(row["coAmount"].ToString());
+
+                        string sqlcustomcancel = @"SELECT * FROM customrequestmaterials WHERE cfrID = @CFID";
+                        MySqlParameter[] parameters = {
+                        new MySqlParameter("@CFID", fid) };
+                        DataTable dt = DbConnect.Query(sqlcustomcancel, parameters);
+
+                        foreach (DataRow rowMaterial in dt.Rows)
+                        {
+                            string materialId = rowMaterial["mID"].ToString();
+                            decimal materialQty = Convert.ToDecimal(rowMaterial["pmqty"]);
+                            MessageBox.Show("Material ID: " + materialId + ", Quantity: " + materialQty);
+                            string sqlUpdateMaterial = @"UPDATE material SET mQuantity = mQuantity + @Quantity WHERE materialCode = @MaterialID";
+                            MySqlParameter[] updateParameters = {
+                                new MySqlParameter("@Quantity", materialQty),
+                                new MySqlParameter("@MaterialID", materialId) };
+                            DbConnect.Execute(sqlUpdateMaterial, updateParameters);
+                        }
+
+                    }
+
+
+
+
+                }
+            }
+
+
+
+
+            if (checkOrder() == "order")
+            {
+                string sqlUpdateMaterial = @"UPDATE customers SET cBudget = cBudget + @totalRefund WHERE cUserID = @cUserID";
+                MySqlParameter[] updateParameters = {
+                                new MySqlParameter("@totalRefund", totalRefund),
+                                new MySqlParameter("@cUserID", UserSession.CustomerId) };
+                DbConnect.Execute(sqlUpdateMaterial, updateParameters);
+            }
+            else {
+                string sqlUpdateMaterial = @"UPDATE customers SET cBudget = cBudget + @totalRefund WHERE cUserID = @cUserID";
+                MySqlParameter[] updateParameters = {
+                                new MySqlParameter("@totalRefund", totalRefund),
+                                new MySqlParameter("@cUserID", UserSession.CustomerId) };
+                DbConnect.Execute(sqlUpdateMaterial, updateParameters);
+            }
+        
+
+
+
+
+
+                try
+            {
+
+
+                string sql = "";
+                MySqlParameter[] parameters = null;
+
+                if (checkOrder() == "order")
+                {
+                    sql = @"UPDATE orders SET statustype = 'ST10', StaffNote = CONCAT(StaffNote, ' [Cancelled by customer at ', NOW(), ']') WHERE orderID = @OrderID AND cUserID = @CustomerID";
+                    parameters = new MySqlParameter[]
+                    {
+                new MySqlParameter("@OrderID", currentOid),
+                new MySqlParameter("@CustomerID", UserSession.CustomerId)
+                    };
+                }
+                else if (checkOrder() == "custom")
+                {
+                    sql = @"UPDATE customorders SET statustype = 'ST10', StaffNote = CONCAT(StaffNote, ' [Cancelled by customer at ', NOW(), ']') WHERE corderID = @OrderID AND cUserID = @CustomerID";
+                    parameters = new MySqlParameter[]
+                    {
+                new MySqlParameter("@OrderID", currentOid),
+                new MySqlParameter("@CustomerID", UserSession.CustomerId)
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("Unsupported order type！", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int affectedRows = DbConnect.Execute(sql, parameters);
+                if (affectedRows > 0)
+                {
+                    MessageBox.Show("Order cancelled successfully！", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    currentOid = "0";
+                    currentStatus = "0"; 
+                    Refresh(); 
+                }
+                else
+                {
+                    MessageBox.Show("Failed to cancel order: No order found or permission denied！", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error cancelling order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void rdProduced_CheckedChanged(object sender, EventArgs e)
+        {
+            updateStatus(11);
+        }
+
+        private void rdWaitingforDelivery_CheckedChanged(object sender, EventArgs e)
+        {
+            updateStatus(12);
         }
     }
 }

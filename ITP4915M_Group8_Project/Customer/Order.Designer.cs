@@ -74,6 +74,8 @@
             gbOC = new GroupBox();
             rbCustomOrders = new RadioButton();
             rbOrders = new RadioButton();
+            rdWaitingforDelivery = new RadioButton();
+            rdProduced = new RadioButton();
             grpStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
             gbOC.SuspendLayout();
@@ -92,6 +94,8 @@
             // 
             // grpStatus
             // 
+            grpStatus.Controls.Add(rdWaitingforDelivery);
+            grpStatus.Controls.Add(rdProduced);
             grpStatus.Controls.Add(rbAll);
             grpStatus.Controls.Add(radReplace);
             grpStatus.Controls.Add(rbCancel);
@@ -125,7 +129,7 @@
             // radReplace
             // 
             radReplace.AutoSize = true;
-            radReplace.Location = new Point(147, 183);
+            radReplace.Location = new Point(147, 203);
             radReplace.Name = "radReplace";
             radReplace.Size = new Size(72, 21);
             radReplace.TabIndex = 102;
@@ -137,7 +141,7 @@
             // rbCancel
             // 
             rbCancel.AutoSize = true;
-            rbCancel.Location = new Point(147, 125);
+            rbCancel.Location = new Point(147, 145);
             rbCancel.Name = "rbCancel";
             rbCancel.Size = new Size(64, 21);
             rbCancel.TabIndex = 5;
@@ -149,7 +153,7 @@
             // radRefund
             // 
             radRefund.AutoSize = true;
-            radRefund.Location = new Point(6, 183);
+            radRefund.Location = new Point(6, 203);
             radRefund.Name = "radRefund";
             radRefund.Size = new Size(67, 21);
             radRefund.TabIndex = 101;
@@ -161,7 +165,7 @@
             // rbFailed
             // 
             rbFailed.AutoSize = true;
-            rbFailed.Location = new Point(6, 125);
+            rbFailed.Location = new Point(6, 145);
             rbFailed.Name = "rbFailed";
             rbFailed.Size = new Size(60, 21);
             rbFailed.TabIndex = 4;
@@ -173,7 +177,7 @@
             // radUnderreview
             // 
             radUnderreview.AutoSize = true;
-            radUnderreview.Location = new Point(147, 154);
+            radUnderreview.Location = new Point(147, 174);
             radUnderreview.Name = "radUnderreview";
             radUnderreview.Size = new Size(103, 21);
             radUnderreview.TabIndex = 100;
@@ -185,7 +189,7 @@
             // radCompleted
             // 
             radCompleted.AutoSize = true;
-            radCompleted.Location = new Point(6, 154);
+            radCompleted.Location = new Point(6, 174);
             radCompleted.Name = "radCompleted";
             radCompleted.Size = new Size(90, 21);
             radCompleted.TabIndex = 99;
@@ -197,7 +201,7 @@
             // rbDelivered
             // 
             rbDelivered.AutoSize = true;
-            rbDelivered.Location = new Point(147, 96);
+            rbDelivered.Location = new Point(147, 116);
             rbDelivered.Name = "rbDelivered";
             rbDelivered.Size = new Size(81, 21);
             rbDelivered.TabIndex = 3;
@@ -209,7 +213,7 @@
             // rbTransit
             // 
             rbTransit.AutoSize = true;
-            rbTransit.Location = new Point(6, 96);
+            rbTransit.Location = new Point(6, 116);
             rbTransit.Name = "rbTransit";
             rbTransit.Size = new Size(80, 21);
             rbTransit.TabIndex = 2;
@@ -482,6 +486,7 @@
             btnCancel.TabIndex = 95;
             btnCancel.Text = "Cancel Order";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnReplace
             // 
@@ -531,6 +536,7 @@
             rbCustomOrders.TabStop = true;
             rbCustomOrders.Text = "Custom";
             rbCustomOrders.UseVisualStyleBackColor = true;
+            rbCustomOrders.CheckedChanged += rbCustomOrders_CheckedChanged;
             // 
             // rbOrders
             // 
@@ -542,6 +548,31 @@
             rbOrders.TabStop = true;
             rbOrders.Text = "Orders";
             rbOrders.UseVisualStyleBackColor = true;
+            rbOrders.CheckedChanged += rbOrders_CheckedChanged;
+            // 
+            // rdWaitingforDelivery
+            // 
+            rdWaitingforDelivery.AutoSize = true;
+            rdWaitingforDelivery.Location = new Point(147, 95);
+            rdWaitingforDelivery.Name = "rdWaitingforDelivery";
+            rdWaitingforDelivery.Size = new Size(141, 21);
+            rdWaitingforDelivery.TabIndex = 104;
+            rdWaitingforDelivery.TabStop = true;
+            rdWaitingforDelivery.Text = "Waiting for Delivery";
+            rdWaitingforDelivery.UseVisualStyleBackColor = true;
+            rdWaitingforDelivery.CheckedChanged += rdWaitingforDelivery_CheckedChanged;
+            // 
+            // rdProduced
+            // 
+            rdProduced.AutoSize = true;
+            rdProduced.Location = new Point(6, 95);
+            rdProduced.Name = "rdProduced";
+            rdProduced.Size = new Size(82, 21);
+            rdProduced.TabIndex = 103;
+            rdProduced.TabStop = true;
+            rdProduced.Text = "Produced";
+            rdProduced.UseVisualStyleBackColor = true;
+            rdProduced.CheckedChanged += rdProduced_CheckedChanged;
             // 
             // Order
             // 
@@ -640,5 +671,7 @@
         private GroupBox gbOC;
         private RadioButton rbCustomOrders;
         private RadioButton rbOrders;
+        private RadioButton rdWaitingforDelivery;
+        private RadioButton rdProduced;
     }
 }

@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,6 +27,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
         private string currentOid = "0";
         private string currentFid = "0";
         private string currentStatus = "0";
+        private bool isOrder =false;
 
 
         public Replace_Request_List()
@@ -67,6 +69,26 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 currentOid = Convert.ToString(row.Cells["oid"].Value);
                 currentFid = Convert.ToString(row.Cells["fid"].Value);
                 currentStatus = Convert.ToString(row.Cells["statusType"].Value);
+
+
+                string getoid = currentOid?.Trim() ?? "";
+
+                if (getoid.StartsWith("CO", StringComparison.OrdinalIgnoreCase))
+                {
+                    isOrder = false;
+                }
+                else if (getoid.StartsWith("O", StringComparison.OrdinalIgnoreCase))
+                {
+                    isOrder = true; 
+                }
+                else
+                {
+                    // 未知前缀默认
+                    isOrder = false;
+                }
+
+
+
             }
 
 
@@ -120,22 +142,39 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 {
                     return;
                 }
-                string sql = "UPDATE orders SET statusType = @type ,StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
-                MySqlParameter[] updateorder = {
+
+                string sql = "";
+                if (isOrder)
+                {
+                     sql = "UPDATE orders SET statusType = @type ,StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
+                    MySqlParameter[] updateorder = {
                         new MySqlParameter("@type", "ST10"),
                         new MySqlParameter("@oid",currentOid),
                         new MySqlParameter("@fID",currentFid),
                         new MySqlParameter("@note", txtStaffNote.Text)
                     };
-                DbConnect.Execute(sql, updateorder);
+                    DbConnect.Execute(sql, updateorder);
+                }
+                else
+                {
+                     sql = "UPDATE customorders SET statusType = @type ,StaffNote = @note WHERE corderID = @oid AND cfID = @fID;";
+                    MySqlParameter[] updateorder = {
+                        new MySqlParameter("@type", "ST10"),
+                        new MySqlParameter("@oid",currentOid),
+                        new MySqlParameter("@fID",currentFid),
+                        new MySqlParameter("@note", txtStaffNote.Text)
+                    };
+                    DbConnect.Execute(sql, updateorder);
+                }
+               
 
-                sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
+                 string sq2l = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
                 MySqlParameter[] updaterequest = {
                         new MySqlParameter("@type", "Rejected"),
                         new MySqlParameter("@rid",currentRid),
                         new MySqlParameter("@fid",currentFid)
                     };
-                DbConnect.Execute(sql, updaterequest);
+                DbConnect.Execute(sq2l, updaterequest);
             }
 
 
@@ -153,7 +192,8 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             {
                 MessageBox.Show("This request has already been processed.");
                 return;
-            }else if (txtStaffNote.Text == ""   )
+            }
+            else if (txtStaffNote.Text == "")
             {
                 MessageBox.Show("Please enter a note for acceptance.");
                 return;
@@ -169,50 +209,82 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                 string sql = "";
                 if (txtType.Text == "Refund")
                 {
+                    if (isOrder)
+                    {
+                        sql = @"SELECT oAmount FROM orders WHERE orderID = @orderID AND fID = @fID";
+                        MySqlParameter[] parameters = { new MySqlParameter("@orderID", currentOid), new MySqlParameter("@fID", currentFid) };
+                        DataTable dt = DbConnect.Query(sql, parameters);
 
-                    sql = @"SELECT oAmount FROM orders WHERE orderID = @orderID AND fID = @fID";
-                    MySqlParameter[] parameters = { new MySqlParameter("@orderID", currentOid), new MySqlParameter("@fID", currentFid) };
-                    DataTable dt = DbConnect.Query(sql, parameters);
-
-                    int oAmount = Convert.ToInt32(dt.Rows[0]["oAmount"]);
-
-
-                    sql = "UPDATE orders SET statusType = @type ， StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
-                    MySqlParameter[] updateorder11 = {
-                        new MySqlParameter("@type", "ST12"),
-                        new MySqlParameter("@note", "Refund received"),
-                        new MySqlParameter("@oid",currentOid),
-                        new MySqlParameter("@fID",currentFid)
-                    };
-                    DbConnect.Execute(sql, updateorder11);
+                        int oAmount = Convert.ToInt32(dt.Rows[0]["oAmount"]);
 
 
-                    sql = "UPDATE customers SET cBudget = cBudget + @oAmount WHERE cUserID  = @cid;";
-                    MySqlParameter[] customer = {
-                        new MySqlParameter("@oAmount", oAmount),
-                        new MySqlParameter("@cid", UserSession.CustomerId)
-                    };
-                    DbConnect.Execute(sql, customer);
+                        sql = "UPDATE orders SET statusType = @type ， StaffNote = @note WHERE orderID = @oid AND fID = @fID;";
+                        MySqlParameter[] updateorder11 = {
+                            new MySqlParameter("@type", "ST12"),
+                            new MySqlParameter("@note", "Refund received"),
+                            new MySqlParameter("@oid",currentOid),
+                            new MySqlParameter("@fID",currentFid)
+                        };
+                        DbConnect.Execute(sql, updateorder11);
+
+
+                        sql = "UPDATE customers SET cBudget = cBudget + @oAmount WHERE cUserID  = @cid;";
+                        MySqlParameter[] customer = {
+                            new MySqlParameter("@oAmount", oAmount),
+                            new MySqlParameter("@cid", UserSession.CustomerId)
+                        };
+                        DbConnect.Execute(sql, customer);
+                    }
+                    else
+                    {
+                        sql = @"SELECT coAmount FROM customorders WHERE corderID = @orderID AND cfID = @fID";
+                        MySqlParameter[] parameters = { new MySqlParameter("@orderID", currentOid), new MySqlParameter("@fID", currentFid) };
+                        DataTable dt = DbConnect.Query(sql, parameters);
+
+                        int oAmount = Convert.ToInt32(dt.Rows[0]["oAmount"]);
+
+
+                        sql = "UPDATE coAmount SET statusType = @type ， StaffNote = @note WHERE corderID = @oid AND cfID = @fID;";
+                        MySqlParameter[] updateorder11 = {
+                            new MySqlParameter("@type", "ST12"),
+                            new MySqlParameter("@note", "Refund received"),
+                            new MySqlParameter("@oid",currentOid),
+                            new MySqlParameter("@fID",currentFid)
+                        };
+                        DbConnect.Execute(sql, updateorder11);
+
+
+                        sql = "UPDATE customers SET cBudget = cBudget + @oAmount WHERE cUserID  = @cid;";
+                        MySqlParameter[] customer = {
+                            new MySqlParameter("@oAmount", oAmount),
+                            new MySqlParameter("@cid", UserSession.CustomerId)
+                        };
+                        DbConnect.Execute(sql, customer);
+                    }
 
                 }
 
                 if (txtType.Text == "Replace")
                 {
-                    txtStaffNote.Text += "    \n This is From Order : " + currentOid;
-                    string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2)AS UNSIGNED)) FROM orders;";
-                    int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
-                    string newOrderId = $"O{maxOrderid:D7}";
 
-                    sql = @"SELECT * FROM orders WHERE orderID = @orderID AND fID = @fID";
-                    MySqlParameter[] parameters = { new MySqlParameter("@orderID", currentOid), new MySqlParameter("@fID", currentFid) };
-                    DataTable dt = DbConnect.Query(sql, parameters);
 
-                    string deliverydate = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
-              
+                    if (isOrder)
+                    {
+                        txtStaffNote.Text += "    \n This is From Order : " + currentOid;
+                        string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2)AS UNSIGNED)) FROM orders;";
+                        int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
+                        string newOrderId = $"O{maxOrderid:D7}";
+
+                        sql = @"SELECT * FROM orders WHERE orderID = @orderID AND fID = @fID";
+                        MySqlParameter[] parameters = { new MySqlParameter("@orderID", currentOid), new MySqlParameter("@fID", currentFid) };
+                        DataTable dt = DbConnect.Query(sql, parameters);
+
+                        string deliverydate = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
+
                         string fID = dt.Rows[0]["fID"].ToString();
                         int qty = Convert.ToInt32(dt.Rows[0]["Quantity"]);
                         string cID = dt.Rows[0]["cUserID"].ToString();
-                        int  oAmount = Convert.ToInt32(dt.Rows[0]["oAmount"]);
+                        int oAmount = Convert.ToInt32(dt.Rows[0]["oAmount"]);
                         string address = dt.Rows[0]["odeliveryaddress"].ToString();
                         string shipType = dt.Rows[0]["shippingType"].ToString();
 
@@ -223,7 +295,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         if (fQuantity < qty)
                         {
                             MessageBox.Show("Not enough stock to replace the item.");
-                            return;  
+                            return;
                         }
 
                         sql = "UPDATE furniture SET fQuantity = fQuantity-@fQuantity WHERE fID = @fID;";
@@ -235,8 +307,8 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
 
                         string insertSql = @"
-                    INSERT INTO orders(orderID,fID,Quantity,cUserID,oAmount,odeliverydate,odeliveryaddress,shippingType ,statusType ,StaffNote)
-                    VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat,@note)";
+                        INSERT INTO orders(orderID,fID,Quantity,cUserID,oAmount,odeliverydate,odeliveryaddress,shippingType ,statusType ,StaffNote)
+                        VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat,@note)";
 
 
                         MySqlParameter[] para = {
@@ -250,36 +322,118 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         new MySqlParameter("@ship",shipType),
                         new MySqlParameter("@stat","ST01"),
                         new MySqlParameter("@note",txtStaffNote.Text)
-                    };
+                        };
                         DbConnect.Execute(insertSql, para);
 
 
 
+                    
+
+                        sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
+                        MySqlParameter[] updaterequest = {
+                                new MySqlParameter("@type", "Accept"),
+                                new MySqlParameter("@rid",currentRid),
+                                new MySqlParameter("@fid",currentFid)
+                            };
+                        DbConnect.Execute(sql, updaterequest);
+
+                        sql = "UPDATE orders SET statusType = @type ， StaffNote = @note WHERE orderID = @oid;";
+                        MySqlParameter[] updateorder = {
+                                new MySqlParameter("@type", "ST13"),
+                                new MySqlParameter("@oid",currentOid),
+                                new MySqlParameter("@note", "Replacement products will take 7 days to arrive after your application is approved. Please see your new order for details.")
+                            };
+                        DbConnect.Execute(sql, updateorder);
+                    }
+                    else
+                    {
+                        string sqlcustom = "SELECT * FROM customorders WHERE corderID = @oid AND cfrID = @fid;";
+                        MySqlParameter[] param = {
+                            new MySqlParameter("@oid", currentOid),
+                            new MySqlParameter("@fid", currentFid)
+                        };
+                        DataTable dt = DbConnect.Query(sql, param);
+                        if (dt.Rows.Count == 0)
+                        {
+                            MessageBox.Show("Original custom order not found!");
+                            return;
+                        }
+
+
+                        string sqlcustomorder = "SELECT MAX(CAST(SUBSTRING(corderID,3) AS UNSIGNED)) FROM customorders;";
+                        int maxId = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlcustomorder)) + 1;
+                        string coid = $"CO{maxId:D7}";
+
+                        DataRow row = dt.Rows[0];
+                        string fID = row["cfID"].ToString();
+                        int qty = Convert.ToInt32(row["Quantity"]);
+                        string cID = row["cUserID"].ToString();
+                        int coAmount = Convert.ToInt32(row["coAmount"]);
+                        string address = row["codeliveryaddress"].ToString();
+                        string shipType = row["shippingType"].ToString();
+
+                       
+                        string deliveryDate = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
+                        string insertSql = @"
+                            INSERT INTO customorders(
+                                corderID, cfID, Quantity, cUserID, coAmount, 
+                                codeliverydate, codeliveryaddress, shippingType, 
+                                , statusType, StaffNote
+                            ) VALUES(
+                                @oid, @fid, @qty, @uid, @amount, 
+                                @date, @addr, @ship, 
+                                @spec, @stat, @note
+                            )";
+                                    MySqlParameter[] insertParam = {
+                            new MySqlParameter("@oid", coid),
+                            new MySqlParameter("@fid", fID),
+                            new MySqlParameter("@qty", qty),
+                            new MySqlParameter("@uid", cID),
+                            new MySqlParameter("@amount", coAmount),
+                            new MySqlParameter("@date", deliveryDate),
+                            new MySqlParameter("@addr", address),
+                            new MySqlParameter("@ship", shipType),
+                            new MySqlParameter("@stat", "ST01"),
+                            new MySqlParameter("@note", txtStaffNote.Text)
+                        };
+                        DbConnect.Execute(insertSql, insertParam);
+
+                        sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
+                        MySqlParameter[] updaterequest = {
+                                new MySqlParameter("@type", "Accept"),
+                                new MySqlParameter("@rid",currentRid),
+                                new MySqlParameter("@fid",currentFid)
+                            };
+                        DbConnect.Execute(sql, updaterequest);
+
+                        sql = "UPDATE customorders SET statusType = @type ， StaffNote = @note WHERE corderID = @oid;";
+                        MySqlParameter[] updateorder = {
+                                new MySqlParameter("@type", "ST13"),
+                                new MySqlParameter("@oid",currentOid),
+                                new MySqlParameter("@note", "Replacement products will take 7 days to arrive after your application is approved. Please see your new order for details.")
+                            };
+                        DbConnect.Execute(sql, updateorder);
+
+
                     }
 
-                sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
-                MySqlParameter[] updaterequest = {
-                        new MySqlParameter("@type", "Accept"),
-                        new MySqlParameter("@rid",currentRid),
-                        new MySqlParameter("@fid",currentFid)
-                    };
-                DbConnect.Execute(sql, updaterequest);
 
-                sql = "UPDATE orders SET statusType = @type ， StaffNote = @note WHERE orderID = @oid;";
-                    MySqlParameter[] updateorder = {
-                        new MySqlParameter("@type", "ST13"),
-                        new MySqlParameter("@oid",currentOid),
-                        new MySqlParameter("@note", "Replacement products will take 7 days to arrive after your application is approved. Please see your new order for details.")
-                    };
-                    DbConnect.Execute(sql, updateorder);
+
+
+
+
+
+
                 }
+                
+            }
 
 
 
 
 
-            
-        }
+            }
+        
 
         private void txtStaffNote_TextChanged(object sender, EventArgs e)
         {
