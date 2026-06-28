@@ -84,6 +84,14 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             string price = txtFurniturePrice.Text.Trim();
             string desc = txtFurnitureDesc.Text.Trim();
 
+            string sql = @"SELECT fName FROM furniture WHERE fName LIKE @name";
+            MySqlParameter parameter = new MySqlParameter("@name", name);
+            DataTable dt = DbConnect.Query(sql, parameter);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("Furniture is already in the table! \nReenter a name for a new furniture");
+                return;
+            }
             DialogResult result = MessageBox.Show("Are you sure you want to insert this data？\n" +
                 "Furniture ID : " + fID + "\n" +
                 "Furniture Name : " + name + "\n" +
@@ -96,8 +104,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
                 return;
             }
 
-
-            string sql = @"INSERT INTO furniture (fID,fName, fQuantity, fType, fPrice, fDesc)VALUES (@fID, @name, @quantity, @type, @price, @desc)";
+            sql = @"INSERT INTO furniture (fID,fName, fQuantity, fType, fPrice, fDesc)VALUES (@fID, @name, @quantity, @type, @price, @desc)";
 
             MySqlParameter[] parameters = {
         new MySqlParameter("@fID", fID),
