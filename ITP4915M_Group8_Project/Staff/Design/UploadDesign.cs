@@ -45,7 +45,7 @@ namespace ITP4915M_Group8_Project.Staff.Design
         }
 
 
-        private void dgvCFR_SelectionChanged(object sender, EventArgs e)
+        private void dgvCFR_CellClick (object sender, EventArgs e)
         {
             if (dgvCFR.CurrentRow == null || dgvCFR.CurrentRow.Index < 0)
                 return;
@@ -59,16 +59,23 @@ namespace ITP4915M_Group8_Project.Staff.Design
             txtcfType.Text = Convert.ToString(row1.Cells["fType"].Value);
         }
 
-        private void dgvCF_SelectionChanged(object sender, EventArgs e)
+        private void dgvCF_CellClick(object sender, EventArgs e)
         {
             if (dgvCF.CurrentRow == null || dgvCF.CurrentRow.Index < 0)
                 return;
 
-            DataGridViewRow row2 = dgvCF.CurrentRow;
-            txtcfName.Text = Convert.ToString(row2.Cells["cfName"].Value);
-            txtcfType.Text = Convert.ToString(row2.Cells["fType"].Value);
-            numcfPrice.Value = Convert.ToDecimal(row2.Cells["cfprice"].Value);
-            txtcfDesc.Text = Convert.ToString(row2.Cells["cfDesc"].Value);
+            try
+            {
+                DataGridViewRow row2 = dgvCF.CurrentRow;
+                txtcfName.Text = Convert.ToString(row2.Cells["cfName"].Value);
+                txtcfType.Text = Convert.ToString(row2.Cells["fType"].Value);
+                numcfPrice.Value = Convert.ToDecimal(row2.Cells["cfprice"].Value);
+                txtcfDesc.Text = Convert.ToString(row2.Cells["cfDesc"].Value);
+            }catch (Exception ex)
+            {
+                ClearTextBoxes();
+                return;
+            }
         }
 
         private void btnfRefresh_Click(object sender, EventArgs e)
@@ -157,13 +164,6 @@ namespace ITP4915M_Group8_Project.Staff.Design
             {
                 MessageBox.Show("Failed submission，all data has been withdrawn：" + ex.Message);
             }
-
-
-
-
-
-
-
 
 
             string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(cfID,3) AS UNSIGNED)) FROM customfurniture;";

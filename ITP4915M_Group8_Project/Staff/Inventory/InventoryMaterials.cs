@@ -96,6 +96,14 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             int PricePerUnit = int.Parse(txtPricePerUnit.Text.Trim());
             string supplier = txtsupplier.Text.Trim();
 
+            string sql = @"SELECT mName FROM material WHERE mName LIKE @name";
+            MySqlParameter parameter = new MySqlParameter("@name", name);
+            DataTable dt = DbConnect.Query(sql, parameter);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("Material is already in the table! \nReenter a name for a new material");
+                return;
+            }
 
             DialogResult result = MessageBox.Show("Are you sure you want to insert this data？\n" +
                 "Material Name : " + name + "\n" +
@@ -109,7 +117,7 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             }
 
 
-            string sql = @"INSERT INTO material (materialCode, mName, mQuantity, mUnit, PerUnitPrice, supplier)VALUES (@materialCode, @name, @quantity, @unit, @pricePerUnit, @supplier)";
+            sql = @"INSERT INTO material (materialCode, mName, mQuantity, mUnit, PerUnitPrice, supplier)VALUES (@materialCode, @name, @quantity, @unit, @pricePerUnit, @supplier)";
 
             MySqlParameter[] parameters = {
         new MySqlParameter("@materialCode", newMcode),

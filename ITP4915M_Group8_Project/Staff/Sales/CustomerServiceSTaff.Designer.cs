@@ -42,18 +42,19 @@
             // linlblBack
             // 
             linlblBack.AutoSize = true;
-            linlblBack.Location = new Point(12, 9);
+            linlblBack.Location = new Point(12, 8);
             linlblBack.Name = "linlblBack";
-            linlblBack.Size = new Size(54, 17);
+            linlblBack.Size = new Size(48, 15);
             linlblBack.TabIndex = 11;
             linlblBack.TabStop = true;
             linlblBack.Text = "<<Back";
+            linlblBack.LinkClicked += linlblBack_LinkClicked_2;
             // 
             // btnSend
             // 
-            btnSend.Location = new Point(874, 405);
+            btnSend.Location = new Point(874, 357);
             btnSend.Name = "btnSend";
-            btnSend.Size = new Size(107, 28);
+            btnSend.Size = new Size(107, 25);
             btnSend.TabIndex = 10;
             btnSend.Text = "Send Msg";
             btnSend.UseVisualStyleBackColor = true;
@@ -62,20 +63,20 @@
             // txtSendMsg
             // 
             txtSendMsg.BorderStyle = BorderStyle.FixedSingle;
-            txtSendMsg.Location = new Point(324, 330);
+            txtSendMsg.Location = new Point(324, 291);
             txtSendMsg.Multiline = true;
             txtSendMsg.Name = "txtSendMsg";
-            txtSendMsg.Size = new Size(657, 70);
+            txtSendMsg.Size = new Size(657, 62);
             txtSendMsg.TabIndex = 9;
             txtSendMsg.Text = "Please edit your requirements.";
             // 
             // lblTaital
             // 
             lblTaital.AutoSize = true;
-            lblTaital.Font = new Font("Noto Sans SC", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblTaital.Location = new Point(355, 9);
+            lblTaital.Font = new Font("Microsoft Sans Serif", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            lblTaital.Location = new Point(355, 8);
             lblTaital.Name = "lblTaital";
-            lblTaital.Size = new Size(268, 42);
+            lblTaital.Size = new Size(264, 33);
             lblTaital.TabIndex = 8;
             lblTaital.Text = "Customer Service";
             // 
@@ -83,52 +84,52 @@
             // 
             flpChatPanel.AutoScroll = true;
             flpChatPanel.FlowDirection = FlowDirection.TopDown;
-            flpChatPanel.Location = new Point(314, 79);
+            flpChatPanel.Location = new Point(314, 70);
             flpChatPanel.Name = "flpChatPanel";
-            flpChatPanel.Size = new Size(677, 245);
+            flpChatPanel.Size = new Size(677, 216);
             flpChatPanel.TabIndex = 7;
             flpChatPanel.WrapContents = false;
             // 
             // label1
             // 
             label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Font = new Font("Noto Sans SC", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label1.Location = new Point(301, 76);
+            label1.Font = new Font("Microsoft Sans Serif", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label1.Location = new Point(301, 67);
             label1.Name = "label1";
-            label1.Size = new Size(700, 369);
+            label1.Size = new Size(700, 326);
             label1.TabIndex = 12;
             // 
             // flpCustomerContactList
             // 
-            flpCustomerContactList.Location = new Point(45, 88);
+            flpCustomerContactList.Location = new Point(45, 78);
             flpCustomerContactList.Name = "flpCustomerContactList";
-            flpCustomerContactList.Size = new Size(228, 345);
+            flpCustomerContactList.Size = new Size(228, 304);
             flpCustomerContactList.TabIndex = 13;
             // 
             // label2
             // 
             label2.BorderStyle = BorderStyle.Fixed3D;
-            label2.Font = new Font("Noto Sans SC", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label2.Location = new Point(38, 76);
+            label2.Font = new Font("Microsoft Sans Serif", 21.7499981F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label2.Location = new Point(38, 67);
             label2.Name = "label2";
-            label2.Size = new Size(242, 369);
+            label2.Size = new Size(242, 326);
             label2.TabIndex = 14;
             // 
             // lblCustomerContactList
             // 
             lblCustomerContactList.AutoSize = true;
-            lblCustomerContactList.Font = new Font("Noto Sans SC", 10.5F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblCustomerContactList.Location = new Point(45, 65);
+            lblCustomerContactList.Font = new Font("Microsoft Sans Serif", 10.5F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            lblCustomerContactList.Location = new Point(45, 57);
             lblCustomerContactList.Name = "lblCustomerContactList";
-            lblCustomerContactList.Size = new Size(162, 20);
+            lblCustomerContactList.Size = new Size(167, 17);
             lblCustomerContactList.TabIndex = 15;
             lblCustomerContactList.Text = "Customer Contact List";
             // 
             // CustomerServiceSTaff
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1020, 474);
+            ClientSize = new Size(1020, 418);
             Controls.Add(flpCustomerContactList);
             Controls.Add(lblCustomerContactList);
             Controls.Add(label2);
