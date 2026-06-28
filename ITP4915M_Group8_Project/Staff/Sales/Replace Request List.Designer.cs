@@ -151,11 +151,11 @@
             // 
             lblInventoryFurnitureTitle.AutoSize = true;
             lblInventoryFurnitureTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblInventoryFurnitureTitle.Location = new Point(218, 32);
+            lblInventoryFurnitureTitle.Location = new Point(267, 33);
             lblInventoryFurnitureTitle.Name = "lblInventoryFurnitureTitle";
-            lblInventoryFurnitureTitle.Size = new Size(349, 31);
+            lblInventoryFurnitureTitle.Size = new Size(263, 31);
             lblInventoryFurnitureTitle.TabIndex = 68;
-            lblInventoryFurnitureTitle.Text = "Inventory Furniture Control";
+            lblInventoryFurnitureTitle.Text = "Replace Request List";
             // 
             // lblback
             // 

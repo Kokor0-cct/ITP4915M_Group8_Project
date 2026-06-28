@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             lblback = new Label();
-            btnSalesService = new Button();
             btnSalesOrderEdit = new Button();
             btnSalesReport = new Button();
             btnInventoryManagement = new Button();
@@ -64,19 +63,9 @@
             lblback.Size = new Size(731, 323);
             lblback.TabIndex = 0;
             // 
-            // btnSalesService
-            // 
-            btnSalesService.Location = new Point(21, 27);
-            btnSalesService.Name = "btnSalesService";
-            btnSalesService.Size = new Size(75, 75);
-            btnSalesService.TabIndex = 11;
-            btnSalesService.Text = "Customer service";
-            btnSalesService.UseVisualStyleBackColor = true;
-            btnSalesService.Click += btnSalesService_Click;
-            // 
             // btnSalesOrderEdit
             // 
-            btnSalesOrderEdit.Location = new Point(111, 24);
+            btnSalesOrderEdit.Location = new Point(29, 27);
             btnSalesOrderEdit.Name = "btnSalesOrderEdit";
             btnSalesOrderEdit.Size = new Size(85, 75);
             btnSalesOrderEdit.TabIndex = 12;
@@ -86,18 +75,19 @@
             // 
             // btnSalesReport
             // 
-            btnSalesReport.Location = new Point(292, 24);
+            btnSalesReport.Location = new Point(218, 28);
             btnSalesReport.Name = "btnSalesReport";
             btnSalesReport.Size = new Size(75, 75);
             btnSalesReport.TabIndex = 13;
             btnSalesReport.Text = "Report";
             btnSalesReport.UseVisualStyleBackColor = true;
+            btnSalesReport.Click += btnSalesReport_Click;
             // 
             // btnInventoryManagement
             // 
-            btnInventoryManagement.Location = new Point(21, 27);
+            btnInventoryManagement.Location = new Point(26, 26);
             btnInventoryManagement.Name = "btnInventoryManagement";
-            btnInventoryManagement.Size = new Size(93, 75);
+            btnInventoryManagement.Size = new Size(109, 75);
             btnInventoryManagement.TabIndex = 14;
             btnInventoryManagement.Text = "Inventory Management";
             btnInventoryManagement.UseVisualStyleBackColor = true;
@@ -105,9 +95,9 @@
             // 
             // btnInventoryMaterlalList
             // 
-            btnInventoryMaterlalList.Location = new Point(136, 28);
+            btnInventoryMaterlalList.Location = new Point(165, 27);
             btnInventoryMaterlalList.Name = "btnInventoryMaterlalList";
-            btnInventoryMaterlalList.Size = new Size(101, 75);
+            btnInventoryMaterlalList.Size = new Size(105, 75);
             btnInventoryMaterlalList.TabIndex = 15;
             btnInventoryMaterlalList.Text = "Materlal Requirements List";
             btnInventoryMaterlalList.UseVisualStyleBackColor = true;
@@ -160,18 +150,17 @@
             grpSales.Controls.Add(btnreplacerequest);
             grpSales.Controls.Add(btnSalesReport);
             grpSales.Controls.Add(btnSalesOrderEdit);
-            grpSales.Controls.Add(btnSalesService);
             grpSales.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpSales.Location = new Point(62, 197);
             grpSales.Name = "grpSales";
-            grpSales.Size = new Size(478, 122);
+            grpSales.Size = new Size(412, 122);
             grpSales.TabIndex = 20;
             grpSales.TabStop = false;
             grpSales.Text = "Sales Department";
             // 
             // btnCustomerSupport
             // 
-            btnCustomerSupport.Location = new Point(384, 24);
+            btnCustomerSupport.Location = new Point(311, 29);
             btnCustomerSupport.Name = "btnCustomerSupport";
             btnCustomerSupport.Size = new Size(75, 75);
             btnCustomerSupport.TabIndex = 29;
@@ -181,7 +170,7 @@
             // 
             // btnreplacerequest
             // 
-            btnreplacerequest.Location = new Point(211, 24);
+            btnreplacerequest.Location = new Point(131, 28);
             btnreplacerequest.Name = "btnreplacerequest";
             btnreplacerequest.Size = new Size(75, 75);
             btnreplacerequest.TabIndex = 28;
@@ -194,7 +183,7 @@
             grpProduction.Controls.Add(btnProductionMaterlalSheet);
             grpProduction.Controls.Add(btnProductionList);
             grpProduction.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpProduction.Location = new Point(327, 348);
+            grpProduction.Location = new Point(515, 197);
             grpProduction.Name = "grpProduction";
             grpProduction.Size = new Size(219, 122);
             grpProduction.TabIndex = 21;
@@ -206,9 +195,9 @@
             grpInventory.Controls.Add(btnInventoryManagement);
             grpInventory.Controls.Add(btnInventoryMaterlalList);
             grpInventory.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpInventory.Location = new Point(62, 348);
+            grpInventory.Location = new Point(248, 348);
             grpInventory.Name = "grpInventory";
-            grpInventory.Size = new Size(247, 122);
+            grpInventory.Size = new Size(297, 122);
             grpInventory.TabIndex = 22;
             grpInventory.TabStop = false;
             grpInventory.Text = "Inventory Control Department";
@@ -217,7 +206,7 @@
             // 
             grpLogistics.Controls.Add(btnLogistic);
             grpLogistics.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpLogistics.Location = new Point(572, 197);
+            grpLogistics.Location = new Point(62, 348);
             grpLogistics.Name = "grpLogistics";
             grpLogistics.Size = new Size(162, 122);
             grpLogistics.TabIndex = 23;
@@ -272,9 +261,9 @@
             Controls.Add(grpProduction);
             Controls.Add(btnViewOrder);
             Controls.Add(lblWelcome);
+            Controls.Add(grpInventory);
             Controls.Add(btnDesign);
             Controls.Add(grpSales);
-            Controls.Add(grpInventory);
             Controls.Add(grpLogistics);
             Controls.Add(grpDesign);
             Controls.Add(lblback);
@@ -291,7 +280,6 @@
         #endregion
 
         private Label lblback;
-        private Button btnSalesService;
         private Button btnSalesOrderEdit;
         private Button btnSalesReport;
         private Button btnInventoryManagement;

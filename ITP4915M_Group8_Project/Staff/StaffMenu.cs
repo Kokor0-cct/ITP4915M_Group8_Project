@@ -156,5 +156,10 @@ namespace ITP4915M_Group8_Project.Staff
             Sales.CustomerServiceSTaff Form = new Sales.CustomerServiceSTaff();
             Form.ShowDialog();
         }
+
+        private void btnSalesReport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
