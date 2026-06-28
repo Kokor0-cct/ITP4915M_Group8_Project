@@ -77,28 +77,102 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
             }
 
             DialogResult result = MessageBox.Show("Are you sure you want to ACCEPT the material request? \n(Your choice is irreversible)", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE materialrequest SET statusType = 'ST02' WHERE statusType = 'ST01' AND mrID = @mrID";
+            string sqlCheckAllMaterial = @"
+            SELECT mr.materialCode, mr.mrQuantity, m.mQuantity
+            FROM materialrequest mr
+            JOIN material m ON mr.materialCode = m.materialCode
+            WHERE mr.statusType = 'ST01' AND mr.mrID = @mrid;
+            ";
+            MySqlParameter[] paramQuery = { new MySqlParameter("@mrid", currentMRid) };
+            DataTable dtAllMaterial = DbConnect.Query(sqlCheckAllMaterial, paramQuery);
 
-            MySqlParameter parameters = new MySqlParameter("@mrID", currentMRid);
-
-            int rows = DbConnect.Execute(sql, parameters);
-
-            if (rows > 0)
+            if (dtAllMaterial.Rows.Count == 0)
             {
-                MessageBox.Show("Material Request Accepted！", "Update Successful");
+                MessageBox.Show("No pending material records for this request.");
+                return;
+            }
+
+            foreach (DataRow row in dtAllMaterial.Rows)
+            {
+                int needQty = Convert.ToInt32(row["mrQuantity"]);
+                int stockQty = Convert.ToInt32(row["mQuantity"]);
+                string matCode = row["materialCode"].ToString();
+
+                if (stockQty < needQty)
+                {
+                    MessageBox.Show($"Material {matCode} stock insufficient!\nNeed:{needQty}, Stock:{stockQty}");
+                    return;
+                }
+            }
+
+            bool allSuccess = true;
+            foreach (DataRow row in dtAllMaterial.Rows)
+            {
+                int needQty = Convert.ToInt32(row["mrQuantity"]);
+                string matCode = row["materialCode"].ToString();
+
+                string sqlUpdateStock = @"UPDATE material SET mQuantity = mQuantity - @qty WHERE materialCode = @mc";
+                MySqlParameter[] paramStock = {
+            new MySqlParameter("@qty", needQty),
+            new MySqlParameter("@mc", matCode)
+        };
+                int stockAffect = DbConnect.Execute(sqlUpdateStock, paramStock);
+
+                string sqlUpdateMr = @"UPDATE materialrequest SET statusType = 'ST02' WHERE mrID = @mid AND materialCode = @mc AND statusType = 'ST01'";
+                MySqlParameter[] paramMr = {
+            new MySqlParameter("@mid", currentMRid),
+            new MySqlParameter("@mc", matCode)
+        };
+                int mrAffect = DbConnect.Execute(sqlUpdateMr, paramMr);
+
+                if (stockAffect <= 0 || mrAffect <= 0)
+                {
+                    allSuccess = false;
+                    break;
+                }
+            }
+
+            if (allSuccess)
+            {
+                MessageBox.Show("All Material Requests Accepted！", "Update Successful");
                 LoadDataToGridView();
                 ClearTextBox();
                 currentMRid = "0";
             }
             else
             {
-                MessageBox.Show("Update failed！", "Update Unsuccessful");
+                MessageBox.Show("Some material update failed！", "Update Unsuccessful");
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         private void btnCompleteProduction_Click(object sender, EventArgs e)
         {
             if (currentMRid == "0")

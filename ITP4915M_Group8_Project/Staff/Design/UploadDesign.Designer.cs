@@ -52,6 +52,11 @@
             btnClearText = new Button();
             dgvCF = new DataGridView();
             numcfPrice = new NumericUpDown();
+            lalQuantity = new Label();
+            lalMaterial = new Label();
+            fpMaterialRequirement = new FlowLayoutPanel();
+            btndeleteMaterialRequirement = new Button();
+            btnADDMaterialRequirement = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCFR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCF).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numcfPrice).BeginInit();
@@ -103,7 +108,7 @@
             btnUpload.Name = "btnUpload";
             btnUpload.Size = new Size(144, 31);
             btnUpload.TabIndex = 102;
-            btnUpload.Text = "Upload Design";
+            btnUpload.Text = "Insert Design";
             btnUpload.UseVisualStyleBackColor = true;
             btnUpload.Click += btnUpload_Click;
             // 
@@ -275,11 +280,63 @@
             numcfPrice.Size = new Size(109, 23);
             numcfPrice.TabIndex = 122;
             // 
+            // lalQuantity
+            // 
+            lalQuantity.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lalQuantity.Location = new Point(1002, 394);
+            lalQuantity.Name = "lalQuantity";
+            lalQuantity.Size = new Size(62, 26);
+            lalQuantity.TabIndex = 127;
+            lalQuantity.Text = "Quantity";
+            // 
+            // lalMaterial
+            // 
+            lalMaterial.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lalMaterial.Location = new Point(753, 394);
+            lalMaterial.Name = "lalMaterial";
+            lalMaterial.Size = new Size(59, 26);
+            lalMaterial.TabIndex = 123;
+            lalMaterial.Text = "Material";
+            // 
+            // fpMaterialRequirement
+            // 
+            fpMaterialRequirement.AutoScroll = true;
+            fpMaterialRequirement.BorderStyle = BorderStyle.Fixed3D;
+            fpMaterialRequirement.Location = new Point(753, 424);
+            fpMaterialRequirement.Name = "fpMaterialRequirement";
+            fpMaterialRequirement.Size = new Size(359, 202);
+            fpMaterialRequirement.TabIndex = 126;
+            // 
+            // btndeleteMaterialRequirement
+            // 
+            btndeleteMaterialRequirement.Location = new Point(870, 358);
+            btndeleteMaterialRequirement.Name = "btndeleteMaterialRequirement";
+            btndeleteMaterialRequirement.Size = new Size(111, 26);
+            btndeleteMaterialRequirement.TabIndex = 125;
+            btndeleteMaterialRequirement.Text = "Delete Material";
+            btndeleteMaterialRequirement.UseVisualStyleBackColor = true;
+            btndeleteMaterialRequirement.Click += btndeleteMaterialRequirement_Click;
+            // 
+            // btnADDMaterialRequirement
+            // 
+            btnADDMaterialRequirement.Location = new Point(753, 358);
+            btnADDMaterialRequirement.Name = "btnADDMaterialRequirement";
+            btnADDMaterialRequirement.Size = new Size(111, 26);
+            btnADDMaterialRequirement.TabIndex = 124;
+            btnADDMaterialRequirement.Text = "Add  Material";
+            btnADDMaterialRequirement.UseVisualStyleBackColor = true;
+            btnADDMaterialRequirement.Click += btnADDMaterialRequirement_Click;
+            // 
             // UploadDesign
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(808, 665);
+            ClientSize = new Size(1125, 665);
+            Controls.Add(lalQuantity);
+            Controls.Add(lalMaterial);
+            Controls.Add(fpMaterialRequirement);
+            Controls.Add(btndeleteMaterialRequirement);
+            Controls.Add(btnADDMaterialRequirement);
             Controls.Add(numcfPrice);
             Controls.Add(dgvCF);
             Controls.Add(btnClearText);
@@ -339,5 +396,10 @@
         private Button btnClearText;
         private DataGridView dgvCF;
         private NumericUpDown numcfPrice;
+        private Label lalQuantity;
+        private Label lalMaterial;
+        private FlowLayoutPanel fpMaterialRequirement;
+        private Button btndeleteMaterialRequirement;
+        private Button btnADDMaterialRequirement;
     }
 }

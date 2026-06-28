@@ -30,7 +30,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
         private void LoadDataToGridView()
         {
 
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY orderID"; // It only gets records with the status "In Transit"
+            string sql = "SELECT * FROM customorders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY corderID"; // It only gets records with the status "In Transit"
 
 
             DataTable dt = DbConnect.Query(sql);
@@ -46,7 +46,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
             string keyword = txtSearch.Text.Trim();
 
 
-            string sql = @"SELECT * FROM orders WHERE orderID LIKE @keyword AND (statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04') ORDER BY orderID";
+            string sql = @"SELECT * FROM customorders WHERE corderID LIKE @keyword AND (statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04') ORDER BY corderID";
 
 
             MySqlParameter[] parameters = { new MySqlParameter("@keyword", "%" + keyword + "%") };
@@ -61,7 +61,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM orders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY orderID";
+            string sql = "SELECT * FROM customorders WHERE statusType = 'ST02' or statusType = 'ST03' or statusType = 'ST04' ORDER BY corderID";
             DataTable dt = DbConnect.Query(sql);
             dgvOrderControl.DataSource = dt;
             txtSearch.Clear();
@@ -82,7 +82,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 'ST03' WHERE  orderId = @OID";
+            string sql = @"UPDATE customorders SET statusType = 'ST03' WHERE corderID = @OID";
 
             MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
 
@@ -113,9 +113,9 @@ namespace ITP4915M_Group8_Project.Staff.Production
             if (result != DialogResult.Yes)
                 return;
 
-            string sql = @"UPDATE orders SET statusType = 'ST04' WHERE statusType = 'ST03' AND orderID = @orderID";
+            string sql = @"UPDATE customorders SET statusType = 'ST04' WHERE statusType = 'ST03' AND corderID = @corderID";
 
-            MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
+            MySqlParameter parameters = new MySqlParameter("@corderID", currentOid);
 
             int rows = DbConnect.Execute(sql, parameters);
 
@@ -145,7 +145,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
             if (result != DialogResult.Yes)
                 return;
 
-            DateTime parsedDate = DateTime.ParseExact(txtDeliveryDate.Text.Trim(), "M/dd/yyyy", CultureInfo.InvariantCulture); // Format the date
+            DateTime parsedDate = DateTime.ParseExact(txtDeliveryDate.Text.Trim(), "yyyy/M/d", CultureInfo.InvariantCulture); // Format the date
             Staff.Logistic.CreateNewShippingRequest Form = new Staff.Logistic.CreateNewShippingRequest();
             Form.collectShippingDetails(currentOid, parsedDate, txtAddress.Text.Trim());
             Form.ShowDialog();
@@ -156,9 +156,9 @@ namespace ITP4915M_Group8_Project.Staff.Production
             }
            
 
-            string sql = @"UPDATE orders SET statusType = 'ST05' WHERE statusType = 'ST04' AND orderID = @orderID";
+            string sql = @"UPDATE customorders SET statusType = 'ST05' WHERE statusType = 'ST04' AND corderID = @corderID";
 
-            MySqlParameter parameters = new MySqlParameter("@orderID", currentOid);
+            MySqlParameter parameters = new MySqlParameter("@corderID", currentOid);
 
             int rows = DbConnect.Execute(sql, parameters);
 
@@ -200,14 +200,14 @@ namespace ITP4915M_Group8_Project.Staff.Production
                 return; //Clicked on the fields but the table is empty
             }
 
-            //Get fName from furniture
-            string sql = @"SELECT fName FROM furniture WHERE fID = @FID";
-            MySqlParameter parameters = new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["fId"].Value.ToString());
+            //Get cfName from customfurniture
+            string sql = @"SELECT cfName FROM customfurniture WHERE cfID = @FID";
+            MySqlParameter parameters = new MySqlParameter("@FID", dgvOrderControl.Rows[e.RowIndex].Cells["cfID"].Value.ToString());
             DataTable dt = DbConnect.Query(sql, parameters);
-            String furnitureName = dt.Rows[0]["fname"].ToString();      //<-- Extract Furniture name from table
+            String furnitureName = dt.Rows[0]["cfName"].ToString();      //<-- Extract Furniture name from table
 
             //Get soName from shippingoption
-            sql = @"SELECT soName FROM shippingoption WHERE soID = @SOID";
+            sql = @"SELECT soName FROM shippingoption WHERE soId = @SOID";
             parameters = new MySqlParameter("@SOID", dgvOrderControl.Rows[e.RowIndex].Cells["shippingType"].Value.ToString());
             dt = DbConnect.Query(sql, parameters);
             String shippingName = dt.Rows[0]["soName"].ToString();      //<--Extract Shipping Type Name from table
@@ -218,14 +218,14 @@ namespace ITP4915M_Group8_Project.Staff.Production
             dt = DbConnect.Query(sql, parameters);
             String statusName = dt.Rows[0]["statusDesc"].ToString();    //<-- Extract Status Type Name from table
 
-            currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["orderID"].Value.ToString(); //Stores the selected orderID
+            currentOid = dgvOrderControl.Rows[e.RowIndex].Cells["corderID"].Value.ToString(); //Stores the selected orderID
             txtOrderID.Text = currentOid;                       //Order ID cell content
             txtFurniture.Text = furnitureName;                 //Furniture ID cell content 
             txtQuantity.Text = dgvOrderControl.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();             //Quantity cell content
             txtUserID.Text = dgvOrderControl.Rows[e.RowIndex].Cells["cUserID"].Value.ToString();                //UserID cell content
-            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["oAmount"].Value.ToString();           //Amount cell content
-            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
-            txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["odeliveryaddress"].Value.ToString();      //Delivery Address cell content
+            txtAmount.Text = dgvOrderControl.Rows[e.RowIndex].Cells["coAmount"].Value.ToString();           //Amount cell content
+            txtDeliveryDate.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliverydate"].Value.ToString().Split(' ')[0];    //Delivery Date cell content
+            txtAddress.Text = dgvOrderControl.Rows[e.RowIndex].Cells["codeliveryaddress"].Value.ToString();      //Delivery Address cell content
             txtShipping.Text = shippingName;         //Shipping Type cell content    
             txtStatus.Text = statusName;             //Status Type cell content      
         }
@@ -234,7 +234,7 @@ namespace ITP4915M_Group8_Project.Staff.Production
         // Find the records with matching OrderID
         private void btnFindSimilar_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM orders WHERE orderID = @OID AND statusType = 'ST02' ORDER BY orderID";
+            string sql = "SELECT * FROM customorders WHERE corderID = @OID AND statusType = 'ST02' ORDER BY corderID";
             MySqlParameter parameters = new MySqlParameter("@OID", currentOid);
             DataTable dt = DbConnect.Query(sql, parameters);
             dgvOrderControl.DataSource = dt;

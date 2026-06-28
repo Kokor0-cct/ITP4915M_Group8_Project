@@ -1,16 +1,20 @@
 ﻿using ITP4915M_Group8_Project.Login;
 using ITP4915M_Group8_Project.Staff.Inventory;
+using ITP4915M_Group8_Project.Staff.Production;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using ITP4915M_Group8_Project.Staff.Production;
 
 namespace ITP4915M_Group8_Project.Staff.Design
 {
@@ -20,6 +24,7 @@ namespace ITP4915M_Group8_Project.Staff.Design
         {
             InitializeComponent();
             LoadDataToGridView();
+
         }
 
         private void LoadDataToGridView()
@@ -97,6 +102,68 @@ namespace ITP4915M_Group8_Project.Staff.Design
                 MessageBox.Show("Please fill in all fields.");
                 return;
             }
+            if (fpMaterialRequirement.Controls.Count == 0)
+            {
+                MessageBox.Show("Please add at least one material requirement！");
+                return;
+            }
+
+            List<Material_Requirement_Sheet> allSheets = new List<Material_Requirement_Sheet>();
+            foreach (Control ctrl in fpMaterialRequirement.Controls)
+            {
+                if (ctrl is Material_Requirement_Sheet sheet)
+                {
+                    string matName = sheet.SelectedMaterialName;
+                    int qty = sheet.RequireQuantity;
+                    if (string.IsNullOrEmpty(matName) || qty <= 0)
+                    {
+                        MessageBox.Show("There are entries without selected materials or invalid quantities. Please check！");
+                        return;
+                    }
+                    allSheets.Add(sheet);
+                }
+            }
+            try
+            {
+
+                string sqlMaxcmId = "SELECT MAX(CAST(SUBSTRING(cfID,3) AS UNSIGNED)) FROM customfurniture;";
+                int maxfID = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxcmId)) + 1;
+                string newfID = $"CF{maxfID:D6}";
+
+                string insertSql = @"INSERT INTO customrequestmaterials(cfrID, mid, pmqty) VALUES(@cfid, @materialCode, @mrQuantity)";
+
+                foreach (var sheet in allSheets)
+                {
+                    string sqlMcode = "SELECT materialCode FROM material WHERE mName = '" + sheet.SelectedMaterialName + "'";
+                    DataTable dt = DbConnect.Query(sqlMcode);
+
+                    string mCode = dt.Rows[0]["materialCode"].ToString();
+                    int qty = sheet.RequireQuantity;
+
+
+                    MySqlParameter[] parameters23 = {
+                    new MySqlParameter("@cfid", newfID),
+                    new MySqlParameter("@materialCode",mCode),
+                    new MySqlParameter("@mrQuantity", qty),
+                    };
+                    int ds = DbConnect.Execute(insertSql, parameters23);
+
+                }
+
+                fpMaterialRequirement.Controls.Clear();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed submission，all data has been withdrawn：" + ex.Message);
+            }
+
+
+
+
+
+
+
 
 
             string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(cfID,3) AS UNSIGNED)) FROM customfurniture;";
@@ -176,6 +243,11 @@ namespace ITP4915M_Group8_Project.Staff.Design
                 MessageBox.Show("Please fill in all fields.");
                 return;
             }
+            if (fpMaterialRequirement.Controls.Count == 0)
+            {
+                MessageBox.Show("Please add at least one material requirement！");
+                return;
+            }
 
             string CFID = Convert.ToString(dgvCF.CurrentRow.Cells["cfID"].Value); ;
             string name = txtcfName.Text.Trim();
@@ -229,6 +301,23 @@ namespace ITP4915M_Group8_Project.Staff.Design
         private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnADDMaterialRequirement_Click(object sender, EventArgs e)
+        {
+            fpMaterialRequirement.Controls.Add(new Material_Requirement_Sheet());
+
+        }
+
+        private void btndeleteMaterialRequirement_Click(object sender, EventArgs e)
+        {
+            if (fpMaterialRequirement.Controls.Count == 0)
+            {
+                System.Windows.Forms.MessageBox.Show("No more material requirement sheet to delete.");
+                return;
+            }
+
+            fpMaterialRequirement.Controls.RemoveAt(fpMaterialRequirement.Controls.Count - 1);
         }
     }
 }

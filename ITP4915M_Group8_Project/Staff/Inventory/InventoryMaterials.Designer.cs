@@ -46,6 +46,10 @@
             dgvmInventoryControl = new DataGridView();
             btnmUpdateFurniture = new Button();
             llBack = new LinkLabel();
+            lblsupplier = new Label();
+            lblPerprice = new Label();
+            txtPricePerUnit = new TextBox();
+            txtsupplier = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvmInventoryControl).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +57,7 @@
             // 
             lblInventoryMaterialTitle.AutoSize = true;
             lblInventoryMaterialTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
-            lblInventoryMaterialTitle.Location = new Point(228, 8);
+            lblInventoryMaterialTitle.Location = new Point(228, 9);
             lblInventoryMaterialTitle.Name = "lblInventoryMaterialTitle";
             lblInventoryMaterialTitle.Size = new Size(350, 31);
             lblInventoryMaterialTitle.TabIndex = 0;
@@ -62,73 +66,73 @@
             // lblmSearch
             // 
             lblmSearch.AutoSize = true;
-            lblmSearch.Location = new Point(69, 44);
+            lblmSearch.Location = new Point(69, 50);
             lblmSearch.Name = "lblmSearch";
-            lblmSearch.Size = new Size(83, 15);
+            lblmSearch.Size = new Size(93, 17);
             lblmSearch.TabIndex = 1;
             lblmSearch.Text = "Search Name :";
             // 
             // lblMaterialName
             // 
             lblMaterialName.AutoSize = true;
-            lblMaterialName.Location = new Point(74, 239);
+            lblMaterialName.Location = new Point(74, 271);
             lblMaterialName.Name = "lblMaterialName";
-            lblMaterialName.Size = new Size(91, 15);
+            lblMaterialName.Size = new Size(102, 17);
             lblMaterialName.TabIndex = 2;
             lblMaterialName.Text = "Material Name :";
             // 
             // lblMaterialQuantity
             // 
             lblMaterialQuantity.AutoSize = true;
-            lblMaterialQuantity.Location = new Point(403, 239);
+            lblMaterialQuantity.Location = new Point(403, 271);
             lblMaterialQuantity.Name = "lblMaterialQuantity";
-            lblMaterialQuantity.Size = new Size(105, 15);
+            lblMaterialQuantity.Size = new Size(115, 17);
             lblMaterialQuantity.TabIndex = 3;
             lblMaterialQuantity.Text = "Material Quantity :";
             // 
             // lblMaterialUnit
             // 
             lblMaterialUnit.AutoSize = true;
-            lblMaterialUnit.Location = new Point(74, 271);
+            lblMaterialUnit.Location = new Point(614, 270);
             lblMaterialUnit.Name = "lblMaterialUnit";
-            lblMaterialUnit.Size = new Size(35, 15);
+            lblMaterialUnit.Size = new Size(38, 17);
             lblMaterialUnit.TabIndex = 4;
             lblMaterialUnit.Text = "Unit :";
             // 
             // txtmSearch
             // 
-            txtmSearch.Location = new Point(164, 41);
+            txtmSearch.Location = new Point(164, 46);
             txtmSearch.Name = "txtmSearch";
             txtmSearch.Size = new Size(100, 23);
             txtmSearch.TabIndex = 7;
             // 
             // txtMaterialName
             // 
-            txtMaterialName.Location = new Point(182, 236);
+            txtMaterialName.Location = new Point(182, 267);
             txtMaterialName.Name = "txtMaterialName";
             txtMaterialName.Size = new Size(215, 23);
             txtMaterialName.TabIndex = 8;
             // 
             // txtMaterialUnit
             // 
-            txtMaterialUnit.Location = new Point(118, 268);
+            txtMaterialUnit.Location = new Point(658, 268);
             txtMaterialUnit.Name = "txtMaterialUnit";
-            txtMaterialUnit.Size = new Size(100, 23);
+            txtMaterialUnit.Size = new Size(71, 23);
             txtMaterialUnit.TabIndex = 9;
             // 
             // txtMaterialQuantity
             // 
-            txtMaterialQuantity.Location = new Point(524, 236);
+            txtMaterialQuantity.Location = new Point(524, 267);
             txtMaterialQuantity.Name = "txtMaterialQuantity";
-            txtMaterialQuantity.Size = new Size(209, 23);
+            txtMaterialQuantity.Size = new Size(84, 23);
             txtMaterialQuantity.TabIndex = 10;
             // 
             // btnmSearch
             // 
             btnmSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            btnmSearch.Location = new Point(270, 41);
+            btnmSearch.Location = new Point(270, 46);
             btnmSearch.Name = "btnmSearch";
-            btnmSearch.Size = new Size(75, 23);
+            btnmSearch.Size = new Size(75, 26);
             btnmSearch.TabIndex = 11;
             btnmSearch.Text = "Search";
             btnmSearch.UseVisualStyleBackColor = true;
@@ -136,19 +140,19 @@
             // 
             // btnmInsertFurniture
             // 
-            btnmInsertFurniture.Location = new Point(261, 301);
+            btnmInsertFurniture.Location = new Point(261, 341);
             btnmInsertFurniture.Name = "btnmInsertFurniture";
-            btnmInsertFurniture.Size = new Size(137, 27);
+            btnmInsertFurniture.Size = new Size(137, 31);
             btnmInsertFurniture.TabIndex = 13;
-            btnmInsertFurniture.Text = "Insert Furniture";
+            btnmInsertFurniture.Text = "Insert Material";
             btnmInsertFurniture.UseVisualStyleBackColor = true;
             btnmInsertFurniture.Click += btnmInsertFurniture_Click;
             // 
             // btnmClearTextBox
             // 
-            btnmClearTextBox.Location = new Point(411, 301);
+            btnmClearTextBox.Location = new Point(411, 341);
             btnmClearTextBox.Name = "btnmClearTextBox";
-            btnmClearTextBox.Size = new Size(137, 27);
+            btnmClearTextBox.Size = new Size(137, 31);
             btnmClearTextBox.TabIndex = 14;
             btnmClearTextBox.Text = "Clear Text Box";
             btnmClearTextBox.UseVisualStyleBackColor = true;
@@ -156,9 +160,9 @@
             // 
             // btnmRefresh
             // 
-            btnmRefresh.Location = new Point(597, 359);
+            btnmRefresh.Location = new Point(597, 407);
             btnmRefresh.Name = "btnmRefresh";
-            btnmRefresh.Size = new Size(144, 27);
+            btnmRefresh.Size = new Size(144, 31);
             btnmRefresh.TabIndex = 15;
             btnmRefresh.Text = "Refresh";
             btnmRefresh.UseVisualStyleBackColor = true;
@@ -166,57 +170,93 @@
             // 
             // btnmDeleteFurniture
             // 
-            btnmDeleteFurniture.Location = new Point(561, 301);
+            btnmDeleteFurniture.Location = new Point(561, 341);
             btnmDeleteFurniture.Name = "btnmDeleteFurniture";
-            btnmDeleteFurniture.Size = new Size(137, 27);
+            btnmDeleteFurniture.Size = new Size(137, 31);
             btnmDeleteFurniture.TabIndex = 16;
-            btnmDeleteFurniture.Text = "Delete Furniture";
+            btnmDeleteFurniture.Text = "Delete Material";
             btnmDeleteFurniture.UseVisualStyleBackColor = true;
             btnmDeleteFurniture.Click += btnmDeleteFurniture_Click;
             // 
             // lblback
             // 
             lblback.BorderStyle = BorderStyle.Fixed3D;
-            lblback.Location = new Point(62, 229);
+            lblback.Location = new Point(62, 260);
             lblback.Name = "lblback";
-            lblback.Size = new Size(679, 117);
+            lblback.Size = new Size(679, 133);
             lblback.TabIndex = 17;
             // 
             // dgvmInventoryControl
             // 
             dgvmInventoryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvmInventoryControl.Location = new Point(69, 67);
+            dgvmInventoryControl.Location = new Point(69, 76);
             dgvmInventoryControl.Name = "dgvmInventoryControl";
-            dgvmInventoryControl.Size = new Size(664, 150);
+            dgvmInventoryControl.Size = new Size(664, 170);
             dgvmInventoryControl.TabIndex = 18;
             dgvmInventoryControl.RowEnter += dgvmInventoryControl_RowEnter;
             // 
             // btnmUpdateFurniture
             // 
-            btnmUpdateFurniture.Location = new Point(111, 301);
+            btnmUpdateFurniture.Location = new Point(111, 341);
             btnmUpdateFurniture.Name = "btnmUpdateFurniture";
-            btnmUpdateFurniture.Size = new Size(137, 27);
+            btnmUpdateFurniture.Size = new Size(137, 31);
             btnmUpdateFurniture.TabIndex = 12;
-            btnmUpdateFurniture.Text = "Update Furniture";
+            btnmUpdateFurniture.Text = "Update Material";
             btnmUpdateFurniture.UseVisualStyleBackColor = true;
             btnmUpdateFurniture.Click += btnmUpdateFurniture_Click;
             // 
             // llBack
             // 
             llBack.AutoSize = true;
-            llBack.Location = new Point(62, 9);
+            llBack.Location = new Point(62, 10);
             llBack.Name = "llBack";
-            llBack.Size = new Size(43, 15);
+            llBack.Size = new Size(49, 17);
             llBack.TabIndex = 19;
             llBack.TabStop = true;
             llBack.Text = "< Back";
             llBack.LinkClicked += llBack_LinkClicked;
             // 
+            // lblsupplier
+            // 
+            lblsupplier.AutoSize = true;
+            lblsupplier.Location = new Point(296, 305);
+            lblsupplier.Name = "lblsupplier";
+            lblsupplier.Size = new Size(63, 17);
+            lblsupplier.TabIndex = 20;
+            lblsupplier.Text = "Supplier :";
+            // 
+            // lblPerprice
+            // 
+            lblPerprice.AutoSize = true;
+            lblPerprice.Location = new Point(84, 305);
+            lblPerprice.Name = "lblPerprice";
+            lblPerprice.Size = new Size(92, 17);
+            lblPerprice.TabIndex = 21;
+            lblPerprice.Text = "Price per unit :";
+            // 
+            // txtPricePerUnit
+            // 
+            txtPricePerUnit.Location = new Point(182, 302);
+            txtPricePerUnit.Name = "txtPricePerUnit";
+            txtPricePerUnit.Size = new Size(82, 23);
+            txtPricePerUnit.TabIndex = 22;
+            // 
+            // txtsupplier
+            // 
+            txtsupplier.Location = new Point(365, 302);
+            txtsupplier.Name = "txtsupplier";
+            txtsupplier.Size = new Size(215, 23);
+            txtsupplier.TabIndex = 23;
+            // 
             // InventoryMaterials
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(796, 397);
+            ClientSize = new Size(796, 450);
+            Controls.Add(txtsupplier);
+            Controls.Add(txtPricePerUnit);
+            Controls.Add(lblPerprice);
+            Controls.Add(lblsupplier);
             Controls.Add(llBack);
             Controls.Add(dgvmInventoryControl);
             Controls.Add(btnmDeleteFurniture);
@@ -262,5 +302,10 @@
         private DataGridView dgvmInventoryControl;
         private Button btnmUpdateFurniture;
         private LinkLabel llBack;
+        private Label lbl;
+        private Label lblPerprice;
+        private TextBox txtPricePerUnit;
+        private TextBox txtsupplier;
+        private Label lblsupplier;
     }
 }

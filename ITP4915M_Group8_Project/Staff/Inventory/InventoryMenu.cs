@@ -35,5 +35,11 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         {
             this.Close();
         }
+
+        private void btnpurchase_Click(object sender, EventArgs e)
+        {
+            Material_Procurement fomr = new Material_Procurement();
+            fomr.ShowDialog();
+        }
     }
 }

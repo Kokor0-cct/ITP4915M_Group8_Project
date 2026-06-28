@@ -59,17 +59,13 @@ namespace ITP4915M_Group8_Project.Customer.Customized
                 MessageBox.Show("Please fill in the name！");
                 return;
             }
-            if (dateChoose.Value < DateTime.Now.AddDays(3))
+            if (dateChoose.Value < DateTime.Now.AddDays(5))
             {
-                MessageBox.Show("Please select a valid delivery date！");
+                MessageBox.Show("Please select at least 5 days later！");
                 return;
             }
 
-            if (!CheckMaterialStockEnough())
-            {
-                MessageBox.Show("Material stock is insufficient! Cannot place order.");
-                return;
-            }
+
 
             string address = txtAddress.Text;
             string cUserID = UserSession.CustomerId;
@@ -121,7 +117,6 @@ namespace ITP4915M_Group8_Project.Customer.Customized
             DbConnect.Execute(insertSql, para);
 
 
-            DeductMaterialStock();
 
             string updateSql = @"UPDATE customers SET cBudget= cBudget - @subtotal WHERE cUserID=@cid";
             MySqlParameter[] para2 = {
@@ -159,82 +154,9 @@ namespace ITP4915M_Group8_Project.Customer.Customized
             lblTotalPrice.Text = "Total Amount: $" + ((Uprice * Qty) + shipPrice).ToString("0.00");
         }
 
-        private bool CheckMaterialStockEnough()
-        {
-            try
-            {
-                string sql = @"
-                    SELECT m.materialCode, m.mQuantity, cm.pmqty 
-                    FROM furniturematerials cm
-                    JOIN material m ON cm.materialCode = m.materialCode
-                    WHERE cm.cfID = @cfID";
-
-                MySqlParameter[] para = { new MySqlParameter("@cfID", cfID) };
-                DataTable dt = DbConnect.Query(sql, para); 
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    decimal stock = Convert.ToDecimal(row["mQuantity"]); 
-                    decimal requiredPerUnit = Convert.ToDecimal(row["pmqty"]); 
-                    decimal totalRequired = requiredPerUnit * Qty; 
-
-                    if (stock < totalRequired)
-                    {
-                        string materialId = row["materialCode"].ToString();
-                        MessageBox.Show($"Material {materialId} stock insufficient! Need: {totalRequired}, Current: {stock}");
-                        return false;
-                    }
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Check material stock failed: {ex.Message}");
-                return false;
-            }
-        }
-        private void DeductMaterialStock()
-        {
-            string sql = @"
-               SELECT m.materialCode, m.mQuantity, cm.pmqty 
-                    FROM furniturematerials cm
-                    JOIN material m ON cm.materialCode = m.materialCode
-                    WHERE cm.cfID = @cfID";
-
-            MySqlParameter[] para = { new MySqlParameter("@cfID", cfID) };
-            DataTable dt = DbConnect.Query(sql, para); 
-
-            foreach (DataRow row in dt.Rows)
-            {
-                string materialId = row["materialCode"].ToString();
-                decimal requiredPerUnit = Convert.ToDecimal(row["pmqty"]);
-                decimal totalConsume = requiredPerUnit * Qty;
-
-                // 扣减库存SQL
-                string updateStockSql = @"
-                    UPDATE material 
-                    SET mQuantity = mQuantity - @consume 
-                    WHERE materialCode = @materialCode";
-
-                MySqlParameter[] updatePara = {
-                    new MySqlParameter("@consume", totalConsume),
-                    new MySqlParameter("@materialID", materialId)
-                };
-
-                DbConnect.Execute(updateStockSql, updatePara);
-
-
-                string updateReport = @"
-                    INSERT INTO materialreport (materialCode, mQuantity) 
-                    VALUES (@materialCode, @consume)";
-
-                MySqlParameter[] updateReport2 = {
-                    new MySqlParameter("@consume", (-1)*totalConsume),
-                    new MySqlParameter("@materialID", materialId)
-                };
-
-                DbConnect.Execute(updateReport, updateReport2);
-            }
-        }
+       
+        
+        
+        
     }
 }

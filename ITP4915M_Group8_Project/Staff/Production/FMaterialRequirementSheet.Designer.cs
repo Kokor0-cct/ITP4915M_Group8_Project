@@ -38,17 +38,17 @@
             lalQuantity = new Label();
             cmbLevel = new ComboBox();
             lblUrgencyLevel = new Label();
-            txtRequiredDate = new TextBox();
             lblRequiredDate = new Label();
             lblDeliveryAddress = new Label();
             cmbProductionSite = new ComboBox();
+            dateRequired = new DateTimePicker();
             SuspendLayout();
             // 
             // lalMaterialRequirementSheet
             // 
             lalMaterialRequirementSheet.AutoSize = true;
             lalMaterialRequirementSheet.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterialRequirementSheet.Location = new Point(11, 18);
+            lalMaterialRequirementSheet.Location = new Point(11, 20);
             lalMaterialRequirementSheet.Margin = new Padding(2, 0, 2, 0);
             lalMaterialRequirementSheet.Name = "lalMaterialRequirementSheet";
             lalMaterialRequirementSheet.Size = new Size(377, 35);
@@ -57,10 +57,10 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(481, 309);
+            btnBack.Location = new Point(481, 350);
             btnBack.Margin = new Padding(2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(79, 23);
+            btnBack.Size = new Size(79, 26);
             btnBack.TabIndex = 10;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
@@ -68,10 +68,10 @@
             // 
             // btnSubmitRequest
             // 
-            btnSubmitRequest.Location = new Point(365, 309);
+            btnSubmitRequest.Location = new Point(365, 350);
             btnSubmitRequest.Margin = new Padding(2);
             btnSubmitRequest.Name = "btnSubmitRequest";
-            btnSubmitRequest.Size = new Size(112, 23);
+            btnSubmitRequest.Size = new Size(112, 26);
             btnSubmitRequest.TabIndex = 11;
             btnSubmitRequest.Text = "Submit Request";
             btnSubmitRequest.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@
             // 
             // btnADDMaterialRequirement
             // 
-            btnADDMaterialRequirement.Location = new Point(12, 67);
+            btnADDMaterialRequirement.Location = new Point(12, 76);
             btnADDMaterialRequirement.Name = "btnADDMaterialRequirement";
-            btnADDMaterialRequirement.Size = new Size(111, 23);
+            btnADDMaterialRequirement.Size = new Size(111, 26);
             btnADDMaterialRequirement.TabIndex = 14;
             btnADDMaterialRequirement.Text = "Add  Material";
             btnADDMaterialRequirement.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
             // 
             // btndeleteMaterialRequirement
             // 
-            btndeleteMaterialRequirement.Location = new Point(129, 67);
+            btndeleteMaterialRequirement.Location = new Point(129, 76);
             btndeleteMaterialRequirement.Name = "btndeleteMaterialRequirement";
-            btndeleteMaterialRequirement.Size = new Size(111, 23);
+            btndeleteMaterialRequirement.Size = new Size(111, 26);
             btndeleteMaterialRequirement.TabIndex = 15;
             btndeleteMaterialRequirement.Text = "Delete Material";
             btndeleteMaterialRequirement.UseVisualStyleBackColor = true;
@@ -101,26 +101,26 @@
             // 
             fpMaterialRequirement.AutoScroll = true;
             fpMaterialRequirement.BorderStyle = BorderStyle.Fixed3D;
-            fpMaterialRequirement.Location = new Point(12, 125);
+            fpMaterialRequirement.Location = new Point(12, 142);
             fpMaterialRequirement.Name = "fpMaterialRequirement";
-            fpMaterialRequirement.Size = new Size(359, 179);
+            fpMaterialRequirement.Size = new Size(359, 202);
             fpMaterialRequirement.TabIndex = 16;
             // 
             // lalMaterial
             // 
             lalMaterial.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalMaterial.Location = new Point(12, 99);
+            lalMaterial.Location = new Point(12, 112);
             lalMaterial.Name = "lalMaterial";
-            lalMaterial.Size = new Size(59, 23);
+            lalMaterial.Size = new Size(59, 26);
             lalMaterial.TabIndex = 0;
             lalMaterial.Text = "Material";
             // 
             // lalQuantity
             // 
             lalQuantity.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lalQuantity.Location = new Point(261, 99);
+            lalQuantity.Location = new Point(261, 112);
             lalQuantity.Name = "lalQuantity";
-            lalQuantity.Size = new Size(62, 23);
+            lalQuantity.Size = new Size(62, 26);
             lalQuantity.TabIndex = 17;
             lalQuantity.Text = "Quantity";
             // 
@@ -128,33 +128,26 @@
             // 
             cmbLevel.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbLevel.FormattingEnabled = true;
-            cmbLevel.Location = new Point(392, 131);
+            cmbLevel.Location = new Point(392, 148);
             cmbLevel.Name = "cmbLevel";
-            cmbLevel.Size = new Size(121, 23);
+            cmbLevel.Size = new Size(121, 25);
             cmbLevel.TabIndex = 18;
             // 
             // lblUrgencyLevel
             // 
             lblUrgencyLevel.AutoSize = true;
             lblUrgencyLevel.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblUrgencyLevel.Location = new Point(392, 111);
+            lblUrgencyLevel.Location = new Point(392, 126);
             lblUrgencyLevel.Name = "lblUrgencyLevel";
             lblUrgencyLevel.Size = new Size(94, 17);
             lblUrgencyLevel.TabIndex = 19;
             lblUrgencyLevel.Text = "Urgency Level";
             // 
-            // txtRequiredDate
-            // 
-            txtRequiredDate.Location = new Point(392, 183);
-            txtRequiredDate.Name = "txtRequiredDate";
-            txtRequiredDate.Size = new Size(121, 23);
-            txtRequiredDate.TabIndex = 20;
-            // 
             // lblRequiredDate
             // 
             lblRequiredDate.AutoSize = true;
             lblRequiredDate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
-            lblRequiredDate.Location = new Point(392, 163);
+            lblRequiredDate.Location = new Point(392, 185);
             lblRequiredDate.Name = "lblRequiredDate";
             lblRequiredDate.Size = new Size(96, 17);
             lblRequiredDate.TabIndex = 21;
@@ -164,7 +157,7 @@
             // 
             lblDeliveryAddress.AutoSize = true;
             lblDeliveryAddress.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
-            lblDeliveryAddress.Location = new Point(392, 218);
+            lblDeliveryAddress.Location = new Point(392, 247);
             lblDeliveryAddress.Name = "lblDeliveryAddress";
             lblDeliveryAddress.Size = new Size(112, 17);
             lblDeliveryAddress.TabIndex = 22;
@@ -173,20 +166,27 @@
             // cmbProductionSite
             // 
             cmbProductionSite.FormattingEnabled = true;
-            cmbProductionSite.Location = new Point(392, 238);
+            cmbProductionSite.Location = new Point(392, 270);
             cmbProductionSite.Name = "cmbProductionSite";
-            cmbProductionSite.Size = new Size(121, 23);
+            cmbProductionSite.Size = new Size(121, 25);
             cmbProductionSite.TabIndex = 23;
+            // 
+            // dateRequired
+            // 
+            dateRequired.Location = new Point(392, 205);
+            dateRequired.Name = "dateRequired";
+            dateRequired.Size = new Size(121, 23);
+            dateRequired.TabIndex = 24;
             // 
             // FMaterialRequirementSheet
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(595, 355);
+            ClientSize = new Size(595, 402);
+            Controls.Add(dateRequired);
             Controls.Add(cmbProductionSite);
             Controls.Add(lblDeliveryAddress);
             Controls.Add(lblRequiredDate);
-            Controls.Add(txtRequiredDate);
             Controls.Add(lblUrgencyLevel);
             Controls.Add(cmbLevel);
             Controls.Add(lalQuantity);
@@ -216,9 +216,9 @@
         private Label lalQuantity;
         private ComboBox cmbLevel;
         private Label lblUrgencyLevel;
-        private TextBox txtRequiredDate;
         private Label lblRequiredDate;
         private Label lblDeliveryAddress;
         private ComboBox cmbProductionSite;
+        private DateTimePicker dateRequired;
     }
 }
