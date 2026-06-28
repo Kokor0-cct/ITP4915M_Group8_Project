@@ -1,8 +1,12 @@
 ﻿using ITP4915M_Group8_Project.Staff.Inventory;
 using MySqlConnector;
 using OxyPlot.WindowsForms;
+using ScottPlot;
+using ScottPlot.Panels;
 using ScottPlot.Plottables;
+using ScottPlot.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,103 +15,244 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ITP4915M_Group8_Project.Staff.Sales
 {
     public partial class SalesReport : Form
     {
+        private readonly FormsPlot plotBar = new FormsPlot();
+        private readonly FormsPlot plotPie = new FormsPlot();
+
         public SalesReport()
         {
             InitializeComponent();
+            LoadDataToGridView();
 
-            // 设计模式不执行初始化
-            if (!DesignMode)
-            {
-                // 默认时间：今天 / 30天前
-                dateTimePicker1.Value = DateTime.Now.AddDays(-30);
-                dateTimePicker2.Value = DateTime.Now;
-            }
+            dtpMonth.Format = DateTimePickerFormat.Custom;
+            dtpMonth.CustomFormat = "yyyy-MM";
+            dtpMonth.ShowUpDown = true;
+
+            dtpMonth.Value = DateTime.Now;
+
+
+          
+            dateStart.Value = DateTime.Now.AddDays(-30);
+            dateEnd.Value = DateTime.Now;
+
+
         }
 
-        private void btnGenerateReport_Click(object sender, EventArgs e)
+
+
+        private void LoadDataToGridView()
         {
-            DateTime start = dateTimePicker1.Value.Date;
-            DateTime end = dateTimePicker2.Value.Date.AddDays(1);
 
-            // 清空两张图表旧数据
-            plotBar.Plot.Clear();
-            plotPie.Plot.Clear();
-
-            // 统计SQL：按商品统计销量、总销售额
             string sql = @"
-                SELECT f.fName,
-                       SUM(od.quantity) AS totalQty,
-                       SUM(od.quantity * od.unit_price) AS totalAmount
-                FROM order_detail od
-                LEFT JOIN furniture f ON od.fid = f.fid
-                WHERE od.order_time >= @start AND od.order_time < @end
-                GROUP BY od.fid, f.fName
-                ORDER BY totalAmount DESC;
+                     WITH AllOrderData AS (
+                    SELECT
+                        f.fName AS ProductName,
+                        od.Quantity,
+                        od.oAmount AS Amount,
+                        od.oCreateDate AS order_time
+                    FROM orders od
+                    LEFT JOIN furniture f ON od.fID = f.fID
+
+                    UNION ALL
+
+                    SELECT
+                        cf.cfName AS ProductName,
+                        cod.Quantity,
+                        cod.coAmount AS Amount,
+                        cod.coCreateDate AS order_time
+                    FROM customorders cod
+                    LEFT JOIN customfurniture cf ON cod.cfID = cf.cfID
+                )
+
+
+                SELECT
+                    ProductName,
+                    SUM(Quantity) AS TotalQuantity,
+                    SUM(Amount) AS TotalSales
+                FROM AllOrderData
+                GROUP BY ProductName
+                ORDER BY TotalSales DESC;
             ";
 
-            MySqlParameter[] para = {
-                new MySqlParameter("@start", start),
-                new MySqlParameter("@end", end)
-            };
 
-            DataTable dt;
+            DataTable table;
             try
             {
-                dt = DbConnect.Query(sql, para);
+                table = DbConnect.Query(sql);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("查询报表失败：" + ex.Message);
+                MessageBox.Show("Report loading failed ：" + ex.Message);
+                dvgSalesReport.DataSource = null;
                 return;
             }
 
-            // 无数据判断
-            if (dt.Rows.Count == 0)
+            if (table.Rows.Count == 0)
             {
-                MessageBox.Show("所选时间段没有销售数据");
+                MessageBox.Show("Report loading failed ：No sales records found for the selected time period (both regular and custom orders are empty)");
+                dvgSalesReport.DataSource = null;
+                return;
+            }
+            string Amount = table.Compute("SUM(TotalSales)", "").ToString();
+            txtAmount.Text = Amount;
+
+            dvgSalesReport.DataSource = table;
+
+        }
+
+
+        private void dvgSalesReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dvgSalesReport.CurrentRow.Selected = true;
+            if (e.RowIndex < 0)
+                return;
+        }
+
+        private void btnGenerateDaay_Click(object sender, EventArgs e)
+        {
+
+
+            DateTime startDate = dateStart.Value.Date;
+            DateTime endDate = dateEnd.Value.Date.AddDays(1);
+
+            string sql = @"
+                     WITH AllOrderData AS (
+                    SELECT
+                        f.fName AS ProductName,
+                        od.Quantity,
+                        od.oAmount AS Amount,
+                        od.oCreateDate AS order_time
+                    FROM orders od
+                    LEFT JOIN furniture f ON od.fID = f.fID
+
+                    UNION ALL
+
+                    SELECT
+                        cf.cfName AS ProductName,
+                        cod.Quantity,
+                        cod.coAmount AS Amount,
+                        cod.coCreateDate AS order_time
+                    FROM customorders cod
+                    LEFT JOIN customfurniture cf ON cod.cfID = cf.cfID
+                )
+
+
+                SELECT
+                    ProductName,
+                    SUM(Quantity) AS TotalQuantity,
+                    SUM(Amount) AS TotalSales
+                FROM AllOrderData
+                WHERE order_time >= @start AND order_time < @end
+                GROUP BY ProductName
+                ORDER BY TotalSales DESC;
+            ";
+
+            MySqlParameter[] paras = {
+                new MySqlParameter("@start", startDate),
+                new MySqlParameter("@end", endDate)
+            };
+
+            DataTable table;
+            try
+            {
+                table = DbConnect.Query(sql, paras);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Report loading failed ：" + ex.Message);
+                dvgSalesReport.DataSource = null;
                 return;
             }
 
-            // 存放图表数据
-            List<string> productNames = new List<string>();
-            List<double> salesAmount = new List<double>();
-            List<PieSlice> pieSliceList = new List<PieSlice>();
-
-            foreach (DataRow row in dt.Rows)
+            if (table.Rows.Count == 0)
             {
-                string name = row["fName"].ToString();
-                double amount = Convert.ToDouble(row["totalAmount"]);
-                double qty = Convert.ToDouble(row["totalQty"]);
-
-                productNames.Add(name);
-                salesAmount.Add(amount);
-                pieSliceList.Add(new PieSlice(qty)
-                {
-                    Label = name
-                });
+                MessageBox.Show("Report loading failed ：No sales records found for the selected time period (both regular and custom orders are empty)");
+                dvgSalesReport.DataSource = null;
+                return;
             }
 
-            // ========== 1. 柱状图：各商品销售额 ==========
-            plotBar.Plot.Add.Bars(salesAmount.ToArray());
-            // X轴商品名称
-            plotBar.Plot.Axes.Bottom.TickLabels.TextLabels = productNames.ToArray();
-            plotBar.Plot.Title("商品销售额统计");
-            plotBar.Plot.YLabel("销售金额");
-            plotBar.Refresh();
+            string Amount = table.Compute("SUM(TotalSales)", "").ToString();
 
-            // ========== 2. 饼图：销量占比 ==========
-            Pie pie = plotPie.Plot.Add.Pie(pieSliceList.ToArray());
-            pie.ShowPercentages = true;          // 显示百分比
-            pie.PercentFormat = "0.00%";         // 百分比格式
-            pie.SliceLabelDistance = 0.6;        // 文字距离饼图边缘
-            pie.ExplodeFraction = 0.04;          // 每块轻微分开更好看
-            plotPie.Plot.Title("商品销量占比");
-            plotPie.Refresh();
+
+
+            dvgSalesReport.DataSource = table;
+            txtAmount.Text = Amount;
+        }
+
+        private void llBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGenerateMon_Click(object sender, EventArgs e)
+        {
+            int year = dtpMonth.Value.Year;
+            int month = dtpMonth.Value.Month;
+
+            string sql = @"
+            WITH AllOrderData AS (
+                SELECT
+                    f.fName AS ProductName,
+                    od.Quantity,
+                    od.oAmount AS Amount,
+                    od.oCreateDate AS order_time
+                FROM orders od
+                LEFT JOIN furniture f ON od.fID = f.fID
+
+                UNION ALL
+
+                SELECT
+                    cf.cfName AS ProductName,
+                    cod.Quantity,
+                    cod.coAmount AS Amount,
+                    cod.coCreateDate AS order_time
+                FROM customorders cod
+                LEFT JOIN customfurniture cf ON cod.cfID = cf.cfID
+            )
+            SELECT
+                ProductName,
+                SUM(Quantity) AS TotalQuantity,
+                SUM(Amount) AS TotalSales
+            FROM AllOrderData
+            WHERE YEAR(order_time) = @year AND MONTH(order_time) = @month
+            GROUP BY ProductName
+            ORDER BY TotalSales DESC;
+            ";
+
+            MySqlParameter[] paras = {
+        new MySqlParameter("@year", year),
+        new MySqlParameter("@month", month)
+    };
+
+            DataTable table;
+            try
+            {
+                table = DbConnect.Query(sql, paras);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Report loading failed：" + ex.Message);
+                dvgSalesReport.DataSource = null;
+                return;
+            }
+
+            if (table.Rows.Count == 0)
+            {
+                MessageBox.Show($"{year}-{month:D2} Report loading failed ：No sales records found for the selected time period (both regular and custom orders are empty)");
+                dvgSalesReport.DataSource = null;
+                return;
+            }
+
+            dvgSalesReport.DataSource = table;
+            string Amount = table.Compute("SUM(TotalSales)", "").ToString();
+            txtAmount.Text = Amount;
+
         }
     }
 }

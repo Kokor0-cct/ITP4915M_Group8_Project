@@ -244,7 +244,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         new MySqlParameter("@fid",fID),
                         new MySqlParameter("@qty",qty),
                         new MySqlParameter("@uid",cID),
-                        new MySqlParameter("@subtotal",oAmount),
+                        new MySqlParameter("@subtotal",0),
                         new MySqlParameter("@date",deliverydate),
                         new MySqlParameter("@addr",address),
                         new MySqlParameter("@ship",shipType),

@@ -1,4 +1,5 @@
-﻿namespace ITP4915M_Group8_Project.Staff.Sales
+﻿
+namespace ITP4915M_Group8_Project.Staff.Sales
 {
     partial class SalesReport
     {
@@ -29,135 +30,81 @@
         private void InitializeComponent()
         {
             llBack = new LinkLabel();
-            btnfSearch = new Button();
-            txtfSearch = new TextBox();
-            dgvfInventoryControl = new DataGridView();
-            lblfSearch = new Label();
+            dvgSalesReport = new DataGridView();
             lblInventoryFurnitureTitle = new Label();
             lblback = new Label();
-            txtStaffNote = new TextBox();
-            lblStaffNote = new Label();
-            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
+            dateEnd = new DateTimePicker();
+            dateStart = new DateTimePicker();
             lblstarttime = new Label();
             lblEndTime = new Label();
             label1 = new Label();
-            label2 = new Label();
-            comboBox1 = new ComboBox();
-            formsPlot2 = new ScottPlot.WinForms.FormsPlot();
             btnGenerateDaay = new Button();
             btnGenerateMon = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).BeginInit();
+            lblTotalAmount = new Label();
+            txtAmount = new TextBox();
+            dtpMonth = new DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)dvgSalesReport).BeginInit();
             SuspendLayout();
             // 
             // llBack
             // 
             llBack.AutoSize = true;
-            llBack.Location = new Point(70, 21);
+            llBack.Location = new Point(12, 23);
             llBack.Name = "llBack";
             llBack.Size = new Size(49, 17);
             llBack.TabIndex = 102;
             llBack.TabStop = true;
             llBack.Text = "< Back";
+            llBack.LinkClicked += llBack_LinkClicked;
             // 
-            // btnfSearch
+            // dvgSalesReport
             // 
-            btnfSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            btnfSearch.Location = new Point(292, 57);
-            btnfSearch.Name = "btnfSearch";
-            btnfSearch.Size = new Size(75, 26);
-            btnfSearch.TabIndex = 97;
-            btnfSearch.Text = "Search";
-            btnfSearch.UseVisualStyleBackColor = true;
-            // 
-            // txtfSearch
-            // 
-            txtfSearch.Location = new Point(186, 59);
-            txtfSearch.Name = "txtfSearch";
-            txtfSearch.Size = new Size(100, 23);
-            txtfSearch.TabIndex = 94;
-            // 
-            // dgvfInventoryControl
-            // 
-            dgvfInventoryControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvfInventoryControl.Location = new Point(58, 88);
-            dgvfInventoryControl.MultiSelect = false;
-            dgvfInventoryControl.Name = "dgvfInventoryControl";
-            dgvfInventoryControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvfInventoryControl.Size = new Size(519, 169);
-            dgvfInventoryControl.TabIndex = 92;
-            // 
-            // lblfSearch
-            // 
-            lblfSearch.AutoSize = true;
-            lblfSearch.Location = new Point(70, 62);
-            lblfSearch.Name = "lblfSearch";
-            lblfSearch.Size = new Size(105, 17);
-            lblfSearch.TabIndex = 91;
-            lblfSearch.Text = "Search Sales ID :";
+            dvgSalesReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dvgSalesReport.Location = new Point(58, 88);
+            dvgSalesReport.MultiSelect = false;
+            dvgSalesReport.Name = "dvgSalesReport";
+            dvgSalesReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dvgSalesReport.Size = new Size(620, 169);
+            dvgSalesReport.TabIndex = 92;
+            dvgSalesReport.CellContentClick += dvgSalesReport_CellContentClick;
             // 
             // lblInventoryFurnitureTitle
             // 
             lblInventoryFurnitureTitle.AutoSize = true;
             lblInventoryFurnitureTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            lblInventoryFurnitureTitle.Location = new Point(268, 21);
+            lblInventoryFurnitureTitle.Location = new Point(255, 9);
             lblInventoryFurnitureTitle.Name = "lblInventoryFurnitureTitle";
-            lblInventoryFurnitureTitle.Size = new Size(263, 31);
+            lblInventoryFurnitureTitle.Size = new Size(158, 31);
             lblInventoryFurnitureTitle.TabIndex = 90;
-            lblInventoryFurnitureTitle.Text = "Replace Request List";
+            lblInventoryFurnitureTitle.Text = "SalesReport";
             // 
             // lblback
             // 
             lblback.BorderStyle = BorderStyle.Fixed3D;
-            lblback.Location = new Point(58, 271);
+            lblback.Location = new Point(41, 271);
             lblback.Name = "lblback";
-            lblback.Size = new Size(519, 83);
+            lblback.Size = new Size(650, 123);
             lblback.TabIndex = 100;
             // 
-            // txtStaffNote
+            // dateEnd
             // 
-            txtStaffNote.Location = new Point(157, 284);
-            txtStaffNote.Multiline = true;
-            txtStaffNote.Name = "txtStaffNote";
-            txtStaffNote.Size = new Size(370, 47);
-            txtStaffNote.TabIndex = 104;
+            dateEnd.Checked = false;
+            dateEnd.Location = new Point(210, 302);
+            dateEnd.Name = "dateEnd";
+            dateEnd.Size = new Size(140, 23);
+            dateEnd.TabIndex = 107;
             // 
-            // lblStaffNote
+            // dateStart
             // 
-            lblStaffNote.AutoSize = true;
-            lblStaffNote.Location = new Point(81, 284);
-            lblStaffNote.Name = "lblStaffNote";
-            lblStaffNote.Size = new Size(70, 17);
-            lblStaffNote.TabIndex = 105;
-            lblStaffNote.Text = "StaffNote :";
-            // 
-            // formsPlot1
-            // 
-            formsPlot1.AutoValidate = AutoValidate.EnableAllowFocusChange;
-            formsPlot1.Location = new Point(614, 152);
-            formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(289, 259);
-            formsPlot1.TabIndex = 106;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(763, 123);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(140, 23);
-            dateTimePicker1.TabIndex = 107;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(614, 123);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(140, 23);
-            dateTimePicker2.TabIndex = 108;
+            dateStart.Location = new Point(61, 302);
+            dateStart.Name = "dateStart";
+            dateStart.Size = new Size(140, 23);
+            dateStart.TabIndex = 108;
             // 
             // lblstarttime
             // 
             lblstarttime.AutoSize = true;
-            lblstarttime.Location = new Point(984, 103);
+            lblstarttime.Location = new Point(462, 284);
             lblstarttime.Name = "lblstarttime";
             lblstarttime.Size = new Size(67, 17);
             lblstarttime.TabIndex = 109;
@@ -166,7 +113,7 @@
             // lblEndTime
             // 
             lblEndTime.AutoSize = true;
-            lblEndTime.Location = new Point(760, 103);
+            lblEndTime.Location = new Point(207, 282);
             lblEndTime.Name = "lblEndTime";
             lblEndTime.Size = new Size(62, 17);
             lblEndTime.TabIndex = 110;
@@ -175,83 +122,80 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(611, 103);
+            label1.Location = new Point(58, 282);
             label1.Name = "label1";
             label1.Size = new Size(67, 17);
             label1.TabIndex = 112;
             label1.Text = "Start Time";
             // 
-            // label2
-            // 
-            label2.BorderStyle = BorderStyle.Fixed3D;
-            label2.Location = new Point(583, 88);
-            label2.Name = "label2";
-            label2.Size = new Size(674, 332);
-            label2.TabIndex = 113;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
-            comboBox1.Location = new Point(984, 121);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 25);
-            comboBox1.TabIndex = 114;
-            // 
-            // formsPlot2
-            // 
-            formsPlot2.AutoValidate = AutoValidate.EnableAllowFocusChange;
-            formsPlot2.Location = new Point(955, 152);
-            formsPlot2.Name = "formsPlot2";
-            formsPlot2.Size = new Size(289, 259);
-            formsPlot2.TabIndex = 115;
-            // 
             // btnGenerateDaay
             // 
-            btnGenerateDaay.Location = new Point(828, 97);
+            btnGenerateDaay.Location = new Point(356, 302);
             btnGenerateDaay.Name = "btnGenerateDaay";
             btnGenerateDaay.Size = new Size(75, 23);
             btnGenerateDaay.TabIndex = 116;
             btnGenerateDaay.Text = "Generate";
             btnGenerateDaay.UseVisualStyleBackColor = true;
+            btnGenerateDaay.Click += btnGenerateDaay_Click;
             // 
             // btnGenerateMon
             // 
-            btnGenerateMon.Location = new Point(1149, 121);
+            btnGenerateMon.Location = new Point(589, 302);
             btnGenerateMon.Name = "btnGenerateMon";
             btnGenerateMon.Size = new Size(75, 23);
             btnGenerateMon.TabIndex = 117;
             btnGenerateMon.Text = "Generate";
             btnGenerateMon.UseVisualStyleBackColor = true;
+            btnGenerateMon.Click += btnGenerateMon_Click;
+            // 
+            // lblTotalAmount
+            // 
+            lblTotalAmount.AutoSize = true;
+            lblTotalAmount.Location = new Point(61, 339);
+            lblTotalAmount.Name = "lblTotalAmount";
+            lblTotalAmount.Size = new Size(93, 17);
+            lblTotalAmount.TabIndex = 119;
+            lblTotalAmount.Text = "Total Amount :";
+            // 
+            // txtAmount
+            // 
+            txtAmount.Location = new Point(160, 331);
+            txtAmount.Multiline = true;
+            txtAmount.Name = "txtAmount";
+            txtAmount.ReadOnly = true;
+            txtAmount.Size = new Size(289, 32);
+            txtAmount.TabIndex = 118;
+            // 
+            // dtpMonth
+            // 
+            dtpMonth.Checked = false;
+            dtpMonth.Location = new Point(462, 304);
+            dtpMonth.Name = "dtpMonth";
+            dtpMonth.Size = new Size(121, 23);
+            dtpMonth.TabIndex = 120;
             // 
             // SalesReport
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1344, 450);
+            ClientSize = new Size(728, 450);
+            Controls.Add(dtpMonth);
+            Controls.Add(lblTotalAmount);
+            Controls.Add(txtAmount);
             Controls.Add(btnGenerateMon);
             Controls.Add(btnGenerateDaay);
-            Controls.Add(formsPlot2);
-            Controls.Add(comboBox1);
             Controls.Add(label1);
             Controls.Add(lblEndTime);
             Controls.Add(lblstarttime);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(formsPlot1);
-            Controls.Add(lblStaffNote);
-            Controls.Add(txtStaffNote);
+            Controls.Add(dateStart);
+            Controls.Add(dateEnd);
             Controls.Add(llBack);
-            Controls.Add(btnfSearch);
-            Controls.Add(txtfSearch);
-            Controls.Add(dgvfInventoryControl);
-            Controls.Add(lblfSearch);
+            Controls.Add(dvgSalesReport);
             Controls.Add(lblInventoryFurnitureTitle);
             Controls.Add(lblback);
-            Controls.Add(label2);
             Name = "SalesReport";
             Text = "SalesReport";
-            ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dvgSalesReport).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -259,24 +203,18 @@
         #endregion
 
         private LinkLabel llBack;
-        private Button btnfSearch;
-        private TextBox txtfSearch;
-        private DataGridView dgvfInventoryControl;
-        private Label lblfSearch;
+        private DataGridView dvgSalesReport;
         private Label lblInventoryFurnitureTitle;
         private Label lblback;
-        private TextBox txtStaffNote;
-        private Label lblStaffNote;
-        private ScottPlot.WinForms.FormsPlot formsPlot1;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateEnd;
+        private DateTimePicker dateStart;
         private Label lblstarttime;
         private Label lblEndTime;
         private Label label1;
-        private Label label2;
-        private ComboBox comboBox1;
-        private ScottPlot.WinForms.FormsPlot formsPlot2;
         private Button btnGenerateDaay;
         private Button btnGenerateMon;
+        private Label lblTotalAmount;
+        private TextBox txtAmount;
+        private DateTimePicker dtpMonth;
     }
 }

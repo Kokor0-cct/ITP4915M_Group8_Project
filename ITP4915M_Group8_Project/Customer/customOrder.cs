@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace ITP4915M_Group8_Project.Customer
 {
-    public partial class Order : Form
+    public partial class customOrder : Form
     {
         private string currentOid = "0";
         private string currentStatus = "0";
         private string currentFid = "0";
 
-        public Order()
+        public customOrder()
         {
             InitializeComponent();
             LoadDataToGridView();

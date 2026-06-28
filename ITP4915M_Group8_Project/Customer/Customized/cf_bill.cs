@@ -52,12 +52,19 @@ namespace ITP4915M_Group8_Project.Customer.Customized
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
+
+            string sqlm = "SELECT * FROM material"; 
+
             if (txtFirstName.Text == "" || txtAddress.Text == "" || txtPhonenum.Text == "")
             {
                 MessageBox.Show("Please fill in the name！");
                 return;
             }
-
+            if (dateChoose.Value < DateTime.Now.AddDays(3))
+            {
+                MessageBox.Show("Please select a valid delivery date！");
+                return;
+            }
 
             string address = txtAddress.Text;
             string cUserID = UserSession.CustomerId;
@@ -107,9 +114,15 @@ namespace ITP4915M_Group8_Project.Customer.Customized
                     new MySqlParameter("@stat",status)
                 };
             DbConnect.Execute(insertSql, para);
-            
 
-           
+            string updateSql = @"UPDATE customers SET cBudget= cBudget - @subtotal WHERE cUserID=@cid";
+            MySqlParameter[] para2 = {
+                    
+                    new MySqlParameter("@subtotal",itemSubTotal),
+                    new MySqlParameter("@cid",cUserID)
+                };
+
+
             MessageBox.Show($"Order successfully! Order Number：{newOrderId}");
 
             this.Close();
@@ -132,6 +145,42 @@ namespace ITP4915M_Group8_Project.Customer.Customized
             }
 
             lblTotalPrice.Text = "Total Amount: $" + ((Uprice * Qty) + shipPrice).ToString("0.00");
+        }
+
+        private bool CheckMaterialStockEnough()
+        {
+            try
+            {
+                string sql = @"
+                    SELECT m.materialCode, m.mQuantity, cm.pmqty 
+                    FROM furniturematerials cm
+                    JOIN material m ON cm.materialCode = m.materialCode
+                    WHERE cm.cfID = @cfID";
+
+                MySqlParameter[] para = { new MySqlParameter("@cfID", cfID) };
+                DataTable dt = DbConnect.GetDataTable(sql, para); // 需确保DbConnect有查询DataTable的方法
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    decimal stock = Convert.ToDecimal(row["mStock"]); // 物料当前库存
+                    decimal requiredPerUnit = Convert.ToDecimal(row["requiredQty"]); // 单套产品所需物料数量
+                    decimal totalRequired = requiredPerUnit * Qty; // 订单总需求数量
+
+                    // 校验库存是否充足
+                    if (stock < totalRequired)
+                    {
+                        string materialId = row["materialID"].ToString();
+                        MessageBox.Show($"Material {materialId} stock insufficient! Need: {totalRequired}, Current: {stock}");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Check material stock failed: {ex.Message}");
+                return false;
+            }
         }
     }
 }

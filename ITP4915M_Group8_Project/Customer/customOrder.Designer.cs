@@ -1,6 +1,6 @@
 ﻿namespace ITP4915M_Group8_Project.Customer
 {
-    partial class Order
+    partial class customOrder
     {
         /// <summary>
         /// Required designer variable.
