@@ -270,7 +270,8 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
                     if (isOrder)
                     {
-                        txtStaffNote.Text += "    \n This is From Order : " + currentOid;
+                        txtStaffNote.Text += "   This is From Order : " + currentOid;
+
                         string sqlMaxId = "SELECT MAX(CAST(SUBSTRING(orderID,2)AS UNSIGNED)) FROM orders;";
                         int maxOrderid = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlMaxId)) + 1;
                         string newOrderId = $"O{maxOrderid:D7}";
@@ -311,6 +312,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat,@note)";
                         int new_subtotal = 0;
 
+                        string notte = txtStaffNote.Text.Trim();
 
                         MySqlParameter[] para = {
                         new MySqlParameter("@oid",newOrderId),
@@ -322,23 +324,26 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         new MySqlParameter("@addr",address),
                         new MySqlParameter("@ship",shipType),
                         new MySqlParameter("@stat","ST01"),
-                        new MySqlParameter("@note",txtStaffNote.Text)
+                        new MySqlParameter("@note",notte)
                         };
                         DbConnect.Execute(insertSql, para);
 
                         sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
+                        string staffnote = "Accept";
                         MySqlParameter[] updaterequest = {
-                                new MySqlParameter("@type", "Accept"),
+                                new MySqlParameter("@type",staffnote.ToString() ),
                                 new MySqlParameter("@rid",currentRid),
                                 new MySqlParameter("@fid",currentFid)
                             };
                         DbConnect.Execute(sql, updaterequest);
 
-                        sql = "UPDATE orders SET statusType = @type ， StaffNote = @note WHERE orderID = @oid;";
+                        sql = "UPDATE orders SET statusType = @type  ,StaffNote = @note WHERE orderID = @oid;";
                         MySqlParameter[] updateorder = {
+
+
                                 new MySqlParameter("@type", "ST13"),
                                 new MySqlParameter("@oid",currentOid),
-                                new MySqlParameter("@note", "Replacement products will take 7 days to arrive after your application is approved. Please see your new order for details.")
+                                new MySqlParameter("@note",notte)
                             };
                         DbConnect.Execute(sql, updateorder);
                     }

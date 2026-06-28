@@ -48,6 +48,7 @@
             rdbALL = new RadioButton();
             lblStaffNote = new Label();
             txtStaffNote = new TextBox();
+            brnrefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvfInventoryControl).BeginInit();
             gbStatusType.SuspendLayout();
             SuspendLayout();
@@ -249,11 +250,23 @@
             txtStaffNote.TabIndex = 88;
             txtStaffNote.TextChanged += txtStaffNote_TextChanged;
             // 
+            // brnrefresh
+            // 
+            brnrefresh.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            brnrefresh.Location = new Point(658, 65);
+            brnrefresh.Name = "brnrefresh";
+            brnrefresh.Size = new Size(75, 26);
+            brnrefresh.TabIndex = 90;
+            brnrefresh.Text = "Refresh";
+            brnrefresh.UseVisualStyleBackColor = true;
+            brnrefresh.Click += brnrefresh_Click;
+            // 
             // Replace_Request_List
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 459);
+            Controls.Add(brnrefresh);
             Controls.Add(lblStaffNote);
             Controls.Add(txtStaffNote);
             Controls.Add(gbStatusType);
@@ -309,5 +322,6 @@
         private RadioButton rdbALL;
         private Label lblStaffNote;
         private TextBox txtStaffNote;
+        private Button brnrefresh;
     }
 }
