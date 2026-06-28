@@ -176,7 +176,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             txtIID.Text = currentItemid;
             if (currentItemid.StartsWith("O"))
                 txtItemType.Text = "Order";
-            else if (currentItemid.StartsWith("CO"))
+            else if (currentItemid.StartsWith("CF"))
                 txtItemType.Text = "Custom Order";
             else if (currentItemid.StartsWith("MR"))
                 txtItemType.Text = "Material";
@@ -245,7 +245,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
                 }
                 else if(rbCO.Checked)
                 {
-                    sql += "'CO%'";
+                    sql += "'CF%'";
                 }else if (rbMaterial.Checked)
                 {
                     sql += "'MR%'";
@@ -262,7 +262,7 @@ namespace ITP4915M_Group8_Project.Staff.Logistic
             {
                 sql = @"UPDATE orders SET statusType = @STATUS WHERE orderID = @ID";
             }
-            else if (ItemID.StartsWith("CO"))
+            else if (ItemID.StartsWith("CF"))
             {
                 sql = @"UPDATE customorders SET statusType = @STATUS WHERE corderID = @ID";
             }
