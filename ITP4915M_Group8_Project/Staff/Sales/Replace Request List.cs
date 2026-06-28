@@ -309,6 +309,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         string insertSql = @"
                         INSERT INTO orders(orderID,fID,Quantity,cUserID,oAmount,odeliverydate,odeliveryaddress,shippingType ,statusType ,StaffNote)
                         VALUES(@oid,@fid,@qty,@uid,@subtotal,@date,@addr,@ship,@stat,@note)";
+                        int new_subtotal = 0;
 
 
                         MySqlParameter[] para = {
@@ -316,7 +317,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         new MySqlParameter("@fid",fID),
                         new MySqlParameter("@qty",qty),
                         new MySqlParameter("@uid",cID),
-                        new MySqlParameter("@subtotal",0),
+                        new MySqlParameter("@subtotal",new_subtotal), // <- Why insert 0?
                         new MySqlParameter("@date",deliverydate),
                         new MySqlParameter("@addr",address),
                         new MySqlParameter("@ship",shipType),
@@ -324,10 +325,6 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                         new MySqlParameter("@note",txtStaffNote.Text)
                         };
                         DbConnect.Execute(insertSql, para);
-
-
-
-
 
                         sql = "UPDATE returnreplacerequest SET statusType = @type WHERE rid  = @rid AND fid = @fid;";
                         MySqlParameter[] updaterequest = {
