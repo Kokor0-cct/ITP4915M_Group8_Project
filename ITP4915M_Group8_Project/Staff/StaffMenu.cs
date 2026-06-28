@@ -52,7 +52,7 @@ namespace ITP4915M_Group8_Project.Staff
         }
         private void StaffMenu_Load()
         {
-            List<Button> salesBtns = new List<Button>() {  btnSalesOrderEdit, btnSalesReport, btnreplacerequest , btnSalesReport };
+            List<Button> salesBtns = new List<Button>() {  btnSalesOrderEdit, btnSalesReport, btnreplacerequest , btnSalesReport, btnCustomerSupport };
             List<Button> productionBtns = new List<Button>() { btnProductionList, btnProductionMaterlalSheet };
             List<Button> inventoryBtns = new List<Button>() { btnInventoryManagement, btnInventoryMaterlalList };
             List<Button> logisticBtns = new List<Button>() { btnLogistic };
