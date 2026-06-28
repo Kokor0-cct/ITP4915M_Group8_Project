@@ -150,7 +150,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
             txtSendMsg.Clear();
         }
 
-        private void linlblBack_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linlblBack_LinkClicked_2(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
         }
