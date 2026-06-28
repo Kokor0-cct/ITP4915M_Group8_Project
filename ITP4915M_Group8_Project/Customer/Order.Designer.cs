@@ -31,8 +31,12 @@
             llBack = new LinkLabel();
             grpStatus = new GroupBox();
             rbAll = new RadioButton();
+            radReplace = new RadioButton();
             rbCancel = new RadioButton();
+            radRefund = new RadioButton();
             rbFailed = new RadioButton();
+            radUnderreview = new RadioButton();
+            radCompleted = new RadioButton();
             rbDelivered = new RadioButton();
             rbTransit = new RadioButton();
             rbProduction = new RadioButton();
@@ -67,12 +71,12 @@
             btnReplace = new Button();
             txtStaffNote = new TextBox();
             lblStaffNote = new Label();
-            radReplace = new RadioButton();
-            radRefund = new RadioButton();
-            radUnderreview = new RadioButton();
-            radCompleted = new RadioButton();
+            gbOC = new GroupBox();
+            rbCustomOrders = new RadioButton();
+            rbOrders = new RadioButton();
             grpStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).BeginInit();
+            gbOC.SuspendLayout();
             SuspendLayout();
             // 
             // llBack
@@ -118,6 +122,18 @@
             rbAll.UseVisualStyleBackColor = true;
             rbAll.CheckedChanged += rbAll_CheckedChanged;
             // 
+            // radReplace
+            // 
+            radReplace.AutoSize = true;
+            radReplace.Location = new Point(147, 183);
+            radReplace.Name = "radReplace";
+            radReplace.Size = new Size(72, 21);
+            radReplace.TabIndex = 102;
+            radReplace.TabStop = true;
+            radReplace.Text = "Replace";
+            radReplace.UseVisualStyleBackColor = true;
+            radReplace.CheckedChanged += radReplace_CheckedChanged;
+            // 
             // rbCancel
             // 
             rbCancel.AutoSize = true;
@@ -130,6 +146,18 @@
             rbCancel.UseVisualStyleBackColor = true;
             rbCancel.CheckedChanged += rbCancel_CheckedChanged;
             // 
+            // radRefund
+            // 
+            radRefund.AutoSize = true;
+            radRefund.Location = new Point(6, 183);
+            radRefund.Name = "radRefund";
+            radRefund.Size = new Size(67, 21);
+            radRefund.TabIndex = 101;
+            radRefund.TabStop = true;
+            radRefund.Text = "Refund";
+            radRefund.UseVisualStyleBackColor = true;
+            radRefund.CheckedChanged += radRefund_CheckedChanged;
+            // 
             // rbFailed
             // 
             rbFailed.AutoSize = true;
@@ -141,6 +169,30 @@
             rbFailed.Text = "Failed";
             rbFailed.UseVisualStyleBackColor = true;
             rbFailed.CheckedChanged += rbFailed_CheckedChanged;
+            // 
+            // radUnderreview
+            // 
+            radUnderreview.AutoSize = true;
+            radUnderreview.Location = new Point(147, 154);
+            radUnderreview.Name = "radUnderreview";
+            radUnderreview.Size = new Size(103, 21);
+            radUnderreview.TabIndex = 100;
+            radUnderreview.TabStop = true;
+            radUnderreview.Text = "Under review";
+            radUnderreview.UseVisualStyleBackColor = true;
+            radUnderreview.CheckedChanged += radUnderreview_CheckedChanged;
+            // 
+            // radCompleted
+            // 
+            radCompleted.AutoSize = true;
+            radCompleted.Location = new Point(6, 154);
+            radCompleted.Name = "radCompleted";
+            radCompleted.Size = new Size(90, 21);
+            radCompleted.TabIndex = 99;
+            radCompleted.TabStop = true;
+            radCompleted.Text = "Completed";
+            radCompleted.UseVisualStyleBackColor = true;
+            radCompleted.CheckedChanged += radCompleted_CheckedChanged;
             // 
             // rbDelivered
             // 
@@ -459,59 +511,44 @@
             lblStaffNote.TabIndex = 97;
             lblStaffNote.Text = "Staff Note :";
             // 
-            // radReplace
+            // gbOC
             // 
-            radReplace.AutoSize = true;
-            radReplace.Location = new Point(147, 183);
-            radReplace.Name = "radReplace";
-            radReplace.Size = new Size(72, 21);
-            radReplace.TabIndex = 102;
-            radReplace.TabStop = true;
-            radReplace.Text = "Replace";
-            radReplace.UseVisualStyleBackColor = true;
-            radReplace.CheckedChanged += radReplace_CheckedChanged;
+            gbOC.Controls.Add(rbCustomOrders);
+            gbOC.Controls.Add(rbOrders);
+            gbOC.Location = new Point(1011, 75);
+            gbOC.Name = "gbOC";
+            gbOC.Size = new Size(145, 39);
+            gbOC.TabIndex = 99;
+            gbOC.TabStop = false;
             // 
-            // radRefund
+            // rbCustomOrders
             // 
-            radRefund.AutoSize = true;
-            radRefund.Location = new Point(6, 183);
-            radRefund.Name = "radRefund";
-            radRefund.Size = new Size(67, 21);
-            radRefund.TabIndex = 101;
-            radRefund.TabStop = true;
-            radRefund.Text = "Refund";
-            radRefund.UseVisualStyleBackColor = true;
-            radRefund.CheckedChanged += radRefund_CheckedChanged;
+            rbCustomOrders.AutoSize = true;
+            rbCustomOrders.Location = new Point(72, 12);
+            rbCustomOrders.Name = "rbCustomOrders";
+            rbCustomOrders.Size = new Size(70, 21);
+            rbCustomOrders.TabIndex = 68;
+            rbCustomOrders.TabStop = true;
+            rbCustomOrders.Text = "Custom";
+            rbCustomOrders.UseVisualStyleBackColor = true;
             // 
-            // radUnderreview
+            // rbOrders
             // 
-            radUnderreview.AutoSize = true;
-            radUnderreview.Location = new Point(147, 154);
-            radUnderreview.Name = "radUnderreview";
-            radUnderreview.Size = new Size(103, 21);
-            radUnderreview.TabIndex = 100;
-            radUnderreview.TabStop = true;
-            radUnderreview.Text = "Under review";
-            radUnderreview.UseVisualStyleBackColor = true;
-            radUnderreview.CheckedChanged += radUnderreview_CheckedChanged;
-            // 
-            // radCompleted
-            // 
-            radCompleted.AutoSize = true;
-            radCompleted.Location = new Point(6, 154);
-            radCompleted.Name = "radCompleted";
-            radCompleted.Size = new Size(90, 21);
-            radCompleted.TabIndex = 99;
-            radCompleted.TabStop = true;
-            radCompleted.Text = "Completed";
-            radCompleted.UseVisualStyleBackColor = true;
-            radCompleted.CheckedChanged += radCompleted_CheckedChanged;
+            rbOrders.AutoSize = true;
+            rbOrders.Location = new Point(6, 12);
+            rbOrders.Name = "rbOrders";
+            rbOrders.Size = new Size(67, 21);
+            rbOrders.TabIndex = 68;
+            rbOrders.TabStop = true;
+            rbOrders.Text = "Orders";
+            rbOrders.UseVisualStyleBackColor = true;
             // 
             // Order
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1203, 567);
+            Controls.Add(gbOC);
             Controls.Add(txtStaffNote);
             Controls.Add(lblStaffNote);
             Controls.Add(btnReplace);
@@ -549,6 +586,8 @@
             grpStatus.ResumeLayout(false);
             grpStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderControl).EndInit();
+            gbOC.ResumeLayout(false);
+            gbOC.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -598,5 +637,8 @@
         private RadioButton radRefund;
         private RadioButton radUnderreview;
         private RadioButton radCompleted;
+        private GroupBox gbOC;
+        private RadioButton rbCustomOrders;
+        private RadioButton rbOrders;
     }
 }

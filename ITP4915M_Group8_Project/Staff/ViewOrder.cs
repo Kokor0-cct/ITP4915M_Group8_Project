@@ -18,6 +18,7 @@ namespace ITP4915M_Group8_Project.Staff
         private string currentOid = "0";
         private string role = "";
 
+
         public ViewOrder()
         {
             InitializeComponent();

@@ -121,6 +121,16 @@ namespace ITP4915M_Group8_Project.Staff.Inventory
         };
                 int stockAffect = DbConnect.Execute(sqlUpdateStock, paramStock);
 
+
+                string sqlinsert     = @"INSERT INTO materialreport (mid,qty) VALUES (@mid, @qty)";
+                MySqlParameter[] paramReport = {
+            new MySqlParameter("@mid", matCode),
+            new MySqlParameter("@qty", (-1)*needQty)
+        };
+                int reportAffect = DbConnect.Execute(sqlinsert, paramReport);
+
+
+
                 string sqlUpdateMr = @"UPDATE materialrequest SET statusType = 'ST02' WHERE mrID = @mid AND materialCode = @mc AND statusType = 'ST01'";
                 MySqlParameter[] paramMr = {
             new MySqlParameter("@mid", currentMRid),

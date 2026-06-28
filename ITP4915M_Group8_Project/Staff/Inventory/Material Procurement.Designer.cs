@@ -30,8 +30,6 @@
         {
             cmbProductionSite = new ComboBox();
             lblDeliveryAddress = new Label();
-            lblRequiredDate = new Label();
-            txtRequiredDate = new TextBox();
             lalQuantity = new Label();
             lalMaterial = new Label();
             fpMaterialRequirement = new FlowLayoutPanel();
@@ -40,6 +38,8 @@
             btnSubmitRequest = new Button();
             btnBack = new Button();
             lalMaterialRequirementSheet = new Label();
+            dateRequired = new DateTimePicker();
+            lblRequiredDate = new Label();
             SuspendLayout();
             // 
             // cmbProductionSite
@@ -59,23 +59,6 @@
             lblDeliveryAddress.Size = new Size(112, 17);
             lblDeliveryAddress.TabIndex = 36;
             lblDeliveryAddress.Text = "Delivery Address";
-            // 
-            // lblRequiredDate
-            // 
-            lblRequiredDate.AutoSize = true;
-            lblRequiredDate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
-            lblRequiredDate.Location = new Point(458, 176);
-            lblRequiredDate.Name = "lblRequiredDate";
-            lblRequiredDate.Size = new Size(96, 17);
-            lblRequiredDate.TabIndex = 35;
-            lblRequiredDate.Text = "Required Date";
-            // 
-            // txtRequiredDate
-            // 
-            txtRequiredDate.Location = new Point(458, 198);
-            txtRequiredDate.Name = "txtRequiredDate";
-            txtRequiredDate.Size = new Size(121, 23);
-            txtRequiredDate.TabIndex = 34;
             // 
             // lalQuantity
             // 
@@ -112,6 +95,7 @@
             btndeleteMaterialRequirement.TabIndex = 29;
             btndeleteMaterialRequirement.Text = "Delete Material";
             btndeleteMaterialRequirement.UseVisualStyleBackColor = true;
+            btndeleteMaterialRequirement.Click += btndeleteMaterialRequirement_Click;
             // 
             // btnADDMaterialRequirement
             // 
@@ -121,6 +105,7 @@
             btnADDMaterialRequirement.TabIndex = 28;
             btnADDMaterialRequirement.Text = "Add  Material";
             btnADDMaterialRequirement.UseVisualStyleBackColor = true;
+            btnADDMaterialRequirement.Click += btnADDMaterialRequirement_Click;
             // 
             // btnSubmitRequest
             // 
@@ -131,6 +116,7 @@
             btnSubmitRequest.TabIndex = 27;
             btnSubmitRequest.Text = "Submit Request";
             btnSubmitRequest.UseVisualStyleBackColor = true;
+            btnSubmitRequest.Click += btnSubmitRequest_Click;
             // 
             // btnBack
             // 
@@ -153,15 +139,32 @@
             lalMaterialRequirementSheet.TabIndex = 25;
             lalMaterialRequirementSheet.Text = "Material Requirement Sheet";
             // 
+            // dateRequired
+            // 
+            dateRequired.Location = new Point(458, 196);
+            dateRequired.Name = "dateRequired";
+            dateRequired.Size = new Size(121, 23);
+            dateRequired.TabIndex = 39;
+            // 
+            // lblRequiredDate
+            // 
+            lblRequiredDate.AutoSize = true;
+            lblRequiredDate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            lblRequiredDate.Location = new Point(458, 176);
+            lblRequiredDate.Name = "lblRequiredDate";
+            lblRequiredDate.Size = new Size(96, 17);
+            lblRequiredDate.TabIndex = 38;
+            lblRequiredDate.Text = "Required Date";
+            // 
             // Material_Procurement
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(664, 402);
+            Controls.Add(dateRequired);
+            Controls.Add(lblRequiredDate);
             Controls.Add(cmbProductionSite);
             Controls.Add(lblDeliveryAddress);
-            Controls.Add(lblRequiredDate);
-            Controls.Add(txtRequiredDate);
             Controls.Add(lalQuantity);
             Controls.Add(lalMaterial);
             Controls.Add(fpMaterialRequirement);
@@ -180,8 +183,6 @@
 
         private ComboBox cmbProductionSite;
         private Label lblDeliveryAddress;
-        private Label lblRequiredDate;
-        private TextBox txtRequiredDate;
         private Label lalQuantity;
         private Label lalMaterial;
         private FlowLayoutPanel fpMaterialRequirement;
@@ -190,5 +191,7 @@
         private Button btnSubmitRequest;
         private Button btnBack;
         private Label lalMaterialRequirementSheet;
+        private DateTimePicker dateRequired;
+        private Label lblRequiredDate;
     }
 }
