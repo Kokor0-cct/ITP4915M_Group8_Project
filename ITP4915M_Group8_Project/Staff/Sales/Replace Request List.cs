@@ -349,12 +349,12 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
                     else
                     {
-                        string sqlcustom = "SELECT * FROM customorders WHERE corderID = @oid AND cfrID = @fid;";
+                        string sqlcustom = "SELECT * FROM customorders WHERE corderID = @oid AND cfID = @fid;";
                         MySqlParameter[] param = {
                             new MySqlParameter("@oid", currentOid),
                             new MySqlParameter("@fid", currentFid)
                         };
-                        DataTable dt = DbConnect.Query(sql, param);
+                        DataTable dt = DbConnect.Query(sqlcustom, param);
                         if (dt.Rows.Count == 0)
                         {
                             MessageBox.Show("Original custom order not found!");
@@ -364,7 +364,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
 
                         string sqlcustomorder = "SELECT MAX(CAST(SUBSTRING(corderID,3) AS UNSIGNED)) FROM customorders;";
                         int maxId = Convert.ToInt32(DbConnect.ExecuteScalar1(sqlcustomorder)) + 1;
-                        string coid = $"CO{maxId:D7}";
+                        string coid = $"CO{maxId:D6}";
 
                         DataRow row = dt.Rows[0];
                         string fID = row["cfID"].ToString();
@@ -377,14 +377,11 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                        
                         string deliveryDate = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
                         string insertSql = @"
-                            INSERT INTO customorders(
-                                corderID, cfID, Quantity, cUserID, coAmount, 
-                                codeliverydate, codeliveryaddress, shippingType, 
-                                , statusType, StaffNote
+                            INSERT INTO customorders(corderID, cfID, Quantity, cUserID, coAmount, codeliverydate, codeliveryaddress, shippingType,statusType, StaffNote
                             ) VALUES(
                                 @oid, @fid, @qty, @uid, @amount, 
                                 @date, @addr, @ship, 
-                                @spec, @stat, @note
+                                 @stat, @note
                             )";
                                     MySqlParameter[] insertParam = {
                             new MySqlParameter("@oid", coid),
@@ -408,7 +405,7 @@ namespace ITP4915M_Group8_Project.Staff.Sales
                             };
                         DbConnect.Execute(sql, updaterequest);
 
-                        sql = "UPDATE customorders SET statusType = @type ， StaffNote = @note WHERE corderID = @oid;";
+                        sql = "UPDATE customorders SET statusType = @type , StaffNote = @note  WHERE corderID = @oid;";
                         MySqlParameter[] updateorder = {
                                 new MySqlParameter("@type", "ST13"),
                                 new MySqlParameter("@oid",currentOid),
